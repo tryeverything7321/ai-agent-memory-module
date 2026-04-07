@@ -13,6 +13,43 @@ Layer 3: DECAY      — Mnemosyne 망각 곡선: w(t) = e^(-λt) * (1 + boost * 
 Layer 4: PREDICTION — Intent Transition Graph → 선제적 컨텍스트 주입
 ```
 
+### 데이터 흐름 (단일 메시지 처리)
+
+```
+사용자: "주간 보고서 작성해야 하는데"
+        │
+        ▼
+  ┌─ api/routes.py: MemoryService.process_chat() ─────────────────┐
+  │                                                                │
+  │  1️⃣  IntentClassifier.classify()              prediction/intent.py
+  │     "주간 보고" 키워드 매칭 → weekly_report                      │
+  │                                                                │
+  │  2️⃣  GraphStore.record_intent_transition()    storage/graph_store.py
+  │     이전 intent → weekly_report 전이 기록                        │
+  │                                                                │
+  │  3️⃣  MemoryIndex.search()  [asyncio.gather]   storage/memory_index.py
+  │     ├─ VectorStore.search()   → cosine 유사도  storage/vector_store.py
+  │     ├─ MetadataStore.query()  → 시간/중요도    storage/metadata_store.py
+  │     └─ GraphStore.neighbors() → 관계 탐색      storage/graph_store.py
+  │     → RRF fusion: score(d) = Σ 1/(60 + rank)  top-5 반환      │
+  │                                                                │
+  │  4️⃣  ProactiveInjector.predict_and_fetch()    prediction/proactive.py
+  │     weekly_report → issue_tracking (확률 0.85)                  │
+  │     threshold(0.5) 초과 → 이슈 메모리 3건 프리페치               │
+  │                                                                │
+  │  5️⃣  Extractor.extract()  [비동기 후처리]      extraction.py
+  │     "주간 보고서" → Fact(schedule, critical)                     │
+  │     → dedup 확인(cosine>0.9) → Memory 생성 → 3 stores 저장     │
+  └────────────────────────────────────────────────────────────────┘
+        │
+        ▼
+  ChatResponse {
+    response: "관련 기억: ... [예측된 컨텍스트] issue_tracking (85%): ..."
+    memories_used: [SearchResult, ...]
+    prediction: IntentPrediction { next: issue_tracking, weight: 0.85 }
+  }
+```
+
 ### 핵심 기능
 
 | 기능 | 설명 |
