@@ -1,2 +1,123 @@
-# ai-agent-memory-module
-Mock-up
+# AI Agent Memory Module
+
+사내 Chat 시스템용 **선제적 AI 메모리 모듈** — 단순 대화 기록이 아니라 사용자의 업무 패턴을 학습하고 다음 행동을 예측하는 "Anticipatory Memory Chains" 구현.
+
+## Architecture
+
+4-Layer Architecture (논문/연구 기반):
+
+```
+Layer 1: EXTRACTION — 대화에서 facts/entities/relations 추출 (LLM 비동기)
+Layer 2: STORAGE    — Qdrant(vector) + NetworkX(graph) + SQLite(metadata)
+Layer 3: DECAY      — Mnemosyne 망각 곡선: w(t) = e^(-λt) * (1 + boost * access_count)
+Layer 4: PREDICTION — Intent Transition Graph → 선제적 컨텍스트 주입
+```
+
+### 핵심 기능
+
+| 기능 | 설명 |
+|------|------|
+| **하이브리드 검색** | Vector + Graph + Metadata → RRF fusion (k=60) |
+| **Ebbinghaus 망각** | 중요도별 감쇠율 (ephemeral λ=0.3, critical λ=0.005) |
+| **메모리 Dedup** | 임베딩 cosine > 0.9 → 기존 메모리 access_count 증가 |
+| **선제적 예측** | Intent 전이 확률 > 50% 시 "예측된 컨텍스트" 레이블로 주입 |
+| **User 격리** | X-User-ID 헤더 기반 메모리 네임스페이스 분리 |
+
+## Project Structure
+
+```
+memory_module/
+├── main.py              # FastAPI entrypoint
+├── config.py            # Settings (env 기반)
+├── models.py            # Pydantic 도메인 모델
+├── extraction.py        # LLM 추출 + 규칙 분류
+├── decay.py             # Ebbinghaus 망각 곡선
+├── storage/
+│   ├── vector_store.py  # Qdrant + in-memory fallback
+│   ├── graph_store.py   # NetworkX (entity_graph + intent_graph)
+│   ├── metadata_store.py # SQLite
+│   └── memory_index.py  # RRF fusion (asyncio.gather 병렬)
+├── prediction/
+│   ├── intent.py        # 12-category 규칙 분류
+│   └── proactive.py     # Anticipatory Memory Chains
+├── api/routes.py        # MemoryService 통합
+├── docker-compose.yml   # Qdrant + App
+├── data/
+│   ├── generate_synthetic.py  # 합성 대화 데이터 생성
+│   └── synthetic_conversations.json  # 3유저, 30세션, 120턴
+└── tests/               # 63 tests (TDD)
+```
+
+## Quick Start
+
+```bash
+# 가상환경 설정
+uv venv .venv && source .venv/bin/activate
+uv pip install -r requirements.txt
+
+# 테스트 실행
+pytest tests/ -v
+
+# 서버 실행 (Qdrant Docker 필요)
+docker-compose up -d qdrant
+uvicorn main:app --reload
+
+# 합성 데이터 생성
+PYTHONPATH=. python data/generate_synthetic.py
+```
+
+## 환경 변수 (.env)
+
+```env
+MEMORY_QDRANT_HOST=localhost
+MEMORY_QDRANT_PORT=6333
+MEMORY_SQLITE_PATH=memory.db
+MEMORY_LLM_BASE_URL=http://localhost:8080/v1
+MEMORY_EMBEDDING_BASE_URL=http://localhost:8080/v1
+```
+
+## Tech Stack
+
+| Component | Technology |
+|-----------|-----------|
+| API Server | FastAPI |
+| Vector DB | Qdrant (Docker) |
+| Graph | NetworkX (in-memory, SQLite 직렬화) |
+| Metadata | SQLite (WAL mode) |
+| Embedding | multilingual-e5-large (계획) |
+| LLM | GPT-OSS-20B / OpenAI-compatible API |
+
+## Test Coverage
+
+| Module | Tests | Pass |
+|--------|-------|------|
+| Infra (MetadataStore, GraphStore, VectorStore) | 12 | ✅ |
+| Extraction (fact/entity/relation/분류) | 11 | ✅ |
+| Storage (RRF, dedup, isolation, degradation) | 8 | ✅ |
+| Decay (Ebbinghaus, pruning, update) | 9 | ✅ |
+| Prediction (intent, transition, injection) | 12 | ✅ |
+| E2E Scenarios (4개 시나리오) | 11 | ✅ |
+| **Total** | **63** | **63 pass** |
+
+## Research References
+
+- Mnemosyne (2025): Edge-based temporal decay + boosting
+- A-Mem (OpenReview): Agentic Memory
+- MAGMA (2026): Multi-graph agentic memory
+- EverMemOS (2026): Self-organizing memory OS
+- M+ (ICML 2025): Co-trained retriever with latent memory
+- Mem0, Letta/MemGPT: Production memory frameworks
+
+## Intent Taxonomy (12 categories)
+
+`weekly_report` · `issue_tracking` · `scheduling` · `knowledge_lookup` · `code_review` · `meeting_prep` · `data_analysis` · `team_communication` · `document_drafting` · `project_status` · `onboarding` · `troubleshooting`
+
+## Design Documents
+
+- 설계 문서: APPROVED (8.4/10, 2라운드 adversarial review)
+- Eng Review: PASS (Architecture 4건 해결, Performance P1 1건)
+- 테스트 플랜: 42 코드 경로, TDD red-green-refactor
+
+## License
+
+Private — 실험/연구용 프로토타입
