@@ -15,6 +15,49 @@ class EmbeddingProvider(Protocol):
     async def embed(self, text: str) -> list[float]: ...
 
 
+class DooGPUEmbeddingProvider:
+    """BAAI/bge-m3 via DooGPU reserved9 — 실제 시맨틱 임베딩"""
+
+    def __init__(
+        self,
+        base_url: str | None = None,
+        model: str | None = None,
+        api_key: str = "EMPTY",
+    ):
+        self._base_url = (base_url or settings.embedding_base_url).rstrip("/")
+        self._model = model or settings.embedding_model
+        self._api_key = api_key
+        self._dim: int | None = None
+
+    @property
+    def dim(self) -> int:
+        return self._dim or settings.embedding_dim
+
+    async def embed(self, text: str) -> list[float]:
+        """단일 텍스트 임베딩"""
+        result = await self.embed_batch([text])
+        return result[0]
+
+    async def embed_batch(self, texts: list[str]) -> list[list[float]]:
+        """배치 임베딩 — demo_runner에서 효율적 처리용"""
+        import httpx
+
+        url = f"{self._base_url}/embeddings"
+        async with httpx.AsyncClient(timeout=60) as client:
+            resp = await client.post(
+                url,
+                json={"model": self._model, "input": texts},
+                headers={"Authorization": f"Bearer {self._api_key}"},
+            )
+            resp.raise_for_status()
+            data = resp.json()
+
+        vectors = [d["embedding"] for d in data["data"]]
+        if vectors and self._dim is None:
+            self._dim = len(vectors[0])
+        return vectors
+
+
 class MockEmbeddingProvider:
     """테스트용 mock 임베딩 (랜덤 벡터, 동일 텍스트는 동일 벡터)"""
     def __init__(self, dim: int = 1024):

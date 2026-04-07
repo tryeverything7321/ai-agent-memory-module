@@ -79,10 +79,16 @@ memory_module/
 │   └── proactive.py     # Anticipatory Memory Chains
 ├── api/routes.py        # MemoryService 통합
 ├── docker-compose.yml   # Qdrant + App
+├── demo_runner.py       # 합성 데이터 전체 실행 (Real LLM + Embedding)
+├── analyze_results.py   # 데모 결과 → 분석 리포트 생성
 ├── data/
 │   ├── generate_synthetic.py  # 합성 대화 데이터 생성
-│   └── synthetic_conversations.json  # 3유저, 30세션, 120턴
-└── tests/               # 63 tests (TDD)
+│   ├── synthetic_conversations.json  # 3유저, 30세션, 120턴
+│   └── demo_results.json      # 데모 실행 결과
+├── docs/
+│   ├── test_results.md        # TDD 과정 및 결과
+│   └── analysis_report.md     # 정량 분석 리포트
+└── tests/               # 68 tests (TDD)
 ```
 
 ## Quick Start
@@ -101,6 +107,12 @@ uvicorn main:app --reload
 
 # 합성 데이터 생성
 PYTHONPATH=. python data/generate_synthetic.py
+
+# 데모 실행 (Real LLM + Embedding, DooGPU 접근 필요)
+PYTHONPATH=. python demo_runner.py
+
+# 분석 리포트 생성
+PYTHONPATH=. python analyze_results.py
 ```
 
 ## 환경 변수 (.env)
@@ -121,8 +133,8 @@ MEMORY_EMBEDDING_BASE_URL=http://localhost:8080/v1
 | Vector DB | Qdrant (Docker) |
 | Graph | NetworkX (in-memory, SQLite 직렬화) |
 | Metadata | SQLite (WAL mode) |
-| Embedding | multilingual-e5-large (계획) |
-| LLM | GPT-OSS-20B / OpenAI-compatible API |
+| Embedding | BAAI/bge-m3 (1024-dim, DooGPU) |
+| LLM | google/gemma-4-31B-it (DooGPU) |
 
 ## Test Coverage
 
@@ -134,7 +146,30 @@ MEMORY_EMBEDDING_BASE_URL=http://localhost:8080/v1
 | Decay (Ebbinghaus, pruning, update) | 9 | ✅ |
 | Prediction (intent, transition, injection) | 12 | ✅ |
 | E2E Scenarios (4개 시나리오) | 11 | ✅ |
-| **Total** | **63** | **63 pass** |
+| Integration (Real LLM: Gemma 31B) | 5 | ✅ |
+| **Total** | **68** | **68 pass** |
+
+## Demo Results (Real LLM + Real Embedding)
+
+합성 대화 60 유저턴을 Gemma 31B + bge-m3로 실행한 정량 결과:
+
+| 지표 | 결과 |
+|------|------|
+| Intent 분류 정확도 | **81.4%** (48/59) |
+| Prediction Hit Rate | **40.7%** (목표 30% PASS) |
+| 메모리 활용률 | 95% (57/60턴) |
+| 평균 latency | 1,253ms/턴 |
+| 에러 | 0건 |
+
+```bash
+# 데모 실행
+PYTHONPATH=. python demo_runner.py
+
+# 분석 리포트 생성
+PYTHONPATH=. python analyze_results.py
+```
+
+상세 분석: [`docs/analysis_report.md`](docs/analysis_report.md)
 
 ## Research References
 
