@@ -1,0 +1,4 @@
+category,member_count,decay_weight,access_count,created_by
+strategic_tech_ops,597,1.0,597,merge
+casual_chat,15,1.5994,15,bootstrap
+bug_tracking,12,1.5915,12,bootstrap

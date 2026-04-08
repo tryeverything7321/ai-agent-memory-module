@@ -1,0 +1,4253 @@
+{
+  "meta": {
+    "version": "v2",
+    "total_turns": 198,
+    "total_sessions": 81,
+    "users": [
+      "user_pm",
+      "user_dev",
+      "user_new",
+      "user_analyst"
+    ],
+    "duration_sec": 288.8,
+    "avg_latency_ms": 1458.2,
+    "llm_model": "google/gemma-4-31B-it",
+    "embedding_model": "BAAI/bge-m3",
+    "timestamp": "2026-04-08T11:05:43.738224"
+  },
+  "turns": [
+    {
+      "turn_id": 0,
+      "session_idx": 0,
+      "user_id": "user_pm",
+      "message": "주간 보고 작성해야 하는데 지난주 핵심 이슈 뭐였지?",
+      "timestamp": "2026-03-23T09:00:00",
+      "ground_truth_intent": "weekly_report",
+      "v2_classified": "buffering",
+      "v1_classified": "weekly_report",
+      "memories_found": 0,
+      "prediction": null,
+      "latency_ms": 2985,
+      "response_preview": "메시지를 받았습니다: 주간 보고 작성해야 하는데 지난주 핵심 이슈 뭐였지?"
+    },
+    {
+      "turn_id": 1,
+      "session_idx": 0,
+      "user_id": "user_pm",
+      "message": "이슈 중에 결제 쪽은 해결됐어?",
+      "timestamp": "2026-03-23T09:05:00",
+      "ground_truth_intent": "issue_tracking",
+      "v2_classified": "buffering",
+      "v1_classified": "issue_tracking",
+      "memories_found": 2,
+      "prediction": null,
+      "latency_ms": 1831,
+      "response_preview": "관련 기억:\n  - 지난주 핵심 이슈 확인 필요\n  - 주간 보고 작성 필요"
+    },
+    {
+      "turn_id": 2,
+      "session_idx": 0,
+      "user_id": "user_pm",
+      "message": "이번 주 일정 정리해줘",
+      "timestamp": "2026-03-23T09:10:00",
+      "ground_truth_intent": "scheduling",
+      "v2_classified": "buffering",
+      "v1_classified": "scheduling",
+      "memories_found": 3,
+      "prediction": null,
+      "latency_ms": 1512,
+      "response_preview": "관련 기억:\n  - 지난주 핵심 이슈 확인 필요\n  - 결제 관련 이슈의 해결 여부를 확인 중임\n  - 주간 보고 작성 필요"
+    },
+    {
+      "turn_id": 3,
+      "session_idx": 1,
+      "user_id": "user_pm",
+      "message": "오늘 스탠드업 내용 정리해줘",
+      "timestamp": "2026-03-24T09:00:00",
+      "ground_truth_intent": "project_status",
+      "v2_classified": "buffering",
+      "v1_classified": "project_status",
+      "memories_found": 4,
+      "prediction": null,
+      "latency_ms": 1256,
+      "response_preview": "관련 기억:\n  - 이번 주 일정 정리를 요청함\n  - 결제 관련 이슈의 해결 여부를 확인 중임\n  - 지난주 핵심 이슈 확인 필요"
+    },
+    {
+      "turn_id": 4,
+      "session_idx": 1,
+      "user_id": "user_pm",
+      "message": "블로커 없다니 다행이다 ㅋㅋ",
+      "timestamp": "2026-03-24T09:05:00",
+      "ground_truth_intent": null,
+      "v2_classified": "buffering",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1191,
+      "response_preview": "관련 기억:\n  - 사용자가 오늘 스탠드업 내용 정리를 요청함\n  - 결제 관련 이슈의 해결 여부를 확인 중임\n  - 이번 주 일정 정리를 요청함"
+    },
+    {
+      "turn_id": 5,
+      "session_idx": 2,
+      "user_id": "user_pm",
+      "message": "디자인 리뷰 미팅 준비해야 하는데 변경사항 정리해줘",
+      "timestamp": "2026-03-25T14:00:00",
+      "ground_truth_intent": "meeting_prep",
+      "v2_classified": "buffering",
+      "v1_classified": "scheduling",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "project_status",
+        "weight": 1.0
+      },
+      "latency_ms": 1508,
+      "response_preview": "관련 기억:\n  - 사용자가 오늘 스탠드업 내용 정리를 요청함\n  - 이번 주 일정 정리를 요청함\n  - 블로커(방해 요소)가 없는 상태임\n\n[예측된 컨텍스트] (project_status, 100%):\n  - 사용자가 오늘 스탠드업 내용 정리를 요청함"
+    },
+    {
+      "turn_id": 6,
+      "session_idx": 2,
+      "user_id": "user_pm",
+      "message": "피드백 내용 문서로 정리해줘",
+      "timestamp": "2026-03-25T15:00:00",
+      "ground_truth_intent": "document_drafting",
+      "v2_classified": "buffering",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "scheduling",
+        "weight": 1.0
+      },
+      "latency_ms": 1099,
+      "response_preview": "관련 기억:\n  - 디자인 리뷰 미팅 준비를 위해 변경사항 정리가 필요함\n  - 사용자가 오늘 스탠드업 내용 정리를 요청함\n  - 이번 주 일정 정리를 요청함\n\n[예측된 컨텍스트] (scheduling, 100%):\n  - 디자인 리뷰 미팅 준비를 위해 변경사항 정리가 필요함\n  - 이번 주 일정 정리를 요청함"
+    },
+    {
+      "turn_id": 7,
+      "session_idx": 3,
+      "user_id": "user_pm",
+      "message": "이번 주 스프린트 회고할 건데 데이터 좀 뽑아줘",
+      "timestamp": "2026-03-27T16:00:00",
+      "ground_truth_intent": "data_analysis",
+      "v2_classified": "buffering",
+      "v1_classified": "data_analysis",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1441,
+      "response_preview": "관련 기억:\n  - 피드백 내용을 문서로 정리해야 함\n  - 사용자가 오늘 스탠드업 내용 정리를 요청함\n  - 이번 주 일정 정리를 요청함"
+    },
+    {
+      "turn_id": 8,
+      "session_idx": 3,
+      "user_id": "user_pm",
+      "message": "회고 문서 작성해줘",
+      "timestamp": "2026-03-27T16:05:00",
+      "ground_truth_intent": "document_drafting",
+      "v2_classified": "buffering",
+      "v1_classified": "document_drafting",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1064,
+      "response_preview": "관련 기억:\n  - 이번 주 스프린트 회고를 위한 데이터 추출 요청\n  - 피드백 내용을 문서로 정리해야 함\n  - 디자인 리뷰 미팅 준비를 위해 변경사항 정리가 필요함"
+    },
+    {
+      "turn_id": 9,
+      "session_idx": 3,
+      "user_id": "user_pm",
+      "message": "다음 주 계획도 같이 정리해",
+      "timestamp": "2026-03-27T16:10:00",
+      "ground_truth_intent": "scheduling",
+      "v2_classified": "buffering",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1400,
+      "response_preview": "관련 기억:\n  - 사용자가 오늘 스탠드업 내용 정리를 요청함\n  - 이번 주 일정 정리를 요청함\n  - 피드백 내용을 문서로 정리해야 함"
+    },
+    {
+      "turn_id": 10,
+      "session_idx": 4,
+      "user_id": "user_pm",
+      "message": "백로그 우선순위 정리해줘",
+      "timestamp": "2026-03-26T14:00:00",
+      "ground_truth_intent": "issue_tracking",
+      "v2_classified": "buffering",
+      "v1_classified": "issue_tracking",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "scheduling",
+        "weight": 1.0
+      },
+      "latency_ms": 1413,
+      "response_preview": "관련 기억:\n  - 다음 주 계획을 정리해야 함\n  - 피드백 내용을 문서로 정리해야 함\n  - 회고 문서 작성을 요청함\n\n[예측된 컨텍스트] (scheduling, 100%):\n  - 디자인 리뷰 미팅 준비를 위해 변경사항 정리가 필요함\n  - 이번 주 일정 정리를 요청함"
+    },
+    {
+      "turn_id": 11,
+      "session_idx": 4,
+      "user_id": "user_pm",
+      "message": "결제 버그 담당 누구지?",
+      "timestamp": "2026-03-26T14:05:00",
+      "ground_truth_intent": "team_communication",
+      "v2_classified": "buffering",
+      "v1_classified": "issue_tracking",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1421,
+      "response_preview": "관련 기억:\n  - 다음 주 계획을 정리해야 함\n  - 회고 문서 작성을 요청함\n  - 백로그 우선순위 정리가 필요함"
+    },
+    {
+      "turn_id": 12,
+      "session_idx": 5,
+      "user_id": "user_pm",
+      "message": "주간 보고 작성해야 하는데 지난주 핵심 이슈 뭐였지?",
+      "timestamp": "2026-03-30T09:00:00",
+      "ground_truth_intent": "weekly_report",
+      "v2_classified": "buffering",
+      "v1_classified": "weekly_report",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "issue_tracking",
+        "weight": 1.0
+      },
+      "latency_ms": 1862,
+      "response_preview": "관련 기억:\n  - 다음 주 계획을 정리해야 함\n  - 백로그 우선순위 정리가 필요함\n  - 이번 주 스프린트 회고를 위한 데이터 추출 요청\n\n[예측된 컨텍스트] (issue_tracking, 100%):\n  - 결제 버그 담당자를 확인하고자 함\n  - 결제 관련 이슈의 해결 여부를 확인 중임\n  - 지난주 핵심 이슈 확인 필요"
+    },
+    {
+      "turn_id": 13,
+      "session_idx": 5,
+      "user_id": "user_pm",
+      "message": "이슈 중에 결제 쪽은 해결됐어?",
+      "timestamp": "2026-03-30T09:05:00",
+      "ground_truth_intent": "issue_tracking",
+      "v2_classified": "buffering",
+      "v1_classified": "issue_tracking",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1411,
+      "response_preview": "관련 기억:\n  - 결제 버그 담당자를 확인하고자 함\n  - 백로그 우선순위 정리가 필요함\n  - 다음 주 계획을 정리해야 함"
+    },
+    {
+      "turn_id": 14,
+      "session_idx": 5,
+      "user_id": "user_pm",
+      "message": "이번 주 일정 정리해줘",
+      "timestamp": "2026-03-30T09:10:00",
+      "ground_truth_intent": "scheduling",
+      "v2_classified": "buffering",
+      "v1_classified": "scheduling",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1295,
+      "response_preview": "관련 기억:\n  - 다음 주 계획을 정리해야 함\n  - 백로그 우선순위 정리가 필요함\n  - 이번 주 스프린트 회고를 위한 데이터 추출 요청"
+    },
+    {
+      "turn_id": 15,
+      "session_idx": 5,
+      "user_id": "user_pm",
+      "message": "넵 확인",
+      "timestamp": "2026-03-30T09:20:00",
+      "ground_truth_intent": null,
+      "v2_classified": "buffering",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1111,
+      "response_preview": "관련 기억:\n  - 결제 버그 담당자를 확인하고자 함\n  - 다음 주 계획을 정리해야 함\n  - 회고 문서 작성을 요청함"
+    },
+    {
+      "turn_id": 16,
+      "session_idx": 6,
+      "user_id": "user_pm",
+      "message": "오늘 스탠드업 내용 정리해줘",
+      "timestamp": "2026-03-31T09:00:00",
+      "ground_truth_intent": "project_status",
+      "v2_classified": "buffering",
+      "v1_classified": "project_status",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 1.0
+      },
+      "latency_ms": 1078,
+      "response_preview": "관련 기억:\n  - 상대방이 내용을 확인하였음\n  - 다음 주 계획을 정리해야 함\n  - 이번 주 스프린트 회고를 위한 데이터 추출 요청\n\n[예측된 컨텍스트] (knowledge_lookup, 100%):\n  - 회고 문서 작성을 요청함\n  - 피드백 내용을 문서로 정리해야 함"
+    },
+    {
+      "turn_id": 17,
+      "session_idx": 6,
+      "user_id": "user_pm",
+      "message": "이대리한테 PR 리뷰 독촉 좀 해줘",
+      "timestamp": "2026-03-31T09:05:00",
+      "ground_truth_intent": "team_communication",
+      "v2_classified": "buffering",
+      "v1_classified": "code_review",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1473,
+      "response_preview": "관련 기억:\n  - 회고 문서 작성을 요청함\n  - 상대방이 내용을 확인하였음\n  - 이번 주 스프린트 회고를 위한 데이터 추출 요청"
+    },
+    {
+      "turn_id": 18,
+      "session_idx": 7,
+      "user_id": "user_pm",
+      "message": "디자인 리뷰 미팅 준비해야 하는데 변경사항 정리해줘",
+      "timestamp": "2026-04-01T14:00:00",
+      "ground_truth_intent": "meeting_prep",
+      "v2_classified": "buffering",
+      "v1_classified": "scheduling",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.667
+      },
+      "latency_ms": 1463,
+      "response_preview": "관련 기억:\n  - 상대방이 내용을 확인하였음\n  - 다음 주 계획을 정리해야 함\n  - 디자인 리뷰 미팅 준비를 위해 변경사항 정리가 필요함\n\n[예측된 컨텍스트] (knowledge_lookup, 67%):\n  - 회고 문서 작성을 요청함\n  - 피드백 내용을 문서로 정리해야 함"
+    },
+    {
+      "turn_id": 19,
+      "session_idx": 7,
+      "user_id": "user_pm",
+      "message": "피드백 내용 문서로 정리해줘",
+      "timestamp": "2026-04-01T15:00:00",
+      "ground_truth_intent": "document_drafting",
+      "v2_classified": "buffering",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1050,
+      "response_preview": "관련 기억:\n  - 회고 문서 작성을 요청함\n  - 상대방이 내용을 확인하였음\n  - 피드백 내용을 문서로 정리해야 함"
+    },
+    {
+      "turn_id": 20,
+      "session_idx": 7,
+      "user_id": "user_pm",
+      "message": "ㅋㅋ 디자인팀이 또 전면 수정했네",
+      "timestamp": "2026-04-01T15:10:00",
+      "ground_truth_intent": null,
+      "v2_classified": "buffering",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1423,
+      "response_preview": "관련 기억:\n  - 상대방이 내용을 확인하였음\n  - 다음 주 계획을 정리해야 함\n  - 디자인 리뷰 미팅 준비를 위해 변경사항 정리가 필요함"
+    },
+    {
+      "turn_id": 21,
+      "session_idx": 7,
+      "user_id": "user_pm",
+      "message": "팀원들한테 일정 변경 공유해줘",
+      "timestamp": "2026-04-01T15:15:00",
+      "ground_truth_intent": "team_communication",
+      "v2_classified": "buffering",
+      "v1_classified": "scheduling",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.75
+      },
+      "latency_ms": 1429,
+      "response_preview": "관련 기억:\n  - 디자인팀이 전면 수정을 진행함\n  - 다음 주 계획을 정리해야 함\n  - 상대방이 내용을 확인하였음\n\n[예측된 컨텍스트] (knowledge_lookup, 75%):\n  - 회고 문서 작성을 요청함\n  - 피드백 내용을 문서로 정리해야 함"
+    },
+    {
+      "turn_id": 22,
+      "session_idx": 8,
+      "user_id": "user_pm",
+      "message": "이번 주 스프린트 회고할 건데 데이터 좀 뽑아줘",
+      "timestamp": "2026-04-03T16:00:00",
+      "ground_truth_intent": "data_analysis",
+      "v2_classified": "buffering",
+      "v1_classified": "data_analysis",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "document_drafting",
+        "weight": 1.0
+      },
+      "latency_ms": 2458,
+      "response_preview": "관련 기억:\n  - 이번 주 스프린트 회고를 위한 데이터 추출 요청\n  - 다음 주 계획을 정리해야 함\n  - 회고 문서 작성을 요청함\n\n[예측된 컨텍스트] (document_drafting, 100%):\n  - 회고 문서 작성을 요청함\n  - 피드백 내용을 문서로 정리해야 함\n  - 주간 보고 작성 필요"
+    },
+    {
+      "turn_id": 23,
+      "session_idx": 8,
+      "user_id": "user_pm",
+      "message": "회고 문서 작성해줘",
+      "timestamp": "2026-04-03T16:05:00",
+      "ground_truth_intent": "document_drafting",
+      "v2_classified": "buffering",
+      "v1_classified": "document_drafting",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 1.0
+      },
+      "latency_ms": 1003,
+      "response_preview": "관련 기억:\n  - 회고 문서 작성을 요청함\n  - 상대방이 내용을 확인하였음\n  - 피드백 내용을 문서로 정리해야 함\n\n[예측된 컨텍스트] (knowledge_lookup, 100%):\n  - 회고 문서 작성을 요청함\n  - 피드백 내용을 문서로 정리해야 함"
+    },
+    {
+      "turn_id": 24,
+      "session_idx": 8,
+      "user_id": "user_pm",
+      "message": "다음 주 계획도 같이 정리해",
+      "timestamp": "2026-04-03T16:10:00",
+      "ground_truth_intent": "scheduling",
+      "v2_classified": "buffering",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1337,
+      "response_preview": "관련 기억:\n  - 팀원들에게 일정 변경 사항을 공유해야 함\n  - 다음 주 계획을 정리해야 함\n  - 백로그 우선순위 정리가 필요함"
+    },
+    {
+      "turn_id": 25,
+      "session_idx": 9,
+      "user_id": "user_pm",
+      "message": "부산 출장 준비해야 하는데 항공편 확인해줘",
+      "timestamp": "2026-04-02T11:00:00",
+      "ground_truth_intent": "scheduling",
+      "v2_classified": "buffering",
+      "v1_classified": "scheduling",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.6
+      },
+      "latency_ms": 1478,
+      "response_preview": "관련 기억:\n  - 상대방이 내용을 확인하였음\n  - 팀원들에게 일정 변경 사항을 공유해야 함\n  - 결제 버그 담당자를 확인하고자 함\n\n[예측된 컨텍스트] (knowledge_lookup, 60%):\n  - 회고 문서 작성을 요청함\n  - 피드백 내용을 문서로 정리해야 함"
+    },
+    {
+      "turn_id": 26,
+      "session_idx": 9,
+      "user_id": "user_pm",
+      "message": "팀원들한테 출장 일정 공유 좀",
+      "timestamp": "2026-04-02T11:05:00",
+      "ground_truth_intent": "team_communication",
+      "v2_classified": "buffering",
+      "v1_classified": "scheduling",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1425,
+      "response_preview": "관련 기억:\n  - 팀원들에게 일정 변경 사항을 공유해야 함\n  - 부산 출장을 준비하고 있으며 항공편 확인이 필요함\n  - 다음 주 계획을 정리해야 함"
+    },
+    {
+      "turn_id": 27,
+      "session_idx": 9,
+      "user_id": "user_pm",
+      "message": "고객사 미팅 자료도 준비해줘",
+      "timestamp": "2026-04-02T11:10:00",
+      "ground_truth_intent": "meeting_prep",
+      "v2_classified": "buffering",
+      "v1_classified": "scheduling",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1406,
+      "response_preview": "관련 기억:\n  - 팀원들에게 출장 일정을 공유해야 함\n  - 상대방이 내용을 확인하였음\n  - 팀원들에게 일정 변경 사항을 공유해야 함"
+    },
+    {
+      "turn_id": 28,
+      "session_idx": 10,
+      "user_id": "user_pm",
+      "message": "주간 보고 작성해야 하는데 지난주 핵심 이슈 뭐였지?",
+      "timestamp": "2026-04-06T09:00:00",
+      "ground_truth_intent": "weekly_report",
+      "v2_classified": "buffering",
+      "v1_classified": "weekly_report",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "issue_tracking",
+        "weight": 1.0
+      },
+      "latency_ms": 1824,
+      "response_preview": "관련 기억:\n  - 팀원들에게 일정 변경 사항을 공유해야 함\n  - 다음 주 계획을 정리해야 함\n  - 백로그 우선순위 정리가 필요함\n\n[예측된 컨텍스트] (issue_tracking, 100%):\n  - 결제 버그 담당자를 확인하고자 함\n  - 결제 관련 이슈의 해결 여부를 확인 중임\n  - 지난주 핵심 이슈 확인 필요"
+    },
+    {
+      "turn_id": 29,
+      "session_idx": 10,
+      "user_id": "user_pm",
+      "message": "이슈 중에 결제 쪽은 해결됐어?",
+      "timestamp": "2026-04-06T09:05:00",
+      "ground_truth_intent": "issue_tracking",
+      "v2_classified": "bug_resolution",
+      "v1_classified": "issue_tracking",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 4059,
+      "response_preview": "관련 기억:\n  - 고객사 미팅 자료 준비 요청\n  - 상대방이 내용을 확인하였음\n  - 결제 버그 담당자를 확인하고자 함"
+    },
+    {
+      "turn_id": 30,
+      "session_idx": 10,
+      "user_id": "user_pm",
+      "message": "이번 주 일정 정리해줘",
+      "timestamp": "2026-04-06T09:10:00",
+      "ground_truth_intent": "scheduling",
+      "v2_classified": "schedule_management",
+      "v1_classified": "scheduling",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1273,
+      "response_preview": "관련 기억:\n  - 팀원들에게 출장 일정을 공유해야 함\n  - 다음 주 계획을 정리해야 함\n  - 팀원들에게 일정 변경 사항을 공유해야 함"
+    },
+    {
+      "turn_id": 31,
+      "session_idx": 10,
+      "user_id": "user_pm",
+      "message": "출장 일정도 포함시켜줘",
+      "timestamp": "2026-04-06T09:15:00",
+      "ground_truth_intent": "scheduling",
+      "v2_classified": "team_communication",
+      "v1_classified": "scheduling",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1068,
+      "response_preview": "관련 기억:\n  - 팀원들에게 출장 일정을 공유해야 함\n  - 부산 출장을 준비하고 있으며 항공편 확인이 필요함\n  - 고객사 미팅 자료 준비 요청"
+    },
+    {
+      "turn_id": 32,
+      "session_idx": 11,
+      "user_id": "user_pm",
+      "message": "오늘 스탠드업 내용 정리해줘",
+      "timestamp": "2026-04-07T09:00:00",
+      "ground_truth_intent": "project_status",
+      "v2_classified": "schedule_management",
+      "v1_classified": "project_status",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1114,
+      "response_preview": "관련 기억:\n  - 상대방이 내용을 확인하였음\n  - 다음 주 계획을 정리해야 함\n  - 이번 주 스프린트 회고를 위한 데이터 추출 요청"
+    },
+    {
+      "turn_id": 33,
+      "session_idx": 11,
+      "user_id": "user_pm",
+      "message": "블로커 없다니 다행이다 ㅋㅋ",
+      "timestamp": "2026-04-07T09:05:00",
+      "ground_truth_intent": null,
+      "v2_classified": "bug_resolution",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1087,
+      "response_preview": "관련 기억:\n  - 상대방이 내용을 확인하였음\n  - 부산 출장을 준비하고 있으며 항공편 확인이 필요함\n  - 백로그 우선순위 정리가 필요함"
+    },
+    {
+      "turn_id": 34,
+      "session_idx": 12,
+      "user_id": "user_pm",
+      "message": "디자인 리뷰 미팅 준비해야 하는데 변경사항 정리해줘",
+      "timestamp": "2026-04-08T14:00:00",
+      "ground_truth_intent": "meeting_prep",
+      "v2_classified": "meeting_preparation",
+      "v1_classified": "scheduling",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1457,
+      "response_preview": "관련 기억:\n  - 고객사 미팅 자료 준비 요청\n  - 디자인팀이 전면 수정을 진행함\n  - 팀원들에게 일정 변경 사항을 공유해야 함"
+    },
+    {
+      "turn_id": 35,
+      "session_idx": 12,
+      "user_id": "user_pm",
+      "message": "피드백 내용 문서로 정리해줘",
+      "timestamp": "2026-04-08T15:00:00",
+      "ground_truth_intent": "document_drafting",
+      "v2_classified": "document_creation",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1050,
+      "response_preview": "관련 기억:\n  - 고객사 미팅 자료 준비 요청\n  - 회고 문서 작성을 요청함\n  - 팀원들에게 일정 변경 사항을 공유해야 함"
+    },
+    {
+      "turn_id": 36,
+      "session_idx": 13,
+      "user_id": "user_pm",
+      "message": "이번 주 스프린트 회고할 건데 데이터 좀 뽑아줘",
+      "timestamp": "2026-04-10T16:00:00",
+      "ground_truth_intent": "data_analysis",
+      "v2_classified": "data_analysis",
+      "v1_classified": "data_analysis",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "document_drafting",
+        "weight": 1.0
+      },
+      "latency_ms": 1417,
+      "response_preview": "관련 기억:\n  - 팀원들에게 출장 일정을 공유해야 함\n  - 이번 주 스프린트 회고를 위한 데이터 추출 요청\n  - 다음 주 계획을 정리해야 함\n\n[예측된 컨텍스트] (document_drafting, 100%):\n  - 회고 문서 작성을 요청함\n  - 피드백 내용을 문서로 정리해야 함\n  - 주간 보고 작성 필요"
+    },
+    {
+      "turn_id": 37,
+      "session_idx": 13,
+      "user_id": "user_pm",
+      "message": "회고 문서 작성해줘",
+      "timestamp": "2026-04-10T16:05:00",
+      "ground_truth_intent": "document_drafting",
+      "v2_classified": "document_creation",
+      "v1_classified": "document_drafting",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 1.0
+      },
+      "latency_ms": 1300,
+      "response_preview": "관련 기억:\n  - 고객사 미팅 자료 준비 요청\n  - 회고 문서 작성을 요청함\n  - 상대방이 내용을 확인하였음\n\n[예측된 컨텍스트] (knowledge_lookup, 100%):\n  - 회고 문서 작성을 요청함\n  - 피드백 내용을 문서로 정리해야 함"
+    },
+    {
+      "turn_id": 38,
+      "session_idx": 13,
+      "user_id": "user_pm",
+      "message": "다음 주 계획도 같이 정리해",
+      "timestamp": "2026-04-10T16:10:00",
+      "ground_truth_intent": "scheduling",
+      "v2_classified": "schedule_management",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1444,
+      "response_preview": "관련 기억:\n  - 팀원들에게 출장 일정을 공유해야 함\n  - 출장 일정을 포함시켜야 함\n  - 팀원들에게 일정 변경 사항을 공유해야 함"
+    },
+    {
+      "turn_id": 39,
+      "session_idx": 14,
+      "user_id": "user_pm",
+      "message": "부산 출장 결과 보고서 작성해야 해",
+      "timestamp": "2026-04-09T11:00:00",
+      "ground_truth_intent": "document_drafting",
+      "v2_classified": "team_communication",
+      "v1_classified": "scheduling",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 2221,
+      "response_preview": "관련 기억:\n  - 출장 일정을 포함시켜야 함\n  - 팀원들에게 출장 일정을 공유해야 함\n  - 부산 출장을 준비하고 있으며 항공편 확인이 필요함"
+    },
+    {
+      "turn_id": 40,
+      "session_idx": 14,
+      "user_id": "user_pm",
+      "message": "고객 미팅 결과도 넣어줘",
+      "timestamp": "2026-04-09T11:05:00",
+      "ground_truth_intent": "document_drafting",
+      "v2_classified": "meeting_preparation",
+      "v1_classified": "scheduling",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1124,
+      "response_preview": "관련 기억:\n  - 고객사 미팅 자료 준비 요청\n  - 부산 출장 결과 보고서를 작성해야 함\n  - 출장 일정을 포함시켜야 함"
+    },
+    {
+      "turn_id": 41,
+      "session_idx": 15,
+      "user_id": "user_pm",
+      "message": "주간 보고 작성해야 하는데 지난주 핵심 이슈 뭐였지?",
+      "timestamp": "2026-04-13T09:00:00",
+      "ground_truth_intent": "weekly_report",
+      "v2_classified": "issue_tracking",
+      "v1_classified": "weekly_report",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "issue_tracking",
+        "weight": 1.0
+      },
+      "latency_ms": 1863,
+      "response_preview": "관련 기억:\n  - 부산 출장 결과 보고서를 작성해야 함\n  - 다음 주 계획을 정리해야 함\n  - 이번 주 스프린트 회고를 위한 데이터 추출 요청\n\n[예측된 컨텍스트] (issue_tracking, 100%):\n  - 결제 버그 담당자를 확인하고자 함\n  - 결제 관련 이슈의 해결 여부를 확인 중임\n  - 지난주 핵심 이슈 확인 필요"
+    },
+    {
+      "turn_id": 42,
+      "session_idx": 15,
+      "user_id": "user_pm",
+      "message": "이슈 중에 결제 쪽은 해결됐어?",
+      "timestamp": "2026-04-13T09:05:00",
+      "ground_truth_intent": "issue_tracking",
+      "v2_classified": "bug_resolution",
+      "v1_classified": "issue_tracking",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "scheduling",
+        "weight": 0.6
+      },
+      "latency_ms": 1370,
+      "response_preview": "관련 기억:\n  - 고객 미팅 결과를 추가해야 함\n  - 결제 버그 담당자를 확인하고자 함\n  - 상대방이 내용을 확인하였음\n\n[예측된 컨텍스트] (scheduling, 60%):\n  - 고객 미팅 결과를 추가해야 함\n  - 출장 일정을 포함시켜야 함\n  - 고객사 미팅 자료 준비 요청"
+    },
+    {
+      "turn_id": 43,
+      "session_idx": 15,
+      "user_id": "user_pm",
+      "message": "이번 주 일정 정리해줘",
+      "timestamp": "2026-04-13T09:10:00",
+      "ground_truth_intent": "scheduling",
+      "v2_classified": "schedule_management",
+      "v1_classified": "scheduling",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1277,
+      "response_preview": "관련 기억:\n  - 출장 일정을 포함시켜야 함\n  - 팀원들에게 출장 일정을 공유해야 함\n  - 다음 주 계획을 정리해야 함"
+    },
+    {
+      "turn_id": 44,
+      "session_idx": 15,
+      "user_id": "user_pm",
+      "message": "넵 확인",
+      "timestamp": "2026-04-13T09:20:00",
+      "ground_truth_intent": null,
+      "v2_classified": "schedule_management",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1044,
+      "response_preview": "관련 기억:\n  - 고객 미팅 결과를 추가해야 함\n  - 부산 출장을 준비하고 있으며 항공편 확인이 필요함\n  - 상대방이 내용을 확인하였음"
+    },
+    {
+      "turn_id": 45,
+      "session_idx": 16,
+      "user_id": "user_pm",
+      "message": "오늘 스탠드업 내용 정리해줘",
+      "timestamp": "2026-04-14T09:00:00",
+      "ground_truth_intent": "project_status",
+      "v2_classified": "schedule_management",
+      "v1_classified": "project_status",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.667
+      },
+      "latency_ms": 1069,
+      "response_preview": "관련 기억:\n  - 상대방이 내용을 확인하였음\n  - 다음 주 계획을 정리해야 함\n  - 이번 주 스프린트 회고를 위한 데이터 추출 요청\n\n[예측된 컨텍스트] (knowledge_lookup, 67%):\n  - 회고 문서 작성을 요청함\n  - 피드백 내용을 문서로 정리해야 함"
+    },
+    {
+      "turn_id": 46,
+      "session_idx": 16,
+      "user_id": "user_pm",
+      "message": "이대리한테 PR 리뷰 독촉 좀 해줘",
+      "timestamp": "2026-04-14T09:05:00",
+      "ground_truth_intent": "team_communication",
+      "v2_classified": "team_communication",
+      "v1_classified": "code_review",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "scheduling",
+        "weight": 1.0
+      },
+      "latency_ms": 1385,
+      "response_preview": "관련 기억:\n  - 고객 미팅 결과를 추가해야 함\n  - 이대리에게 PR 리뷰를 독촉해야 함\n  - 고객사 미팅 자료 준비 요청\n\n[예측된 컨텍스트] (scheduling, 100%):\n  - 고객 미팅 결과를 추가해야 함\n  - 출장 일정을 포함시켜야 함\n  - 고객사 미팅 자료 준비 요청"
+    },
+    {
+      "turn_id": 47,
+      "session_idx": 17,
+      "user_id": "user_pm",
+      "message": "디자인 리뷰 미팅 준비해야 하는데 변경사항 정리해줘",
+      "timestamp": "2026-04-15T14:00:00",
+      "ground_truth_intent": "meeting_prep",
+      "v2_classified": "meeting_preparation",
+      "v1_classified": "scheduling",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1434,
+      "response_preview": "관련 기억:\n  - 고객 미팅 결과를 추가해야 함\n  - 고객사 미팅 자료 준비 요청\n  - 디자인팀이 전면 수정을 진행함"
+    },
+    {
+      "turn_id": 48,
+      "session_idx": 17,
+      "user_id": "user_pm",
+      "message": "피드백 내용 문서로 정리해줘",
+      "timestamp": "2026-04-15T15:00:00",
+      "ground_truth_intent": "document_drafting",
+      "v2_classified": "document_creation",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1029,
+      "response_preview": "관련 기억:\n  - 고객 미팅 결과를 추가해야 함\n  - 고객사 미팅 자료 준비 요청\n  - 회고 문서 작성을 요청함"
+    },
+    {
+      "turn_id": 49,
+      "session_idx": 17,
+      "user_id": "user_pm",
+      "message": "ㅋㅋ 디자인팀이 또 전면 수정했네",
+      "timestamp": "2026-04-15T15:10:00",
+      "ground_truth_intent": null,
+      "v2_classified": "meeting_preparation",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1371,
+      "response_preview": "관련 기억:\n  - 고객 미팅 결과를 추가해야 함\n  - 디자인팀이 전면 수정을 진행함\n  - 팀원들에게 일정 변경 사항을 공유해야 함"
+    },
+    {
+      "turn_id": 50,
+      "session_idx": 17,
+      "user_id": "user_pm",
+      "message": "팀원들한테 일정 변경 공유해줘",
+      "timestamp": "2026-04-15T15:15:00",
+      "ground_truth_intent": "team_communication",
+      "v2_classified": "team_communication",
+      "v1_classified": "scheduling",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1337,
+      "response_preview": "관련 기억:\n  - 팀원들에게 출장 일정을 공유해야 함\n  - 팀원들에게 일정 변경 사항을 공유해야 함\n  - 출장 일정을 포함시켜야 함"
+    },
+    {
+      "turn_id": 51,
+      "session_idx": 18,
+      "user_id": "user_pm",
+      "message": "이번 주 스프린트 회고할 건데 데이터 좀 뽑아줘",
+      "timestamp": "2026-04-17T16:00:00",
+      "ground_truth_intent": "data_analysis",
+      "v2_classified": "data_analysis",
+      "v1_classified": "data_analysis",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "document_drafting",
+        "weight": 1.0
+      },
+      "latency_ms": 2408,
+      "response_preview": "관련 기억:\n  - 고객 미팅 결과를 추가해야 함\n  - 이번 주 스프린트 회고를 위한 데이터 추출 요청\n  - 다음 주 계획을 정리해야 함\n\n[예측된 컨텍스트] (document_drafting, 100%):\n  - 부산 출장 결과 보고서를 작성해야 함\n  - 회고 문서 작성을 요청함\n  - 피드백 내용을 문서로 정리해야 함"
+    },
+    {
+      "turn_id": 52,
+      "session_idx": 18,
+      "user_id": "user_pm",
+      "message": "회고 문서 작성해줘",
+      "timestamp": "2026-04-17T16:05:00",
+      "ground_truth_intent": "document_drafting",
+      "v2_classified": "document_creation",
+      "v1_classified": "document_drafting",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 1.0
+      },
+      "latency_ms": 1015,
+      "response_preview": "관련 기억:\n  - 부산 출장 결과 보고서를 작성해야 함\n  - 고객사 미팅 자료 준비 요청\n  - 회고 문서 작성을 요청함\n\n[예측된 컨텍스트] (knowledge_lookup, 100%):\n  - 회고 문서 작성을 요청함\n  - 피드백 내용을 문서로 정리해야 함"
+    },
+    {
+      "turn_id": 53,
+      "session_idx": 18,
+      "user_id": "user_pm",
+      "message": "다음 주 계획도 같이 정리해",
+      "timestamp": "2026-04-17T16:10:00",
+      "ground_truth_intent": "scheduling",
+      "v2_classified": "schedule_management",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1312,
+      "response_preview": "관련 기억:\n  - 팀원들에게 출장 일정을 공유해야 함\n  - 출장 일정을 포함시켜야 함\n  - 팀원들에게 일정 변경 사항을 공유해야 함"
+    },
+    {
+      "turn_id": 54,
+      "session_idx": 19,
+      "user_id": "user_pm",
+      "message": "백로그 우선순위 정리해줘",
+      "timestamp": "2026-04-16T14:00:00",
+      "ground_truth_intent": "issue_tracking",
+      "v2_classified": "schedule_management",
+      "v1_classified": "issue_tracking",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "scheduling",
+        "weight": 0.667
+      },
+      "latency_ms": 1367,
+      "response_preview": "관련 기억:\n  - 출장 일정을 포함시켜야 함\n  - 백로그 우선순위 정리가 필요함\n  - 다음 주 계획을 정리해야 함\n\n[예측된 컨텍스트] (scheduling, 67%):\n  - 고객 미팅 결과를 추가해야 함\n  - 출장 일정을 포함시켜야 함\n  - 고객사 미팅 자료 준비 요청"
+    },
+    {
+      "turn_id": 55,
+      "session_idx": 19,
+      "user_id": "user_pm",
+      "message": "결제 버그 담당 누구지?",
+      "timestamp": "2026-04-16T14:05:00",
+      "ground_truth_intent": "team_communication",
+      "v2_classified": "bug_resolution",
+      "v1_classified": "issue_tracking",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "scheduling",
+        "weight": 0.571
+      },
+      "latency_ms": 1378,
+      "response_preview": "관련 기억:\n  - 팀원들에게 일정 변경 사항을 공유해야 함\n  - 결제 버그 담당자를 확인하고자 함\n  - 상대방이 내용을 확인하였음\n\n[예측된 컨텍스트] (scheduling, 57%):\n  - 고객 미팅 결과를 추가해야 함\n  - 출장 일정을 포함시켜야 함\n  - 고객사 미팅 자료 준비 요청"
+    },
+    {
+      "turn_id": 56,
+      "session_idx": 20,
+      "user_id": "user_dev",
+      "message": "오늘 리뷰할 PR 있어?",
+      "timestamp": "2026-03-23T10:00:00",
+      "ground_truth_intent": "code_review",
+      "v2_classified": "schedule_management",
+      "v1_classified": "code_review",
+      "memories_found": 0,
+      "prediction": {
+        "next_intent": "scheduling",
+        "weight": 1.0
+      },
+      "latency_ms": 1075,
+      "response_preview": "메시지를 받았습니다: 오늘 리뷰할 PR 있어?"
+    },
+    {
+      "turn_id": 57,
+      "session_idx": 20,
+      "user_id": "user_dev",
+      "message": "PR 리뷰하다가 이상한 버그 발견. 결제 API가 간헐적으로 500 에러 뱉어",
+      "timestamp": "2026-03-23T11:00:00",
+      "ground_truth_intent": "troubleshooting",
+      "v2_classified": "bug_resolution",
+      "v1_classified": "issue_tracking",
+      "memories_found": 1,
+      "prediction": {
+        "next_intent": "scheduling",
+        "weight": 0.571
+      },
+      "latency_ms": 1545,
+      "response_preview": "관련 기억:\n  - 리뷰할 PR 존재 여부 확인"
+    },
+    {
+      "turn_id": 58,
+      "session_idx": 20,
+      "user_id": "user_dev",
+      "message": "로그 좀 더 자세히 봐줘",
+      "timestamp": "2026-03-23T11:05:00",
+      "ground_truth_intent": "troubleshooting",
+      "v2_classified": "schedule_management",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 2,
+      "prediction": null,
+      "latency_ms": 1141,
+      "response_preview": "관련 기억:\n  - 결제 API에서 간헐적으로 500 에러가 발생하는 버그가 발견됨\n  - 리뷰할 PR 존재 여부 확인"
+    },
+    {
+      "turn_id": 59,
+      "session_idx": 21,
+      "user_id": "user_dev",
+      "message": "수요일 PR 리뷰하려고",
+      "timestamp": "2026-03-25T10:00:00",
+      "ground_truth_intent": "code_review",
+      "v2_classified": "schedule_management",
+      "v1_classified": "code_review",
+      "memories_found": 3,
+      "prediction": {
+        "next_intent": "scheduling",
+        "weight": 0.667
+      },
+      "latency_ms": 1436,
+      "response_preview": "관련 기억:\n  - 로그를 더 자세히 분석해달라고 요청함\n  - 리뷰할 PR 존재 여부 확인\n  - 결제 API에서 간헐적으로 500 에러가 발생하는 버그가 발견됨"
+    },
+    {
+      "turn_id": 60,
+      "session_idx": 21,
+      "user_id": "user_dev",
+      "message": "리뷰 중에 N+1 쿼리 발견했어 이거 성능 터질듯",
+      "timestamp": "2026-03-25T11:00:00",
+      "ground_truth_intent": "troubleshooting",
+      "v2_classified": "schedule_management",
+      "v1_classified": "code_review",
+      "memories_found": 4,
+      "prediction": null,
+      "latency_ms": 1176,
+      "response_preview": "관련 기억:\n  - 로그를 더 자세히 분석해달라고 요청함\n  - 수요일에 PR 리뷰를 진행할 예정임\n  - 리뷰할 PR 존재 여부 확인"
+    },
+    {
+      "turn_id": 61,
+      "session_idx": 22,
+      "user_id": "user_dev",
+      "message": "금요일 PR 리뷰 뭐 남았어?",
+      "timestamp": "2026-03-27T10:00:00",
+      "ground_truth_intent": "code_review",
+      "v2_classified": "schedule_management",
+      "v1_classified": "code_review",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1442,
+      "response_preview": "관련 기억:\n  - 수요일에 PR 리뷰를 진행할 예정임\n  - 리뷰 중 N+1 쿼리 문제 발견 및 성능 저하 우려\n  - 로그를 더 자세히 분석해달라고 요청함"
+    },
+    {
+      "turn_id": 62,
+      "session_idx": 22,
+      "user_id": "user_dev",
+      "message": "리뷰 완료된 PR 변경사항 정리해줘",
+      "timestamp": "2026-03-27T11:00:00",
+      "ground_truth_intent": "document_drafting",
+      "v2_classified": "meeting_preparation",
+      "v1_classified": "code_review",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1514,
+      "response_preview": "관련 기억:\n  - 금요일에 PR 리뷰 잔여 분량을 확인하고자 함\n  - 수요일에 PR 리뷰를 진행할 예정임\n  - 리뷰 중 N+1 쿼리 문제 발견 및 성능 저하 우려"
+    },
+    {
+      "turn_id": 63,
+      "session_idx": 23,
+      "user_id": "user_dev",
+      "message": "Redis 캐시 만료 전략 어떤 게 좋을까?",
+      "timestamp": "2026-03-24T14:00:00",
+      "ground_truth_intent": "knowledge_lookup",
+      "v2_classified": "technical_discussion",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1523,
+      "response_preview": "관련 기억:\n  - 금요일에 PR 리뷰 잔여 분량을 확인하고자 함\n  - 리뷰가 완료된 PR의 변경사항 정리가 필요함\n  - 수요일에 PR 리뷰를 진행할 예정임"
+    },
+    {
+      "turn_id": 64,
+      "session_idx": 23,
+      "user_id": "user_dev",
+      "message": "그리고 하나 더, k8s pod가 oomkilled 되는데 메모리 설정 어떻게 해야 해?",
+      "timestamp": "2026-03-24T14:10:00",
+      "ground_truth_intent": "knowledge_lookup",
+      "v2_classified": "technical_discussion",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1600,
+      "response_preview": "관련 기억:\n  - Redis 캐시 만료 전략에 대해 논의함\n  - 리뷰가 완료된 PR의 변경사항 정리가 필요함\n  - 금요일에 PR 리뷰 잔여 분량을 확인하고자 함"
+    },
+    {
+      "turn_id": 65,
+      "session_idx": 24,
+      "user_id": "user_dev",
+      "message": "이번 스프린트 진행 상황 어떻게 돼?",
+      "timestamp": "2026-03-26T14:00:00",
+      "ground_truth_intent": "project_status",
+      "v2_classified": "data_analysis",
+      "v1_classified": "project_status",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1487,
+      "response_preview": "관련 기억:\n  - 금요일에 PR 리뷰 잔여 분량을 확인하고자 함\n  - 수요일에 PR 리뷰를 진행할 예정임\n  - 리뷰가 완료된 PR의 변경사항 정리가 필요함"
+    },
+    {
+      "turn_id": 66,
+      "session_idx": 24,
+      "user_id": "user_dev",
+      "message": "API 문서도 업데이트해야 하는데 변경된 엔드포인트 정리해줘",
+      "timestamp": "2026-03-26T14:05:00",
+      "ground_truth_intent": "document_drafting",
+      "v2_classified": "meeting_preparation",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 2040,
+      "response_preview": "관련 기억:\n  - 리뷰가 완료된 PR의 변경사항 정리가 필요함\n  - 이번 스프린트 진행 상황에 대한 확인 요청\n  - 금요일에 PR 리뷰 잔여 분량을 확인하고자 함"
+    },
+    {
+      "turn_id": 67,
+      "session_idx": 24,
+      "user_id": "user_dev",
+      "message": "Swagger 문서도 같이 업데이트해줘",
+      "timestamp": "2026-03-26T14:10:00",
+      "ground_truth_intent": "document_drafting",
+      "v2_classified": "meeting_preparation",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1406,
+      "response_preview": "관련 기억:\n  - API 문서 업데이트 필요\n  - 변경된 엔드포인트 정리 요청\n  - 이번 스프린트 진행 상황에 대한 확인 요청"
+    },
+    {
+      "turn_id": 68,
+      "session_idx": 25,
+      "user_id": "user_dev",
+      "message": "오늘 리뷰할 PR 있어?",
+      "timestamp": "2026-03-30T10:00:00",
+      "ground_truth_intent": "code_review",
+      "v2_classified": "schedule_management",
+      "v1_classified": "code_review",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1058,
+      "response_preview": "관련 기억:\n  - API 문서 업데이트 필요\n  - 이번 스프린트 진행 상황에 대한 확인 요청\n  - Swagger 문서 업데이트 요청"
+    },
+    {
+      "turn_id": 69,
+      "session_idx": 25,
+      "user_id": "user_dev",
+      "message": "null 체크 안 하고 있어서 프로덕션에서 NPE 터질 수 있을 것 같아",
+      "timestamp": "2026-03-30T11:00:00",
+      "ground_truth_intent": "troubleshooting",
+      "v2_classified": "technical_discussion",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1645,
+      "response_preview": "관련 기억:\n  - API 문서 업데이트 필요\n  - 이번 스프린트 진행 상황에 대한 확인 요청\n  - 리뷰 중 N+1 쿼리 문제 발견 및 성능 저하 우려"
+    },
+    {
+      "turn_id": 70,
+      "session_idx": 26,
+      "user_id": "user_dev",
+      "message": "금요일 PR 리뷰 뭐 남았어?",
+      "timestamp": "2026-04-03T10:00:00",
+      "ground_truth_intent": "code_review",
+      "v2_classified": "schedule_management",
+      "v1_classified": "code_review",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1380,
+      "response_preview": "관련 기억:\n  - 금요일에 PR 리뷰 잔여 분량을 확인하고자 함\n  - API 문서 업데이트 필요\n  - 변경된 엔드포인트 정리 요청"
+    },
+    {
+      "turn_id": 71,
+      "session_idx": 26,
+      "user_id": "user_dev",
+      "message": "리뷰 완료된 PR 변경사항 정리해줘",
+      "timestamp": "2026-04-03T11:00:00",
+      "ground_truth_intent": "document_drafting",
+      "v2_classified": "meeting_preparation",
+      "v1_classified": "code_review",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1376,
+      "response_preview": "관련 기억:\n  - 변경된 엔드포인트 정리 요청\n  - Swagger 문서 업데이트 요청\n  - 리뷰가 완료된 PR의 변경사항 정리가 필요함"
+    },
+    {
+      "turn_id": 72,
+      "session_idx": 26,
+      "user_id": "user_dev",
+      "message": "이번 주 테스트 커버리지 어떻게 돼?",
+      "timestamp": "2026-04-03T11:05:00",
+      "ground_truth_intent": "project_status",
+      "v2_classified": "schedule_management",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1360,
+      "response_preview": "관련 기억:\n  - 이번 스프린트 진행 상황에 대한 확인 요청\n  - null 체크 누락으로 인해 프로덕션 환경에서 NullPointerException(NPE) 발생 가능성이 있음\n  - 금요일에 PR 리뷰 잔여 분량을 확인하고자 함"
+    },
+    {
+      "turn_id": 73,
+      "session_idx": 27,
+      "user_id": "user_dev",
+      "message": "Docker 멀티스테이지 빌드로 이미지 사이즈 줄이고 싶은데",
+      "timestamp": "2026-03-31T14:00:00",
+      "ground_truth_intent": "knowledge_lookup",
+      "v2_classified": "technical_discussion",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1556,
+      "response_preview": "관련 기억:\n  - Swagger 문서 업데이트 요청\n  - 변경된 엔드포인트 정리 요청\n  - 이번 주 테스트 커버리지 확인 요청"
+    },
+    {
+      "turn_id": 74,
+      "session_idx": 27,
+      "user_id": "user_dev",
+      "message": "ㅇㅋ 고마워",
+      "timestamp": "2026-03-31T14:05:00",
+      "ground_truth_intent": null,
+      "v2_classified": "schedule_management",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1165,
+      "response_preview": "관련 기억:\n  - 이번 주 테스트 커버리지 확인 요청\n  - Swagger 문서 업데이트 요청\n  - 변경된 엔드포인트 정리 요청"
+    },
+    {
+      "turn_id": 75,
+      "session_idx": 28,
+      "user_id": "user_dev",
+      "message": "CI 파이프라인이 자꾸 타임아웃 나는데 뭐가 문제지?",
+      "timestamp": "2026-04-02T15:00:00",
+      "ground_truth_intent": null,
+      "v2_classified": "technical_discussion",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1621,
+      "response_preview": "관련 기억:\n  - null 체크 누락으로 인해 프로덕션 환경에서 NullPointerException(NPE) 발생 가능성이 있음\n  - API 문서 업데이트 필요\n  - 이번 주 테스트 커버리지 확인 요청"
+    },
+    {
+      "turn_id": 76,
+      "session_idx": 28,
+      "user_id": "user_dev",
+      "message": "빌드 캐시 어떻게 설정해?",
+      "timestamp": "2026-04-02T15:10:00",
+      "ground_truth_intent": null,
+      "v2_classified": "technical_discussion",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1357,
+      "response_preview": "관련 기억:\n  - Docker 멀티스테이지 빌드를 통해 이미지 사이즈를 줄이고 싶어함\n  - CI 파이프라인에서 타임아웃 문제가 발생하고 있음\n  - k8s pod가 oomkilled 발생하여 메모리 설정 방법 문의"
+    },
+    {
+      "turn_id": 77,
+      "session_idx": 29,
+      "user_id": "user_dev",
+      "message": "오늘 리뷰할 PR 있어?",
+      "timestamp": "2026-04-06T10:00:00",
+      "ground_truth_intent": "code_review",
+      "v2_classified": "schedule_management",
+      "v1_classified": "code_review",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1034,
+      "response_preview": "관련 기억:\n  - 이번 주 테스트 커버리지 확인 요청\n  - API 문서 업데이트 필요\n  - 이번 스프린트 진행 상황에 대한 확인 요청"
+    },
+    {
+      "turn_id": 78,
+      "session_idx": 29,
+      "user_id": "user_dev",
+      "message": "race condition 있을 것 같아 동시 결제 요청 들어오면 어떡해",
+      "timestamp": "2026-04-06T11:00:00",
+      "ground_truth_intent": "troubleshooting",
+      "v2_classified": "bug_resolution",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 2170,
+      "response_preview": "관련 기억:\n  - 사용자가 빌드 캐시 설정 방법에 대해 질문함\n  - 이번 주 테스트 커버리지 확인 요청\n  - CI 파이프라인에서 타임아웃 문제가 발생하고 있음"
+    },
+    {
+      "turn_id": 79,
+      "session_idx": 29,
+      "user_id": "user_dev",
+      "message": "로그 좀 더 자세히 봐줘",
+      "timestamp": "2026-04-06T11:05:00",
+      "ground_truth_intent": "troubleshooting",
+      "v2_classified": "schedule_management",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1087,
+      "response_preview": "관련 기억:\n  - 이번 주 테스트 커버리지 확인 요청\n  - Swagger 문서 업데이트 요청\n  - 이번 스프린트 진행 상황에 대한 확인 요청"
+    },
+    {
+      "turn_id": 80,
+      "session_idx": 30,
+      "user_id": "user_dev",
+      "message": "수요일 PR 리뷰하려고",
+      "timestamp": "2026-04-08T10:00:00",
+      "ground_truth_intent": "code_review",
+      "v2_classified": "schedule_management",
+      "v1_classified": "code_review",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1372,
+      "response_preview": "관련 기억:\n  - 이번 주 테스트 커버리지 확인 요청\n  - 상대방의 말에 동의하고 감사함을 표함\n  - 금요일에 PR 리뷰 잔여 분량을 확인하고자 함"
+    },
+    {
+      "turn_id": 81,
+      "session_idx": 30,
+      "user_id": "user_dev",
+      "message": "메모리 누수 의심돼 서버 장시간 돌리면 RSS가 계속 올라가",
+      "timestamp": "2026-04-08T11:00:00",
+      "ground_truth_intent": "troubleshooting",
+      "v2_classified": "issue_tracking",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1606,
+      "response_preview": "관련 기억:\n  - 동시 결제 요청 시 race condition 발생 가능성에 대한 우려\n  - CI 파이프라인에서 타임아웃 문제가 발생하고 있음\n  - API 문서 업데이트 필요"
+    },
+    {
+      "turn_id": 82,
+      "session_idx": 31,
+      "user_id": "user_dev",
+      "message": "금요일 PR 리뷰 뭐 남았어?",
+      "timestamp": "2026-04-10T10:00:00",
+      "ground_truth_intent": "code_review",
+      "v2_classified": "schedule_management",
+      "v1_classified": "code_review",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1372,
+      "response_preview": "관련 기억:\n  - 이번 주 테스트 커버리지 확인 요청\n  - 금요일에 PR 리뷰 잔여 분량을 확인하고자 함\n  - 리뷰가 완료된 PR의 변경사항 정리가 필요함"
+    },
+    {
+      "turn_id": 83,
+      "session_idx": 31,
+      "user_id": "user_dev",
+      "message": "리뷰 완료된 PR 변경사항 정리해줘",
+      "timestamp": "2026-04-10T11:00:00",
+      "ground_truth_intent": "document_drafting",
+      "v2_classified": "meeting_preparation",
+      "v1_classified": "code_review",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1397,
+      "response_preview": "관련 기억:\n  - 변경된 엔드포인트 정리 요청\n  - 리뷰가 완료된 PR의 변경사항 정리가 필요함\n  - Swagger 문서 업데이트 요청"
+    },
+    {
+      "turn_id": 84,
+      "session_idx": 32,
+      "user_id": "user_dev",
+      "message": "gRPC vs REST 어떤 상황에서 뭐 써야 해?",
+      "timestamp": "2026-04-07T14:00:00",
+      "ground_truth_intent": "knowledge_lookup",
+      "v2_classified": "technical_discussion",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1356,
+      "response_preview": "관련 기억:\n  - 서버 장시간 가동 시 RSS가 지속적으로 상승하여 메모리 누수가 의심됨\n  - 동시 결제 요청 시 race condition 발생 가능성에 대한 우려\n  - 사용자가 빌드 캐시 설정 방법에 대해 질문함"
+    },
+    {
+      "turn_id": 85,
+      "session_idx": 32,
+      "user_id": "user_dev",
+      "message": "그리고 하나 더, celery worker가 간헐적으로 죽어 모니터링 어떻게 해?",
+      "timestamp": "2026-04-07T14:10:00",
+      "ground_truth_intent": "knowledge_lookup",
+      "v2_classified": "technical_discussion",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1810,
+      "response_preview": "관련 기억:\n  - 서버 장시간 가동 시 RSS가 지속적으로 상승하여 메모리 누수가 의심됨\n  - CI 파이프라인에서 타임아웃 문제가 발생하고 있음\n  - 이번 주 테스트 커버리지 확인 요청"
+    },
+    {
+      "turn_id": 86,
+      "session_idx": 33,
+      "user_id": "user_dev",
+      "message": "GitHub Actions workflow 파일 수정했는데 리뷰 좀",
+      "timestamp": "2026-04-09T15:00:00",
+      "ground_truth_intent": null,
+      "v2_classified": "meeting_preparation",
+      "v1_classified": "code_review",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1411,
+      "response_preview": "관련 기억:\n  - 변경된 엔드포인트 정리 요청\n  - 사용자가 빌드 캐시 설정 방법에 대해 질문함\n  - API 문서 업데이트 필요"
+    },
+    {
+      "turn_id": 87,
+      "session_idx": 33,
+      "user_id": "user_dev",
+      "message": "매트릭스에 Python 3.11이랑 3.12 같이 넣으면 되지?",
+      "timestamp": "2026-04-09T15:10:00",
+      "ground_truth_intent": null,
+      "v2_classified": "technical_discussion",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 2087,
+      "response_preview": "관련 기억:\n  - GitHub Actions workflow 파일을 수정하여 리뷰를 요청함\n  - 사용자가 빌드 캐시 설정 방법에 대해 질문함\n  - API 문서 업데이트 필요"
+    },
+    {
+      "turn_id": 88,
+      "session_idx": 34,
+      "user_id": "user_dev",
+      "message": "결제 모듈 아키텍처를 이벤트 드리븐으로 바꾸는 거 어떻게 생각해?",
+      "timestamp": "2026-04-10T16:00:00",
+      "ground_truth_intent": "code_review",
+      "v2_classified": "bug_resolution",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1542,
+      "response_preview": "관련 기억:\n  - GitHub Actions workflow 파일을 수정하여 리뷰를 요청함\n  - 매트릭스에 Python 3.11과 3.12 버전을 함께 포함하는 것에 대해 논의함\n  - 동시 결제 요청 시 race condition 발생 가능성에 대한 우려"
+    },
+    {
+      "turn_id": 89,
+      "session_idx": 34,
+      "user_id": "user_dev",
+      "message": "관련 레퍼런스 문서 찾아줘",
+      "timestamp": "2026-04-10T16:10:00",
+      "ground_truth_intent": "knowledge_lookup",
+      "v2_classified": "document_creation",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1086,
+      "response_preview": "관련 기억:\n  - GitHub Actions workflow 파일을 수정하여 리뷰를 요청함\n  - API 문서 업데이트 필요\n  - Swagger 문서 업데이트 요청"
+    },
+    {
+      "turn_id": 90,
+      "session_idx": 35,
+      "user_id": "user_dev",
+      "message": "오늘 리뷰할 PR 있어?",
+      "timestamp": "2026-04-13T10:00:00",
+      "ground_truth_intent": "code_review",
+      "v2_classified": "schedule_management",
+      "v1_classified": "code_review",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1062,
+      "response_preview": "관련 기억:\n  - GitHub Actions workflow 파일을 수정하여 리뷰를 요청함\n  - 이번 주 테스트 커버리지 확인 요청\n  - 수요일에 PR 리뷰를 진행할 예정임"
+    },
+    {
+      "turn_id": 91,
+      "session_idx": 35,
+      "user_id": "user_dev",
+      "message": "API 응답 시간이 갑자기 3배 느려졌어 뭐가 바뀐 거지?",
+      "timestamp": "2026-04-13T11:00:00",
+      "ground_truth_intent": "troubleshooting",
+      "v2_classified": "technical_discussion",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1440,
+      "response_preview": "관련 기억:\n  - 결제 모듈 아키텍처를 이벤트 드리븐 방식으로 변경하는 것에 대한 제안\n  - GitHub Actions workflow 파일을 수정하여 리뷰를 요청함\n  - 매트릭스에 Python 3.11과 3.12 버전을 함께 포함하는 것에 대해 논의함"
+    },
+    {
+      "turn_id": 92,
+      "session_idx": 36,
+      "user_id": "user_dev",
+      "message": "금요일 PR 리뷰 뭐 남았어?",
+      "timestamp": "2026-04-17T10:00:00",
+      "ground_truth_intent": "code_review",
+      "v2_classified": "schedule_management",
+      "v1_classified": "code_review",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1380,
+      "response_preview": "관련 기억:\n  - GitHub Actions workflow 파일을 수정하여 리뷰를 요청함\n  - 이번 주 테스트 커버리지 확인 요청\n  - 금요일에 PR 리뷰 잔여 분량을 확인하고자 함"
+    },
+    {
+      "turn_id": 93,
+      "session_idx": 36,
+      "user_id": "user_dev",
+      "message": "리뷰 완료된 PR 변경사항 정리해줘",
+      "timestamp": "2026-04-17T11:00:00",
+      "ground_truth_intent": "document_drafting",
+      "v2_classified": "meeting_preparation",
+      "v1_classified": "code_review",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1384,
+      "response_preview": "관련 기억:\n  - GitHub Actions workflow 파일을 수정하여 리뷰를 요청함\n  - 변경된 엔드포인트 정리 요청\n  - 리뷰가 완료된 PR의 변경사항 정리가 필요함"
+    },
+    {
+      "turn_id": 94,
+      "session_idx": 36,
+      "user_id": "user_dev",
+      "message": "이번 주 테스트 커버리지 어떻게 돼?",
+      "timestamp": "2026-04-17T11:05:00",
+      "ground_truth_intent": "project_status",
+      "v2_classified": "schedule_management",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1295,
+      "response_preview": "관련 기억:\n  - API 응답 시간이 갑자기 3배 느려짐\n  - 이번 주 테스트 커버리지 확인 요청\n  - gRPC와 REST의 사용 상황에 대한 비교 및 선택 기준을 질문함"
+    },
+    {
+      "turn_id": 95,
+      "session_idx": 37,
+      "user_id": "user_dev",
+      "message": "SQLAlchemy 2.0 마이그레이션 가이드 있어?",
+      "timestamp": "2026-04-14T14:00:00",
+      "ground_truth_intent": "knowledge_lookup",
+      "v2_classified": "technical_discussion",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1594,
+      "response_preview": "관련 기억:\n  - 매트릭스에 Python 3.11과 3.12 버전을 함께 포함하는 것에 대해 논의함\n  - API 응답 시간이 갑자기 3배 느려짐\n  - GitHub Actions workflow 파일을 수정하여 리뷰를 요청함"
+    },
+    {
+      "turn_id": 96,
+      "session_idx": 37,
+      "user_id": "user_dev",
+      "message": "ㅇㅋ 고마워",
+      "timestamp": "2026-04-14T14:05:00",
+      "ground_truth_intent": null,
+      "v2_classified": "schedule_management",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1127,
+      "response_preview": "관련 기억:\n  - API 응답 시간이 갑자기 3배 느려짐\n  - 상대방의 말에 동의하고 감사함을 표함\n  - 이번 주 테스트 커버리지 확인 요청"
+    },
+    {
+      "turn_id": 97,
+      "session_idx": 38,
+      "user_id": "user_dev",
+      "message": "배포 파이프라인에서 도커 이미지 태깅이 안 돼",
+      "timestamp": "2026-04-16T15:00:00",
+      "ground_truth_intent": null,
+      "v2_classified": "issue_tracking",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 2489,
+      "response_preview": "관련 기억:\n  - 사용자가 SQLAlchemy 2.0 마이그레이션 가이드를 찾고 있음\n  - API 응답 시간이 갑자기 3배 느려짐\n  - 결제 모듈 아키텍처를 이벤트 드리븐 방식으로 변경하는 것에 대한 제안"
+    },
+    {
+      "turn_id": 98,
+      "session_idx": 38,
+      "user_id": "user_dev",
+      "message": "태그를 커밋 SHA로 자동 설정하는 방법은?",
+      "timestamp": "2026-04-16T15:10:00",
+      "ground_truth_intent": null,
+      "v2_classified": "technical_discussion",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1157,
+      "response_preview": "관련 기억:\n  - 배포 파이프라인에서 도커 이미지 태깅이 되지 않는 문제가 발생함\n  - 사용자가 SQLAlchemy 2.0 마이그레이션 가이드를 찾고 있음\n  - API 응답 시간이 갑자기 3배 느려짐"
+    },
+    {
+      "turn_id": 99,
+      "session_idx": 39,
+      "user_id": "user_dev",
+      "message": "모놀리스에서 마이크로서비스로 전환할 때 뭐부터 분리해야 해?",
+      "timestamp": "2026-04-17T16:00:00",
+      "ground_truth_intent": "code_review",
+      "v2_classified": "technical_discussion",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 2458,
+      "response_preview": "관련 기억:\n  - 사용자가 SQLAlchemy 2.0 마이그레이션 가이드를 찾고 있음\n  - 결제 모듈 아키텍처를 이벤트 드리븐 방식으로 변경하는 것에 대한 제안\n  - GitHub Actions workflow 파일을 수정하여 리뷰를 요청함"
+    },
+    {
+      "turn_id": 100,
+      "session_idx": 39,
+      "user_id": "user_dev",
+      "message": "우리 서비스에서는 인증 모듈이 제일 독립적인 것 같은데",
+      "timestamp": "2026-04-17T16:10:00",
+      "ground_truth_intent": "code_review",
+      "v2_classified": "technical_discussion",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1499,
+      "response_preview": "관련 기억:\n  - 사용자가 모놀리스 아키텍처에서 마이크로서비스 아키텍처로의 전환 시 분리 우선순위에 대해 질문함\n  - 사용자가 태그를 커밋 SHA로 자동 설정하는 방법을 문의함\n  - 결제 모듈 아키텍처를 이벤트 드리븐 방식으로 변경하는 것에 대한 제안"
+    },
+    {
+      "turn_id": 101,
+      "session_idx": 40,
+      "user_id": "user_new",
+      "message": "안녕하세요~ 오늘 첫 출근인데 뭐부터 하면 될까요?",
+      "timestamp": "2026-03-23T09:00:00",
+      "ground_truth_intent": "onboarding",
+      "v2_classified": "schedule_management",
+      "v1_classified": "onboarding",
+      "memories_found": 0,
+      "prediction": null,
+      "latency_ms": 1685,
+      "response_preview": "메시지를 받았습니다: 안녕하세요~ 오늘 첫 출근인데 뭐부터 하면 될까요?"
+    },
+    {
+      "turn_id": 102,
+      "session_idx": 40,
+      "user_id": "user_new",
+      "message": "개발 환경 설정 문서 어디 있어요?",
+      "timestamp": "2026-03-23T09:05:00",
+      "ground_truth_intent": "knowledge_lookup",
+      "v2_classified": "technical_discussion",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 2,
+      "prediction": null,
+      "latency_ms": 1463,
+      "response_preview": "관련 기억:\n  - 사용자가 업무 시작 방법에 대해 질문함\n  - 사용자가 오늘 첫 출근을 함"
+    },
+    {
+      "turn_id": 103,
+      "session_idx": 40,
+      "user_id": "user_new",
+      "message": "감사합니다!",
+      "timestamp": "2026-03-23T09:10:00",
+      "ground_truth_intent": null,
+      "v2_classified": "schedule_management",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 3,
+      "prediction": null,
+      "latency_ms": 1114,
+      "response_preview": "관련 기억:\n  - 사용자가 개발 환경 설정 문서의 위치를 문의함\n  - 사용자가 업무 시작 방법에 대해 질문함\n  - 사용자가 오늘 첫 출근을 함"
+    },
+    {
+      "turn_id": 104,
+      "session_idx": 41,
+      "user_id": "user_new",
+      "message": "IDE 설정 하려는데 우리 팀 추천 플러그인이 뭐예요?",
+      "timestamp": "2026-03-24T10:00:00",
+      "ground_truth_intent": "onboarding",
+      "v2_classified": "technical_discussion",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 4,
+      "prediction": null,
+      "latency_ms": 1300,
+      "response_preview": "관련 기억:\n  - 사용자가 개발 환경 설정 문서의 위치를 문의함\n  - 사용자가 감사 인사를 전함\n  - 사용자가 업무 시작 방법에 대해 질문함"
+    },
+    {
+      "turn_id": 105,
+      "session_idx": 41,
+      "user_id": "user_new",
+      "message": "Python 확장은 어떤 걸 설치해야 하나요?",
+      "timestamp": "2026-03-24T10:05:00",
+      "ground_truth_intent": "onboarding",
+      "v2_classified": "technical_discussion",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1396,
+      "response_preview": "관련 기억:\n  - 사용자가 팀의 추천 IDE 플러그인 정보를 요청함\n  - 사용자가 개발 환경 설정 문서의 위치를 문의함\n  - 사용자가 감사 인사를 전함"
+    },
+    {
+      "turn_id": 106,
+      "session_idx": 41,
+      "user_id": "user_new",
+      "message": "넵 감사합니다~",
+      "timestamp": "2026-03-24T10:10:00",
+      "ground_truth_intent": null,
+      "v2_classified": "schedule_management",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1032,
+      "response_preview": "관련 기억:\n  - 사용자가 감사 인사를 전함\n  - 사용자가 Python 확장에 대해 문의함\n  - 사용자가 팀의 추천 IDE 플러그인 정보를 요청함"
+    },
+    {
+      "turn_id": 107,
+      "session_idx": 42,
+      "user_id": "user_new",
+      "message": "우리 팀 코드 컨벤션이 어떻게 돼요?",
+      "timestamp": "2026-03-25T10:00:00",
+      "ground_truth_intent": "onboarding",
+      "v2_classified": "technical_discussion",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.511
+      },
+      "latency_ms": 1133,
+      "response_preview": "관련 기억:\n  - 사용자가 팀의 추천 IDE 플러그인 정보를 요청함\n  - 사용자가 Python 확장에 대해 문의함\n  - 사용자가 개발 환경 설정 문서의 위치를 문의함\n\n[예측된 컨텍스트] (knowledge_lookup, 51%):\n  - 사용자가 개발 환경 설정 문서의 위치를 문의함\n  - 사용자가 업무 시작 방법에 대해 질문함"
+    },
+    {
+      "turn_id": 108,
+      "session_idx": 42,
+      "user_id": "user_new",
+      "message": "브랜치 전략은요? Git flow 쓰나요?",
+      "timestamp": "2026-03-25T10:05:00",
+      "ground_truth_intent": "onboarding",
+      "v2_classified": "technical_discussion",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.522
+      },
+      "latency_ms": 1546,
+      "response_preview": "관련 기억:\n  - 사용자가 팀의 코드 컨벤션에 대해 질문함\n  - 사용자가 팀의 추천 IDE 플러그인 정보를 요청함\n  - 사용자가 Python 확장에 대해 문의함\n\n[예측된 컨텍스트] (knowledge_lookup, 52%):\n  - 사용자가 개발 환경 설정 문서의 위치를 문의함\n  - 사용자가 업무 시작 방법에 대해 질문함"
+    },
+    {
+      "turn_id": 109,
+      "session_idx": 42,
+      "user_id": "user_new",
+      "message": "커밋 메시지 규칙도 있나요?",
+      "timestamp": "2026-03-25T10:10:00",
+      "ground_truth_intent": "onboarding",
+      "v2_classified": "technical_discussion",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.532
+      },
+      "latency_ms": 1167,
+      "response_preview": "관련 기억:\n  - 사용자가 팀의 코드 컨벤션에 대해 질문함\n  - 브랜치 전략으로 Git flow 사용 여부를 확인하고 있음\n  - 사용자가 팀의 추천 IDE 플러그인 정보를 요청함\n\n[예측된 컨텍스트] (knowledge_lookup, 53%):\n  - 사용자가 개발 환경 설정 문서의 위치를 문의함\n  - 사용자가 업무 시작 방법에 대해 질문함"
+    },
+    {
+      "turn_id": 110,
+      "session_idx": 43,
+      "user_id": "user_new",
+      "message": "팀 구성원이 어떻게 되는지 알 수 있을까요?",
+      "timestamp": "2026-03-26T14:00:00",
+      "ground_truth_intent": "onboarding",
+      "v2_classified": "team_communication",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.542
+      },
+      "latency_ms": 1134,
+      "response_preview": "관련 기억:\n  - 사용자가 팀의 코드 컨벤션에 대해 질문함\n  - 사용자가 커밋 메시지 규칙의 존재 여부에 대해 질문함\n  - 사용자가 팀의 추천 IDE 플러그인 정보를 요청함\n\n[예측된 컨텍스트] (knowledge_lookup, 54%):\n  - 사용자가 개발 환경 설정 문서의 위치를 문의함\n  - 사용자가 업무 시작 방법에 대해 질문함"
+    },
+    {
+      "turn_id": 111,
+      "session_idx": 43,
+      "user_id": "user_new",
+      "message": "각 분이 어떤 업무를 담당하시나요?",
+      "timestamp": "2026-03-26T14:05:00",
+      "ground_truth_intent": "onboarding",
+      "v2_classified": "team_communication",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.551
+      },
+      "latency_ms": 1189,
+      "response_preview": "관련 기억:\n  - 사용자가 팀 구성원에 대한 정보를 요청함\n  - 사용자가 팀의 코드 컨벤션에 대해 질문함\n  - 사용자가 커밋 메시지 규칙의 존재 여부에 대해 질문함\n\n[예측된 컨텍스트] (knowledge_lookup, 55%):\n  - 사용자가 개발 환경 설정 문서의 위치를 문의함\n  - 사용자가 업무 시작 방법에 대해 질문함"
+    },
+    {
+      "turn_id": 112,
+      "session_idx": 44,
+      "user_id": "user_new",
+      "message": "이번 주 온보딩 학습 내용 정리해서 문서로 만들어야 해요",
+      "timestamp": "2026-03-27T16:00:00",
+      "ground_truth_intent": "document_drafting",
+      "v2_classified": "schedule_management",
+      "v1_classified": "onboarding",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 1.0
+      },
+      "latency_ms": 2337,
+      "response_preview": "관련 기억:\n  - 사용자가 팀 구성원에 대한 정보를 요청함\n  - 화자가 상대방들의 담당 업무에 대해 질문함\n  - 사용자가 팀의 코드 컨벤션에 대해 질문함\n\n[예측된 컨텍스트] (knowledge_lookup, 100%):\n  - 사용자가 개발 환경 설정 문서의 위치를 문의함\n  - 사용자가 업무 시작 방법에 대해 질문함"
+    },
+    {
+      "turn_id": 113,
+      "session_idx": 44,
+      "user_id": "user_new",
+      "message": "환경설정, 컨벤션, 팀 구조로 나눠서 정리해주세요",
+      "timestamp": "2026-03-27T16:05:00",
+      "ground_truth_intent": "document_drafting",
+      "v2_classified": "technical_discussion",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.54
+      },
+      "latency_ms": 1332,
+      "response_preview": "관련 기억:\n  - 사용자가 팀 구성원에 대한 정보를 요청함\n  - 이번 주 온보딩 학습 내용을 정리하여 문서로 작성해야 함\n  - 사용자가 팀의 코드 컨벤션에 대해 질문함\n\n[예측된 컨텍스트] (knowledge_lookup, 54%):\n  - 이번 주 온보딩 학습 내용을 정리하여 문서로 작성해야 함\n  - 사용자가 개발 환경 설정 문서의 위치를 문의함\n"
+    },
+    {
+      "turn_id": 114,
+      "session_idx": 45,
+      "user_id": "user_new",
+      "message": "안녕하세요~ DB 스키마 문서는 어디서 볼 수 있나요?",
+      "timestamp": "2026-03-30T09:00:00",
+      "ground_truth_intent": "onboarding",
+      "v2_classified": "technical_discussion",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.549
+      },
+      "latency_ms": 1514,
+      "response_preview": "관련 기억:\n  - 정리 항목을 환경설정, 컨벤션, 팀 구조로 나누어 요청함\n  - 사용자가 팀 구성원에 대한 정보를 요청함\n  - 사용자가 커밋 메시지 규칙의 존재 여부에 대해 질문함\n\n[예측된 컨텍스트] (knowledge_lookup, 55%):\n  - 이번 주 온보딩 학습 내용을 정리하여 문서로 작성해야 함\n  - 사용자가 개발 환경 설정 문서의 위"
+    },
+    {
+      "turn_id": 115,
+      "session_idx": 45,
+      "user_id": "user_new",
+      "message": "API 문서는요?",
+      "timestamp": "2026-03-30T09:05:00",
+      "ground_truth_intent": "onboarding",
+      "v2_classified": "technical_discussion",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.558
+      },
+      "latency_ms": 1454,
+      "response_preview": "관련 기억:\n  - 사용자가 DB 스키마 문서의 위치를 문의함\n  - 사용자가 팀 구성원에 대한 정보를 요청함\n  - 이번 주 온보딩 학습 내용을 정리하여 문서로 작성해야 함\n\n[예측된 컨텍스트] (knowledge_lookup, 56%):\n  - 사용자가 DB 스키마 문서의 위치를 문의함\n  - 이번 주 온보딩 학습 내용을 정리하여 문서로 작성해야 함\n "
+    },
+    {
+      "turn_id": 116,
+      "session_idx": 46,
+      "user_id": "user_new",
+      "message": "첫 PR 올려도 될까요? 리뷰어 누구로 지정하면 되나요?",
+      "timestamp": "2026-03-31T10:00:00",
+      "ground_truth_intent": "code_review",
+      "v2_classified": "team_communication",
+      "v1_classified": "code_review",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 2724,
+      "response_preview": "관련 기억:\n  - 사용자가 API 문서의 위치나 제공 여부를 문의함\n  - 화자가 상대방들의 담당 업무에 대해 질문함\n  - 사용자가 팀 구성원에 대한 정보를 요청함"
+    },
+    {
+      "turn_id": 117,
+      "session_idx": 46,
+      "user_id": "user_new",
+      "message": "감사합니다! 올렸어요",
+      "timestamp": "2026-03-31T10:10:00",
+      "ground_truth_intent": null,
+      "v2_classified": "schedule_management",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.547
+      },
+      "latency_ms": 2771,
+      "response_preview": "관련 기억:\n  - 리뷰어 지정 대상에 대해 문의함\n  - 사용자가 첫 PR(Pull Request) 제출 가능 여부를 문의함\n  - 사용자가 팀 구성원에 대한 정보를 요청함\n\n[예측된 컨텍스트] (knowledge_lookup, 55%):\n  - 사용자가 API 문서의 위치나 제공 여부를 문의함\n  - 사용자가 DB 스키마 문서의 위치를 문의함\n  - 이"
+    },
+    {
+      "turn_id": 118,
+      "session_idx": 47,
+      "user_id": "user_new",
+      "message": "pytest fixture 어떻게 써요? conftest.py에 넣으면 되나요?",
+      "timestamp": "2026-04-01T14:00:00",
+      "ground_truth_intent": "knowledge_lookup",
+      "v2_classified": "technical_discussion",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.556
+      },
+      "latency_ms": 3595,
+      "response_preview": "관련 기억:\n  - 정리 항목을 환경설정, 컨벤션, 팀 구조로 나누어 요청함\n  - 사용자가 DB 스키마 문서의 위치를 문의함\n  - 사용자가 API 문서의 위치나 제공 여부를 문의함\n\n[예측된 컨텍스트] (knowledge_lookup, 56%):\n  - 사용자가 API 문서의 위치나 제공 여부를 문의함\n  - 사용자가 DB 스키마 문서의 위치를 문의함\n"
+    },
+    {
+      "turn_id": 119,
+      "session_idx": 47,
+      "user_id": "user_new",
+      "message": "mock이랑 fixture 차이가 뭐예요?",
+      "timestamp": "2026-04-01T14:05:00",
+      "ground_truth_intent": "knowledge_lookup",
+      "v2_classified": "technical_discussion",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.564
+      },
+      "latency_ms": 2579,
+      "response_preview": "관련 기억:\n  - 사용자가 pytest fixture의 사용 방법과 conftest.py 파일 활용 여부에 대해 질문함\n  - 사용자가 DB 스키마 문서의 위치를 문의함\n  - 정리 항목을 환경설정, 컨벤션, 팀 구조로 나누어 요청함\n\n[예측된 컨텍스트] (knowledge_lookup, 56%):\n  - 사용자가 pytest fixture의 사용 방법과"
+    },
+    {
+      "turn_id": 120,
+      "session_idx": 48,
+      "user_id": "user_new",
+      "message": "코드 리뷰 피드백 반영했는데 확인해주세요",
+      "timestamp": "2026-04-02T15:00:00",
+      "ground_truth_intent": "code_review",
+      "v2_classified": "meeting_preparation",
+      "v1_classified": "code_review",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.526
+      },
+      "latency_ms": 1960,
+      "response_preview": "관련 기억:\n  - 리뷰어 지정 대상에 대해 문의함\n  - 사용자가 무언가를 업로드 완료함\n  - 사용자가 첫 PR(Pull Request) 제출 가능 여부를 문의함\n\n[예측된 컨텍스트] (knowledge_lookup, 53%):\n  - 사용자가 pytest fixture의 사용 방법과 conftest.py 파일 활용 여부에 대해 질문함\n  - 사용자가 "
+    },
+    {
+      "turn_id": 121,
+      "session_idx": 48,
+      "user_id": "user_new",
+      "message": "넵 수정했어요!",
+      "timestamp": "2026-04-02T15:05:00",
+      "ground_truth_intent": null,
+      "v2_classified": "meeting_preparation",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.554
+      },
+      "latency_ms": 1214,
+      "response_preview": "관련 기억:\n  - 코드 리뷰 피드백 반영 완료 및 확인 요청\n  - 사용자가 무언가를 업로드 완료함\n  - 리뷰어 지정 대상에 대해 문의함\n\n[예측된 컨텍스트] (knowledge_lookup, 55%):\n  - 사용자가 pytest fixture의 사용 방법과 conftest.py 파일 활용 여부에 대해 질문함\n  - 사용자가 API 문서의 위치나 제공"
+    },
+    {
+      "turn_id": 122,
+      "session_idx": 49,
+      "user_id": "user_new",
+      "message": "이번 주 한 일 정리해주세요",
+      "timestamp": "2026-04-03T16:00:00",
+      "ground_truth_intent": "project_status",
+      "v2_classified": "schedule_management",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.561
+      },
+      "latency_ms": 1106,
+      "response_preview": "관련 기억:\n  - 수정을 완료함\n  - 코드 리뷰 피드백 반영 완료 및 확인 요청\n  - 사용자가 무언가를 업로드 완료함\n\n[예측된 컨텍스트] (knowledge_lookup, 56%):\n  - 사용자가 pytest fixture의 사용 방법과 conftest.py 파일 활용 여부에 대해 질문함\n  - 사용자가 API 문서의 위치나 제공 여부를 문의함\n "
+    },
+    {
+      "turn_id": 123,
+      "session_idx": 49,
+      "user_id": "user_new",
+      "message": "다음 주부터 실전 투입이죠?",
+      "timestamp": "2026-04-03T16:05:00",
+      "ground_truth_intent": "project_status",
+      "v2_classified": "schedule_management",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.569
+      },
+      "latency_ms": 1398,
+      "response_preview": "관련 기억:\n  - 이번 주에 한 일에 대한 정리를 요청함\n  - 코드 리뷰 피드백 반영 완료 및 확인 요청\n  - 이번 주 온보딩 학습 내용을 정리하여 문서로 작성해야 함\n\n[예측된 컨텍스트] (knowledge_lookup, 57%):\n  - 사용자가 pytest fixture의 사용 방법과 conftest.py 파일 활용 여부에 대해 질문함\n  - 사"
+    },
+    {
+      "turn_id": 124,
+      "session_idx": 50,
+      "user_id": "user_new",
+      "message": "이번 주 제 담당 태스크 뭐예요?",
+      "timestamp": "2026-04-06T09:00:00",
+      "ground_truth_intent": "project_status",
+      "v2_classified": "schedule_management",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.576
+      },
+      "latency_ms": 1177,
+      "response_preview": "관련 기억:\n  - 이번 주에 한 일에 대한 정리를 요청함\n  - 다음 주부터 실전 투입 예정\n  - 이번 주 온보딩 학습 내용을 정리하여 문서로 작성해야 함\n\n[예측된 컨텍스트] (knowledge_lookup, 58%):\n  - 사용자가 pytest fixture의 사용 방법과 conftest.py 파일 활용 여부에 대해 질문함\n  - 사용자가 API "
+    },
+    {
+      "turn_id": 125,
+      "session_idx": 50,
+      "user_id": "user_new",
+      "message": "프로필 API 스펙 문서 어디 있어요?",
+      "timestamp": "2026-04-06T09:05:00",
+      "ground_truth_intent": "knowledge_lookup",
+      "v2_classified": "technical_discussion",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.583
+      },
+      "latency_ms": 1668,
+      "response_preview": "관련 기억:\n  - 사용자가 API 문서의 위치나 제공 여부를 문의함\n  - 코드 리뷰 피드백 반영 완료 및 확인 요청\n  - 사용자가 DB 스키마 문서의 위치를 문의함\n\n[예측된 컨텍스트] (knowledge_lookup, 58%):\n  - 사용자가 pytest fixture의 사용 방법과 conftest.py 파일 활용 여부에 대해 질문함\n  - 사용자"
+    },
+    {
+      "turn_id": 126,
+      "session_idx": 51,
+      "user_id": "user_new",
+      "message": "코드 리뷰 피드백 반영했는데 확인해주세요",
+      "timestamp": "2026-04-07T10:00:00",
+      "ground_truth_intent": "code_review",
+      "v2_classified": "meeting_preparation",
+      "v1_classified": "code_review",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.55
+      },
+      "latency_ms": 1079,
+      "response_preview": "관련 기억:\n  - 수정을 완료함\n  - 코드 리뷰 피드백 반영 완료 및 확인 요청\n  - 사용자가 이번 주 담당 태스크를 확인하고자 함\n\n[예측된 컨텍스트] (knowledge_lookup, 55%):\n  - 사용자가 프로필 API 스펙 문서의 위치를 문의함\n  - 사용자가 pytest fixture의 사용 방법과 conftest.py 파일 활용 여부에 "
+    },
+    {
+      "turn_id": 127,
+      "session_idx": 51,
+      "user_id": "user_new",
+      "message": "에러 핸들링은 어떤 패턴이 좋을까요?",
+      "timestamp": "2026-04-07T10:05:00",
+      "ground_truth_intent": "knowledge_lookup",
+      "v2_classified": "technical_discussion",
+      "v1_classified": "troubleshooting",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1201,
+      "response_preview": "관련 기억:\n  - 이번 주에 한 일에 대한 정리를 요청함\n  - 수정을 완료함\n  - 정리 항목을 환경설정, 컨벤션, 팀 구조로 나누어 요청함"
+    },
+    {
+      "turn_id": 128,
+      "session_idx": 51,
+      "user_id": "user_new",
+      "message": "감사합니다!",
+      "timestamp": "2026-04-07T10:10:00",
+      "ground_truth_intent": null,
+      "v2_classified": "schedule_management",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.574
+      },
+      "latency_ms": 1292,
+      "response_preview": "관련 기억:\n  - 이번 주에 한 일에 대한 정리를 요청함\n  - 수정을 완료함\n  - 코드 리뷰 피드백 반영 완료 및 확인 요청\n\n[예측된 컨텍스트] (knowledge_lookup, 57%):\n  - 사용자가 프로필 API 스펙 문서의 위치를 문의함\n  - 사용자가 pytest fixture의 사용 방법과 conftest.py 파일 활용 여부에 대해 질"
+    },
+    {
+      "turn_id": 129,
+      "session_idx": 52,
+      "user_id": "user_new",
+      "message": "FastAPI에서 Depends 패턴 어떻게 쓰는 건가요?",
+      "timestamp": "2026-04-08T14:00:00",
+      "ground_truth_intent": "knowledge_lookup",
+      "v2_classified": "technical_discussion",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.581
+      },
+      "latency_ms": 2012,
+      "response_preview": "관련 기억:\n  - 에러 핸들링 패턴에 대해 질문함\n  - 사용자가 프로필 API 스펙 문서의 위치를 문의함\n  - 사용자가 API 문서의 위치나 제공 여부를 문의함\n\n[예측된 컨텍스트] (knowledge_lookup, 58%):\n  - 사용자가 프로필 API 스펙 문서의 위치를 문의함\n  - 사용자가 pytest fixture의 사용 방법과 confte"
+    },
+    {
+      "turn_id": 130,
+      "session_idx": 52,
+      "user_id": "user_new",
+      "message": "Pydantic validation은 자동으로 되는 건가요?",
+      "timestamp": "2026-04-08T14:05:00",
+      "ground_truth_intent": "knowledge_lookup",
+      "v2_classified": "technical_discussion",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.587
+      },
+      "latency_ms": 2012,
+      "response_preview": "관련 기억:\n  - 사용자가 FastAPI의 Depends 패턴 사용법에 대해 질문함\n  - 에러 핸들링 패턴에 대해 질문함\n  - 코드 리뷰 피드백 반영 완료 및 확인 요청\n\n[예측된 컨텍스트] (knowledge_lookup, 59%):\n  - 사용자가 프로필 API 스펙 문서의 위치를 문의함\n  - 사용자가 pytest fixture의 사용 방법과 c"
+    },
+    {
+      "turn_id": 131,
+      "session_idx": 53,
+      "user_id": "user_new",
+      "message": "API 테스트 중에 422 에러가 나는데 뭐가 문제인 건가요?",
+      "timestamp": "2026-04-08T16:00:00",
+      "ground_truth_intent": "troubleshooting",
+      "v2_classified": "technical_discussion",
+      "v1_classified": "troubleshooting",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 1.0
+      },
+      "latency_ms": 1502,
+      "response_preview": "관련 기억:\n  - 사용자가 FastAPI의 Depends 패턴 사용법에 대해 질문함\n  - 사용자가 프로필 API 스펙 문서의 위치를 문의함\n  - 에러 핸들링 패턴에 대해 질문함\n\n[예측된 컨텍스트] (knowledge_lookup, 100%):\n  - 사용자가 프로필 API 스펙 문서의 위치를 문의함\n  - 사용자가 pytest fixture의 사용 "
+    },
+    {
+      "turn_id": 132,
+      "session_idx": 53,
+      "user_id": "user_new",
+      "message": "아 날짜 포맷이 잘못됐었네요 감사합니다!",
+      "timestamp": "2026-04-08T16:05:00",
+      "ground_truth_intent": null,
+      "v2_classified": "team_collaboration",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.578
+      },
+      "latency_ms": 1229,
+      "response_preview": "관련 기억:\n  - 에러 핸들링 패턴에 대해 질문함\n  - 이번 주에 한 일에 대한 정리를 요청함\n  - 사용자가 이번 주 담당 태스크를 확인하고자 함\n\n[예측된 컨텍스트] (knowledge_lookup, 58%):\n  - 사용자가 프로필 API 스펙 문서의 위치를 문의함\n  - 사용자가 pytest fixture의 사용 방법과 conftest.py 파일"
+    },
+    {
+      "turn_id": 133,
+      "session_idx": 54,
+      "user_id": "user_new",
+      "message": "프로필 API 구현 다 했어요 PR 올렸는데 리뷰 부탁드려요",
+      "timestamp": "2026-04-09T10:00:00",
+      "ground_truth_intent": "code_review",
+      "v2_classified": "meeting_preparation",
+      "v1_classified": "code_review",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.524
+      },
+      "latency_ms": 1967,
+      "response_preview": "관련 기억:\n  - 사용자가 프로필 API 스펙 문서의 위치를 문의함\n  - 코드 리뷰 피드백 반영 완료 및 확인 요청\n  - 수정을 완료함\n\n[예측된 컨텍스트] (knowledge_lookup, 52%):\n  - 사용자가 프로필 API 스펙 문서의 위치를 문의함\n  - 사용자가 pytest fixture의 사용 방법과 conftest.py 파일 활용 여부"
+    },
+    {
+      "turn_id": 134,
+      "session_idx": 54,
+      "user_id": "user_new",
+      "message": "테스트 커버리지 80% 넘겼어요",
+      "timestamp": "2026-04-09T10:05:00",
+      "ground_truth_intent": "code_review",
+      "v2_classified": "team_collaboration",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.569
+      },
+      "latency_ms": 1099,
+      "response_preview": "관련 기억:\n  - 날짜 포맷 오류가 해결됨\n  - 프로필 API 구현 완료 및 PR 제출\n  - 수정을 완료함\n\n[예측된 컨텍스트] (knowledge_lookup, 57%):\n  - 사용자가 프로필 API 스펙 문서의 위치를 문의함\n  - 사용자가 pytest fixture의 사용 방법과 conftest.py 파일 활용 여부에 대해 질문함\n  - 사용자"
+    },
+    {
+      "turn_id": 135,
+      "session_idx": 55,
+      "user_id": "user_new",
+      "message": "이번 주 진행 상황 정리해주세요",
+      "timestamp": "2026-04-10T15:00:00",
+      "ground_truth_intent": "project_status",
+      "v2_classified": "team_collaboration",
+      "v1_classified": "project_status",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.6
+      },
+      "latency_ms": 974,
+      "response_preview": "관련 기억:\n  - 사용자가 이번 주 담당 태스크를 확인하고자 함\n  - 이번 주에 한 일에 대한 정리를 요청함\n  - 다음 주부터 실전 투입 예정\n\n[예측된 컨텍스트] (knowledge_lookup, 60%):\n  - 사용자가 프로필 API 스펙 문서의 위치를 문의함\n  - 사용자가 pytest fixture의 사용 방법과 conftest.py 파일 활"
+    },
+    {
+      "turn_id": 136,
+      "session_idx": 55,
+      "user_id": "user_new",
+      "message": "다음 주에는 뭐 하면 돼요?",
+      "timestamp": "2026-04-10T15:05:00",
+      "ground_truth_intent": "project_status",
+      "v2_classified": "team_collaboration",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.561
+      },
+      "latency_ms": 1321,
+      "response_preview": "관련 기억:\n  - 다음 주부터 실전 투입 예정\n  - 이번 주에 한 일에 대한 정리를 요청함\n  - 사용자가 이번 주 담당 태스크를 확인하고자 함\n\n[예측된 컨텍스트] (knowledge_lookup, 56%):\n  - 사용자가 프로필 API 스펙 문서의 위치를 문의함\n  - 사용자가 pytest fixture의 사용 방법과 conftest.py 파일 활"
+    },
+    {
+      "turn_id": 137,
+      "session_idx": 56,
+      "user_id": "user_new",
+      "message": "이번 주 담당 태스크 확인할게요",
+      "timestamp": "2026-04-13T09:00:00",
+      "ground_truth_intent": "project_status",
+      "v2_classified": "team_collaboration",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.567
+      },
+      "latency_ms": 1014,
+      "response_preview": "관련 기억:\n  - 다음 주 일정에 대한 문의\n  - 사용자가 이번 주 담당 태스크를 확인하고자 함\n  - 이번 주에 한 일에 대한 정리를 요청함\n\n[예측된 컨텍스트] (knowledge_lookup, 57%):\n  - 사용자가 프로필 API 스펙 문서의 위치를 문의함\n  - 사용자가 pytest fixture의 사용 방법과 conftest.py 파일 활용"
+    },
+    {
+      "turn_id": 138,
+      "session_idx": 56,
+      "user_id": "user_new",
+      "message": "알림 서비스 설계 문서 먼저 봐야겠어요",
+      "timestamp": "2026-04-13T09:05:00",
+      "ground_truth_intent": "knowledge_lookup",
+      "v2_classified": "technical_discussion",
+      "v1_classified": "team_communication",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1444,
+      "response_preview": "관련 기억:\n  - 사용자가 프로필 API 스펙 문서의 위치를 문의함\n  - 사용자가 DB 스키마 문서의 위치를 문의함\n  - 이번 주에 한 일에 대한 정리를 요청함"
+    },
+    {
+      "turn_id": 139,
+      "session_idx": 57,
+      "user_id": "user_new",
+      "message": "WebSocket으로 실시간 알림 구현하려면 어떻게 해야 하나요?",
+      "timestamp": "2026-04-14T10:00:00",
+      "ground_truth_intent": "knowledge_lookup",
+      "v2_classified": "technical_discussion",
+      "v1_classified": "team_communication",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "team_communication",
+        "weight": 1.0
+      },
+      "latency_ms": 1128,
+      "response_preview": "관련 기억:\n  - 알림 서비스 설계 문서를 먼저 확인해야 함\n  - 사용자가 프로필 API 스펙 문서의 위치를 문의함\n  - 사용자가 이번 주 담당 태스크를 확인하고자 함\n\n[예측된 컨텍스트] (team_communication, 100%):\n  - 알림 서비스 설계 문서를 먼저 확인해야 함"
+    },
+    {
+      "turn_id": 140,
+      "session_idx": 57,
+      "user_id": "user_new",
+      "message": "Redis Pub/Sub이랑 연동도 가능해요?",
+      "timestamp": "2026-04-14T10:05:00",
+      "ground_truth_intent": "knowledge_lookup",
+      "v2_classified": "technical_discussion",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.559
+      },
+      "latency_ms": 1480,
+      "response_preview": "관련 기억:\n  - WebSocket을 이용한 실시간 알림 구현 방법에 대해 문의함\n  - 다음 주 일정에 대한 문의\n  - 프로필 API 구현 완료 및 PR 제출\n\n[예측된 컨텍스트] (knowledge_lookup, 56%):\n  - WebSocket을 이용한 실시간 알림 구현 방법에 대해 문의함\n  - 알림 서비스 설계 문서를 먼저 확인해야 함\n  -"
+    },
+    {
+      "turn_id": 141,
+      "session_idx": 58,
+      "user_id": "user_new",
+      "message": "알림 서비스 PR 올렸어요 설계 리뷰 부탁드려요",
+      "timestamp": "2026-04-15T14:00:00",
+      "ground_truth_intent": "code_review",
+      "v2_classified": "meeting_preparation",
+      "v1_classified": "code_review",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.545
+      },
+      "latency_ms": 1483,
+      "response_preview": "관련 기억:\n  - 알림 서비스 설계 문서를 먼저 확인해야 함\n  - PR 리뷰 요청\n  - 프로필 API 구현 완료 및 PR 제출\n\n[예측된 컨텍스트] (knowledge_lookup, 55%):\n  - WebSocket을 이용한 실시간 알림 구현 방법에 대해 문의함\n  - 알림 서비스 설계 문서를 먼저 확인해야 함\n  - 사용자가 프로필 API 스펙 문"
+    },
+    {
+      "turn_id": 142,
+      "session_idx": 58,
+      "user_id": "user_new",
+      "message": "재시도 로직은 exponential backoff로 하면 될까요?",
+      "timestamp": "2026-04-15T14:05:00",
+      "ground_truth_intent": "knowledge_lookup",
+      "v2_classified": "technical_discussion",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.551
+      },
+      "latency_ms": 1164,
+      "response_preview": "관련 기억:\n  - WebSocket을 이용한 실시간 알림 구현 방법에 대해 문의함\n  - Redis Pub/Sub 연동 가능 여부에 대해 문의함\n  - 사용자가 Pydantic validation의 자동 수행 여부에 대해 질문함\n\n[예측된 컨텍스트] (knowledge_lookup, 55%):\n  - WebSocket을 이용한 실시간 알림 구현 방법에 대"
+    },
+    {
+      "turn_id": 143,
+      "session_idx": 59,
+      "user_id": "user_new",
+      "message": "WebSocket 연결이 간헐적으로 끊기는데 왜 그런 건가요?",
+      "timestamp": "2026-04-16T10:00:00",
+      "ground_truth_intent": "troubleshooting",
+      "v2_classified": "technical_discussion",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.557
+      },
+      "latency_ms": 1184,
+      "response_preview": "관련 기억:\n  - WebSocket을 이용한 실시간 알림 구현 방법에 대해 문의함\n  - 에러 핸들링 패턴에 대해 질문함\n  - 사용자가 이번 주 담당 태스크를 확인하고자 함\n\n[예측된 컨텍스트] (knowledge_lookup, 56%):\n  - WebSocket을 이용한 실시간 알림 구현 방법에 대해 문의함\n  - 알림 서비스 설계 문서를 먼저 확인해"
+    },
+    {
+      "turn_id": 144,
+      "session_idx": 59,
+      "user_id": "user_new",
+      "message": "해결됐어요! 트러블슈팅 과정을 문서로 남겨야 할 것 같아요",
+      "timestamp": "2026-04-16T10:05:00",
+      "ground_truth_intent": "document_drafting",
+      "v2_classified": "document_creation",
+      "v1_classified": "troubleshooting",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 1.0
+      },
+      "latency_ms": 1716,
+      "response_preview": "관련 기억:\n  - 알림 서비스 PR이 제출되었으며 설계 리뷰가 필요함\n  - 이번 주에 한 일에 대한 정리를 요청함\n  - 에러 핸들링 패턴에 대해 질문함\n\n[예측된 컨텍스트] (knowledge_lookup, 100%):\n  - WebSocket을 이용한 실시간 알림 구현 방법에 대해 문의함\n  - 알림 서비스 설계 문서를 먼저 확인해야 함\n  - 사용"
+    },
+    {
+      "turn_id": 145,
+      "session_idx": 60,
+      "user_id": "user_new",
+      "message": "통합 테스트에서 외부 API 호출은 어떻게 처리하나요?",
+      "timestamp": "2026-04-17T15:00:00",
+      "ground_truth_intent": "knowledge_lookup",
+      "v2_classified": "technical_discussion",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.549
+      },
+      "latency_ms": 1153,
+      "response_preview": "관련 기억:\n  - WebSocket을 이용한 실시간 알림 구현 방법에 대해 문의함\n  - API 테스트 중 422 에러 발생\n  - 프로필 API 구현 완료 및 PR 제출\n\n[예측된 컨텍스트] (knowledge_lookup, 55%):\n  - 트러블슈팅 과정을 문서로 남기기로 함\n  - WebSocket을 이용한 실시간 알림 구현 방법에 대해 문의함\n "
+    },
+    {
+      "turn_id": 146,
+      "session_idx": 60,
+      "user_id": "user_new",
+      "message": "테스트 다 통과시켰어요 이번 주 정리해주세요",
+      "timestamp": "2026-04-17T15:05:00",
+      "ground_truth_intent": "project_status",
+      "v2_classified": "team_collaboration",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.556
+      },
+      "latency_ms": 1546,
+      "response_preview": "관련 기억:\n  - 문제 해결 완료\n  - 이번 주 담당 태스크 확인 예정\n  - 다음 주 일정에 대한 문의\n\n[예측된 컨텍스트] (knowledge_lookup, 56%):\n  - 통합 테스트에서의 외부 API 호출 처리 방법에 대해 질문함\n  - 트러블슈팅 과정을 문서로 남기기로 함\n  - WebSocket을 이용한 실시간 알림 구현 방법에 대해 문의함"
+    },
+    {
+      "turn_id": 147,
+      "session_idx": 60,
+      "user_id": "user_new",
+      "message": "넵 감사합니다!",
+      "timestamp": "2026-04-17T15:10:00",
+      "ground_truth_intent": null,
+      "v2_classified": "team_collaboration",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.562
+      },
+      "latency_ms": 1040,
+      "response_preview": "관련 기억:\n  - 테스트 통과 완료\n  - 문제 해결 완료\n  - 다음 주 일정에 대한 문의\n\n[예측된 컨텍스트] (knowledge_lookup, 56%):\n  - 통합 테스트에서의 외부 API 호출 처리 방법에 대해 질문함\n  - 트러블슈팅 과정을 문서로 남기기로 함\n  - WebSocket을 이용한 실시간 알림 구현 방법에 대해 문의함"
+    },
+    {
+      "turn_id": 148,
+      "session_idx": 61,
+      "user_id": "user_analyst",
+      "message": "지난주 매출 데이터 쿼리 좀 도와줘. GROUP BY 절이 잘 안 돼",
+      "timestamp": "2026-03-23T10:00:00",
+      "ground_truth_intent": "data_analysis",
+      "v2_classified": "team_collaboration",
+      "v1_classified": "data_analysis",
+      "memories_found": 0,
+      "prediction": {
+        "next_intent": "document_drafting",
+        "weight": 1.0
+      },
+      "latency_ms": 1525,
+      "response_preview": "메시지를 받았습니다: 지난주 매출 데이터 쿼리 좀 도와줘. GROUP BY 절이 잘 안 돼"
+    },
+    {
+      "turn_id": 149,
+      "session_idx": 61,
+      "user_id": "user_analyst",
+      "message": "서브쿼리 대신 CTE로 쓸 수 있어?",
+      "timestamp": "2026-03-23T10:10:00",
+      "ground_truth_intent": "data_analysis",
+      "v2_classified": "technical_discussion",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 1,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.562
+      },
+      "latency_ms": 1117,
+      "response_preview": "관련 기억:\n  - 사용자가 지난주 매출 데이터 쿼리 작성을 위해 GROUP BY 절 관련 도움을 요청함"
+    },
+    {
+      "turn_id": 150,
+      "session_idx": 61,
+      "user_id": "user_analyst",
+      "message": "그리고 Jupyter에서 SQL 바로 실행하는 방법 있어?",
+      "timestamp": "2026-03-23T10:15:00",
+      "ground_truth_intent": "knowledge_lookup",
+      "v2_classified": "technical_discussion",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 2,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.568
+      },
+      "latency_ms": 2181,
+      "response_preview": "관련 기억:\n  - 서브쿼리 대신 CTE 사용 가능 여부에 대해 질문함\n  - 사용자가 지난주 매출 데이터 쿼리 작성을 위해 GROUP BY 절 관련 도움을 요청함"
+    },
+    {
+      "turn_id": 151,
+      "session_idx": 62,
+      "user_id": "user_analyst",
+      "message": "Pandas로 매출 데이터 전처리하는데 결측치 처리 어떻게 하면 좋을까?",
+      "timestamp": "2026-03-24T10:00:00",
+      "ground_truth_intent": "data_analysis",
+      "v2_classified": "technical_discussion",
+      "v1_classified": "data_analysis",
+      "memories_found": 3,
+      "prediction": {
+        "next_intent": "document_drafting",
+        "weight": 0.8
+      },
+      "latency_ms": 1536,
+      "response_preview": "관련 기억:\n  - 사용자가 Jupyter에서 SQL을 직접 실행하는 방법에 대해 질문함\n  - 서브쿼리 대신 CTE 사용 가능 여부에 대해 질문함\n  - 사용자가 지난주 매출 데이터 쿼리 작성을 위해 GROUP BY 절 관련 도움을 요청함\n\n[예측된 컨텍스트] (document_drafting, 80%):\n  - 사용자가 지난주 매출 데이터 쿼리 작성을 "
+    },
+    {
+      "turn_id": 152,
+      "session_idx": 62,
+      "user_id": "user_analyst",
+      "message": "피벗테이블 만드는 법도 알려줘",
+      "timestamp": "2026-03-24T10:05:00",
+      "ground_truth_intent": "data_analysis",
+      "v2_classified": "technical_discussion",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 4,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.56
+      },
+      "latency_ms": 1171,
+      "response_preview": "관련 기억:\n  - 사용자가 Jupyter에서 SQL을 직접 실행하는 방법에 대해 질문함\n  - Pandas를 사용하여 매출 데이터 전처리를 수행 중이며 결측치 처리 방법을 고민하고 있음\n  - 서브쿼리 대신 CTE 사용 가능 여부에 대해 질문함\n\n[예측된 컨텍스트] (knowledge_lookup, 56%):\n  - Pandas를 사용하여 매출 데이터 전"
+    },
+    {
+      "turn_id": 153,
+      "session_idx": 62,
+      "user_id": "user_analyst",
+      "message": "오키 고마워",
+      "timestamp": "2026-03-24T10:10:00",
+      "ground_truth_intent": null,
+      "v2_classified": "team_collaboration",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.566
+      },
+      "latency_ms": 1230,
+      "response_preview": "관련 기억:\n  - 사용자가 피벗테이블 만드는 법에 대한 정보를 요청함\n  - Pandas를 사용하여 매출 데이터 전처리를 수행 중이며 결측치 처리 방법을 고민하고 있음\n  - 서브쿼리 대신 CTE 사용 가능 여부에 대해 질문함\n\n[예측된 컨텍스트] (knowledge_lookup, 57%):\n  - Pandas를 사용하여 매출 데이터 전처리를 수행 중이며"
+    },
+    {
+      "turn_id": 154,
+      "session_idx": 63,
+      "user_id": "user_analyst",
+      "message": "Grafana 대시보드에 신규 메트릭 추가하고 싶은데",
+      "timestamp": "2026-03-25T14:00:00",
+      "ground_truth_intent": null,
+      "v2_classified": "technical_discussion",
+      "v1_classified": "data_analysis",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "document_drafting",
+        "weight": 0.667
+      },
+      "latency_ms": 1504,
+      "response_preview": "관련 기억:\n  - Pandas를 사용하여 매출 데이터 전처리를 수행 중이며 결측치 처리 방법을 고민하고 있음\n  - 사용자가 피벗테이블 만드는 법에 대한 정보를 요청함\n  - 상대방의 말에 동의하고 감사함을 표함\n\n[예측된 컨텍스트] (document_drafting, 67%):\n  - 사용자가 지난주 매출 데이터 쿼리 작성을 위해 GROUP BY 절 관"
+    },
+    {
+      "turn_id": 155,
+      "session_idx": 63,
+      "user_id": "user_analyst",
+      "message": "커스텀 패널 만드는 방법 알려줘",
+      "timestamp": "2026-03-25T14:05:00",
+      "ground_truth_intent": null,
+      "v2_classified": "technical_discussion",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.558
+      },
+      "latency_ms": 1487,
+      "response_preview": "관련 기억:\n  - Grafana 대시보드에 신규 메트릭을 추가하고 싶어함\n  - 사용자가 피벗테이블 만드는 법에 대한 정보를 요청함\n  - Pandas를 사용하여 매출 데이터 전처리를 수행 중이며 결측치 처리 방법을 고민하고 있음\n\n[예측된 컨텍스트] (knowledge_lookup, 56%):\n  - Pandas를 사용하여 매출 데이터 전처리를 수행 중"
+    },
+    {
+      "turn_id": 156,
+      "session_idx": 64,
+      "user_id": "user_analyst",
+      "message": "이번 주 데이터 파이프라인 상태 업데이트할게",
+      "timestamp": "2026-03-26T11:00:00",
+      "ground_truth_intent": "project_status",
+      "v2_classified": "team_collaboration",
+      "v1_classified": "data_analysis",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "document_drafting",
+        "weight": 0.571
+      },
+      "latency_ms": 2184,
+      "response_preview": "관련 기억:\n  - Grafana 대시보드에 신규 메트릭을 추가하고 싶어함\n  - 사용자가 커스텀 패널 만드는 방법에 대해 문의함\n  - Pandas를 사용하여 매출 데이터 전처리를 수행 중이며 결측치 처리 방법을 고민하고 있음\n\n[예측된 컨텍스트] (document_drafting, 57%):\n  - 사용자가 지난주 매출 데이터 쿼리 작성을 위해 GROU"
+    },
+    {
+      "turn_id": 157,
+      "session_idx": 64,
+      "user_id": "user_analyst",
+      "message": "ETL 스케줄러 설정도 해야 해",
+      "timestamp": "2026-03-26T11:05:00",
+      "ground_truth_intent": "scheduling",
+      "v2_classified": "technical_discussion",
+      "v1_classified": "scheduling",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1425,
+      "response_preview": "관련 기억:\n  - 이번 주 데이터 파이프라인 상태 업데이트 예정\n  - 사용자가 피벗테이블 만드는 법에 대한 정보를 요청함\n  - 사용자가 커스텀 패널 만드는 방법에 대해 문의함"
+    },
+    {
+      "turn_id": 158,
+      "session_idx": 65,
+      "user_id": "user_analyst",
+      "message": "주간 데이터 리포트 작성해줘",
+      "timestamp": "2026-03-27T15:00:00",
+      "ground_truth_intent": "document_drafting",
+      "v2_classified": "team_collaboration",
+      "v1_classified": "data_analysis",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1467,
+      "response_preview": "관련 기억:\n  - 이번 주 데이터 파이프라인 상태 업데이트 예정\n  - ETL 스케줄러 설정 필요\n  - 사용자가 커스텀 패널 만드는 방법에 대해 문의함"
+    },
+    {
+      "turn_id": 159,
+      "session_idx": 65,
+      "user_id": "user_analyst",
+      "message": "그래프도 같이 넣어줘",
+      "timestamp": "2026-03-27T15:05:00",
+      "ground_truth_intent": "document_drafting",
+      "v2_classified": "team_collaboration",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.551
+      },
+      "latency_ms": 1145,
+      "response_preview": "관련 기억:\n  - 주간 데이터 리포트 작성이 요청됨\n  - Grafana 대시보드에 신규 메트릭을 추가하고 싶어함\n  - 이번 주 데이터 파이프라인 상태 업데이트 예정\n\n[예측된 컨텍스트] (knowledge_lookup, 55%):\n  - 사용자가 커스텀 패널 만드는 방법에 대해 문의함\n  - Pandas를 사용하여 매출 데이터 전처리를 수행 중이며 결"
+    },
+    {
+      "turn_id": 160,
+      "session_idx": 66,
+      "user_id": "user_analyst",
+      "message": "사용자 세그먼트별 리텐션율 쿼리 작성해줘",
+      "timestamp": "2026-03-30T10:00:00",
+      "ground_truth_intent": "data_analysis",
+      "v2_classified": "technical_discussion",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.557
+      },
+      "latency_ms": 1201,
+      "response_preview": "관련 기억:\n  - 그래프를 포함해달라고 요청함\n  - 주간 데이터 리포트 작성이 요청됨\n  - 사용자가 커스텀 패널 만드는 방법에 대해 문의함\n\n[예측된 컨텍스트] (knowledge_lookup, 56%):\n  - 사용자가 커스텀 패널 만드는 방법에 대해 문의함\n  - Pandas를 사용하여 매출 데이터 전처리를 수행 중이며 결측치 처리 방법을 고민하고"
+    },
+    {
+      "turn_id": 161,
+      "session_idx": 66,
+      "user_id": "user_analyst",
+      "message": "WINDOW 함수 사용법도 알려줘",
+      "timestamp": "2026-03-30T10:10:00",
+      "ground_truth_intent": "data_analysis",
+      "v2_classified": "technical_discussion",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.562
+      },
+      "latency_ms": 1153,
+      "response_preview": "관련 기억:\n  - 그래프를 포함해달라고 요청함\n  - 주간 데이터 리포트 작성이 요청됨\n  - 사용자 세그먼트별 리텐션율 쿼리 작성을 요청함\n\n[예측된 컨텍스트] (knowledge_lookup, 56%):\n  - 사용자가 커스텀 패널 만드는 방법에 대해 문의함\n  - Pandas를 사용하여 매출 데이터 전처리를 수행 중이며 결측치 처리 방법을 고민하고 "
+    },
+    {
+      "turn_id": 162,
+      "session_idx": 66,
+      "user_id": "user_analyst",
+      "message": "참 데이터 파이프라인 스케줄링은 Airflow로 해야 하나?",
+      "timestamp": "2026-03-30T10:15:00",
+      "ground_truth_intent": "knowledge_lookup",
+      "v2_classified": "technical_discussion",
+      "v1_classified": "scheduling",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 2084,
+      "response_preview": "관련 기억:\n  - ETL 스케줄러 설정 필요\n  - 사용자가 WINDOW 함수 사용법에 대한 정보를 요청함\n  - 그래프를 포함해달라고 요청함"
+    },
+    {
+      "turn_id": 163,
+      "session_idx": 66,
+      "user_id": "user_analyst",
+      "message": "넵넵 고마워",
+      "timestamp": "2026-03-30T10:20:00",
+      "ground_truth_intent": null,
+      "v2_classified": "team_collaboration",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.556
+      },
+      "latency_ms": 1330,
+      "response_preview": "관련 기억:\n  - 그래프를 포함해달라고 요청함\n  - 사용자가 WINDOW 함수 사용법에 대한 정보를 요청함\n  - 사용자 세그먼트별 리텐션율 쿼리 작성을 요청함\n\n[예측된 컨텍스트] (knowledge_lookup, 56%):\n  - 사용자가 커스텀 패널 만드는 방법에 대해 문의함\n  - Pandas를 사용하여 매출 데이터 전처리를 수행 중이며 결측치 "
+    },
+    {
+      "turn_id": 164,
+      "session_idx": 67,
+      "user_id": "user_analyst",
+      "message": "DataFrame merge할 때 left join이랑 inner join 차이가 뭐야?",
+      "timestamp": "2026-03-31T10:00:00",
+      "ground_truth_intent": "data_analysis",
+      "v2_classified": "technical_discussion",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.561
+      },
+      "latency_ms": 1246,
+      "response_preview": "관련 기억:\n  - 데이터 파이프라인 스케줄링 도구로 Airflow 사용 여부를 고민 중임\n  - 사용자가 WINDOW 함수 사용법에 대한 정보를 요청함\n  - 그래프를 포함해달라고 요청함\n\n[예측된 컨텍스트] (knowledge_lookup, 56%):\n  - 사용자가 커스텀 패널 만드는 방법에 대해 문의함\n  - Pandas를 사용하여 매출 데이터 전처"
+    },
+    {
+      "turn_id": 165,
+      "session_idx": 67,
+      "user_id": "user_analyst",
+      "message": "merge 성능 최적화하려면?",
+      "timestamp": "2026-03-31T10:05:00",
+      "ground_truth_intent": "data_analysis",
+      "v2_classified": "technical_discussion",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.566
+      },
+      "latency_ms": 1131,
+      "response_preview": "관련 기억:\n  - 사용자가 DataFrame merge 시 left join과 inner join의 차이점에 대해 질문함\n  - 데이터 파이프라인 스케줄링 도구로 Airflow 사용 여부를 고민 중임\n  - 그래프를 포함해달라고 요청함\n\n[예측된 컨텍스트] (knowledge_lookup, 57%):\n  - 사용자가 커스텀 패널 만드는 방법에 대해 문의함"
+    },
+    {
+      "turn_id": 166,
+      "session_idx": 68,
+      "user_id": "user_analyst",
+      "message": "주간 리포트 자동화 대시보드 만들려고 하는데",
+      "timestamp": "2026-04-01T14:00:00",
+      "ground_truth_intent": null,
+      "v2_classified": "technical_discussion",
+      "v1_classified": "data_analysis",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1585,
+      "response_preview": "관련 기억:\n  - 주간 데이터 리포트 작성이 요청됨\n  - 데이터 파이프라인 스케줄링 도구로 Airflow 사용 여부를 고민 중임\n  - 그래프를 포함해달라고 요청함"
+    },
+    {
+      "turn_id": 167,
+      "session_idx": 68,
+      "user_id": "user_analyst",
+      "message": "DAU, WAU, 매출 추이를 한 화면에 보고 싶어",
+      "timestamp": "2026-04-01T14:05:00",
+      "ground_truth_intent": null,
+      "v2_classified": "technical_discussion",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.56
+      },
+      "latency_ms": 1202,
+      "response_preview": "관련 기억:\n  - 주간 리포트 자동화 대시보드를 제작하려고 함\n  - 그래프를 포함해달라고 요청함\n  - 사용자가 WINDOW 함수 사용법에 대한 정보를 요청함\n\n[예측된 컨텍스트] (knowledge_lookup, 56%):\n  - merge 성능 최적화 방법에 대해 문의함\n  - 사용자가 커스텀 패널 만드는 방법에 대해 문의함\n  - Pandas를 사"
+    },
+    {
+      "turn_id": 168,
+      "session_idx": 69,
+      "user_id": "user_analyst",
+      "message": "ETL 작업 진행상황 공유할게. 80% 완료됐어",
+      "timestamp": "2026-04-02T11:00:00",
+      "ground_truth_intent": "project_status",
+      "v2_classified": "team_collaboration",
+      "v1_classified": "team_communication",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1483,
+      "response_preview": "관련 기억:\n  - 주간 리포트 자동화 대시보드를 제작하려고 함\n  - 사용자 세그먼트별 리텐션율 쿼리 작성을 요청함\n  - merge 성능 최적화 방법에 대해 문의함"
+    },
+    {
+      "turn_id": 169,
+      "session_idx": 69,
+      "user_id": "user_analyst",
+      "message": "데이터 검증 로직이랑 에러 핸들링이 남았어",
+      "timestamp": "2026-04-02T11:05:00",
+      "ground_truth_intent": "project_status",
+      "v2_classified": "technical_discussion",
+      "v1_classified": "data_analysis",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1852,
+      "response_preview": "관련 기억:\n  - 데이터 파이프라인 스케줄링 도구로 Airflow 사용 여부를 고민 중임\n  - 주간 리포트 자동화 대시보드를 제작하려고 함\n  - 사용자가 WINDOW 함수 사용법에 대한 정보를 요청함"
+    },
+    {
+      "turn_id": 170,
+      "session_idx": 69,
+      "user_id": "user_analyst",
+      "message": "넵넵",
+      "timestamp": "2026-04-02T11:10:00",
+      "ground_truth_intent": null,
+      "v2_classified": "team_collaboration",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.553
+      },
+      "latency_ms": 1191,
+      "response_preview": "관련 기억:\n  - merge 성능 최적화 방법에 대해 문의함\n  - 그래프를 포함해달라고 요청함\n  - DAU, WAU, 매출 추이를 한 화면에서 확인하기를 원함\n\n[예측된 컨텍스트] (knowledge_lookup, 55%):\n  - merge 성능 최적화 방법에 대해 문의함\n  - 사용자가 커스텀 패널 만드는 방법에 대해 문의함\n  - Pandas를 "
+    },
+    {
+      "turn_id": 171,
+      "session_idx": 70,
+      "user_id": "user_analyst",
+      "message": "이상치 탐지 결과 좀 봐줘",
+      "timestamp": "2026-04-03T15:00:00",
+      "ground_truth_intent": "data_analysis",
+      "v2_classified": "team_collaboration",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.558
+      },
+      "latency_ms": 1494,
+      "response_preview": "관련 기억:\n  - 에러 핸들링 구현이 남아있음\n  - 데이터 검증 로직 구현이 남아있음\n  - DAU, WAU, 매출 추이를 한 화면에서 확인하기를 원함\n\n[예측된 컨텍스트] (knowledge_lookup, 56%):\n  - merge 성능 최적화 방법에 대해 문의함\n  - 사용자가 커스텀 패널 만드는 방법에 대해 문의함\n  - Pandas를 사용하여 "
+    },
+    {
+      "turn_id": 172,
+      "session_idx": 70,
+      "user_id": "user_analyst",
+      "message": "오키 보고서에 넣어줘",
+      "timestamp": "2026-04-03T15:05:00",
+      "ground_truth_intent": "document_drafting",
+      "v2_classified": "document_creation",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.563
+      },
+      "latency_ms": 1372,
+      "response_preview": "관련 기억:\n  - 사용자가 이상치 탐지 결과에 대한 검토를 요청함\n  - 주간 리포트 자동화 대시보드를 제작하려고 함\n  - DAU, WAU, 매출 추이를 한 화면에서 확인하기를 원함\n\n[예측된 컨텍스트] (knowledge_lookup, 56%):\n  - merge 성능 최적화 방법에 대해 문의함\n  - 사용자가 커스텀 패널 만드는 방법에 대해 문의함\n"
+    },
+    {
+      "turn_id": 173,
+      "session_idx": 71,
+      "user_id": "user_analyst",
+      "message": "이번 달 신규 가입자 퍼널 분석 쿼리 필요해",
+      "timestamp": "2026-04-06T10:00:00",
+      "ground_truth_intent": "data_analysis",
+      "v2_classified": "team_collaboration",
+      "v1_classified": "data_analysis",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.545
+      },
+      "latency_ms": 2364,
+      "response_preview": "관련 기억:\n  - 보고서에 내용을 추가하기로 결정함\n  - 주간 리포트 자동화 대시보드를 제작하려고 함\n  - 주간 데이터 리포트 작성이 요청됨\n\n[예측된 컨텍스트] (knowledge_lookup, 55%):\n  - merge 성능 최적화 방법에 대해 문의함\n  - 사용자가 커스텀 패널 만드는 방법에 대해 문의함\n  - Pandas를 사용하여 매출 데이"
+    },
+    {
+      "turn_id": 174,
+      "session_idx": 71,
+      "user_id": "user_analyst",
+      "message": "인덱스 안 타는 것 같은데 실행 계획 봐줘",
+      "timestamp": "2026-04-06T10:10:00",
+      "ground_truth_intent": "data_analysis",
+      "v2_classified": "technical_discussion",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.557
+      },
+      "latency_ms": 1222,
+      "response_preview": "관련 기억:\n  - 에러 핸들링 구현이 남아있음\n  - 데이터 검증 로직 구현이 남아있음\n  - 주간 리포트 자동화 대시보드를 제작하려고 함\n\n[예측된 컨텍스트] (knowledge_lookup, 56%):\n  - merge 성능 최적화 방법에 대해 문의함\n  - 사용자가 커스텀 패널 만드는 방법에 대해 문의함\n  - Pandas를 사용하여 매출 데이터 전"
+    },
+    {
+      "turn_id": 175,
+      "session_idx": 71,
+      "user_id": "user_analyst",
+      "message": "dbt로 데이터 변환 자동화하는 게 좋을까?",
+      "timestamp": "2026-04-06T10:15:00",
+      "ground_truth_intent": "knowledge_lookup",
+      "v2_classified": "technical_discussion",
+      "v1_classified": "data_analysis",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.583
+      },
+      "latency_ms": 1486,
+      "response_preview": "관련 기억:\n  - 주간 리포트 자동화 대시보드를 제작하려고 함\n  - DAU, WAU, 매출 추이를 한 화면에서 확인하기를 원함\n  - 데이터 검증 로직 구현이 남아있음\n\n[예측된 컨텍스트] (knowledge_lookup, 58%):\n  - merge 성능 최적화 방법에 대해 문의함\n  - 사용자가 커스텀 패널 만드는 방법에 대해 문의함\n  - Pand"
+    },
+    {
+      "turn_id": 176,
+      "session_idx": 72,
+      "user_id": "user_analyst",
+      "message": "시계열 데이터 리샘플링 어떻게 해?",
+      "timestamp": "2026-04-07T10:00:00",
+      "ground_truth_intent": "data_analysis",
+      "v2_classified": "technical_discussion",
+      "v1_classified": "data_analysis",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.538
+      },
+      "latency_ms": 1156,
+      "response_preview": "관련 기억:\n  - 이번 달 신규 가입자 퍼널 분석 쿼리가 필요함\n  - 데이터 검증 로직 구현이 남아있음\n  - 주간 리포트 자동화 대시보드를 제작하려고 함\n\n[예측된 컨텍스트] (knowledge_lookup, 54%):\n  - merge 성능 최적화 방법에 대해 문의함\n  - 사용자가 커스텀 패널 만드는 방법에 대해 문의함\n  - Pandas를 사용하"
+    },
+    {
+      "turn_id": 177,
+      "session_idx": 72,
+      "user_id": "user_analyst",
+      "message": "rolling average도 같이 보고 싶어",
+      "timestamp": "2026-04-07T10:05:00",
+      "ground_truth_intent": "data_analysis",
+      "v2_classified": "team_collaboration",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.551
+      },
+      "latency_ms": 1170,
+      "response_preview": "관련 기억:\n  - 보고서에 내용을 추가하기로 결정함\n  - 이번 달 신규 가입자 퍼널 분석 쿼리가 필요함\n  - DAU, WAU, 매출 추이를 한 화면에서 확인하기를 원함\n\n[예측된 컨텍스트] (knowledge_lookup, 55%):\n  - 사용자가 시계열 데이터 리샘플링 방법에 대해 질문함\n  - merge 성능 최적화 방법에 대해 문의함\n  - 사"
+    },
+    {
+      "turn_id": 178,
+      "session_idx": 72,
+      "user_id": "user_analyst",
+      "message": "오키 고마워",
+      "timestamp": "2026-04-07T10:10:00",
+      "ground_truth_intent": null,
+      "v2_classified": "team_collaboration",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.556
+      },
+      "latency_ms": 1184,
+      "response_preview": "관련 기억:\n  - 사용자가 시계열 데이터 리샘플링 방법에 대해 질문함\n  - 상대방의 말에 긍정적으로 응답함\n  - 사용자가 이상치 탐지 결과에 대한 검토를 요청함\n\n[예측된 컨텍스트] (knowledge_lookup, 56%):\n  - 사용자가 시계열 데이터 리샘플링 방법에 대해 질문함\n  - merge 성능 최적화 방법에 대해 문의함\n  - 사용자가 "
+    },
+    {
+      "turn_id": 179,
+      "session_idx": 73,
+      "user_id": "user_analyst",
+      "message": "경영진 대시보드에 Funnel 차트 추가해야 해",
+      "timestamp": "2026-04-08T14:00:00",
+      "ground_truth_intent": null,
+      "v2_classified": "technical_discussion",
+      "v1_classified": "data_analysis",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.571
+      },
+      "latency_ms": 1674,
+      "response_preview": "관련 기억:\n  - 이번 달 신규 가입자 퍼널 분석 쿼리가 필요함\n  - 보고서에 내용을 추가하기로 결정함\n  - 주간 리포트 자동화 대시보드를 제작하려고 함\n\n[예측된 컨텍스트] (knowledge_lookup, 57%):\n  - 사용자가 시계열 데이터 리샘플링 방법에 대해 질문함\n  - merge 성능 최적화 방법에 대해 문의함\n  - 사용자가 커스텀 "
+    },
+    {
+      "turn_id": 180,
+      "session_idx": 73,
+      "user_id": "user_analyst",
+      "message": "전환율 단계별로 보여줘야 하는데 어떤 차트가 좋을까",
+      "timestamp": "2026-04-08T14:05:00",
+      "ground_truth_intent": null,
+      "v2_classified": "technical_discussion",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.549
+      },
+      "latency_ms": 1229,
+      "response_preview": "관련 기억:\n  - 경영진 대시보드에 Funnel 차트를 추가해야 함\n  - 사용자가 rolling average(이동 평균) 데이터를 함께 확인하기를 원함\n  - dbt를 이용한 데이터 변환 자동화 도입 여부를 고민 중임\n\n[예측된 컨텍스트] (knowledge_lookup, 55%):\n  - 사용자가 시계열 데이터 리샘플링 방법에 대해 질문함\n  - m"
+    },
+    {
+      "turn_id": 181,
+      "session_idx": 74,
+      "user_id": "user_analyst",
+      "message": "대시보드 개발 진행률 보고할게",
+      "timestamp": "2026-04-09T11:00:00",
+      "ground_truth_intent": "project_status",
+      "v2_classified": "team_meeting_prep",
+      "v1_classified": "data_analysis",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.6
+      },
+      "latency_ms": 1461,
+      "response_preview": "관련 기억:\n  - 경영진 대시보드에 Funnel 차트를 추가해야 함\n  - 전환율을 단계별로 시각화하기 위한 적절한 차트 유형을 고민 중임\n  - 사용자가 rolling average(이동 평균) 데이터를 함께 확인하기를 원함\n\n[예측된 컨텍스트] (knowledge_lookup, 60%):\n  - 사용자가 시계열 데이터 리샘플링 방법에 대해 질문함\n  "
+    },
+    {
+      "turn_id": 182,
+      "session_idx": 74,
+      "user_id": "user_analyst",
+      "message": "김과장님한테 공유할 자료도 만들어줘",
+      "timestamp": "2026-04-09T11:05:00",
+      "ground_truth_intent": "team_communication",
+      "v2_classified": "team_meeting_prep",
+      "v1_classified": "team_communication",
+      "memories_found": 5,
+      "prediction": null,
+      "latency_ms": 1439,
+      "response_preview": "관련 기억:\n  - 사용자가 rolling average(이동 평균) 데이터를 함께 확인하기를 원함\n  - 보고서에 내용을 추가하기로 결정함\n  - 사용자가 시계열 데이터 리샘플링 방법에 대해 질문함"
+    },
+    {
+      "turn_id": 183,
+      "session_idx": 75,
+      "user_id": "user_analyst",
+      "message": "주간 데이터 리포트 작성해줘",
+      "timestamp": "2026-04-10T15:00:00",
+      "ground_truth_intent": "document_drafting",
+      "v2_classified": "team_meeting_prep",
+      "v1_classified": "data_analysis",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.562
+      },
+      "latency_ms": 1419,
+      "response_preview": "관련 기억:\n  - 김과장에게 공유할 자료를 제작해야 함\n  - 사용자가 rolling average(이동 평균) 데이터를 함께 확인하기를 원함\n  - 보고서에 내용을 추가하기로 결정함\n\n[예측된 컨텍스트] (knowledge_lookup, 56%):\n  - 사용자가 시계열 데이터 리샘플링 방법에 대해 질문함\n  - merge 성능 최적화 방법에 대해 문의"
+    },
+    {
+      "turn_id": 184,
+      "session_idx": 75,
+      "user_id": "user_analyst",
+      "message": "그래프도 같이 넣어줘",
+      "timestamp": "2026-04-10T15:05:00",
+      "ground_truth_intent": "document_drafting",
+      "v2_classified": "team_meeting_prep",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.543
+      },
+      "latency_ms": 1044,
+      "response_preview": "관련 기억:\n  - 김과장에게 공유할 자료를 제작해야 함\n  - 사용자가 rolling average(이동 평균) 데이터를 함께 확인하기를 원함\n  - 경영진 대시보드에 Funnel 차트를 추가해야 함\n\n[예측된 컨텍스트] (knowledge_lookup, 54%):\n  - 사용자가 시계열 데이터 리샘플링 방법에 대해 질문함\n  - merge 성능 최적화 "
+    },
+    {
+      "turn_id": 185,
+      "session_idx": 76,
+      "user_id": "user_analyst",
+      "message": "A/B 테스트 결과 데이터 추출 쿼리 작성해줘",
+      "timestamp": "2026-04-13T10:00:00",
+      "ground_truth_intent": "data_analysis",
+      "v2_classified": "team_meeting_prep",
+      "v1_classified": "data_analysis",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.588
+      },
+      "latency_ms": 1504,
+      "response_preview": "관련 기억:\n  - 사용자가 시계열 데이터 리샘플링 방법에 대해 질문함\n  - 사용자가 rolling average(이동 평균) 데이터를 함께 확인하기를 원함\n  - 사용자가 이상치 탐지 결과에 대한 검토를 요청함\n\n[예측된 컨텍스트] (knowledge_lookup, 59%):\n  - 사용자가 시계열 데이터 리샘플링 방법에 대해 질문함\n  - merge "
+    },
+    {
+      "turn_id": 186,
+      "session_idx": 76,
+      "user_id": "user_analyst",
+      "message": "통계적 유의성은 어떻게 계산해?",
+      "timestamp": "2026-04-13T10:10:00",
+      "ground_truth_intent": "data_analysis",
+      "v2_classified": "data_analysis",
+      "v1_classified": "data_analysis",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.556
+      },
+      "latency_ms": 1186,
+      "response_preview": "관련 기억:\n  - A/B 테스트 결과 데이터 추출을 위한 쿼리 작성이 필요함\n  - 전환율을 단계별로 시각화하기 위한 적절한 차트 유형을 고민 중임\n  - 보고서에 내용을 추가하기로 결정함\n\n[예측된 컨텍스트] (knowledge_lookup, 56%):\n  - 사용자가 시계열 데이터 리샘플링 방법에 대해 질문함\n  - merge 성능 최적화 방법에 대해"
+    },
+    {
+      "turn_id": 187,
+      "session_idx": 76,
+      "user_id": "user_analyst",
+      "message": "데이터 품질 모니터링은 어떻게 하면 좋아?",
+      "timestamp": "2026-04-13T10:15:00",
+      "ground_truth_intent": "knowledge_lookup",
+      "v2_classified": "technical_discussion",
+      "v1_classified": "data_analysis",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.526
+      },
+      "latency_ms": 1118,
+      "response_preview": "관련 기억:\n  - 전환율을 단계별로 시각화하기 위한 적절한 차트 유형을 고민 중임\n  - 사용자가 rolling average(이동 평균) 데이터를 함께 확인하기를 원함\n  - 사용자가 시계열 데이터 리샘플링 방법에 대해 질문함\n\n[예측된 컨텍스트] (knowledge_lookup, 53%):\n  - 사용자가 통계적 유의성 계산 방법에 대해 질문함\n  -"
+    },
+    {
+      "turn_id": 188,
+      "session_idx": 76,
+      "user_id": "user_analyst",
+      "message": "넵넵 고마워",
+      "timestamp": "2026-04-13T10:20:00",
+      "ground_truth_intent": null,
+      "v2_classified": "team_meeting_prep",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.538
+      },
+      "latency_ms": 1118,
+      "response_preview": "관련 기억:\n  - 사용자가 데이터 품질 모니터링 방법에 대해 질문함\n  - 사용자가 시계열 데이터 리샘플링 방법에 대해 질문함\n  - 상대방의 말에 긍정적으로 응답함\n\n[예측된 컨텍스트] (knowledge_lookup, 54%):\n  - 사용자가 데이터 품질 모니터링 방법에 대해 질문함\n  - 사용자가 통계적 유의성 계산 방법에 대해 질문함\n  - 사용"
+    },
+    {
+      "turn_id": 189,
+      "session_idx": 77,
+      "user_id": "user_analyst",
+      "message": "대용량 CSV 읽을 때 메모리 터지는데 어떡해?",
+      "timestamp": "2026-04-14T10:00:00",
+      "ground_truth_intent": "data_analysis",
+      "v2_classified": "technical_discussion",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.543
+      },
+      "latency_ms": 1161,
+      "response_preview": "관련 기억:\n  - 사용자가 데이터 품질 모니터링 방법에 대해 질문함\n  - 사용자가 통계적 유의성 계산 방법에 대해 질문함\n  - A/B 테스트 결과 데이터 추출을 위한 쿼리 작성이 필요함\n\n[예측된 컨텍스트] (knowledge_lookup, 54%):\n  - 사용자가 데이터 품질 모니터링 방법에 대해 질문함\n  - 사용자가 통계적 유의성 계산 방법에 "
+    },
+    {
+      "turn_id": 190,
+      "session_idx": 77,
+      "user_id": "user_analyst",
+      "message": "Parquet 포맷으로 변환하는 게 나을까?",
+      "timestamp": "2026-04-14T10:05:00",
+      "ground_truth_intent": "data_analysis",
+      "v2_classified": "technical_discussion",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.547
+      },
+      "latency_ms": 1146,
+      "response_preview": "관련 기억:\n  - 김과장에게 공유할 자료를 제작해야 함\n  - 전환율을 단계별로 시각화하기 위한 적절한 차트 유형을 고민 중임\n  - 보고서에 내용을 추가하기로 결정함\n\n[예측된 컨텍스트] (knowledge_lookup, 55%):\n  - 사용자가 데이터 품질 모니터링 방법에 대해 질문함\n  - 사용자가 통계적 유의성 계산 방법에 대해 질문함\n  - 사"
+    },
+    {
+      "turn_id": 191,
+      "session_idx": 78,
+      "user_id": "user_analyst",
+      "message": "리텐션 코호트 분석 시각화하려면 어떻게 해?",
+      "timestamp": "2026-04-15T14:00:00",
+      "ground_truth_intent": null,
+      "v2_classified": "technical_discussion",
+      "v1_classified": "data_analysis",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.55
+      },
+      "latency_ms": 1136,
+      "response_preview": "관련 기억:\n  - 사용자가 데이터 품질 모니터링 방법에 대해 질문함\n  - 사용자가 통계적 유의성 계산 방법에 대해 질문함\n  - 전환율을 단계별로 시각화하기 위한 적절한 차트 유형을 고민 중임\n\n[예측된 컨텍스트] (knowledge_lookup, 55%):\n  - 사용자가 데이터 품질 모니터링 방법에 대해 질문함\n  - 사용자가 통계적 유의성 계산 방"
+    },
+    {
+      "turn_id": 192,
+      "session_idx": 78,
+      "user_id": "user_analyst",
+      "message": "matplotlib로도 할 수 있어?",
+      "timestamp": "2026-04-15T14:05:00",
+      "ground_truth_intent": null,
+      "v2_classified": "technical_discussion",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.542
+      },
+      "latency_ms": 1458,
+      "response_preview": "관련 기억:\n  - 사용자가 rolling average(이동 평균) 데이터를 함께 확인하기를 원함\n  - dbt를 이용한 데이터 변환 자동화 도입 여부를 고민 중임\n  - 사용자가 시계열 데이터 리샘플링 방법에 대해 질문함\n\n[예측된 컨텍스트] (knowledge_lookup, 54%):\n  - 리텐션 코호트 분석 시각화 방법에 대해 질문함\n  - 사용자"
+    },
+    {
+      "turn_id": 193,
+      "session_idx": 79,
+      "user_id": "user_analyst",
+      "message": "이번 분기 데이터 프로젝트 현황 정리해줘",
+      "timestamp": "2026-04-16T11:00:00",
+      "ground_truth_intent": "project_status",
+      "v2_classified": "team_meeting_prep",
+      "v1_classified": "data_analysis",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.571
+      },
+      "latency_ms": 1416,
+      "response_preview": "관련 기억:\n  - 전환율을 단계별로 시각화하기 위한 적절한 차트 유형을 고민 중임\n  - 이번 달 신규 가입자 퍼널 분석 쿼리가 필요함\n  - 데이터 검증 로직 구현이 남아있음\n\n[예측된 컨텍스트] (knowledge_lookup, 57%):\n  - 리텐션 코호트 분석 시각화 방법에 대해 질문함\n  - 사용자가 데이터 품질 모니터링 방법에 대해 질문함\n "
+    },
+    {
+      "turn_id": 194,
+      "session_idx": 79,
+      "user_id": "user_analyst",
+      "message": "KPI 달성률도 같이 넣어줘",
+      "timestamp": "2026-04-16T11:05:00",
+      "ground_truth_intent": "project_status",
+      "v2_classified": "team_meeting_prep",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.536
+      },
+      "latency_ms": 1408,
+      "response_preview": "관련 기억:\n  - 이번 분기 데이터 프로젝트 현황 정리가 필요함\n  - 김과장에게 공유할 자료를 제작해야 함\n  - 사용자가 통계적 유의성 계산 방법에 대해 질문함\n\n[예측된 컨텍스트] (knowledge_lookup, 54%):\n  - 리텐션 코호트 분석 시각화 방법에 대해 질문함\n  - 사용자가 데이터 품질 모니터링 방법에 대해 질문함\n  - 사용자가"
+    },
+    {
+      "turn_id": 195,
+      "session_idx": 79,
+      "user_id": "user_analyst",
+      "message": "넵넵",
+      "timestamp": "2026-04-16T11:10:00",
+      "ground_truth_intent": null,
+      "v2_classified": "team_meeting_prep",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.541
+      },
+      "latency_ms": 1114,
+      "response_preview": "관련 기억:\n  - 사용자가 matplotlib를 이용한 작업 가능 여부를 질문함\n  - 상대방의 말에 긍정적으로 응답함\n  - 보고서에 내용을 추가하기로 결정함\n\n[예측된 컨텍스트] (knowledge_lookup, 54%):\n  - 리텐션 코호트 분석 시각화 방법에 대해 질문함\n  - 사용자가 데이터 품질 모니터링 방법에 대해 질문함\n  - 사용자가 통"
+    },
+    {
+      "turn_id": 196,
+      "session_idx": 80,
+      "user_id": "user_analyst",
+      "message": "이상치 탐지 결과 좀 봐줘",
+      "timestamp": "2026-04-17T15:00:00",
+      "ground_truth_intent": "data_analysis",
+      "v2_classified": "team_meeting_prep",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.545
+      },
+      "latency_ms": 1430,
+      "response_preview": "관련 기억:\n  - 이번 분기 데이터 프로젝트 현황 정리가 필요함\n  - A/B 테스트 결과 데이터 추출을 위한 쿼리 작성이 필요함\n  - 사용자가 데이터 품질 모니터링 방법에 대해 질문함\n\n[예측된 컨텍스트] (knowledge_lookup, 55%):\n  - 리텐션 코호트 분석 시각화 방법에 대해 질문함\n  - 사용자가 데이터 품질 모니터링 방법에 대해"
+    },
+    {
+      "turn_id": 197,
+      "session_idx": 80,
+      "user_id": "user_analyst",
+      "message": "오키 보고서에 넣어줘",
+      "timestamp": "2026-04-17T15:05:00",
+      "ground_truth_intent": "document_drafting",
+      "v2_classified": "document_creation",
+      "v1_classified": "knowledge_lookup",
+      "memories_found": 5,
+      "prediction": {
+        "next_intent": "knowledge_lookup",
+        "weight": 0.55
+      },
+      "latency_ms": 1322,
+      "response_preview": "관련 기억:\n  - 이번 분기 데이터 프로젝트 현황 정리가 필요함\n  - KPI 달성률을 포함해야 함\n  - 김과장에게 공유할 자료를 제작해야 함\n\n[예측된 컨텍스트] (knowledge_lookup, 55%):\n  - 리텐션 코호트 분석 시각화 방법에 대해 질문함\n  - 사용자가 데이터 품질 모니터링 방법에 대해 질문함\n  - 사용자가 통계적 유의성 계산"
+    }
+  ],
+  "taxonomy": {
+    "categories": [
+      {
+        "name": "issue_tracking",
+        "member_count": 6,
+        "decay_weight": 1.2955,
+        "access_count": 6,
+        "created_by": "bootstrap"
+      },
+      {
+        "name": "bug_resolution",
+        "member_count": 11,
+        "decay_weight": 1.5442,
+        "access_count": 11,
+        "created_by": "bootstrap"
+      },
+      {
+        "name": "document_creation",
+        "member_count": 12,
+        "decay_weight": 1.5496,
+        "access_count": 12,
+        "created_by": "bootstrap"
+      },
+      {
+        "name": "data_analysis",
+        "member_count": 6,
+        "decay_weight": 1.2441,
+        "access_count": 6,
+        "created_by": "bootstrap"
+      },
+      {
+        "name": "technical_discussion",
+        "member_count": 61,
+        "decay_weight": 2.0,
+        "access_count": 60,
+        "created_by": "discovery"
+      },
+      {
+        "name": "team_meeting_prep",
+        "member_count": 102,
+        "decay_weight": 1.0,
+        "access_count": 102,
+        "created_by": "merge"
+      }
+    ],
+    "total_categories": 6
+  },
+  "lineage": {
+    "total_events": 10,
+    "total_nodes": 10,
+    "alive_categories": 6,
+    "extinct_categories": 4,
+    "event_counts": {
+      "bootstrap": 7,
+      "discovery": 1,
+      "merge": 2
+    },
+    "events": [
+      {
+        "type": "bootstrap",
+        "timestamp": "2026-04-08T02:01:38.237156+00:00",
+        "category": "schedule_management",
+        "metadata": {
+          "member_count": 8
+        }
+      },
+      {
+        "type": "bootstrap",
+        "timestamp": "2026-04-08T02:01:38.237201+00:00",
+        "category": "issue_tracking",
+        "metadata": {
+          "member_count": 3
+        }
+      },
+      {
+        "type": "bootstrap",
+        "timestamp": "2026-04-08T02:01:38.237229+00:00",
+        "category": "bug_resolution",
+        "metadata": {
+          "member_count": 5
+        }
+      },
+      {
+        "type": "bootstrap",
+        "timestamp": "2026-04-08T02:01:38.237252+00:00",
+        "category": "team_communication",
+        "metadata": {
+          "member_count": 4
+        }
+      },
+      {
+        "type": "bootstrap",
+        "timestamp": "2026-04-08T02:01:38.237277+00:00",
+        "category": "document_creation",
+        "metadata": {
+          "member_count": 4
+        }
+      },
+      {
+        "type": "bootstrap",
+        "timestamp": "2026-04-08T02:01:38.237304+00:00",
+        "category": "data_analysis",
+        "metadata": {
+          "member_count": 2
+        }
+      },
+      {
+        "type": "bootstrap",
+        "timestamp": "2026-04-08T02:01:38.237326+00:00",
+        "category": "meeting_preparation",
+        "metadata": {
+          "member_count": 4
+        }
+      },
+      {
+        "type": "discovery",
+        "timestamp": "2026-04-08T02:02:26.340682+00:00",
+        "category": "technical_discussion",
+        "metadata": {
+          "trigger_message": "Redis 캐시 만료 전략 어떤 게 좋을까?"
+        }
+      },
+      {
+        "type": "merge",
+        "timestamp": "2026-04-08T02:04:07.799169+00:00",
+        "parents": [
+          "schedule_management",
+          "team_communication"
+        ],
+        "child": "team_collaboration",
+        "reason": "centroid similarity exceeded 0.85",
+        "metadata": {}
+      },
+      {
+        "type": "merge",
+        "timestamp": "2026-04-08T02:05:19.141806+00:00",
+        "parents": [
+          "meeting_preparation",
+          "team_collaboration"
+        ],
+        "child": "team_meeting_prep",
+        "reason": "centroid similarity exceeded 0.85",
+        "metadata": {}
+      }
+    ]
+  },
+  "evolution_log": [
+    {
+      "turn_id": 29,
+      "event": "bootstrap_complete",
+      "categories": [
+        "schedule_management",
+        "issue_tracking",
+        "bug_resolution",
+        "team_communication",
+        "document_creation",
+        "data_analysis",
+        "meeting_preparation"
+      ],
+      "ephemeral_count": 9
+    },
+    {
+      "turn_id": 63,
+      "event": "category_discovered",
+      "category": "technical_discussion",
+      "trigger": "Redis 캐시 만료 전략 어떤 게 좋을까?"
+    },
+    {
+      "turn_id": 79,
+      "event": "decay_sweep",
+      "pruned": [],
+      "reclassified": 0,
+      "splits": [],
+      "fusions": []
+    },
+    {
+      "turn_id": 129,
+      "event": "decay_sweep",
+      "pruned": [],
+      "reclassified": 0,
+      "splits": [],
+      "fusions": [
+        {
+          "parents": [
+            "schedule_management",
+            "team_communication"
+          ],
+          "child": "team_collaboration"
+        }
+      ]
+    },
+    {
+      "turn_id": 179,
+      "event": "decay_sweep",
+      "pruned": [],
+      "reclassified": 0,
+      "splits": [],
+      "fusions": [
+        {
+          "parents": [
+            "meeting_preparation",
+            "team_collaboration"
+          ],
+          "child": "team_meeting_prep"
+        }
+      ]
+    }
+  ],
+  "ephemeral_patterns": [
+    "ㅋ",
+    "ㅎ",
+    "ㅇㅋ",
+    "오키",
+    "넵",
+    "네네",
+    "ㄴㄴ",
+    "점심",
+    "ㅇㅇ"
+  ],
+  "final_state": {
+    "memories_per_user": {
+      "user_pm": 23,
+      "user_dev": 33,
+      "user_new": 46,
+      "user_analyst": 43
+    },
+    "memories_detail": {
+      "user_pm": [
+        {
+          "id": "8f2d7a39-2a47-4054-830c-f2450cc2f21d",
+          "content": "고객 미팅 결과를 추가해야 함",
+          "importance": "important",
+          "access_count": 7
+        },
+        {
+          "id": "cd7a8ecd-b262-4188-8c1b-4cd13c7dc0c1",
+          "content": "부산 출장 결과 보고서를 작성해야 함",
+          "importance": "critical",
+          "access_count": 3
+        },
+        {
+          "id": "8f0a19ec-8aef-4e2c-9420-d9e22793ea87",
+          "content": "출장 일정을 포함시켜야 함",
+          "importance": "critical",
+          "access_count": 8
+        },
+        {
+          "id": "42e0924c-5d09-4405-92fc-c49a25ce1b7f",
+          "content": "고객사 미팅 자료 준비 요청",
+          "importance": "important",
+          "access_count": 12
+        },
+        {
+          "id": "6ea70b0f-f7b2-42e2-92bf-f781990c1557",
+          "content": "팀원들에게 출장 일정을 공유해야 함",
+          "importance": "critical",
+          "access_count": 11
+        },
+        {
+          "id": "bd72a636-3c2c-40e3-80e9-68def20b2307",
+          "content": "부산 출장을 준비하고 있으며 항공편 확인이 필요함",
+          "importance": "critical",
+          "access_count": 5
+        },
+        {
+          "id": "cc74fb69-5363-48b5-90ce-7df6e6804b33",
+          "content": "팀원들에게 일정 변경 사항을 공유해야 함",
+          "importance": "critical",
+          "access_count": 18
+        },
+        {
+          "id": "1389f420-40ef-4266-a91d-eea386e053a2",
+          "content": "디자인팀이 전면 수정을 진행함",
+          "importance": "important",
+          "access_count": 8
+        },
+        {
+          "id": "c6d7927d-f7fe-4e79-8e35-eb7aa7c4dc89",
+          "content": "이대리에게 PR 리뷰를 독촉해야 함",
+          "importance": "important",
+          "access_count": 2
+        },
+        {
+          "id": "d644741d-72a7-442c-847a-0422677b300d",
+          "content": "상대방이 내용을 확인하였음",
+          "importance": "ephemeral",
+          "access_count": 22
+        },
+        {
+          "id": "418d0a3d-c283-46a3-8607-4cdac1b5d66c",
+          "content": "결제 버그 담당자를 확인하고자 함",
+          "importance": "important",
+          "access_count": 10
+        },
+        {
+          "id": "7bac7f5a-7fb9-460a-b23f-5b19ba4611f9",
+          "content": "백로그 우선순위 정리가 필요함",
+          "importance": "important",
+          "access_count": 26
+        },
+        {
+          "id": "264ed5ee-f0d9-4f96-877f-1688d47cbfd6",
+          "content": "다음 주 계획을 정리해야 함",
+          "importance": "critical",
+          "access_count": 33
+        },
+        {
+          "id": "cd6c8476-66bb-4817-8e6d-9eab577aa875",
+          "content": "회고 문서 작성을 요청함",
+          "importance": "important",
+          "access_count": 23
+        },
+        {
+          "id": "d781b3d9-e45a-487c-9e54-a40242483296",
+          "content": "이번 주 스프린트 회고를 위한 데이터 추출 요청",
+          "importance": "critical",
+          "access_count": 21
+        },
+        {
+          "id": "93117922-eb7f-4c73-a93f-c8c1fc23f003",
+          "content": "피드백 내용을 문서로 정리해야 함",
+          "importance": "important",
+          "access_count": 20
+        },
+        {
+          "id": "e5d0b32f-2b2a-4073-85c2-123e92b7927a",
+          "content": "디자인 리뷰 미팅 준비를 위해 변경사항 정리가 필요함",
+          "importance": "important",
+          "access_count": 14
+        },
+        {
+          "id": "db282f06-05fa-4dc3-ad38-02950fb739bf",
+          "content": "블로커(방해 요소)가 없는 상태임",
+          "importance": "important",
+          "access_count": 3
+        },
+        {
+          "id": "50781e9d-87b1-4313-a56c-74f0bca80e28",
+          "content": "사용자가 오늘 스탠드업 내용 정리를 요청함",
+          "importance": "important",
+          "access_count": 15
+        },
+        {
+          "id": "26a0c3ff-61f2-4f8e-ba4c-7f94689b8456",
+          "content": "이번 주 일정 정리를 요청함",
+          "importance": "critical",
+          "access_count": 15
+        },
+        {
+          "id": "9e97690a-7067-42a0-963d-dfc49cc4e55f",
+          "content": "결제 관련 이슈의 해결 여부를 확인 중임",
+          "importance": "important",
+          "access_count": 12
+        },
+        {
+          "id": "819359e8-aa13-44b8-bbc1-40f86884e2d7",
+          "content": "지난주 핵심 이슈 확인 필요",
+          "importance": "important",
+          "access_count": 11
+        },
+        {
+          "id": "7dcd80df-c462-48be-b138-90b42c6b28e7",
+          "content": "주간 보고 작성 필요",
+          "importance": "important",
+          "access_count": 7
+        }
+      ],
+      "user_dev": [
+        {
+          "id": "b3ef1d40-fb2a-4995-8a44-5cda5cb89a2a",
+          "content": "서비스 내 인증 모듈이 가장 독립적인 구조를 가지고 있음",
+          "importance": "important",
+          "access_count": 0
+        },
+        {
+          "id": "73ea724e-7212-405f-b459-0dcb7ba3461a",
+          "content": "사용자가 모놀리스 아키텍처에서 마이크로서비스 아키텍처로의 전환 시 분리 우선순위에 대해 질문함",
+          "importance": "important",
+          "access_count": 1
+        },
+        {
+          "id": "7a2bcadc-5cd6-4a99-90bd-018b3af11327",
+          "content": "사용자가 태그를 커밋 SHA로 자동 설정하는 방법을 문의함",
+          "importance": "important",
+          "access_count": 1
+        },
+        {
+          "id": "2ed580e8-de55-4f8f-83bb-669b9f972274",
+          "content": "배포 파이프라인에서 도커 이미지 태깅이 되지 않는 문제가 발생함",
+          "importance": "important",
+          "access_count": 1
+        },
+        {
+          "id": "52e6aa2b-1d03-4a2d-834d-56a4a3b0d094",
+          "content": "사용자가 SQLAlchemy 2.0 마이그레이션 가이드를 찾고 있음",
+          "importance": "critical",
+          "access_count": 3
+        },
+        {
+          "id": "e838d886-73a9-4183-9e8d-0420298fdf73",
+          "content": "API 응답 시간이 갑자기 3배 느려짐",
+          "importance": "critical",
+          "access_count": 6
+        },
+        {
+          "id": "6b2574b9-7b78-4f81-9cfc-68b332157a4f",
+          "content": "관련 레퍼런스 문서 검색 요청",
+          "importance": "important",
+          "access_count": 0
+        },
+        {
+          "id": "5051264a-4f32-4b2c-afb1-5e3ae598a7e9",
+          "content": "결제 모듈 아키텍처를 이벤트 드리븐 방식으로 변경하는 것에 대한 제안",
+          "importance": "important",
+          "access_count": 5
+        },
+        {
+          "id": "9545086b-03a6-4341-83dc-27965d3fd93b",
+          "content": "매트릭스에 Python 3.11과 3.12 버전을 함께 포함하는 것에 대해 논의함",
+          "importance": "critical",
+          "access_count": 3
+        },
+        {
+          "id": "f9fa5b48-90ac-42cb-9929-20ba02cd17bb",
+          "content": "GitHub Actions workflow 파일을 수정하여 리뷰를 요청함",
+          "importance": "important",
+          "access_count": 10
+        },
+        {
+          "id": "3bcd5410-3cdb-41ea-af03-dfee39205c8f",
+          "content": "celery worker가 간헐적으로 종료되는 현상이 발생하여 모니터링 방법이 필요함",
+          "importance": "important",
+          "access_count": 1
+        },
+        {
+          "id": "f0a58a50-ef00-4065-a9fa-3e5f0bb34b72",
+          "content": "gRPC와 REST의 사용 상황에 대한 비교 및 선택 기준을 질문함",
+          "importance": "important",
+          "access_count": 2
+        },
+        {
+          "id": "42787a05-9368-42b1-91e3-4026fa9b0319",
+          "content": "서버 장시간 가동 시 RSS가 지속적으로 상승하여 메모리 누수가 의심됨",
+          "importance": "important",
+          "access_count": 3
+        },
+        {
+          "id": "f889cbb3-e5c9-491e-a60b-253eed3dc502",
+          "content": "동시 결제 요청 시 race condition 발생 가능성에 대한 우려",
+          "importance": "important",
+          "access_count": 3
+        },
+        {
+          "id": "3d05bbb3-2d80-440a-9ec9-25c1d79396ed",
+          "content": "사용자가 빌드 캐시 설정 방법에 대해 질문함",
+          "importance": "important",
+          "access_count": 7
+        },
+        {
+          "id": "7376b6ca-9495-472e-9936-ef0cafe9fcb0",
+          "content": "CI 파이프라인에서 타임아웃 문제가 발생하고 있음",
+          "importance": "important",
+          "access_count": 8
+        },
+        {
+          "id": "c08501ac-75ed-45ef-9e67-36ea6b377eef",
+          "content": "상대방의 말에 동의하고 감사함을 표함",
+          "importance": "ephemeral",
+          "access_count": 3
+        },
+        {
+          "id": "16377cf3-0631-4b60-a5cd-939a111a5f90",
+          "content": "Docker 멀티스테이지 빌드를 통해 이미지 사이즈를 줄이고 싶어함",
+          "importance": "important",
+          "access_count": 2
+        },
+        {
+          "id": "a6cdedbd-fa92-4e96-878f-6eb2c03097d7",
+          "content": "이번 주 테스트 커버리지 확인 요청",
+          "importance": "critical",
+          "access_count": 15
+        },
+        {
+          "id": "be7b5eb8-0567-4758-9212-82c4ec253fc6",
+          "content": "null 체크 누락으로 인해 프로덕션 환경에서 NullPointerException(NPE) 발생 가능성이 있음",
+          "importance": "critical",
+          "access_count": 3
+        },
+        {
+          "id": "d6af1805-225a-47ba-b731-114e74f4d4d6",
+          "content": "Swagger 문서 업데이트 요청",
+          "importance": "important",
+          "access_count": 11
+        },
+        {
+          "id": "251ff599-6227-4987-a8ee-245ab8441ed5",
+          "content": "변경된 엔드포인트 정리 요청",
+          "importance": "important",
+          "access_count": 16
+        },
+        {
+          "id": "61605366-4e53-4875-b7c3-441659b84fa0",
+          "content": "API 문서 업데이트 필요",
+          "importance": "important",
+          "access_count": 18
+        },
+        {
+          "id": "4d54fa17-3a6e-4c88-9b9a-e9cb3028eb0b",
+          "content": "이번 스프린트 진행 상황에 대한 확인 요청",
+          "importance": "important",
+          "access_count": 15
+        },
+        {
+          "id": "b3161eef-9ba7-45a3-8625-309c11031c72",
+          "content": "k8s pod가 oomkilled 발생하여 메모리 설정 방법 문의",
+          "importance": "important",
+          "access_count": 5
+        },
+        {
+          "id": "2140b098-952d-41b0-b4ab-a48873f590ae",
+          "content": "Redis 캐시 만료 전략에 대해 논의함",
+          "importance": "important",
+          "access_count": 4
+        },
+        {
+          "id": "5b475cb3-6917-4867-bd66-bc53dd37502d",
+          "content": "리뷰가 완료된 PR의 변경사항 정리가 필요함",
+          "importance": "important",
+          "access_count": 15
+        },
+        {
+          "id": "56e91d55-5f48-4562-9691-73278f1a965f",
+          "content": "금요일에 PR 리뷰 잔여 분량을 확인하고자 함",
+          "importance": "important",
+          "access_count": 20
+        },
+        {
+          "id": "1df7b768-5923-432b-81af-64405b3d7597",
+          "content": "리뷰 중 N+1 쿼리 문제 발견 및 성능 저하 우려",
+          "importance": "important",
+          "access_count": 6
+        },
+        {
+          "id": "b7fa7610-2343-42d8-a702-bb20f1fc6e12",
+          "content": "수요일에 PR 리뷰를 진행할 예정임",
+          "importance": "critical",
+          "access_count": 13
+        },
+        {
+          "id": "7b937b32-c36b-4730-8b03-46b9a5d2f4c3",
+          "content": "로그를 더 자세히 분석해달라고 요청함",
+          "importance": "important",
+          "access_count": 9
+        },
+        {
+          "id": "856e0aaf-ecbf-4dcb-85f3-a1236fb675e0",
+          "content": "결제 API에서 간헐적으로 500 에러가 발생하는 버그가 발견됨",
+          "importance": "critical",
+          "access_count": 5
+        },
+        {
+          "id": "00f74395-0931-49b7-90a0-50b606edae84",
+          "content": "리뷰할 PR 존재 여부 확인",
+          "importance": "important",
+          "access_count": 9
+        }
+      ],
+      "user_new": [
+        {
+          "id": "7786fb1a-22c6-4ed0-af11-0443c2360cb4",
+          "content": "테스트 통과 완료",
+          "importance": "important",
+          "access_count": 1
+        },
+        {
+          "id": "2a640faf-acc5-43e6-8b6a-eb1c528dcf76",
+          "content": "통합 테스트에서의 외부 API 호출 처리 방법에 대해 질문함",
+          "importance": "important",
+          "access_count": 0
+        },
+        {
+          "id": "85def983-951c-4c3c-af5c-8e815795e075",
+          "content": "트러블슈팅 과정을 문서로 남기기로 함",
+          "importance": "important",
+          "access_count": 0
+        },
+        {
+          "id": "6b4eefe1-a29c-4741-a58d-09af5977abcd",
+          "content": "문제 해결 완료",
+          "importance": "important",
+          "access_count": 2
+        },
+        {
+          "id": "048d7c39-2650-4ccb-bea4-fbea351c108e",
+          "content": "WebSocket 연결이 간헐적으로 끊어지는 현상이 발생함",
+          "importance": "important",
+          "access_count": 0
+        },
+        {
+          "id": "d3225e96-a2a7-44c0-9abf-1eb4c82925bd",
+          "content": "재시도 로직에 exponential backoff 적용 여부를 논의함",
+          "importance": "important",
+          "access_count": 0
+        },
+        {
+          "id": "dc090a60-7a85-409c-926d-43ad71fb2baf",
+          "content": "알림 서비스 PR이 제출되었으며 설계 리뷰가 필요함",
+          "importance": "important",
+          "access_count": 1
+        },
+        {
+          "id": "5ca17bba-c05e-494f-a344-52fdb166e854",
+          "content": "Redis Pub/Sub 연동 가능 여부에 대해 문의함",
+          "importance": "important",
+          "access_count": 1
+        },
+        {
+          "id": "a3172d06-d59e-4c08-b20b-23efabf5cc5d",
+          "content": "WebSocket을 이용한 실시간 알림 구현 방법에 대해 문의함",
+          "importance": "important",
+          "access_count": 4
+        },
+        {
+          "id": "5f655036-d335-485d-a6c0-af35daf10574",
+          "content": "알림 서비스 설계 문서를 먼저 확인해야 함",
+          "importance": "important",
+          "access_count": 2
+        },
+        {
+          "id": "0bd0c7c1-3e9e-4007-b5d0-5103508af15b",
+          "content": "이번 주 담당 태스크 확인 예정",
+          "importance": "critical",
+          "access_count": 1
+        },
+        {
+          "id": "eb210dba-fa99-44b2-a4e1-3df91c8a2f59",
+          "content": "다음 주 일정에 대한 문의",
+          "importance": "critical",
+          "access_count": 4
+        },
+        {
+          "id": "f9299d4d-7266-427e-85cc-6ffd9c4e6438",
+          "content": "테스트 커버리지 80% 달성",
+          "importance": "important",
+          "access_count": 0
+        },
+        {
+          "id": "fc4b6421-c9e5-4280-94ad-15b052c17f26",
+          "content": "PR 리뷰 요청",
+          "importance": "important",
+          "access_count": 3
+        },
+        {
+          "id": "213856a3-d3f0-4e63-9c47-bfef1040cb00",
+          "content": "프로필 API 구현 완료 및 PR 제출",
+          "importance": "important",
+          "access_count": 4
+        },
+        {
+          "id": "1a9b9d1e-21f5-401e-a668-39d92913b4cf",
+          "content": "날짜 포맷 오류가 해결됨",
+          "importance": "important",
+          "access_count": 1
+        },
+        {
+          "id": "814e789f-a0ea-4db2-bdbb-4148bc949bc1",
+          "content": "API 테스트 중 422 에러 발생",
+          "importance": "important",
+          "access_count": 1
+        },
+        {
+          "id": "3ec362ce-3703-4609-81b7-7da67163bfc6",
+          "content": "사용자가 Pydantic validation의 자동 수행 여부에 대해 질문함",
+          "importance": "important",
+          "access_count": 2
+        },
+        {
+          "id": "eb8f501c-c46a-498f-8c30-282043a3042a",
+          "content": "사용자가 FastAPI의 Depends 패턴 사용법에 대해 질문함",
+          "importance": "important",
+          "access_count": 3
+        },
+        {
+          "id": "d207de13-8bf3-4d5c-9359-f74d18d24857",
+          "content": "에러 핸들링 패턴에 대해 질문함",
+          "importance": "important",
+          "access_count": 8
+        },
+        {
+          "id": "f9ce2eaa-487b-47ec-98b6-72bb3cb367ca",
+          "content": "사용자가 프로필 API 스펙 문서의 위치를 문의함",
+          "importance": "important",
+          "access_count": 6
+        },
+        {
+          "id": "c312baaf-77e9-4589-a171-d268e9596fbb",
+          "content": "사용자가 이번 주 담당 태스크를 확인하고자 함",
+          "importance": "critical",
+          "access_count": 11
+        },
+        {
+          "id": "1d11d08e-5ef4-4c10-aa04-723c95fb1329",
+          "content": "다음 주부터 실전 투입 예정",
+          "importance": "critical",
+          "access_count": 4
+        },
+        {
+          "id": "dcc0a3f6-7649-4347-84ac-b555fd5db5ae",
+          "content": "이번 주에 한 일에 대한 정리를 요청함",
+          "importance": "critical",
+          "access_count": 17
+        },
+        {
+          "id": "41aed768-6b7b-45d9-926d-859f9a1d4dff",
+          "content": "수정을 완료함",
+          "importance": "important",
+          "access_count": 11
+        },
+        {
+          "id": "0b779a43-34c5-433a-b232-4beded95d28b",
+          "content": "코드 리뷰 피드백 반영 완료 및 확인 요청",
+          "importance": "important",
+          "access_count": 14
+        },
+        {
+          "id": "5c80c1bb-0f14-46de-bd52-79bd8b381392",
+          "content": "사용자가 mock과 fixture의 차이점에 대해 질문함",
+          "importance": "important",
+          "access_count": 0
+        },
+        {
+          "id": "09ddf88a-3f09-4fcb-a9c9-ade7da23501c",
+          "content": "사용자가 pytest fixture의 사용 방법과 conftest.py 파일 활용 여부에 대해 질문함",
+          "importance": "important",
+          "access_count": 4
+        },
+        {
+          "id": "786a1a12-efa7-4ba1-ba06-a5d658c37d04",
+          "content": "사용자가 무언가를 업로드 완료함",
+          "importance": "important",
+          "access_count": 5
+        },
+        {
+          "id": "74244ce0-6adf-400d-ba80-bc3cac746431",
+          "content": "리뷰어 지정 대상에 대해 문의함",
+          "importance": "important",
+          "access_count": 6
+        },
+        {
+          "id": "7a9ccdbc-9e30-4d16-bbe8-483b562ab7e4",
+          "content": "사용자가 첫 PR(Pull Request) 제출 가능 여부를 문의함",
+          "importance": "important",
+          "access_count": 6
+        },
+        {
+          "id": "8832acae-1303-4405-9384-42426dae6aa3",
+          "content": "사용자가 API 문서의 위치나 제공 여부를 문의함",
+          "importance": "important",
+          "access_count": 11
+        },
+        {
+          "id": "74237355-3e73-44f9-b335-d64b6a8fb03d",
+          "content": "사용자가 DB 스키마 문서의 위치를 문의함",
+          "importance": "important",
+          "access_count": 7
+        },
+        {
+          "id": "1139297a-2d0a-4958-8e6b-9d92e21d6674",
+          "content": "정리 항목을 환경설정, 컨벤션, 팀 구조로 나누어 요청함",
+          "importance": "important",
+          "access_count": 5
+        },
+        {
+          "id": "fb697f98-a558-4a11-a968-6ef0dadc62de",
+          "content": "이번 주 온보딩 학습 내용을 정리하여 문서로 작성해야 함",
+          "importance": "critical",
+          "access_count": 9
+        },
+        {
+          "id": "bf4c88cf-0547-4cdc-9101-89dcb274b640",
+          "content": "화자가 상대방들의 담당 업무에 대해 질문함",
+          "importance": "important",
+          "access_count": 6
+        },
+        {
+          "id": "ab006bdf-0db6-448b-a469-6847ab1c7bea",
+          "content": "사용자가 팀 구성원에 대한 정보를 요청함",
+          "importance": "important",
+          "access_count": 10
+        },
+        {
+          "id": "8a846207-f416-4bb1-8aa8-75042393d9f9",
+          "content": "사용자가 커밋 메시지 규칙의 존재 여부에 대해 질문함",
+          "importance": "important",
+          "access_count": 6
+        },
+        {
+          "id": "e70f2640-5e8a-4d99-921c-fe0b7ae8a2d4",
+          "content": "브랜치 전략으로 Git flow 사용 여부를 확인하고 있음",
+          "importance": "important",
+          "access_count": 3
+        },
+        {
+          "id": "c615fd48-a0be-4673-b766-728dc43cdad8",
+          "content": "사용자가 팀의 코드 컨벤션에 대해 질문함",
+          "importance": "important",
+          "access_count": 11
+        },
+        {
+          "id": "822d8bdf-45b4-49d3-a576-fb373832f4d5",
+          "content": "사용자가 Python 확장에 대해 문의함",
+          "importance": "important",
+          "access_count": 5
+        },
+        {
+          "id": "7151cf59-d02d-472c-9ab1-68617830fdf8",
+          "content": "사용자가 팀의 추천 IDE 플러그인 정보를 요청함",
+          "importance": "important",
+          "access_count": 7
+        },
+        {
+          "id": "99ed4758-b87b-4cfb-8748-01747eddcdf7",
+          "content": "사용자가 감사 인사를 전함",
+          "importance": "ephemeral",
+          "access_count": 8
+        },
+        {
+          "id": "920935da-bb28-443d-b5ad-532e2669a398",
+          "content": "사용자가 개발 환경 설정 문서의 위치를 문의함",
+          "importance": "important",
+          "access_count": 6
+        },
+        {
+          "id": "a52a6d97-7d61-4436-a722-8906b465c81d",
+          "content": "사용자가 업무 시작 방법에 대해 질문함",
+          "importance": "important",
+          "access_count": 8
+        },
+        {
+          "id": "5e983727-0061-47f0-a00a-abcb96c82472",
+          "content": "사용자가 오늘 첫 출근을 함",
+          "importance": "important",
+          "access_count": 6
+        }
+      ],
+      "user_analyst": [
+        {
+          "id": "cdbc44f1-44c4-455c-9fc4-5ca51e0ced96",
+          "content": "KPI 달성률을 포함해야 함",
+          "importance": "important",
+          "access_count": 1
+        },
+        {
+          "id": "eeaff292-be0c-477c-8b5b-35ccab9666a2",
+          "content": "이번 분기 데이터 프로젝트 현황 정리가 필요함",
+          "importance": "important",
+          "access_count": 3
+        },
+        {
+          "id": "3c40cb28-e218-47b9-a39a-913bb6eb683f",
+          "content": "사용자가 matplotlib를 이용한 작업 가능 여부를 질문함",
+          "importance": "important",
+          "access_count": 1
+        },
+        {
+          "id": "decfbde3-7098-492e-b556-4843f44ff7f8",
+          "content": "리텐션 코호트 분석 시각화 방법에 대해 질문함",
+          "importance": "important",
+          "access_count": 0
+        },
+        {
+          "id": "7c777ee4-6062-4d2a-a321-1e2f079d9a45",
+          "content": "Parquet 포맷으로의 변환 여부를 고민 중임",
+          "importance": "important",
+          "access_count": 0
+        },
+        {
+          "id": "56cbc7f8-abb5-4746-ad90-ac4f4dfcc230",
+          "content": "대용량 CSV 파일을 읽을 때 메모리 부족 문제가 발생함",
+          "importance": "important",
+          "access_count": 0
+        },
+        {
+          "id": "cc1252d5-25e2-4562-afbe-8d69e6843fd8",
+          "content": "사용자가 데이터 품질 모니터링 방법에 대해 질문함",
+          "importance": "important",
+          "access_count": 4
+        },
+        {
+          "id": "03183691-8429-411a-981a-02a6d6d1a454",
+          "content": "사용자가 통계적 유의성 계산 방법에 대해 질문함",
+          "importance": "important",
+          "access_count": 3
+        },
+        {
+          "id": "7d78e135-7f9d-496d-aacb-78a9a1dba1a1",
+          "content": "A/B 테스트 결과 데이터 추출을 위한 쿼리 작성이 필요함",
+          "importance": "important",
+          "access_count": 4
+        },
+        {
+          "id": "2ab91073-f58e-42a4-8bfd-aafd6dbd8c39",
+          "content": "김과장에게 공유할 자료를 제작해야 함",
+          "importance": "important",
+          "access_count": 6
+        },
+        {
+          "id": "8a7ccfdf-fd4a-4a36-94b1-77f7837b1a86",
+          "content": "대시보드 개발 진행률 보고 예정",
+          "importance": "important",
+          "access_count": 1
+        },
+        {
+          "id": "a66c52e2-586f-44fc-9ab3-9dffab5965be",
+          "content": "전환율을 단계별로 시각화하기 위한 적절한 차트 유형을 고민 중임",
+          "importance": "important",
+          "access_count": 7
+        },
+        {
+          "id": "c3f1010a-9471-4de5-84fb-35741529aff7",
+          "content": "경영진 대시보드에 Funnel 차트를 추가해야 함",
+          "importance": "important",
+          "access_count": 3
+        },
+        {
+          "id": "7d5bd6f3-3581-45bf-b9e3-526c1fb37d74",
+          "content": "사용자가 rolling average(이동 평균) 데이터를 함께 확인하기를 원함",
+          "importance": "important",
+          "access_count": 11
+        },
+        {
+          "id": "63393219-15e3-4f6f-887c-7db0bdb70015",
+          "content": "사용자가 시계열 데이터 리샘플링 방법에 대해 질문함",
+          "importance": "important",
+          "access_count": 9
+        },
+        {
+          "id": "0c22e5d2-e2a3-43b7-aed7-dcd4f67a8176",
+          "content": "dbt를 이용한 데이터 변환 자동화 도입 여부를 고민 중임",
+          "importance": "important",
+          "access_count": 4
+        },
+        {
+          "id": "c33bb6f4-f677-4279-8fd2-b97ed517ec8a",
+          "content": "사용자가 인덱스가 적용되지 않는 것으로 의심하여 실행 계획 확인을 요청함",
+          "importance": "important",
+          "access_count": 1
+        },
+        {
+          "id": "4401b8d4-bceb-46f7-acf1-e33f77741f57",
+          "content": "이번 달 신규 가입자 퍼널 분석 쿼리가 필요함",
+          "importance": "important",
+          "access_count": 4
+        },
+        {
+          "id": "3bdd37ec-24df-41e9-98cf-3d5c2bcd0315",
+          "content": "보고서에 내용을 추가하기로 결정함",
+          "importance": "critical",
+          "access_count": 14
+        },
+        {
+          "id": "2fa0c988-8561-463d-9356-b2f068a25b24",
+          "content": "사용자가 이상치 탐지 결과에 대한 검토를 요청함",
+          "importance": "important",
+          "access_count": 8
+        },
+        {
+          "id": "6814b002-6ea0-4b7f-902e-4163b0356ede",
+          "content": "상대방의 말에 긍정적으로 응답함",
+          "importance": "ephemeral",
+          "access_count": 4
+        },
+        {
+          "id": "3ec61ee4-520b-46e1-87a8-e49f101acd60",
+          "content": "에러 핸들링 구현이 남아있음",
+          "importance": "important",
+          "access_count": 2
+        },
+        {
+          "id": "2809adeb-f9dd-451d-a474-1f9afa588778",
+          "content": "데이터 검증 로직 구현이 남아있음",
+          "importance": "important",
+          "access_count": 6
+        },
+        {
+          "id": "20a84327-0288-42be-8fd0-8b66acddca27",
+          "content": "ETL 작업이 80% 완료됨",
+          "importance": "important",
+          "access_count": 0
+        },
+        {
+          "id": "956c3809-70ae-445d-9aa8-3d24bffc8631",
+          "content": "DAU, WAU, 매출 추이를 한 화면에서 확인하기를 원함",
+          "importance": "important",
+          "access_count": 8
+        },
+        {
+          "id": "2cb10a49-bf38-4eab-8a35-8d1e45ac5415",
+          "content": "주간 리포트 자동화 대시보드를 제작하려고 함",
+          "importance": "important",
+          "access_count": 16
+        },
+        {
+          "id": "a4f168ff-e5c8-4e31-8c05-a37625fc10ca",
+          "content": "merge 성능 최적화 방법에 대해 문의함",
+          "importance": "important",
+          "access_count": 7
+        },
+        {
+          "id": "5ec35f4f-5641-4091-b4a5-0413315174a4",
+          "content": "사용자가 DataFrame merge 시 left join과 inner join의 차이점에 대해 질문함",
+          "importance": "important",
+          "access_count": 1
+        },
+        {
+          "id": "16ae50a5-d01b-408a-86d7-03353f710bb4",
+          "content": "데이터 파이프라인 스케줄링 도구로 Airflow 사용 여부를 고민 중임",
+          "importance": "important",
+          "access_count": 9
+        },
+        {
+          "id": "5b8d3efa-dc25-4e2b-a558-b5523aed805f",
+          "content": "사용자가 WINDOW 함수 사용법에 대한 정보를 요청함",
+          "importance": "important",
+          "access_count": 6
+        },
+        {
+          "id": "8c5bec9b-6444-4f60-adf9-27cc38f7a440",
+          "content": "사용자 세그먼트별 리텐션율 쿼리 작성을 요청함",
+          "importance": "important",
+          "access_count": 8
+        },
+        {
+          "id": "3344ac25-66fa-4ab5-a6d6-4de663da05bf",
+          "content": "그래프를 포함해달라고 요청함",
+          "importance": "important",
+          "access_count": 17
+        },
+        {
+          "id": "1f7337e6-e422-498d-974c-323b79349bcb",
+          "content": "주간 데이터 리포트 작성이 요청됨",
+          "importance": "important",
+          "access_count": 15
+        },
+        {
+          "id": "8dbc9589-5570-45a1-9d74-24e28cb8af60",
+          "content": "ETL 스케줄러 설정 필요",
+          "importance": "important",
+          "access_count": 6
+        },
+        {
+          "id": "318bcd1c-412f-46e1-8cd4-e43713437ec3",
+          "content": "이번 주 데이터 파이프라인 상태 업데이트 예정",
+          "importance": "critical",
+          "access_count": 8
+        },
+        {
+          "id": "1f46504f-04f5-4174-a7b2-fd8132faf519",
+          "content": "사용자가 커스텀 패널 만드는 방법에 대해 문의함",
+          "importance": "important",
+          "access_count": 6
+        },
+        {
+          "id": "98006cf4-a26b-48e8-a4cc-748534ab43a0",
+          "content": "Grafana 대시보드에 신규 메트릭을 추가하고 싶어함",
+          "importance": "important",
+          "access_count": 6
+        },
+        {
+          "id": "c727cf99-d6bf-465f-a3db-e16fcf5735de",
+          "content": "상대방의 말에 동의하고 감사함을 표함",
+          "importance": "ephemeral",
+          "access_count": 6
+        },
+        {
+          "id": "d506a2c6-bc40-4c1e-967a-78982455c46d",
+          "content": "사용자가 피벗테이블 만드는 법에 대한 정보를 요청함",
+          "importance": "important",
+          "access_count": 7
+        },
+        {
+          "id": "eddd7143-acfc-4129-98ab-4cc4f51b8847",
+          "content": "Pandas를 사용하여 매출 데이터 전처리를 수행 중이며 결측치 처리 방법을 고민하고 있음",
+          "importance": "important",
+          "access_count": 5
+        },
+        {
+          "id": "2e5f2afe-fe69-49ea-a627-3828634ae1e5",
+          "content": "사용자가 Jupyter에서 SQL을 직접 실행하는 방법에 대해 질문함",
+          "importance": "important",
+          "access_count": 5
+        },
+        {
+          "id": "7d240ebe-7ee1-4b15-b2f8-d3034b1631cf",
+          "content": "서브쿼리 대신 CTE 사용 가능 여부에 대해 질문함",
+          "importance": "important",
+          "access_count": 5
+        },
+        {
+          "id": "1f82601c-8a7d-4a88-b533-fc659a254ebf",
+          "content": "사용자가 지난주 매출 데이터 쿼리 작성을 위해 GROUP BY 절 관련 도움을 요청함",
+          "importance": "important",
+          "access_count": 6
+        }
+      ]
+    },
+    "intent_transitions": {
+      "weekly_report -> issue_tracking": 1.0,
+      "issue_tracking -> scheduling": 0.5,
+      "issue_tracking -> issue_tracking": 0.25,
+      "issue_tracking -> weekly_report": 0.125,
+      "issue_tracking -> knowledge_lookup": 0.125,
+      "scheduling -> project_status": 0.111,
+      "scheduling -> knowledge_lookup": 0.389,
+      "scheduling -> data_analysis": 0.167,
+      "scheduling -> scheduling": 0.222,
+      "scheduling -> weekly_report": 0.111,
+      "project_status -> knowledge_lookup": 0.667,
+      "project_status -> code_review": 0.333,
+      "knowledge_lookup -> scheduling": 0.07,
+      "knowledge_lookup -> data_analysis": 0.13,
+      "knowledge_lookup -> issue_tracking": 0.02,
+      "knowledge_lookup -> project_status": 0.04,
+      "knowledge_lookup -> knowledge_lookup": 0.55,
+      "knowledge_lookup -> code_review": 0.14,
+      "knowledge_lookup -> onboarding": 0.01,
+      "knowledge_lookup -> troubleshooting": 0.02,
+      "knowledge_lookup -> team_communication": 0.02,
+      "data_analysis -> document_drafting": 0.182,
+      "data_analysis -> knowledge_lookup": 0.591,
+      "data_analysis -> scheduling": 0.045,
+      "data_analysis -> data_analysis": 0.136,
+      "data_analysis -> team_communication": 0.045,
+      "document_drafting -> knowledge_lookup": 1.0,
+      "code_review -> scheduling": 0.087,
+      "code_review -> issue_tracking": 0.043,
+      "code_review -> code_review": 0.261,
+      "code_review -> knowledge_lookup": 0.565,
+      "code_review -> troubleshooting": 0.043,
+      "onboarding -> knowledge_lookup": 1.0,
+      "troubleshooting -> knowledge_lookup": 1.0,
+      "team_communication -> team_communication": 0.25,
+      "team_communication -> knowledge_lookup": 0.25,
+      "team_communication -> data_analysis": 0.5
+    }
+  }
+}

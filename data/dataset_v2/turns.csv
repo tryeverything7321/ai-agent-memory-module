@@ -1,0 +1,199 @@
+turn_id,user_id,message,timestamp,ground_truth,v1_classified,v2_classified,v1_correct,v2_exact_correct,v2_semantic_correct,memories_found,has_prediction,pred_intent,pred_weight,latency_ms,has_error
+0,user_pm,주간 보고 작성해야 하는데 지난주 핵심 이슈 뭐였지?,2026-03-23T09:00:00,weekly_report,weekly_report,buffering,1,0,0,0,0,,,2985,0
+1,user_pm,이슈 중에 결제 쪽은 해결됐어?,2026-03-23T09:05:00,issue_tracking,issue_tracking,buffering,1,0,0,2,0,,,1831,0
+2,user_pm,이번 주 일정 정리해줘,2026-03-23T09:10:00,scheduling,scheduling,buffering,1,0,0,3,0,,,1512,0
+3,user_pm,오늘 스탠드업 내용 정리해줘,2026-03-24T09:00:00,project_status,project_status,buffering,1,0,0,4,0,,,1256,0
+4,user_pm,블로커 없다니 다행이다 ㅋㅋ,2026-03-24T09:05:00,,knowledge_lookup,buffering,0,0,0,5,0,,,1191,0
+5,user_pm,디자인 리뷰 미팅 준비해야 하는데 변경사항 정리해줘,2026-03-25T14:00:00,meeting_prep,scheduling,buffering,0,0,0,5,1,project_status,1.0,1508,0
+6,user_pm,피드백 내용 문서로 정리해줘,2026-03-25T15:00:00,document_drafting,knowledge_lookup,buffering,0,0,0,5,1,scheduling,1.0,1099,0
+7,user_pm,이번 주 스프린트 회고할 건데 데이터 좀 뽑아줘,2026-03-27T16:00:00,data_analysis,data_analysis,buffering,1,0,0,5,0,,,1441,0
+8,user_pm,회고 문서 작성해줘,2026-03-27T16:05:00,document_drafting,document_drafting,buffering,1,0,0,5,0,,,1064,0
+9,user_pm,다음 주 계획도 같이 정리해,2026-03-27T16:10:00,scheduling,knowledge_lookup,buffering,0,0,0,5,0,,,1400,0
+10,user_pm,백로그 우선순위 정리해줘,2026-03-26T14:00:00,issue_tracking,issue_tracking,buffering,1,0,0,5,1,scheduling,1.0,1413,0
+11,user_pm,결제 버그 담당 누구지?,2026-03-26T14:05:00,team_communication,issue_tracking,buffering,0,0,0,5,0,,,1421,0
+12,user_pm,주간 보고 작성해야 하는데 지난주 핵심 이슈 뭐였지?,2026-03-30T09:00:00,weekly_report,weekly_report,buffering,1,0,0,5,1,issue_tracking,1.0,1862,0
+13,user_pm,이슈 중에 결제 쪽은 해결됐어?,2026-03-30T09:05:00,issue_tracking,issue_tracking,buffering,1,0,0,5,0,,,1411,0
+14,user_pm,이번 주 일정 정리해줘,2026-03-30T09:10:00,scheduling,scheduling,buffering,1,0,0,5,0,,,1295,0
+15,user_pm,넵 확인,2026-03-30T09:20:00,,knowledge_lookup,buffering,0,0,0,5,0,,,1111,0
+16,user_pm,오늘 스탠드업 내용 정리해줘,2026-03-31T09:00:00,project_status,project_status,buffering,1,0,0,5,1,knowledge_lookup,1.0,1078,0
+17,user_pm,이대리한테 PR 리뷰 독촉 좀 해줘,2026-03-31T09:05:00,team_communication,code_review,buffering,0,0,0,5,0,,,1473,0
+18,user_pm,디자인 리뷰 미팅 준비해야 하는데 변경사항 정리해줘,2026-04-01T14:00:00,meeting_prep,scheduling,buffering,0,0,0,5,1,knowledge_lookup,0.667,1463,0
+19,user_pm,피드백 내용 문서로 정리해줘,2026-04-01T15:00:00,document_drafting,knowledge_lookup,buffering,0,0,0,5,0,,,1050,0
+20,user_pm,ㅋㅋ 디자인팀이 또 전면 수정했네,2026-04-01T15:10:00,,knowledge_lookup,buffering,0,0,0,5,0,,,1423,0
+21,user_pm,팀원들한테 일정 변경 공유해줘,2026-04-01T15:15:00,team_communication,scheduling,buffering,0,0,0,5,1,knowledge_lookup,0.75,1429,0
+22,user_pm,이번 주 스프린트 회고할 건데 데이터 좀 뽑아줘,2026-04-03T16:00:00,data_analysis,data_analysis,buffering,1,0,0,5,1,document_drafting,1.0,2458,0
+23,user_pm,회고 문서 작성해줘,2026-04-03T16:05:00,document_drafting,document_drafting,buffering,1,0,0,5,1,knowledge_lookup,1.0,1003,0
+24,user_pm,다음 주 계획도 같이 정리해,2026-04-03T16:10:00,scheduling,knowledge_lookup,buffering,0,0,0,5,0,,,1337,0
+25,user_pm,부산 출장 준비해야 하는데 항공편 확인해줘,2026-04-02T11:00:00,scheduling,scheduling,buffering,1,0,0,5,1,knowledge_lookup,0.6,1478,0
+26,user_pm,팀원들한테 출장 일정 공유 좀,2026-04-02T11:05:00,team_communication,scheduling,buffering,0,0,0,5,0,,,1425,0
+27,user_pm,고객사 미팅 자료도 준비해줘,2026-04-02T11:10:00,meeting_prep,scheduling,buffering,0,0,0,5,0,,,1406,0
+28,user_pm,주간 보고 작성해야 하는데 지난주 핵심 이슈 뭐였지?,2026-04-06T09:00:00,weekly_report,weekly_report,buffering,1,0,0,5,1,issue_tracking,1.0,1824,0
+29,user_pm,이슈 중에 결제 쪽은 해결됐어?,2026-04-06T09:05:00,issue_tracking,issue_tracking,bug_resolution,1,0,1,5,0,,,4059,0
+30,user_pm,이번 주 일정 정리해줘,2026-04-06T09:10:00,scheduling,scheduling,schedule_management,1,0,1,5,0,,,1273,0
+31,user_pm,출장 일정도 포함시켜줘,2026-04-06T09:15:00,scheduling,scheduling,team_communication,1,0,0,5,0,,,1068,0
+32,user_pm,오늘 스탠드업 내용 정리해줘,2026-04-07T09:00:00,project_status,project_status,schedule_management,1,0,0,5,0,,,1114,0
+33,user_pm,블로커 없다니 다행이다 ㅋㅋ,2026-04-07T09:05:00,,knowledge_lookup,bug_resolution,0,0,0,5,0,,,1087,0
+34,user_pm,디자인 리뷰 미팅 준비해야 하는데 변경사항 정리해줘,2026-04-08T14:00:00,meeting_prep,scheduling,meeting_preparation,0,0,1,5,0,,,1457,0
+35,user_pm,피드백 내용 문서로 정리해줘,2026-04-08T15:00:00,document_drafting,knowledge_lookup,document_creation,0,0,1,5,0,,,1050,0
+36,user_pm,이번 주 스프린트 회고할 건데 데이터 좀 뽑아줘,2026-04-10T16:00:00,data_analysis,data_analysis,data_analysis,1,1,1,5,1,document_drafting,1.0,1417,0
+37,user_pm,회고 문서 작성해줘,2026-04-10T16:05:00,document_drafting,document_drafting,document_creation,1,0,1,5,1,knowledge_lookup,1.0,1300,0
+38,user_pm,다음 주 계획도 같이 정리해,2026-04-10T16:10:00,scheduling,knowledge_lookup,schedule_management,0,0,1,5,0,,,1444,0
+39,user_pm,부산 출장 결과 보고서 작성해야 해,2026-04-09T11:00:00,document_drafting,scheduling,team_communication,0,0,0,5,0,,,2221,0
+40,user_pm,고객 미팅 결과도 넣어줘,2026-04-09T11:05:00,document_drafting,scheduling,meeting_preparation,0,0,0,5,0,,,1124,0
+41,user_pm,주간 보고 작성해야 하는데 지난주 핵심 이슈 뭐였지?,2026-04-13T09:00:00,weekly_report,weekly_report,issue_tracking,1,0,0,5,1,issue_tracking,1.0,1863,0
+42,user_pm,이슈 중에 결제 쪽은 해결됐어?,2026-04-13T09:05:00,issue_tracking,issue_tracking,bug_resolution,1,0,1,5,1,scheduling,0.6,1370,0
+43,user_pm,이번 주 일정 정리해줘,2026-04-13T09:10:00,scheduling,scheduling,schedule_management,1,0,1,5,0,,,1277,0
+44,user_pm,넵 확인,2026-04-13T09:20:00,,knowledge_lookup,schedule_management,0,0,0,5,0,,,1044,0
+45,user_pm,오늘 스탠드업 내용 정리해줘,2026-04-14T09:00:00,project_status,project_status,schedule_management,1,0,0,5,1,knowledge_lookup,0.667,1069,0
+46,user_pm,이대리한테 PR 리뷰 독촉 좀 해줘,2026-04-14T09:05:00,team_communication,code_review,team_communication,0,1,1,5,1,scheduling,1.0,1385,0
+47,user_pm,디자인 리뷰 미팅 준비해야 하는데 변경사항 정리해줘,2026-04-15T14:00:00,meeting_prep,scheduling,meeting_preparation,0,0,1,5,0,,,1434,0
+48,user_pm,피드백 내용 문서로 정리해줘,2026-04-15T15:00:00,document_drafting,knowledge_lookup,document_creation,0,0,1,5,0,,,1029,0
+49,user_pm,ㅋㅋ 디자인팀이 또 전면 수정했네,2026-04-15T15:10:00,,knowledge_lookup,meeting_preparation,0,0,0,5,0,,,1371,0
+50,user_pm,팀원들한테 일정 변경 공유해줘,2026-04-15T15:15:00,team_communication,scheduling,team_communication,0,1,1,5,0,,,1337,0
+51,user_pm,이번 주 스프린트 회고할 건데 데이터 좀 뽑아줘,2026-04-17T16:00:00,data_analysis,data_analysis,data_analysis,1,1,1,5,1,document_drafting,1.0,2408,0
+52,user_pm,회고 문서 작성해줘,2026-04-17T16:05:00,document_drafting,document_drafting,document_creation,1,0,1,5,1,knowledge_lookup,1.0,1015,0
+53,user_pm,다음 주 계획도 같이 정리해,2026-04-17T16:10:00,scheduling,knowledge_lookup,schedule_management,0,0,1,5,0,,,1312,0
+54,user_pm,백로그 우선순위 정리해줘,2026-04-16T14:00:00,issue_tracking,issue_tracking,schedule_management,1,0,0,5,1,scheduling,0.667,1367,0
+55,user_pm,결제 버그 담당 누구지?,2026-04-16T14:05:00,team_communication,issue_tracking,bug_resolution,0,0,0,5,1,scheduling,0.571,1378,0
+56,user_dev,오늘 리뷰할 PR 있어?,2026-03-23T10:00:00,code_review,code_review,schedule_management,1,0,0,0,1,scheduling,1.0,1075,0
+57,user_dev,PR 리뷰하다가 이상한 버그 발견. 결제 API가 간헐적으로 500 에러 뱉어,2026-03-23T11:00:00,troubleshooting,issue_tracking,bug_resolution,0,0,1,1,1,scheduling,0.571,1545,0
+58,user_dev,로그 좀 더 자세히 봐줘,2026-03-23T11:05:00,troubleshooting,knowledge_lookup,schedule_management,0,0,0,2,0,,,1141,0
+59,user_dev,수요일 PR 리뷰하려고,2026-03-25T10:00:00,code_review,code_review,schedule_management,1,0,0,3,1,scheduling,0.667,1436,0
+60,user_dev,리뷰 중에 N+1 쿼리 발견했어 이거 성능 터질듯,2026-03-25T11:00:00,troubleshooting,code_review,schedule_management,0,0,0,4,0,,,1176,0
+61,user_dev,금요일 PR 리뷰 뭐 남았어?,2026-03-27T10:00:00,code_review,code_review,schedule_management,1,0,0,5,0,,,1442,0
+62,user_dev,리뷰 완료된 PR 변경사항 정리해줘,2026-03-27T11:00:00,document_drafting,code_review,meeting_preparation,0,0,0,5,0,,,1514,0
+63,user_dev,Redis 캐시 만료 전략 어떤 게 좋을까?,2026-03-24T14:00:00,knowledge_lookup,knowledge_lookup,technical_discussion,1,0,1,5,0,,,1523,0
+64,user_dev,"그리고 하나 더, k8s pod가 oomkilled 되는데 메모리 설정 어떻게 해야 해?",2026-03-24T14:10:00,knowledge_lookup,knowledge_lookup,technical_discussion,1,0,1,5,0,,,1600,0
+65,user_dev,이번 스프린트 진행 상황 어떻게 돼?,2026-03-26T14:00:00,project_status,project_status,data_analysis,1,0,0,5,0,,,1487,0
+66,user_dev,API 문서도 업데이트해야 하는데 변경된 엔드포인트 정리해줘,2026-03-26T14:05:00,document_drafting,knowledge_lookup,meeting_preparation,0,0,0,5,0,,,2040,0
+67,user_dev,Swagger 문서도 같이 업데이트해줘,2026-03-26T14:10:00,document_drafting,knowledge_lookup,meeting_preparation,0,0,0,5,0,,,1406,0
+68,user_dev,오늘 리뷰할 PR 있어?,2026-03-30T10:00:00,code_review,code_review,schedule_management,1,0,0,5,0,,,1058,0
+69,user_dev,null 체크 안 하고 있어서 프로덕션에서 NPE 터질 수 있을 것 같아,2026-03-30T11:00:00,troubleshooting,knowledge_lookup,technical_discussion,0,0,1,5,0,,,1645,0
+70,user_dev,금요일 PR 리뷰 뭐 남았어?,2026-04-03T10:00:00,code_review,code_review,schedule_management,1,0,0,5,0,,,1380,0
+71,user_dev,리뷰 완료된 PR 변경사항 정리해줘,2026-04-03T11:00:00,document_drafting,code_review,meeting_preparation,0,0,0,5,0,,,1376,0
+72,user_dev,이번 주 테스트 커버리지 어떻게 돼?,2026-04-03T11:05:00,project_status,knowledge_lookup,schedule_management,0,0,0,5,0,,,1360,0
+73,user_dev,Docker 멀티스테이지 빌드로 이미지 사이즈 줄이고 싶은데,2026-03-31T14:00:00,knowledge_lookup,knowledge_lookup,technical_discussion,1,0,1,5,0,,,1556,0
+74,user_dev,ㅇㅋ 고마워,2026-03-31T14:05:00,,knowledge_lookup,schedule_management,0,0,0,5,0,,,1165,0
+75,user_dev,CI 파이프라인이 자꾸 타임아웃 나는데 뭐가 문제지?,2026-04-02T15:00:00,,knowledge_lookup,technical_discussion,0,0,0,5,0,,,1621,0
+76,user_dev,빌드 캐시 어떻게 설정해?,2026-04-02T15:10:00,,knowledge_lookup,technical_discussion,0,0,0,5,0,,,1357,0
+77,user_dev,오늘 리뷰할 PR 있어?,2026-04-06T10:00:00,code_review,code_review,schedule_management,1,0,0,5,0,,,1034,0
+78,user_dev,race condition 있을 것 같아 동시 결제 요청 들어오면 어떡해,2026-04-06T11:00:00,troubleshooting,knowledge_lookup,bug_resolution,0,0,1,5,0,,,2170,0
+79,user_dev,로그 좀 더 자세히 봐줘,2026-04-06T11:05:00,troubleshooting,knowledge_lookup,schedule_management,0,0,0,5,0,,,1087,0
+80,user_dev,수요일 PR 리뷰하려고,2026-04-08T10:00:00,code_review,code_review,schedule_management,1,0,0,5,0,,,1372,0
+81,user_dev,메모리 누수 의심돼 서버 장시간 돌리면 RSS가 계속 올라가,2026-04-08T11:00:00,troubleshooting,knowledge_lookup,issue_tracking,0,0,0,5,0,,,1606,0
+82,user_dev,금요일 PR 리뷰 뭐 남았어?,2026-04-10T10:00:00,code_review,code_review,schedule_management,1,0,0,5,0,,,1372,0
+83,user_dev,리뷰 완료된 PR 변경사항 정리해줘,2026-04-10T11:00:00,document_drafting,code_review,meeting_preparation,0,0,0,5,0,,,1397,0
+84,user_dev,gRPC vs REST 어떤 상황에서 뭐 써야 해?,2026-04-07T14:00:00,knowledge_lookup,knowledge_lookup,technical_discussion,1,0,1,5,0,,,1356,0
+85,user_dev,"그리고 하나 더, celery worker가 간헐적으로 죽어 모니터링 어떻게 해?",2026-04-07T14:10:00,knowledge_lookup,knowledge_lookup,technical_discussion,1,0,1,5,0,,,1810,0
+86,user_dev,GitHub Actions workflow 파일 수정했는데 리뷰 좀,2026-04-09T15:00:00,,code_review,meeting_preparation,0,0,0,5,0,,,1411,0
+87,user_dev,매트릭스에 Python 3.11이랑 3.12 같이 넣으면 되지?,2026-04-09T15:10:00,,knowledge_lookup,technical_discussion,0,0,0,5,0,,,2087,0
+88,user_dev,결제 모듈 아키텍처를 이벤트 드리븐으로 바꾸는 거 어떻게 생각해?,2026-04-10T16:00:00,code_review,knowledge_lookup,bug_resolution,0,0,0,5,0,,,1542,0
+89,user_dev,관련 레퍼런스 문서 찾아줘,2026-04-10T16:10:00,knowledge_lookup,knowledge_lookup,document_creation,1,0,0,5,0,,,1086,0
+90,user_dev,오늘 리뷰할 PR 있어?,2026-04-13T10:00:00,code_review,code_review,schedule_management,1,0,0,5,0,,,1062,0
+91,user_dev,API 응답 시간이 갑자기 3배 느려졌어 뭐가 바뀐 거지?,2026-04-13T11:00:00,troubleshooting,knowledge_lookup,technical_discussion,0,0,1,5,0,,,1440,0
+92,user_dev,금요일 PR 리뷰 뭐 남았어?,2026-04-17T10:00:00,code_review,code_review,schedule_management,1,0,0,5,0,,,1380,0
+93,user_dev,리뷰 완료된 PR 변경사항 정리해줘,2026-04-17T11:00:00,document_drafting,code_review,meeting_preparation,0,0,0,5,0,,,1384,0
+94,user_dev,이번 주 테스트 커버리지 어떻게 돼?,2026-04-17T11:05:00,project_status,knowledge_lookup,schedule_management,0,0,0,5,0,,,1295,0
+95,user_dev,SQLAlchemy 2.0 마이그레이션 가이드 있어?,2026-04-14T14:00:00,knowledge_lookup,knowledge_lookup,technical_discussion,1,0,1,5,0,,,1594,0
+96,user_dev,ㅇㅋ 고마워,2026-04-14T14:05:00,,knowledge_lookup,schedule_management,0,0,0,5,0,,,1127,0
+97,user_dev,배포 파이프라인에서 도커 이미지 태깅이 안 돼,2026-04-16T15:00:00,,knowledge_lookup,issue_tracking,0,0,0,5,0,,,2489,0
+98,user_dev,태그를 커밋 SHA로 자동 설정하는 방법은?,2026-04-16T15:10:00,,knowledge_lookup,technical_discussion,0,0,0,5,0,,,1157,0
+99,user_dev,모놀리스에서 마이크로서비스로 전환할 때 뭐부터 분리해야 해?,2026-04-17T16:00:00,code_review,knowledge_lookup,technical_discussion,0,0,0,5,0,,,2458,0
+100,user_dev,우리 서비스에서는 인증 모듈이 제일 독립적인 것 같은데,2026-04-17T16:10:00,code_review,knowledge_lookup,technical_discussion,0,0,0,5,0,,,1499,0
+101,user_new,안녕하세요~ 오늘 첫 출근인데 뭐부터 하면 될까요?,2026-03-23T09:00:00,onboarding,onboarding,schedule_management,1,0,1,0,0,,,1685,0
+102,user_new,개발 환경 설정 문서 어디 있어요?,2026-03-23T09:05:00,knowledge_lookup,knowledge_lookup,technical_discussion,1,0,1,2,0,,,1463,0
+103,user_new,감사합니다!,2026-03-23T09:10:00,,knowledge_lookup,schedule_management,0,0,0,3,0,,,1114,0
+104,user_new,IDE 설정 하려는데 우리 팀 추천 플러그인이 뭐예요?,2026-03-24T10:00:00,onboarding,knowledge_lookup,technical_discussion,0,0,0,4,0,,,1300,0
+105,user_new,Python 확장은 어떤 걸 설치해야 하나요?,2026-03-24T10:05:00,onboarding,knowledge_lookup,technical_discussion,0,0,0,5,0,,,1396,0
+106,user_new,넵 감사합니다~,2026-03-24T10:10:00,,knowledge_lookup,schedule_management,0,0,0,5,0,,,1032,0
+107,user_new,우리 팀 코드 컨벤션이 어떻게 돼요?,2026-03-25T10:00:00,onboarding,knowledge_lookup,technical_discussion,0,0,0,5,1,knowledge_lookup,0.511,1133,0
+108,user_new,브랜치 전략은요? Git flow 쓰나요?,2026-03-25T10:05:00,onboarding,knowledge_lookup,technical_discussion,0,0,0,5,1,knowledge_lookup,0.522,1546,0
+109,user_new,커밋 메시지 규칙도 있나요?,2026-03-25T10:10:00,onboarding,knowledge_lookup,technical_discussion,0,0,0,5,1,knowledge_lookup,0.532,1167,0
+110,user_new,팀 구성원이 어떻게 되는지 알 수 있을까요?,2026-03-26T14:00:00,onboarding,knowledge_lookup,team_communication,0,0,0,5,1,knowledge_lookup,0.542,1134,0
+111,user_new,각 분이 어떤 업무를 담당하시나요?,2026-03-26T14:05:00,onboarding,knowledge_lookup,team_communication,0,0,0,5,1,knowledge_lookup,0.551,1189,0
+112,user_new,이번 주 온보딩 학습 내용 정리해서 문서로 만들어야 해요,2026-03-27T16:00:00,document_drafting,onboarding,schedule_management,0,0,0,5,1,knowledge_lookup,1.0,2337,0
+113,user_new,"환경설정, 컨벤션, 팀 구조로 나눠서 정리해주세요",2026-03-27T16:05:00,document_drafting,knowledge_lookup,technical_discussion,0,0,0,5,1,knowledge_lookup,0.54,1332,0
+114,user_new,안녕하세요~ DB 스키마 문서는 어디서 볼 수 있나요?,2026-03-30T09:00:00,onboarding,knowledge_lookup,technical_discussion,0,0,0,5,1,knowledge_lookup,0.549,1514,0
+115,user_new,API 문서는요?,2026-03-30T09:05:00,onboarding,knowledge_lookup,technical_discussion,0,0,0,5,1,knowledge_lookup,0.558,1454,0
+116,user_new,첫 PR 올려도 될까요? 리뷰어 누구로 지정하면 되나요?,2026-03-31T10:00:00,code_review,code_review,team_communication,1,0,0,5,0,,,2724,0
+117,user_new,감사합니다! 올렸어요,2026-03-31T10:10:00,,knowledge_lookup,schedule_management,0,0,0,5,1,knowledge_lookup,0.547,2771,0
+118,user_new,pytest fixture 어떻게 써요? conftest.py에 넣으면 되나요?,2026-04-01T14:00:00,knowledge_lookup,knowledge_lookup,technical_discussion,1,0,1,5,1,knowledge_lookup,0.556,3595,0
+119,user_new,mock이랑 fixture 차이가 뭐예요?,2026-04-01T14:05:00,knowledge_lookup,knowledge_lookup,technical_discussion,1,0,1,5,1,knowledge_lookup,0.564,2579,0
+120,user_new,코드 리뷰 피드백 반영했는데 확인해주세요,2026-04-02T15:00:00,code_review,code_review,meeting_preparation,1,0,1,5,1,knowledge_lookup,0.526,1960,0
+121,user_new,넵 수정했어요!,2026-04-02T15:05:00,,knowledge_lookup,meeting_preparation,0,0,0,5,1,knowledge_lookup,0.554,1214,0
+122,user_new,이번 주 한 일 정리해주세요,2026-04-03T16:00:00,project_status,knowledge_lookup,schedule_management,0,0,0,5,1,knowledge_lookup,0.561,1106,0
+123,user_new,다음 주부터 실전 투입이죠?,2026-04-03T16:05:00,project_status,knowledge_lookup,schedule_management,0,0,0,5,1,knowledge_lookup,0.569,1398,0
+124,user_new,이번 주 제 담당 태스크 뭐예요?,2026-04-06T09:00:00,project_status,knowledge_lookup,schedule_management,0,0,0,5,1,knowledge_lookup,0.576,1177,0
+125,user_new,프로필 API 스펙 문서 어디 있어요?,2026-04-06T09:05:00,knowledge_lookup,knowledge_lookup,technical_discussion,1,0,1,5,1,knowledge_lookup,0.583,1668,0
+126,user_new,코드 리뷰 피드백 반영했는데 확인해주세요,2026-04-07T10:00:00,code_review,code_review,meeting_preparation,1,0,1,5,1,knowledge_lookup,0.55,1079,0
+127,user_new,에러 핸들링은 어떤 패턴이 좋을까요?,2026-04-07T10:05:00,knowledge_lookup,troubleshooting,technical_discussion,0,0,1,5,0,,,1201,0
+128,user_new,감사합니다!,2026-04-07T10:10:00,,knowledge_lookup,schedule_management,0,0,0,5,1,knowledge_lookup,0.574,1292,0
+129,user_new,FastAPI에서 Depends 패턴 어떻게 쓰는 건가요?,2026-04-08T14:00:00,knowledge_lookup,knowledge_lookup,technical_discussion,1,0,1,5,1,knowledge_lookup,0.581,2012,0
+130,user_new,Pydantic validation은 자동으로 되는 건가요?,2026-04-08T14:05:00,knowledge_lookup,knowledge_lookup,technical_discussion,1,0,1,5,1,knowledge_lookup,0.587,2012,0
+131,user_new,API 테스트 중에 422 에러가 나는데 뭐가 문제인 건가요?,2026-04-08T16:00:00,troubleshooting,troubleshooting,technical_discussion,1,0,1,5,1,knowledge_lookup,1.0,1502,0
+132,user_new,아 날짜 포맷이 잘못됐었네요 감사합니다!,2026-04-08T16:05:00,,knowledge_lookup,team_collaboration,0,0,0,5,1,knowledge_lookup,0.578,1229,0
+133,user_new,프로필 API 구현 다 했어요 PR 올렸는데 리뷰 부탁드려요,2026-04-09T10:00:00,code_review,code_review,meeting_preparation,1,0,1,5,1,knowledge_lookup,0.524,1967,0
+134,user_new,테스트 커버리지 80% 넘겼어요,2026-04-09T10:05:00,code_review,knowledge_lookup,team_collaboration,0,0,0,5,1,knowledge_lookup,0.569,1099,0
+135,user_new,이번 주 진행 상황 정리해주세요,2026-04-10T15:00:00,project_status,project_status,team_collaboration,1,0,1,5,1,knowledge_lookup,0.6,974,0
+136,user_new,다음 주에는 뭐 하면 돼요?,2026-04-10T15:05:00,project_status,knowledge_lookup,team_collaboration,0,0,1,5,1,knowledge_lookup,0.561,1321,0
+137,user_new,이번 주 담당 태스크 확인할게요,2026-04-13T09:00:00,project_status,knowledge_lookup,team_collaboration,0,0,1,5,1,knowledge_lookup,0.567,1014,0
+138,user_new,알림 서비스 설계 문서 먼저 봐야겠어요,2026-04-13T09:05:00,knowledge_lookup,team_communication,technical_discussion,0,0,1,5,0,,,1444,0
+139,user_new,WebSocket으로 실시간 알림 구현하려면 어떻게 해야 하나요?,2026-04-14T10:00:00,knowledge_lookup,team_communication,technical_discussion,0,0,1,5,1,team_communication,1.0,1128,0
+140,user_new,Redis Pub/Sub이랑 연동도 가능해요?,2026-04-14T10:05:00,knowledge_lookup,knowledge_lookup,technical_discussion,1,0,1,5,1,knowledge_lookup,0.559,1480,0
+141,user_new,알림 서비스 PR 올렸어요 설계 리뷰 부탁드려요,2026-04-15T14:00:00,code_review,code_review,meeting_preparation,1,0,1,5,1,knowledge_lookup,0.545,1483,0
+142,user_new,재시도 로직은 exponential backoff로 하면 될까요?,2026-04-15T14:05:00,knowledge_lookup,knowledge_lookup,technical_discussion,1,0,1,5,1,knowledge_lookup,0.551,1164,0
+143,user_new,WebSocket 연결이 간헐적으로 끊기는데 왜 그런 건가요?,2026-04-16T10:00:00,troubleshooting,knowledge_lookup,technical_discussion,0,0,1,5,1,knowledge_lookup,0.557,1184,0
+144,user_new,해결됐어요! 트러블슈팅 과정을 문서로 남겨야 할 것 같아요,2026-04-16T10:05:00,document_drafting,troubleshooting,document_creation,0,0,1,5,1,knowledge_lookup,1.0,1716,0
+145,user_new,통합 테스트에서 외부 API 호출은 어떻게 처리하나요?,2026-04-17T15:00:00,knowledge_lookup,knowledge_lookup,technical_discussion,1,0,1,5,1,knowledge_lookup,0.549,1153,0
+146,user_new,테스트 다 통과시켰어요 이번 주 정리해주세요,2026-04-17T15:05:00,project_status,knowledge_lookup,team_collaboration,0,0,1,5,1,knowledge_lookup,0.556,1546,0
+147,user_new,넵 감사합니다!,2026-04-17T15:10:00,,knowledge_lookup,team_collaboration,0,0,0,5,1,knowledge_lookup,0.562,1040,0
+148,user_analyst,지난주 매출 데이터 쿼리 좀 도와줘. GROUP BY 절이 잘 안 돼,2026-03-23T10:00:00,data_analysis,data_analysis,team_collaboration,1,0,0,0,1,document_drafting,1.0,1525,0
+149,user_analyst,서브쿼리 대신 CTE로 쓸 수 있어?,2026-03-23T10:10:00,data_analysis,knowledge_lookup,technical_discussion,0,0,0,1,1,knowledge_lookup,0.562,1117,0
+150,user_analyst,그리고 Jupyter에서 SQL 바로 실행하는 방법 있어?,2026-03-23T10:15:00,knowledge_lookup,knowledge_lookup,technical_discussion,1,0,1,2,1,knowledge_lookup,0.568,2181,0
+151,user_analyst,Pandas로 매출 데이터 전처리하는데 결측치 처리 어떻게 하면 좋을까?,2026-03-24T10:00:00,data_analysis,data_analysis,technical_discussion,1,0,0,3,1,document_drafting,0.8,1536,0
+152,user_analyst,피벗테이블 만드는 법도 알려줘,2026-03-24T10:05:00,data_analysis,knowledge_lookup,technical_discussion,0,0,0,4,1,knowledge_lookup,0.56,1171,0
+153,user_analyst,오키 고마워,2026-03-24T10:10:00,,knowledge_lookup,team_collaboration,0,0,0,5,1,knowledge_lookup,0.566,1230,0
+154,user_analyst,Grafana 대시보드에 신규 메트릭 추가하고 싶은데,2026-03-25T14:00:00,,data_analysis,technical_discussion,0,0,0,5,1,document_drafting,0.667,1504,0
+155,user_analyst,커스텀 패널 만드는 방법 알려줘,2026-03-25T14:05:00,,knowledge_lookup,technical_discussion,0,0,0,5,1,knowledge_lookup,0.558,1487,0
+156,user_analyst,이번 주 데이터 파이프라인 상태 업데이트할게,2026-03-26T11:00:00,project_status,data_analysis,team_collaboration,0,0,1,5,1,document_drafting,0.571,2184,0
+157,user_analyst,ETL 스케줄러 설정도 해야 해,2026-03-26T11:05:00,scheduling,scheduling,technical_discussion,1,0,0,5,0,,,1425,0
+158,user_analyst,주간 데이터 리포트 작성해줘,2026-03-27T15:00:00,document_drafting,data_analysis,team_collaboration,0,0,0,5,0,,,1467,0
+159,user_analyst,그래프도 같이 넣어줘,2026-03-27T15:05:00,document_drafting,knowledge_lookup,team_collaboration,0,0,0,5,1,knowledge_lookup,0.551,1145,0
+160,user_analyst,사용자 세그먼트별 리텐션율 쿼리 작성해줘,2026-03-30T10:00:00,data_analysis,knowledge_lookup,technical_discussion,0,0,0,5,1,knowledge_lookup,0.557,1201,0
+161,user_analyst,WINDOW 함수 사용법도 알려줘,2026-03-30T10:10:00,data_analysis,knowledge_lookup,technical_discussion,0,0,0,5,1,knowledge_lookup,0.562,1153,0
+162,user_analyst,참 데이터 파이프라인 스케줄링은 Airflow로 해야 하나?,2026-03-30T10:15:00,knowledge_lookup,scheduling,technical_discussion,0,0,1,5,0,,,2084,0
+163,user_analyst,넵넵 고마워,2026-03-30T10:20:00,,knowledge_lookup,team_collaboration,0,0,0,5,1,knowledge_lookup,0.556,1330,0
+164,user_analyst,DataFrame merge할 때 left join이랑 inner join 차이가 뭐야?,2026-03-31T10:00:00,data_analysis,knowledge_lookup,technical_discussion,0,0,0,5,1,knowledge_lookup,0.561,1246,0
+165,user_analyst,merge 성능 최적화하려면?,2026-03-31T10:05:00,data_analysis,knowledge_lookup,technical_discussion,0,0,0,5,1,knowledge_lookup,0.566,1131,0
+166,user_analyst,주간 리포트 자동화 대시보드 만들려고 하는데,2026-04-01T14:00:00,,data_analysis,technical_discussion,0,0,0,5,0,,,1585,0
+167,user_analyst,"DAU, WAU, 매출 추이를 한 화면에 보고 싶어",2026-04-01T14:05:00,,knowledge_lookup,technical_discussion,0,0,0,5,1,knowledge_lookup,0.56,1202,0
+168,user_analyst,ETL 작업 진행상황 공유할게. 80% 완료됐어,2026-04-02T11:00:00,project_status,team_communication,team_collaboration,0,0,1,5,0,,,1483,0
+169,user_analyst,데이터 검증 로직이랑 에러 핸들링이 남았어,2026-04-02T11:05:00,project_status,data_analysis,technical_discussion,0,0,0,5,0,,,1852,0
+170,user_analyst,넵넵,2026-04-02T11:10:00,,knowledge_lookup,team_collaboration,0,0,0,5,1,knowledge_lookup,0.553,1191,0
+171,user_analyst,이상치 탐지 결과 좀 봐줘,2026-04-03T15:00:00,data_analysis,knowledge_lookup,team_collaboration,0,0,0,5,1,knowledge_lookup,0.558,1494,0
+172,user_analyst,오키 보고서에 넣어줘,2026-04-03T15:05:00,document_drafting,knowledge_lookup,document_creation,0,0,1,5,1,knowledge_lookup,0.563,1372,0
+173,user_analyst,이번 달 신규 가입자 퍼널 분석 쿼리 필요해,2026-04-06T10:00:00,data_analysis,data_analysis,team_collaboration,1,0,0,5,1,knowledge_lookup,0.545,2364,0
+174,user_analyst,인덱스 안 타는 것 같은데 실행 계획 봐줘,2026-04-06T10:10:00,data_analysis,knowledge_lookup,technical_discussion,0,0,0,5,1,knowledge_lookup,0.557,1222,0
+175,user_analyst,dbt로 데이터 변환 자동화하는 게 좋을까?,2026-04-06T10:15:00,knowledge_lookup,data_analysis,technical_discussion,0,0,1,5,1,knowledge_lookup,0.583,1486,0
+176,user_analyst,시계열 데이터 리샘플링 어떻게 해?,2026-04-07T10:00:00,data_analysis,data_analysis,technical_discussion,1,0,0,5,1,knowledge_lookup,0.538,1156,0
+177,user_analyst,rolling average도 같이 보고 싶어,2026-04-07T10:05:00,data_analysis,knowledge_lookup,team_collaboration,0,0,0,5,1,knowledge_lookup,0.551,1170,0
+178,user_analyst,오키 고마워,2026-04-07T10:10:00,,knowledge_lookup,team_collaboration,0,0,0,5,1,knowledge_lookup,0.556,1184,0
+179,user_analyst,경영진 대시보드에 Funnel 차트 추가해야 해,2026-04-08T14:00:00,,data_analysis,technical_discussion,0,0,0,5,1,knowledge_lookup,0.571,1674,0
+180,user_analyst,전환율 단계별로 보여줘야 하는데 어떤 차트가 좋을까,2026-04-08T14:05:00,,knowledge_lookup,technical_discussion,0,0,0,5,1,knowledge_lookup,0.549,1229,0
+181,user_analyst,대시보드 개발 진행률 보고할게,2026-04-09T11:00:00,project_status,data_analysis,team_meeting_prep,0,0,1,5,1,knowledge_lookup,0.6,1461,0
+182,user_analyst,김과장님한테 공유할 자료도 만들어줘,2026-04-09T11:05:00,team_communication,team_communication,team_meeting_prep,1,0,1,5,0,,,1439,0
+183,user_analyst,주간 데이터 리포트 작성해줘,2026-04-10T15:00:00,document_drafting,data_analysis,team_meeting_prep,0,0,0,5,1,knowledge_lookup,0.562,1419,0
+184,user_analyst,그래프도 같이 넣어줘,2026-04-10T15:05:00,document_drafting,knowledge_lookup,team_meeting_prep,0,0,0,5,1,knowledge_lookup,0.543,1044,0
+185,user_analyst,A/B 테스트 결과 데이터 추출 쿼리 작성해줘,2026-04-13T10:00:00,data_analysis,data_analysis,team_meeting_prep,1,0,0,5,1,knowledge_lookup,0.588,1504,0
+186,user_analyst,통계적 유의성은 어떻게 계산해?,2026-04-13T10:10:00,data_analysis,data_analysis,data_analysis,1,1,1,5,1,knowledge_lookup,0.556,1186,0
+187,user_analyst,데이터 품질 모니터링은 어떻게 하면 좋아?,2026-04-13T10:15:00,knowledge_lookup,data_analysis,technical_discussion,0,0,1,5,1,knowledge_lookup,0.526,1118,0
+188,user_analyst,넵넵 고마워,2026-04-13T10:20:00,,knowledge_lookup,team_meeting_prep,0,0,0,5,1,knowledge_lookup,0.538,1118,0
+189,user_analyst,대용량 CSV 읽을 때 메모리 터지는데 어떡해?,2026-04-14T10:00:00,data_analysis,knowledge_lookup,technical_discussion,0,0,0,5,1,knowledge_lookup,0.543,1161,0
+190,user_analyst,Parquet 포맷으로 변환하는 게 나을까?,2026-04-14T10:05:00,data_analysis,knowledge_lookup,technical_discussion,0,0,0,5,1,knowledge_lookup,0.547,1146,0
+191,user_analyst,리텐션 코호트 분석 시각화하려면 어떻게 해?,2026-04-15T14:00:00,,data_analysis,technical_discussion,0,0,0,5,1,knowledge_lookup,0.55,1136,0
+192,user_analyst,matplotlib로도 할 수 있어?,2026-04-15T14:05:00,,knowledge_lookup,technical_discussion,0,0,0,5,1,knowledge_lookup,0.542,1458,0
+193,user_analyst,이번 분기 데이터 프로젝트 현황 정리해줘,2026-04-16T11:00:00,project_status,data_analysis,team_meeting_prep,0,0,1,5,1,knowledge_lookup,0.571,1416,0
+194,user_analyst,KPI 달성률도 같이 넣어줘,2026-04-16T11:05:00,project_status,knowledge_lookup,team_meeting_prep,0,0,1,5,1,knowledge_lookup,0.536,1408,0
+195,user_analyst,넵넵,2026-04-16T11:10:00,,knowledge_lookup,team_meeting_prep,0,0,0,5,1,knowledge_lookup,0.541,1114,0
+196,user_analyst,이상치 탐지 결과 좀 봐줘,2026-04-17T15:00:00,data_analysis,knowledge_lookup,team_meeting_prep,0,0,0,5,1,knowledge_lookup,0.545,1430,0
+197,user_analyst,오키 보고서에 넣어줘,2026-04-17T15:05:00,document_drafting,knowledge_lookup,document_creation,0,0,1,5,1,knowledge_lookup,0.55,1322,0

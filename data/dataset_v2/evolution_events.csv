@@ -1,0 +1,11 @@
+event_id,timestamp,type,category,parent,parents,child,children,member_count,trigger_message,reason
+0,2026-04-08T02:01:38.237156+00:00,bootstrap,schedule_management,,,,,8,,
+1,2026-04-08T02:01:38.237201+00:00,bootstrap,issue_tracking,,,,,3,,
+2,2026-04-08T02:01:38.237229+00:00,bootstrap,bug_resolution,,,,,5,,
+3,2026-04-08T02:01:38.237252+00:00,bootstrap,team_communication,,,,,4,,
+4,2026-04-08T02:01:38.237277+00:00,bootstrap,document_creation,,,,,4,,
+5,2026-04-08T02:01:38.237304+00:00,bootstrap,data_analysis,,,,,2,,
+6,2026-04-08T02:01:38.237326+00:00,bootstrap,meeting_preparation,,,,,4,,
+7,2026-04-08T02:02:26.340682+00:00,discovery,technical_discussion,,,,,,Redis 캐시 만료 전략 어떤 게 좋을까?,
+8,2026-04-08T02:04:07.799169+00:00,merge,,,schedule_management|team_communication,team_collaboration,,,,
+9,2026-04-08T02:05:19.141806+00:00,merge,,,meeting_preparation|team_collaboration,team_meeting_prep,,,,

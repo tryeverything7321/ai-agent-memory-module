@@ -1,0 +1,7 @@
+category,member_count,decay_weight,access_count,created_by
+team_meeting_prep,102,1.0,102,merge
+technical_discussion,61,2.0,60,discovery
+document_creation,12,1.5496,12,bootstrap
+bug_resolution,11,1.5442,11,bootstrap
+issue_tracking,6,1.2955,6,bootstrap
+data_analysis,6,1.2441,6,bootstrap

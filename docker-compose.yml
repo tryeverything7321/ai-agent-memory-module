@@ -1,0 +1,26 @@
+services:
+  qdrant:
+    image: qdrant/qdrant:v1.12.0
+    ports:
+      - "6333:6333"
+      - "6334:6334"
+    volumes:
+      - qdrant_data:/qdrant/storage
+    environment:
+      QDRANT__SERVICE__GRPC_PORT: 6334
+
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    depends_on:
+      - qdrant
+    environment:
+      MEMORY_QDRANT_HOST: qdrant
+      MEMORY_SQLITE_PATH: /data/memory.db
+    volumes:
+      - app_data:/data
+
+volumes:
+  qdrant_data:
+  app_data:
