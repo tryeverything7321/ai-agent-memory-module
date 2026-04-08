@@ -43,6 +43,10 @@ class Settings(BaseSettings):
     # --- 그래프 직렬화 ---
     graph_serialize_interval: int = 10  # 변경 N건마다
 
+    # --- Taxonomy ---
+    taxonomy_persist_dir: str = "data/taxonomy"
+    taxonomy_sweep_interval: int = 50  # decay sweep 주기 (턴)
+
     model_config = {"env_prefix": "MEMORY_", "env_file": ".env"}
 
 

@@ -20,6 +20,57 @@ from sklearn.metrics import silhouette_score
 from taxonomy.taxonomy_graph import TaxonomyGraph
 from taxonomy.lineage import PhylogeneticLineage
 
+# --- JSON 파싱 유틸 ---
+
+import re
+
+
+def _extract_json_array(raw: str, prefix_items: list[str] | None = None) -> list[str] | None:
+    """LLM 출력에서 JSON 배열을 추출한다.
+
+    LLM이 JSON만 출력하지 않고 설명을 덧붙이는 경우를 처리:
+      1. 전체 문자열을 JSON으로 파싱 시도
+      2. 실패 시 [...] 패턴을 찾아 파싱
+      3. prefix_items가 있으면 LLM의 continuation 출력을 prefix와 합침
+    """
+    if not raw:
+        return None
+
+    # prefix continuation 모드: LLM이 "] 전까지만 출력한 경우
+    if prefix_items:
+        # LLM 출력이 continuation이면 prefix + continuation을 합침
+        combined = '["' + '", "'.join(prefix_items) + '", ' + raw.lstrip(", ")
+        # ] 보정: 닫는 괄호가 없으면 추가
+        if "]" not in combined:
+            combined += "]"
+        try:
+            result = json.loads(combined)
+            if isinstance(result, list):
+                return result
+        except json.JSONDecodeError:
+            pass
+
+    # 방법 1: 전체 파싱
+    try:
+        result = json.loads(raw)
+        if isinstance(result, list):
+            return result
+    except json.JSONDecodeError:
+        pass
+
+    # 방법 2: [...] 패턴 추출
+    match = re.search(r'\[.*?\]', raw, re.DOTALL)
+    if match:
+        try:
+            result = json.loads(match.group())
+            if isinstance(result, list):
+                return result
+        except json.JSONDecodeError:
+            pass
+
+    return None
+
+
 # --- 상수 ---
 BUFFER_SIZE = 30
 K_MIN = 3
@@ -210,12 +261,10 @@ class TaxonomyBootstrap:
                 max_tokens=200,
             )
             raw = response.choices[0].message.content.strip()
-            # JSON 파싱
-            names = json.loads(raw)
-            if isinstance(names, list) and len(names) >= k:
-                # 정리: 소문자, 공백→underscore
+            names = _extract_json_array(raw)
+            if names and len(names) >= k:
                 cleaned = [
-                    n.strip().lower().replace(" ", "_").replace('"', "")
+                    str(n).strip().lower().replace(" ", "_").replace('"', "")
                     for n in names[:k]
                 ]
                 return cleaned
@@ -231,16 +280,20 @@ class TaxonomyBootstrap:
         Returns:
             30개의 패턴 문자열 리스트
         """
-        prompt = """한국어 채팅에서 "기억할 필요 없는 짧은 반응"에 해당하는 패턴 30개를 생성하세요.
+        # few-shot 예시를 포함한 구조화된 프롬프트 (JSON 출력 안정화)
+        prompt = """업무 채팅에서 "기억할 필요 없는 짧은 반응"을 판별하는 한국어 패턴 30개를 JSON 배열로 출력하세요.
 
-예시: "ㅋㅋ", "ㅎㅎ", "오키", "넵", "ㅇㅇ", "ㄴㄴ", "네네", "점심"
+예시 출력:
+["ㅋㅋ", "ㅎㅎ", "오키", "넵", "ㅇㅇ", "ㄴㄴ", "네네", "ㄱㄱ", "ㅇㅋ", "점심"]
 
-규칙:
-1. 한국어 채팅에서 자주 쓰이는 짧은 반응/감탄사/축약어
-2. 한글 자모 반복 (ㅋㅋㅋ, ㅎㅎ 등), 줄임말, 단답 응대
-3. 업무 채팅에서 "메모리로 저장할 가치가 없는" 메시지를 판별하는 키워드
-4. 정확히 30개, JSON 배열로만 출력
-5. 다른 텍스트 없이 JSON만 출력"""
+포함 기준:
+- 자모 반복: ㅋㅋㅋ, ㅎㅎㅎ, ㄷㄷ
+- 축약 응대: 넵, 네네, 오키, 고고, 감사
+- 단답 감탄: 와, 헐, 대박, 진짜
+- 일상 잡담: 점심, 퇴근, 수고
+
+위 예시 10개에 추가로 20개를 더 만들어 총 30개 배열을 출력하세요.
+["ㅋㅋ", "ㅎㅎ", "오키", "넵", "ㅇㅇ", "ㄴㄴ", "네네", "ㄱㄱ", "ㅇㅋ", "점심","""
 
         try:
             response = self._llm._client.chat.completions.create(
@@ -248,16 +301,18 @@ class TaxonomyBootstrap:
                 messages=[
                     {
                         "role": "system",
-                        "content": "JSON 배열만 답하세요. 다른 텍스트 없이.",
+                        "content": 'Continue the JSON array. Output ONLY the remaining items and closing bracket "]".',
                     },
                     {"role": "user", "content": prompt},
                 ],
                 temperature=0.5,
-                max_tokens=300,
+                max_tokens=400,
             )
             raw = response.choices[0].message.content.strip()
-            patterns = json.loads(raw)
-            if isinstance(patterns, list) and len(patterns) >= 10:
+            patterns = _extract_json_array(raw, prefix_items=[
+                "ㅋㅋ", "ㅎㅎ", "오키", "넵", "ㅇㅇ", "ㄴㄴ", "네네", "ㄱㄱ", "ㅇㅋ", "점심",
+            ])
+            if patterns and len(patterns) >= 15:
                 return [str(p).strip() for p in patterns[:30]]
         except Exception:
             pass

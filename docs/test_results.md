@@ -235,19 +235,70 @@ tests/test_integration_llm.py::test_intent_transition       PASSED  (weight: 1.0
 | test_prediction.py | 12 | Mock | 0.02s |
 | test_scenarios.py | 11 | Mock | 0.18s |
 | test_integration_llm.py | 5 | Gemma 31B | 27.92s |
-| **Total** | **68** | | **~28s** |
+| **Total (v1)** | **68** | | **~28s** |
+
+---
+
+## 5. v2 Taxonomy Evolution 테스트 (2026-04-08)
+
+### 추가된 테스트 파일
+
+| 파일 | Tests | 대상 | 소요 |
+|------|-------|------|------|
+| test_taxonomy_graph.py | 30 | TaxonomyGraph CRUD, decay, split, merge, 직렬화 | 0.8s |
+| test_lineage.py | 8 | PhylogeneticLineage 이벤트 기록, DAG, 직렬화 | 0.1s |
+| test_evolver.py | 12 | TaxonomyEvolver 2-stage 분류, sweep, mitosis, fusion | 0.3s |
+| test_bootstrap.py | 12 | TaxonomyBootstrap k-means, LLM 네이밍, EPHEMERAL | 0.4s |
+| test_v2_integration.py | 16 | v2 통합: Persistence, JSON 파싱, MemoryService v2, Semantic 매핑 | 0.9s |
+| **Total (v2 추가분)** | **78** | | **~2.5s** |
+
+### v2 통합 테스트 상세 (test_v2_integration.py)
+
+| ID | 테스트 | 설명 |
+|----|--------|------|
+| INT1 | test_v1_mode_unchanged | use_taxonomy=False 시 v1 동작 유지 |
+| INT2 | test_v2_bootstrap_phase | Bootstrap phase에서 buffering 상태 확인 |
+| INT4 | test_load_taxonomy_state | 저장된 taxonomy 상태 복원 |
+| INT5 | test_save_load_roundtrip | Persistence save → load round-trip |
+| INT6 | test_exists_and_delete | Persistence exists/delete 동작 |
+| INT7 | test_normal_json | _extract_json_array 정상 JSON 파싱 |
+| INT8 | test_json_with_surrounding_text | 설명 텍스트 포함 JSON 추출 |
+| INT9 | test_prefix_continuation | prefix + LLM continuation 합치기 |
+| INT10 | test_unparseable_returns_none | 파싱 불가 시 None 반환 |
+| INT11 | test_semantic_match/no_match | Semantic mapping 정확도 검증 |
+
+### 전체 테스트 현황 (v1 + v2)
+
+| 파일 | Tests | 소요 |
+|------|-------|------|
+| test_infra.py | 12 | 0.04s |
+| test_extraction.py | 11 | 0.02s |
+| test_storage.py | 8 | 0.04s |
+| test_decay.py | 9 | 0.02s |
+| test_prediction.py | 12 | 0.02s |
+| test_scenarios.py | 11 | 0.18s |
+| test_integration_llm.py | 5 | 27.92s |
+| test_taxonomy_graph.py | 30 | 0.8s |
+| test_lineage.py | 8 | 0.1s |
+| test_evolver.py | 12 | 0.3s |
+| test_bootstrap.py | 12 | 0.4s |
+| test_v2_integration.py | 16 | 0.9s |
+| **Total** | **146** | **~26s** |
 
 ### 실행 명령어
 
 ```bash
-# Mock 테스트만 (빠름, 0.23s)
+# Mock 테스트만 (빠름, ~2s)
 pytest tests/ -v --ignore=tests/test_integration_llm.py
 
-# 실제 LLM 포함 전체 (DooGPU 접근 필요, ~28s)
+# 실제 LLM 포함 전체 (DooGPU 접근 필요, ~26s)
 pytest tests/ -v
 
-# Integration만
-pytest tests/test_integration_llm.py -v -s
+# v2 통합 테스트만
+pytest tests/test_v2_integration.py -v
+
+# Taxonomy 관련 테스트만
+pytest tests/test_taxonomy_graph.py tests/test_evolver.py tests/test_bootstrap.py tests/test_lineage.py tests/test_v2_integration.py -v
 ```
 
 ### 미검증 항목
@@ -255,6 +306,7 @@ pytest tests/test_integration_llm.py -v -s
 | 항목 | 이유 | 향후 계획 |
 |------|------|-----------|
 | 실제 Qdrant Docker | 로컬에 Docker 미설정 | docker-compose up 후 연동 |
-| 실제 Embedding (시맨틱 검색) | reserved3에 embedding API 없음 | embedding 모델 배포 후 연동 |
+| 장기 시뮬레이션 (624턴) | DooGPU 실행 필요 | demo_runner_v2_long.py 실행 |
+| Mitosis/Extinction 실제 발생 | 198턴에서 미발생 | 624턴 데이터로 검증 예정 |
 | 대량 데이터 성능 | 프로토타입 단계 | 10K 메모리 벤치마크 |
 | 동시 요청 부하 | 단일 요청만 테스트 | locust/k6 부하 테스트 |

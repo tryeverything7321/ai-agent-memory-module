@@ -82,24 +82,29 @@ memory_module/
 │   ├── taxonomy_graph.py # NetworkX DiGraph 카테고리 그래프
 │   ├── evolver.py       # 2-stage 분류 + decay sweep + mitosis/fusion
 │   ├── bootstrap.py     # k-means 콜드스타트 + LLM 네이밍 + EPHEMERAL 생성
-│   └── lineage.py       # Phylogenetic DAG (진화 이벤트 기록)
-├── api/routes.py        # MemoryService 통합
+│   ├── lineage.py       # Phylogenetic DAG (진화 이벤트 기록)
+│   └── persistence.py   # Taxonomy/Lineage JSON 디스크 저장/복원
+├── api/routes.py        # MemoryService 통합 (v1/v2 호환)
 ├── docker-compose.yml   # Qdrant + App
 ├── demo_runner.py       # v1 합성 데이터 데모
-├── demo_runner_v2.py    # v2 Taxonomy Evolution 데모 (realistic data)
+├── demo_runner_v2.py    # v2 Taxonomy Evolution 데모 (198턴)
+├── demo_runner_v2_long.py # v2 장기 시뮬레이션 (624턴, Mitosis/Extinction 검증)
 ├── analyze_results.py   # v1 분석 리포트
-├── analyze_results_v2.py # v2 Taxonomy Evolution 분석 리포트
+├── analyze_results_v2.py # v2 분석 리포트 (semantic accuracy 포함)
 ├── data/
 │   ├── generate_synthetic.py       # 합성 대화 (v1)
 │   ├── generate_realistic.py       # 리얼리스틱 데이터 (4유저, 28일, 200+턴)
+│   ├── generate_long_simulation.py # 장기 시뮬레이션 (4유저, 56일, 624턴)
 │   ├── synthetic_conversations.json
 │   ├── realistic_conversations.json
+│   ├── long_simulation.json        # 장기 시뮬레이션 데이터
 │   └── demo_results_v2.json        # v2 데모 결과
 ├── docs/
 │   ├── test_results.md             # TDD 과정 및 결과
 │   ├── analysis_report.md          # v1 분석 리포트
-│   └── analysis_report_v2.md       # v2 Taxonomy Evolution 분석 리포트
-└── tests/               # 130 tests (TDD)
+│   ├── analysis_report_v2.md       # v2 Taxonomy Evolution 분석 리포트
+│   └── technical_report.md         # 기술 블로그/포트폴리오용 문서
+└── tests/               # 146 tests (TDD)
 ```
 
 ## Quick Start
@@ -109,7 +114,7 @@ memory_module/
 uv venv .venv && source .venv/bin/activate
 uv pip install -r requirements.txt
 
-# 테스트 실행 (130 tests)
+# 테스트 실행 (146 tests)
 pytest tests/ -v
 
 # 서버 실행 (Qdrant Docker 필요)
@@ -124,7 +129,11 @@ PYTHONPATH=. python analyze_results.py
 # --- v2 (Taxonomy Evolution) ---
 PYTHONPATH=. python data/generate_realistic.py   # 4유저×28일 리얼리스틱 데이터
 PYTHONPATH=. python demo_runner_v2.py             # Bootstrap + Evolution 데모
-PYTHONPATH=. python analyze_results_v2.py         # v2 분석 리포트
+PYTHONPATH=. python analyze_results_v2.py         # v2 분석 리포트 (semantic accuracy 포함)
+
+# --- v2 장기 시뮬레이션 (Mitosis/Extinction 검증) ---
+PYTHONPATH=. python data/generate_long_simulation.py  # 4유저×56일×624턴
+PYTHONPATH=. python demo_runner_v2_long.py            # 장기 시뮬레이션 (DooGPU 필요)
 ```
 
 ## 환경 변수 (.env)
@@ -150,6 +159,8 @@ v1의 12개 고정 Intent 카테고리를 **데이터 기반 동적 분류 체�
 | **Fusion (병합)** | centroid cosine > 0.85 → 가중 평균 centroid + LLM 네이밍 |
 | **Lineage DAG** | 모든 진화 이벤트(bootstrap/discovery/split/merge/extinction) 계통수 기록 |
 | **EPHEMERAL LLM** | 하드코딩 패턴 대신 LLM이 도메인별 30개 ephemeral 패턴 자동 생성 |
+| **Persistence** | TaxonomyGraph + Lineage JSON 디스크 저장/복원 (서버 재시작 대응) |
+| **Semantic Accuracy** | v1↔v2 의미적 매핑 기반 분류 정확도 자동 평가 |
 
 ### Taxonomy Evolution Flow
 
@@ -200,7 +211,8 @@ Decay Sweep → prune → re-classify orphans → mitosis → fusion
 | Lineage DAG (이벤트 기록, 직렬화) | 8 | ✅ |
 | Evolver (2-stage 분류, sweep, mitosis, fusion) | 12 | ✅ |
 | Bootstrap (k-means, LLM 네이밍, EPHEMERAL) | 12 | ✅ |
-| **Total** | **130** | **130 pass** |
+| v2 Integration (Persistence, JSON파싱, Semantic매핑) | 16 | ✅ |
+| **Total** | **146** | **146 pass** |
 
 ## Demo Results (Real LLM + Real Embedding)
 
@@ -226,6 +238,7 @@ Decay Sweep → prune → re-classify orphans → mitosis → fusion
 | Discovery 이벤트 | **1회** (`technical_discussion` 자동 생성) |
 | Fusion 이벤트 | **2회** (유사 카테고리 자동 병합) |
 | 메모리 | **145개** (4유저 합산) |
+| Semantic 정확도 | **38.7%** (exact match 3.1% → 의미적 매핑 기반) |
 | Prediction 생성률 | **53.0%** (105/198턴) |
 | 메모리 활용률 | **98.0%** (194/198턴) |
 | 평균 latency | **1,458ms/턴** |

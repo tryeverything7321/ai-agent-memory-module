@@ -6,6 +6,11 @@ GET  /memory/{id} - 메모리 상세
 DELETE /memory/{id} - 메모리 삭제
 GET  /debug/memories - 전체 메모리 상태
 GET  /debug/graph    - 그래프 상태
+
+v2: TaxonomyEvolver 통합
+  - use_taxonomy=True 시 v2 동적 분류 활성화
+  - Bootstrap phase → Evolution phase 자동 전환
+  - v1 IntentClassifier는 prediction용으로 유지
 """
 
 from __future__ import annotations
@@ -33,7 +38,11 @@ router = APIRouter()
 
 
 class MemoryService:
-    """API에서 사용하는 통합 서비스 — 모든 레이어 조율"""
+    """API에서 사용하는 통합 서비스 — 모든 레이어 조율
+
+    v2: use_taxonomy=True 시 TaxonomyEvolver 기반 동적 분류 활성화.
+    Bootstrap(30턴) → Evolution(이후) 자동 전환.
+    """
 
     def __init__(
         self,
@@ -41,6 +50,9 @@ class MemoryService:
         vector_store: VectorStore,
         graph_store: GraphStore,
         extractor: Extractor,
+        use_taxonomy: bool = False,
+        llm_client=None,
+        embedding_provider=None,
     ):
         self.metadata = metadata_store
         self.vector = vector_store
@@ -52,20 +64,60 @@ class MemoryService:
         self.injector = ProactiveInjector(graph_store, metadata_store)
         self._last_intent: dict[str, str] = {}  # user_id → last intent
 
+        # --- v2: Taxonomy Evolution ---
+        self._use_taxonomy = use_taxonomy
+        self._llm = llm_client
+        self._embedding_provider = embedding_provider
+        self._bootstrap = None  # TaxonomyBootstrap (bootstrap phase)
+        self._evolver = None    # TaxonomyEvolver (evolution phase)
+        self._lineage = None    # PhylogeneticLineage
+        self._ephemeral_patterns = None
+        self._taxonomy_turn_count = 0
+
+        if use_taxonomy and llm_client:
+            from taxonomy.bootstrap import TaxonomyBootstrap
+            self._bootstrap = TaxonomyBootstrap(llm_client)
+
+    @property
+    def taxonomy_ready(self) -> bool:
+        """Bootstrap 완료 후 evolver가 활성화되었는지 확인"""
+        return self._evolver is not None
+
+    @property
+    def evolver(self):
+        return self._evolver
+
+    def load_taxonomy_state(self, taxonomy, lineage, ephemeral_patterns, turn_count=0):
+        """저장된 taxonomy 상태를 복원하여 bootstrap 건너뛰기"""
+        from taxonomy.evolver import TaxonomyEvolver
+        self._evolver = TaxonomyEvolver(
+            taxonomy, lineage, self._llm, self._embedding_provider,
+        )
+        self._lineage = lineage
+        self._ephemeral_patterns = ephemeral_patterns
+        self._taxonomy_turn_count = turn_count
+        self._bootstrap = None  # bootstrap 완료 상태
+
     async def process_chat(
         self, message: str, user_id: str, session_id: Optional[str] = None
     ) -> ChatResponse:
         """
         메인 대화 파이프라인:
-          1. Intent 분류
+          1. Intent 분류 (v1 rule-based 또는 v2 taxonomy)
           2. 메모리 검색 (RRF fusion)
           3. 선제적 예측
           4. 비동기 추출 (백그라운드)
+          5. (v2) Taxonomy evolution: bootstrap → classify → sweep
         """
         # --- 1. Intent 분류 ---
         intent = self.intent_classifier.classify(message)
 
-        # Intent 전이 기록
+        # v2: Taxonomy 기반 분류 (v1과 병행)
+        v2_category = None
+        if self._use_taxonomy:
+            v2_category = await self._taxonomy_classify(message)
+
+        # Intent 전이 기록 (v1 기반 — prediction은 v1 intent graph 사용)
         last = self._last_intent.get(user_id)
         if last:
             self.graph.record_intent_transition(last, intent.value)
@@ -119,6 +171,48 @@ class MemoryService:
             memories_used=search_results,
             prediction=prediction,
         )
+
+    # --- v2: Taxonomy 분류 ---
+
+    async def _taxonomy_classify(self, message: str) -> Optional[str]:
+        """v2 taxonomy 기반 분류: bootstrap → evolution 자동 전환"""
+        if not self._embedding_provider:
+            return None
+
+        embedding = await self._embedding_provider.embed(message)
+
+        # Phase 1: Bootstrap (첫 30턴)
+        if self._bootstrap and not self._bootstrap.is_executed:
+            self._bootstrap.add_message(message, embedding)
+            if self._bootstrap.is_ready():
+                taxonomy, lineage, patterns = await self._bootstrap.execute()
+                from taxonomy.evolver import TaxonomyEvolver
+                self._evolver = TaxonomyEvolver(
+                    taxonomy, lineage, self._llm, self._embedding_provider,
+                )
+                self._lineage = lineage
+                self._ephemeral_patterns = patterns
+                # bootstrap 완료 시점의 분류
+                best = taxonomy.get_best_match(embedding)
+                return best or "unknown"
+            return "buffering"
+
+        # Phase 2: Evolution
+        if self._evolver:
+            category, is_new = await self._evolver.classify_or_propose(message, embedding)
+
+            # 멤버 등록
+            mem_id = f"tax_{self._taxonomy_turn_count}"
+            await self._evolver.register_memory(category, mem_id, embedding)
+            self._taxonomy_turn_count += 1
+
+            # Decay sweep 체크
+            if self._evolver.should_sweep():
+                await self._evolver.decay_sweep(datetime.now())
+
+            return category
+
+        return None
 
     async def recall(
         self, query: str, user_id: str, top_k: int = 5,
