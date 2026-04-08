@@ -73,6 +73,7 @@ class MemoryService:
         self._lineage = None    # PhylogeneticLineage
         self._ephemeral_patterns = None
         self._taxonomy_turn_count = 0
+        self._last_v2_category: dict[str, str] = {}  # user_id → last v2 category
 
         if use_taxonomy and llm_client:
             from taxonomy.bootstrap import TaxonomyBootstrap
@@ -116,6 +117,7 @@ class MemoryService:
         v2_category = None
         if self._use_taxonomy:
             v2_category = await self._taxonomy_classify(message)
+            self._last_v2_category[user_id] = v2_category
 
         # Intent 전이 기록 (v1 기반 — prediction은 v1 intent graph 사용)
         last = self._last_intent.get(user_id)

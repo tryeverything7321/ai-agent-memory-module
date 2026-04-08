@@ -1,0 +1,70 @@
+{
+  "experiment": {
+    "version": "v2-long",
+    "total_turns": 624,
+    "total_sessions": 224,
+    "users": [
+      "user_pm",
+      "user_dev",
+      "user_new",
+      "user_analyst"
+    ],
+    "duration_days": 56,
+    "duration_sec": 996.2,
+    "llm_model": "google/gemma-4-31B-it",
+    "embedding_model": "BAAI/bge-m3",
+    "errors": 0
+  },
+  "classification_accuracy": {
+    "total_with_ground_truth": 602,
+    "v1_rule_based": {
+      "correct": 317,
+      "accuracy_pct": 52.7
+    },
+    "v2_exact_match": {
+      "correct": 0,
+      "accuracy_pct": 0.0
+    },
+    "v2_semantic_match": {
+      "correct": 192,
+      "accuracy_pct": 31.9
+    }
+  },
+  "prediction": {
+    "total_predictions": 389,
+    "prediction_rate_pct": 62.3,
+    "hit_count": 143,
+    "hit_rate_pct": 36.8
+  },
+  "memory": {
+    "total_memories": 191,
+    "memories_per_user": {
+      "user_pm": 40,
+      "user_dev": 67,
+      "user_new": 50,
+      "user_analyst": 34
+    },
+    "turns_with_memories": 620,
+    "utilization_pct": 99.4
+  },
+  "taxonomy_evolution": {
+    "bootstrap_categories": 7,
+    "final_categories": 3,
+    "events": {
+      "bootstrap": 7,
+      "discovery": 0,
+      "merge": 4,
+      "split": 0,
+      "extinction": 8
+    },
+    "alive_categories": 3
+  },
+  "latency": {
+    "avg_ms": 1596,
+    "p50_ms": 1523,
+    "p90_ms": 2037,
+    "p99_ms": 2939,
+    "min_ms": 942,
+    "max_ms": 4097
+  }
+}

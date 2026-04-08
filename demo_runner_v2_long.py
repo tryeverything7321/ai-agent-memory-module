@@ -76,13 +76,11 @@ async def run_long_simulation():
         embedding_provider=embedding,
     )
 
-    # --- Persistence: 기존 상태 복원 시도 ---
+    # --- Persistence ---
     persistence = TaxonomyPersistence(base_dir=PERSIST_DIR)
+    # 항상 처음부터 실행 (clean run)
     if persistence.exists():
-        print("  >>> 기존 taxonomy 상태 복원 중...")
-        tax, lin, patterns, tc = persistence.load()
-        svc.load_taxonomy_state(tax, lin, patterns, turn_count=tc)
-        print(f"  >>> 복원 완료: {len(tax)} categories, {tc} turns")
+        print("  >>> 기존 taxonomy 상태 발견 — clean run이므로 무시합니다.")
 
     # --- user turns 추출 ---
     all_user_turns = []
@@ -105,6 +103,7 @@ async def run_long_simulation():
     # --- 실행 ---
     results = []
     evolution_log = []
+    bootstrap_logged = False
     total_start = time.time()
 
     for turn_id, turn_data in enumerate(all_user_turns):
@@ -129,6 +128,18 @@ async def run_long_simulation():
                     "weight": round(response.prediction.transition_weight, 3),
                 }
 
+            # v2 분류 결과 캡처
+            v2_classified = svc._last_v2_category.get(user_id)
+
+            # taxonomy 상태 스냅샷
+            taxonomy_snapshot = None
+            if svc.evolver:
+                cats = svc.evolver.taxonomy.get_all_categories()
+                taxonomy_snapshot = {
+                    "total_categories": len(cats),
+                    "categories": {c["name"]: c["member_count"] for c in cats},
+                }
+
             turn_result = {
                 "turn_id": turn_id,
                 "user_id": user_id,
@@ -136,6 +147,7 @@ async def run_long_simulation():
                 "timestamp": turn_data.get("timestamp"),
                 "ground_truth_intent": ground_truth_intent,
                 "v1_classified": v1_intent,
+                "v2_classified": v2_classified,
                 "memories_found": len(response.memories_used),
                 "prediction": prediction_info,
                 "latency_ms": latency_ms,
@@ -144,23 +156,27 @@ async def run_long_simulation():
 
             # 진행 상태 (50턴마다)
             if (turn_id + 1) % 50 == 0 or turn_id == 0:
+                v2_tag = v2_classified or "?"
                 print(f"  [{turn_id+1}/{total_user_turns}] {user_id}: "
-                      f"\"{message[:40]}\" | v1:{v1_intent} "
+                      f"\"{message[:35]}\" | v1:{v1_intent} v2:{v2_tag} "
                       f"| mem={len(response.memories_used)} | {latency_ms}ms")
 
             # --- Evolution 이벤트 감지 ---
             if svc.evolver:
                 ev = svc.evolver
-                # Bootstrap 완료 감지 (evolver가 처음 생성된 시점)
-                if turn_id == 29 and svc.taxonomy_ready:
-                    cats = ev.taxonomy.get_all_categories()
+
+                # Bootstrap 완료 감지
+                if not bootstrap_logged and svc.taxonomy_ready:
+                    bootstrap_cats = ev.taxonomy.get_all_categories()
                     evolution_log.append({
                         "turn_id": turn_id,
                         "event": "bootstrap_complete",
-                        "categories": [c["name"] for c in cats],
+                        "categories": [c["name"] for c in bootstrap_cats],
+                        "category_sizes": {c["name"]: c["member_count"] for c in bootstrap_cats},
                         "ephemeral_count": len(svc._ephemeral_patterns or []),
                     })
-                    print(f"\n  >>> Bootstrap 완료: {len(cats)} categories")
+                    bootstrap_logged = True
+                    print(f"\n  >>> Bootstrap 완료: {len(bootstrap_cats)} categories")
 
         except Exception as e:
             latency_ms = int((time.time() - t0) * 1000)

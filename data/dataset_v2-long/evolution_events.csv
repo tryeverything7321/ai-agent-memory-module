@@ -1,0 +1,12 @@
+event_id,timestamp,type,category,parent,parents,child,children,member_count,trigger_message,reason
+0,2026-04-08T05:32:31.079389+00:00,bootstrap,casual_chat,,,,,3,,
+1,2026-04-08T05:32:31.079443+00:00,bootstrap,strategic_planning,,,,,3,,
+2,2026-04-08T05:32:31.079474+00:00,bootstrap,dev_ops_request,,,,,7,,
+3,2026-04-08T05:32:31.079520+00:00,bootstrap,bug_tracking,,,,,2,,
+4,2026-04-08T05:32:31.079548+00:00,bootstrap,task_status,,,,,4,,
+5,2026-04-08T05:32:31.080130+00:00,bootstrap,schedule_management,,,,,7,,
+6,2026-04-08T05:32:31.080335+00:00,bootstrap,technical_consulting,,,,,4,,
+7,2026-04-08T05:43:25.201055+00:00,merge,,,dev_ops_request|schedule_management,ops_schedule_mgmt,,,,
+8,2026-04-08T05:44:37.478496+00:00,merge,,,task_status|ops_schedule_mgmt,task_ops_mgmt,,,,
+9,2026-04-08T05:45:53.402044+00:00,merge,,,technical_consulting|task_ops_mgmt,tech_ops_consulting,,,,
+10,2026-04-08T05:47:07.686103+00:00,merge,,,strategic_planning|tech_ops_consulting,strategic_tech_ops,,,,
