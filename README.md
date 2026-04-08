@@ -69,26 +69,37 @@ memory_module/
 ├── models.py            # Pydantic 도메인 모델
 ├── extraction.py        # LLM 추출 + 규칙 분류
 ├── decay.py             # Ebbinghaus 망각 곡선
+├── llm_client.py        # DooGPU LLM + Embedding 클라이언트
 ├── storage/
 │   ├── vector_store.py  # Qdrant + in-memory fallback
 │   ├── graph_store.py   # NetworkX (entity_graph + intent_graph)
 │   ├── metadata_store.py # SQLite
 │   └── memory_index.py  # RRF fusion (asyncio.gather 병렬)
 ├── prediction/
-│   ├── intent.py        # 12-category 규칙 분류
+│   ├── intent.py        # 12-category 규칙 분류 (v1)
 │   └── proactive.py     # Anticipatory Memory Chains
+├── taxonomy/            # ★ v2: Self-evolving Taxonomy
+│   ├── taxonomy_graph.py # NetworkX DiGraph 카테고리 그래프
+│   ├── evolver.py       # 2-stage 분류 + decay sweep + mitosis/fusion
+│   ├── bootstrap.py     # k-means 콜드스타트 + LLM 네이밍 + EPHEMERAL 생성
+│   └── lineage.py       # Phylogenetic DAG (진화 이벤트 기록)
 ├── api/routes.py        # MemoryService 통합
 ├── docker-compose.yml   # Qdrant + App
-├── demo_runner.py       # 합성 데이터 전체 실행 (Real LLM + Embedding)
-├── analyze_results.py   # 데모 결과 → 분석 리포트 생성
+├── demo_runner.py       # v1 합성 데이터 데모
+├── demo_runner_v2.py    # v2 Taxonomy Evolution 데모 (realistic data)
+├── analyze_results.py   # v1 분석 리포트
+├── analyze_results_v2.py # v2 Taxonomy Evolution 분석 리포트
 ├── data/
-│   ├── generate_synthetic.py  # 합성 대화 데이터 생성
-│   ├── synthetic_conversations.json  # 3유저, 30세션, 120턴
-│   └── demo_results.json      # 데모 실행 결과
+│   ├── generate_synthetic.py       # 합성 대화 (v1)
+│   ├── generate_realistic.py       # 리얼리스틱 데이터 (4유저, 28일, 200+턴)
+│   ├── synthetic_conversations.json
+│   ├── realistic_conversations.json
+│   └── demo_results_v2.json        # v2 데모 결과
 ├── docs/
-│   ├── test_results.md        # TDD 과정 및 결과
-│   └── analysis_report.md     # 정량 분석 리포트
-└── tests/               # 68 tests (TDD)
+│   ├── test_results.md             # TDD 과정 및 결과
+│   ├── analysis_report.md          # v1 분석 리포트
+│   └── analysis_report_v2.md       # v2 Taxonomy Evolution 분석 리포트
+└── tests/               # 130 tests (TDD)
 ```
 
 ## Quick Start
@@ -98,21 +109,22 @@ memory_module/
 uv venv .venv && source .venv/bin/activate
 uv pip install -r requirements.txt
 
-# 테스트 실행
+# 테스트 실행 (130 tests)
 pytest tests/ -v
 
 # 서버 실행 (Qdrant Docker 필요)
 docker-compose up -d qdrant
 uvicorn main:app --reload
 
-# 합성 데이터 생성
+# --- v1 (Rule-based Intent) ---
 PYTHONPATH=. python data/generate_synthetic.py
-
-# 데모 실행 (Real LLM + Embedding, DooGPU 접근 필요)
 PYTHONPATH=. python demo_runner.py
-
-# 분석 리포트 생성
 PYTHONPATH=. python analyze_results.py
+
+# --- v2 (Taxonomy Evolution) ---
+PYTHONPATH=. python data/generate_realistic.py   # 4유저×28일 리얼리스틱 데이터
+PYTHONPATH=. python demo_runner_v2.py             # Bootstrap + Evolution 데모
+PYTHONPATH=. python analyze_results_v2.py         # v2 분석 리포트
 ```
 
 ## 환경 변수 (.env)
@@ -125,6 +137,42 @@ MEMORY_LLM_BASE_URL=http://localhost:8080/v1
 MEMORY_EMBEDDING_BASE_URL=http://localhost:8080/v1
 ```
 
+## v2: Self-evolving Taxonomy
+
+v1의 12개 고정 Intent 카테고리를 **데이터 기반 동적 분류 체계**로 교체:
+
+| 기능 | 설명 |
+|------|------|
+| **Bootstrap** | 첫 30개 메시지 → k-means(k=3~7, silhouette score) → LLM 네이밍 |
+| **2-stage 분류** | 1차 centroid cosine match (~0ms) → 2차 LLM fallback (~1s) |
+| **Taxonomy Decay** | Ebbinghaus 망각 곡선을 카테고리 자체에 적용 — 비활성 카테고리 자연 소멸 |
+| **Mitosis (분열)** | intra-cluster variance > 0.5 → k-means(k=2) 분할 + LLM 네이밍 |
+| **Fusion (병합)** | centroid cosine > 0.85 → 가중 평균 centroid + LLM 네이밍 |
+| **Lineage DAG** | 모든 진화 이벤트(bootstrap/discovery/split/merge/extinction) 계통수 기록 |
+| **EPHEMERAL LLM** | 하드코딩 패턴 대신 LLM이 도메인별 30개 ephemeral 패턴 자동 생성 |
+
+### Taxonomy Evolution Flow
+
+```
+User Messages (30개 버퍼링)
+    │
+    ▼  [Bootstrap]
+k-means(k=auto) → LLM 클러스터 네이밍 → TaxonomyGraph 초기화
+    │
+    ▼  [Evolution Loop]
+새 메시지 → centroid match? ──YES→ activate_category (centroid 증분 업데이트)
+    │                          │
+    NO                         ▼
+    ▼                    register_memory
+LLM classify_or_propose
+    │
+    ├─ 기존 카테고리 → activate
+    └─ 신규 카테고리 → add_category + lineage.record_discovery
+    │
+    ▼  [50턴마다]
+Decay Sweep → prune → re-classify orphans → mitosis → fusion
+```
+
 ## Tech Stack
 
 | Component | Technology |
@@ -135,6 +183,7 @@ MEMORY_EMBEDDING_BASE_URL=http://localhost:8080/v1
 | Metadata | SQLite (WAL mode) |
 | Embedding | BAAI/bge-m3 (1024-dim, DooGPU) |
 | LLM | google/gemma-4-31B-it (DooGPU) |
+| Clustering | scikit-learn (k-means + silhouette) |
 
 ## Test Coverage
 
@@ -147,11 +196,15 @@ MEMORY_EMBEDDING_BASE_URL=http://localhost:8080/v1
 | Prediction (intent, transition, injection) | 12 | ✅ |
 | E2E Scenarios (4개 시나리오) | 11 | ✅ |
 | Integration (Real LLM: Gemma 31B) | 5 | ✅ |
-| **Total** | **68** | **68 pass** |
+| TaxonomyGraph (CRUD, decay, split, merge, 직렬화) | 30 | ✅ |
+| Lineage DAG (이벤트 기록, 직렬화) | 8 | ✅ |
+| Evolver (2-stage 분류, sweep, mitosis, fusion) | 12 | ✅ |
+| Bootstrap (k-means, LLM 네이밍, EPHEMERAL) | 12 | ✅ |
+| **Total** | **130** | **130 pass** |
 
 ## Demo Results (Real LLM + Real Embedding)
 
-합성 대화 60 유저턴을 Gemma 31B + bge-m3로 실행한 정량 결과:
+### v1 (Rule-based Intent, 60턴)
 
 | 지표 | 결과 |
 |------|------|
@@ -161,15 +214,24 @@ MEMORY_EMBEDDING_BASE_URL=http://localhost:8080/v1
 | 평균 latency | 1,253ms/턴 |
 | 에러 | 0건 |
 
-```bash
-# 데모 실행
-PYTHONPATH=. python demo_runner.py
-
-# 분석 리포트 생성
-PYTHONPATH=. python analyze_results.py
-```
-
 상세 분석: [`docs/analysis_report.md`](docs/analysis_report.md)
+
+### v2 (Taxonomy Evolution, 198턴, 4유저×28일)
+
+| 지표 | 결과 |
+|------|------|
+| 총 턴 | **198** (4유저, 81세션, 28일) |
+| Bootstrap 카테고리 | **7개** (k-means auto) |
+| 최종 카테고리 | **6개** (Fusion 2회, Discovery 1회) |
+| Discovery 이벤트 | **1회** (`technical_discussion` 자동 생성) |
+| Fusion 이벤트 | **2회** (유사 카테고리 자동 병합) |
+| 메모리 | **145개** (4유저 합산) |
+| Prediction 생성률 | **53.0%** (105/198턴) |
+| 메모리 활용률 | **98.0%** (194/198턴) |
+| 평균 latency | **1,458ms/턴** |
+| 에러 | **0건** |
+
+상세 분석: [`docs/analysis_report_v2.md`](docs/analysis_report_v2.md)
 
 ## Research References
 

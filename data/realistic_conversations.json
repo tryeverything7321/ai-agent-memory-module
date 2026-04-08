@@ -1,0 +1,2983 @@
+{
+  "metadata": {
+    "generated_at": "2026-04-08T10:32:34.011041",
+    "base_date": "2026-03-23T00:00:00",
+    "duration_days": 28,
+    "users": [
+      "user_pm",
+      "user_dev",
+      "user_new",
+      "user_analyst"
+    ],
+    "total_sessions": 81,
+    "total_turns": 396,
+    "total_user_turns": 198,
+    "user_turn_counts": {
+      "user_pm": 56,
+      "user_dev": 45,
+      "user_new": 47,
+      "user_analyst": 50
+    },
+    "intent_distribution": {
+      "document_drafting": 25,
+      "knowledge_lookup": 23,
+      "data_analysis": 22,
+      "project_status": 20,
+      "_new_category(cicd/dashboard)": 20,
+      "code_review": 19,
+      "_ephemeral": 15,
+      "scheduling": 11,
+      "troubleshooting": 10,
+      "onboarding": 10,
+      "team_communication": 8,
+      "issue_tracking": 6,
+      "meeting_prep": 5,
+      "weekly_report": 4
+    }
+  },
+  "sessions": [
+    {
+      "session_id": "87ad0c9d-c3e7-4895-9b18-6edd72a4b407",
+      "user_id": "user_pm",
+      "turns": [
+        {
+          "role": "user",
+          "content": "주간 보고 작성해야 하는데 지난주 핵심 이슈 뭐였지?",
+          "timestamp": "2026-03-23T09:00:00",
+          "intent": "weekly_report"
+        },
+        {
+          "role": "assistant",
+          "content": "지난 주 주요 이슈를 정리해드리겠습니다.",
+          "timestamp": "2026-03-23T09:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "이슈 중에 결제 쪽은 해결됐어?",
+          "timestamp": "2026-03-23T09:05:00",
+          "intent": "issue_tracking"
+        },
+        {
+          "role": "assistant",
+          "content": "결제 API 레이턴시 이슈는 핫픽스 배포로 해결됐습니다. P95 응답시간 200ms 이하로 안정화됐어요.",
+          "timestamp": "2026-03-23T09:06:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "이번 주 일정 정리해줘",
+          "timestamp": "2026-03-23T09:10:00",
+          "intent": "scheduling"
+        },
+        {
+          "role": "assistant",
+          "content": "이번 주: 화 디자인리뷰, 수 스프린트플래닝, 금 회고입니다.",
+          "timestamp": "2026-03-23T09:11:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-03-23T09:00:00"
+    },
+    {
+      "session_id": "bd5a6922-339b-4074-8741-6c40a6382fd4",
+      "user_id": "user_pm",
+      "turns": [
+        {
+          "role": "user",
+          "content": "오늘 스탠드업 내용 정리해줘",
+          "timestamp": "2026-03-24T09:00:00",
+          "intent": "project_status"
+        },
+        {
+          "role": "assistant",
+          "content": "어제: 핫픽스 배포 완료. 오늘: 디자인 리뷰. 블로커: 없음.",
+          "timestamp": "2026-03-24T09:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "블로커 없다니 다행이다 ㅋㅋ",
+          "timestamp": "2026-03-24T09:05:00",
+          "intent": null
+        },
+        {
+          "role": "assistant",
+          "content": "네, 순조롭게 진행 중입니다.",
+          "timestamp": "2026-03-24T09:06:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-03-24T09:00:00"
+    },
+    {
+      "session_id": "2e9bcac2-fd2a-405d-a02e-e9b258049fbb",
+      "user_id": "user_pm",
+      "turns": [
+        {
+          "role": "user",
+          "content": "디자인 리뷰 미팅 준비해야 하는데 변경사항 정리해줘",
+          "timestamp": "2026-03-25T14:00:00",
+          "intent": "meeting_prep"
+        },
+        {
+          "role": "assistant",
+          "content": "지난 스프린트 UI 변경사항을 정리했습니다. 결제 흐름 개선, 대시보드 차트 추가.",
+          "timestamp": "2026-03-25T14:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "피드백 내용 문서로 정리해줘",
+          "timestamp": "2026-03-25T15:00:00",
+          "intent": "document_drafting"
+        },
+        {
+          "role": "assistant",
+          "content": "디자인 리뷰 피드백 문서 초안을 작성하겠습니다.",
+          "timestamp": "2026-03-25T15:01:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-03-25T14:00:00"
+    },
+    {
+      "session_id": "4fb9faf2-9f60-4ad4-9391-4391a88c76bd",
+      "user_id": "user_pm",
+      "turns": [
+        {
+          "role": "user",
+          "content": "이번 주 스프린트 회고할 건데 데이터 좀 뽑아줘",
+          "timestamp": "2026-03-27T16:00:00",
+          "intent": "data_analysis"
+        },
+        {
+          "role": "assistant",
+          "content": "이번 주 벨로시티: 완료 20pt / 계획 25pt. 지난 주 대비 +1pt.",
+          "timestamp": "2026-03-27T16:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "회고 문서 작성해줘",
+          "timestamp": "2026-03-27T16:05:00",
+          "intent": "document_drafting"
+        },
+        {
+          "role": "assistant",
+          "content": "스프린트 회고 문서를 작성하겠습니다.",
+          "timestamp": "2026-03-27T16:06:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "다음 주 계획도 같이 정리해",
+          "timestamp": "2026-03-27T16:10:00",
+          "intent": "scheduling"
+        },
+        {
+          "role": "assistant",
+          "content": "다음 주 주요 일정과 목표를 정리하겠습니다.",
+          "timestamp": "2026-03-27T16:11:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-03-27T16:00:00"
+    },
+    {
+      "session_id": "9fb3f218-20ca-44b2-ba34-6642d42bc183",
+      "user_id": "user_pm",
+      "turns": [
+        {
+          "role": "user",
+          "content": "백로그 우선순위 정리해줘",
+          "timestamp": "2026-03-26T14:00:00",
+          "intent": "issue_tracking"
+        },
+        {
+          "role": "assistant",
+          "content": "P0: 결제 버그 수정, P1: 대시보드 리뉴얼, P2: 문서 업데이트",
+          "timestamp": "2026-03-26T14:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "결제 버그 담당 누구지?",
+          "timestamp": "2026-03-26T14:05:00",
+          "intent": "team_communication"
+        },
+        {
+          "role": "assistant",
+          "content": "이대리님이 담당하고 있습니다.",
+          "timestamp": "2026-03-26T14:06:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-03-26T14:00:00"
+    },
+    {
+      "session_id": "9d0d60e9-fdb7-4b66-93bd-6c01d27bb8ca",
+      "user_id": "user_pm",
+      "turns": [
+        {
+          "role": "user",
+          "content": "주간 보고 작성해야 하는데 지난주 핵심 이슈 뭐였지?",
+          "timestamp": "2026-03-30T09:00:00",
+          "intent": "weekly_report"
+        },
+        {
+          "role": "assistant",
+          "content": "지난 주 주요 이슈를 정리해드리겠습니다.",
+          "timestamp": "2026-03-30T09:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "이슈 중에 결제 쪽은 해결됐어?",
+          "timestamp": "2026-03-30T09:05:00",
+          "intent": "issue_tracking"
+        },
+        {
+          "role": "assistant",
+          "content": "결제 API 레이턴시 이슈는 핫픽스 배포로 해결됐습니다. P95 응답시간 200ms 이하로 안정화됐어요.",
+          "timestamp": "2026-03-30T09:06:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "이번 주 일정 정리해줘",
+          "timestamp": "2026-03-30T09:10:00",
+          "intent": "scheduling"
+        },
+        {
+          "role": "assistant",
+          "content": "이번 주: 화 디자인리뷰, 수 스프린트플래닝, 금 회고입니다.",
+          "timestamp": "2026-03-30T09:11:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "넵 확인",
+          "timestamp": "2026-03-30T09:20:00",
+          "intent": null
+        },
+        {
+          "role": "assistant",
+          "content": "필요하시면 말씀해주세요.",
+          "timestamp": "2026-03-30T09:21:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-03-30T09:00:00"
+    },
+    {
+      "session_id": "192611e3-667c-4ba0-b02f-7a9760d487e1",
+      "user_id": "user_pm",
+      "turns": [
+        {
+          "role": "user",
+          "content": "오늘 스탠드업 내용 정리해줘",
+          "timestamp": "2026-03-31T09:00:00",
+          "intent": "project_status"
+        },
+        {
+          "role": "assistant",
+          "content": "어제: 핫픽스 배포 완료. 오늘: 디자인 리뷰. 블로커: 없음.",
+          "timestamp": "2026-03-31T09:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "이대리한테 PR 리뷰 독촉 좀 해줘",
+          "timestamp": "2026-03-31T09:05:00",
+          "intent": "team_communication"
+        },
+        {
+          "role": "assistant",
+          "content": "이대리님에게 PR 리뷰 요청 메시지를 보내겠습니다.",
+          "timestamp": "2026-03-31T09:06:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-03-31T09:00:00"
+    },
+    {
+      "session_id": "b7c180d8-a2c4-4372-afa8-c0a9d59773bc",
+      "user_id": "user_pm",
+      "turns": [
+        {
+          "role": "user",
+          "content": "디자인 리뷰 미팅 준비해야 하는데 변경사항 정리해줘",
+          "timestamp": "2026-04-01T14:00:00",
+          "intent": "meeting_prep"
+        },
+        {
+          "role": "assistant",
+          "content": "지난 스프린트 UI 변경사항을 정리했습니다. 결제 흐름 개선, 대시보드 차트 추가.",
+          "timestamp": "2026-04-01T14:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "피드백 내용 문서로 정리해줘",
+          "timestamp": "2026-04-01T15:00:00",
+          "intent": "document_drafting"
+        },
+        {
+          "role": "assistant",
+          "content": "디자인 리뷰 피드백 문서 초안을 작성하겠습니다.",
+          "timestamp": "2026-04-01T15:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "ㅋㅋ 디자인팀이 또 전면 수정했네",
+          "timestamp": "2026-04-01T15:10:00",
+          "intent": null
+        },
+        {
+          "role": "assistant",
+          "content": "변경 범위가 넓어서 스프린트 일정에 영향이 있을 수 있습니다.",
+          "timestamp": "2026-04-01T15:11:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "팀원들한테 일정 변경 공유해줘",
+          "timestamp": "2026-04-01T15:15:00",
+          "intent": "team_communication"
+        },
+        {
+          "role": "assistant",
+          "content": "일정 변경 안내를 전달하겠습니다.",
+          "timestamp": "2026-04-01T15:16:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-04-01T14:00:00"
+    },
+    {
+      "session_id": "b218e6db-0297-4f5f-af4c-59961ed4bdae",
+      "user_id": "user_pm",
+      "turns": [
+        {
+          "role": "user",
+          "content": "이번 주 스프린트 회고할 건데 데이터 좀 뽑아줘",
+          "timestamp": "2026-04-03T16:00:00",
+          "intent": "data_analysis"
+        },
+        {
+          "role": "assistant",
+          "content": "이번 주 벨로시티: 완료 22pt / 계획 25pt. 지난 주 대비 +2pt.",
+          "timestamp": "2026-04-03T16:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "회고 문서 작성해줘",
+          "timestamp": "2026-04-03T16:05:00",
+          "intent": "document_drafting"
+        },
+        {
+          "role": "assistant",
+          "content": "스프린트 회고 문서를 작성하겠습니다.",
+          "timestamp": "2026-04-03T16:06:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "다음 주 계획도 같이 정리해",
+          "timestamp": "2026-04-03T16:10:00",
+          "intent": "scheduling"
+        },
+        {
+          "role": "assistant",
+          "content": "다음 주 주요 일정과 목표를 정리하겠습니다.",
+          "timestamp": "2026-04-03T16:11:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-04-03T16:00:00"
+    },
+    {
+      "session_id": "9bae2365-1a4d-4a34-9515-ca9bd5d39d16",
+      "user_id": "user_pm",
+      "turns": [
+        {
+          "role": "user",
+          "content": "부산 출장 준비해야 하는데 항공편 확인해줘",
+          "timestamp": "2026-04-02T11:00:00",
+          "intent": "scheduling"
+        },
+        {
+          "role": "assistant",
+          "content": "부산행 KTX 예약 현황을 확인하겠습니다.",
+          "timestamp": "2026-04-02T11:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "팀원들한테 출장 일정 공유 좀",
+          "timestamp": "2026-04-02T11:05:00",
+          "intent": "team_communication"
+        },
+        {
+          "role": "assistant",
+          "content": "출장 안내 메일 초안을 작성했습니다.",
+          "timestamp": "2026-04-02T11:06:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "고객사 미팅 자료도 준비해줘",
+          "timestamp": "2026-04-02T11:10:00",
+          "intent": "meeting_prep"
+        },
+        {
+          "role": "assistant",
+          "content": "고객사 미팅용 발표 자료 초안을 작성하겠습니다.",
+          "timestamp": "2026-04-02T11:11:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-04-02T11:00:00"
+    },
+    {
+      "session_id": "b9725b60-d4f8-4e59-8cf8-c3125e99aa20",
+      "user_id": "user_pm",
+      "turns": [
+        {
+          "role": "user",
+          "content": "주간 보고 작성해야 하는데 지난주 핵심 이슈 뭐였지?",
+          "timestamp": "2026-04-06T09:00:00",
+          "intent": "weekly_report"
+        },
+        {
+          "role": "assistant",
+          "content": "지난 주 주요 이슈를 정리해드리겠습니다.",
+          "timestamp": "2026-04-06T09:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "이슈 중에 결제 쪽은 해결됐어?",
+          "timestamp": "2026-04-06T09:05:00",
+          "intent": "issue_tracking"
+        },
+        {
+          "role": "assistant",
+          "content": "결제 API 레이턴시 이슈는 핫픽스 배포로 해결됐습니다. P95 응답시간 200ms 이하로 안정화됐어요.",
+          "timestamp": "2026-04-06T09:06:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "이번 주 일정 정리해줘",
+          "timestamp": "2026-04-06T09:10:00",
+          "intent": "scheduling"
+        },
+        {
+          "role": "assistant",
+          "content": "이번 주: 화 디자인리뷰, 수 스프린트플래닝, 금 회고입니다.",
+          "timestamp": "2026-04-06T09:11:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "출장 일정도 포함시켜줘",
+          "timestamp": "2026-04-06T09:15:00",
+          "intent": "scheduling"
+        },
+        {
+          "role": "assistant",
+          "content": "네, 수~금 부산 출장 일정을 반영하겠습니다.",
+          "timestamp": "2026-04-06T09:16:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-04-06T09:00:00"
+    },
+    {
+      "session_id": "afbe0c8f-53a2-437a-a4f5-9862b974ce0c",
+      "user_id": "user_pm",
+      "turns": [
+        {
+          "role": "user",
+          "content": "오늘 스탠드업 내용 정리해줘",
+          "timestamp": "2026-04-07T09:00:00",
+          "intent": "project_status"
+        },
+        {
+          "role": "assistant",
+          "content": "어제: 핫픽스 배포 완료. 오늘: 디자인 리뷰. 블로커: 없음.",
+          "timestamp": "2026-04-07T09:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "블로커 없다니 다행이다 ㅋㅋ",
+          "timestamp": "2026-04-07T09:05:00",
+          "intent": null
+        },
+        {
+          "role": "assistant",
+          "content": "네, 순조롭게 진행 중입니다.",
+          "timestamp": "2026-04-07T09:06:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-04-07T09:00:00"
+    },
+    {
+      "session_id": "88c8360e-55e9-44df-a057-ab92baf47a7a",
+      "user_id": "user_pm",
+      "turns": [
+        {
+          "role": "user",
+          "content": "디자인 리뷰 미팅 준비해야 하는데 변경사항 정리해줘",
+          "timestamp": "2026-04-08T14:00:00",
+          "intent": "meeting_prep"
+        },
+        {
+          "role": "assistant",
+          "content": "지난 스프린트 UI 변경사항을 정리했습니다. 결제 흐름 개선, 대시보드 차트 추가.",
+          "timestamp": "2026-04-08T14:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "피드백 내용 문서로 정리해줘",
+          "timestamp": "2026-04-08T15:00:00",
+          "intent": "document_drafting"
+        },
+        {
+          "role": "assistant",
+          "content": "디자인 리뷰 피드백 문서 초안을 작성하겠습니다.",
+          "timestamp": "2026-04-08T15:01:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-04-08T14:00:00"
+    },
+    {
+      "session_id": "2c886d45-770a-4ab7-9db8-434e13d127cf",
+      "user_id": "user_pm",
+      "turns": [
+        {
+          "role": "user",
+          "content": "이번 주 스프린트 회고할 건데 데이터 좀 뽑아줘",
+          "timestamp": "2026-04-10T16:00:00",
+          "intent": "data_analysis"
+        },
+        {
+          "role": "assistant",
+          "content": "이번 주 벨로시티: 완료 24pt / 계획 25pt. 지난 주 대비 +3pt.",
+          "timestamp": "2026-04-10T16:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "회고 문서 작성해줘",
+          "timestamp": "2026-04-10T16:05:00",
+          "intent": "document_drafting"
+        },
+        {
+          "role": "assistant",
+          "content": "스프린트 회고 문서를 작성하겠습니다.",
+          "timestamp": "2026-04-10T16:06:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "다음 주 계획도 같이 정리해",
+          "timestamp": "2026-04-10T16:10:00",
+          "intent": "scheduling"
+        },
+        {
+          "role": "assistant",
+          "content": "다음 주 주요 일정과 목표를 정리하겠습니다.",
+          "timestamp": "2026-04-10T16:11:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-04-10T16:00:00"
+    },
+    {
+      "session_id": "9a589733-69d3-41bd-b321-5d37d15eec86",
+      "user_id": "user_pm",
+      "turns": [
+        {
+          "role": "user",
+          "content": "부산 출장 결과 보고서 작성해야 해",
+          "timestamp": "2026-04-09T11:00:00",
+          "intent": "document_drafting"
+        },
+        {
+          "role": "assistant",
+          "content": "출장 결과 보고서 초안을 작성하겠습니다.",
+          "timestamp": "2026-04-09T11:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "고객 미팅 결과도 넣어줘",
+          "timestamp": "2026-04-09T11:05:00",
+          "intent": "document_drafting"
+        },
+        {
+          "role": "assistant",
+          "content": "고객 미팅 요약을 포함하여 업데이트하겠습니다.",
+          "timestamp": "2026-04-09T11:06:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-04-09T11:00:00"
+    },
+    {
+      "session_id": "900e391b-bfa1-4edc-ba67-4493d933b276",
+      "user_id": "user_pm",
+      "turns": [
+        {
+          "role": "user",
+          "content": "주간 보고 작성해야 하는데 지난주 핵심 이슈 뭐였지?",
+          "timestamp": "2026-04-13T09:00:00",
+          "intent": "weekly_report"
+        },
+        {
+          "role": "assistant",
+          "content": "지난 주 주요 이슈를 정리해드리겠습니다.",
+          "timestamp": "2026-04-13T09:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "이슈 중에 결제 쪽은 해결됐어?",
+          "timestamp": "2026-04-13T09:05:00",
+          "intent": "issue_tracking"
+        },
+        {
+          "role": "assistant",
+          "content": "결제 API 레이턴시 이슈는 핫픽스 배포로 해결됐습니다. P95 응답시간 200ms 이하로 안정화됐어요.",
+          "timestamp": "2026-04-13T09:06:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "이번 주 일정 정리해줘",
+          "timestamp": "2026-04-13T09:10:00",
+          "intent": "scheduling"
+        },
+        {
+          "role": "assistant",
+          "content": "이번 주: 화 디자인리뷰, 수 스프린트플래닝, 금 회고입니다.",
+          "timestamp": "2026-04-13T09:11:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "넵 확인",
+          "timestamp": "2026-04-13T09:20:00",
+          "intent": null
+        },
+        {
+          "role": "assistant",
+          "content": "필요하시면 말씀해주세요.",
+          "timestamp": "2026-04-13T09:21:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-04-13T09:00:00"
+    },
+    {
+      "session_id": "41571f91-878d-4abc-8f20-69629e7b8631",
+      "user_id": "user_pm",
+      "turns": [
+        {
+          "role": "user",
+          "content": "오늘 스탠드업 내용 정리해줘",
+          "timestamp": "2026-04-14T09:00:00",
+          "intent": "project_status"
+        },
+        {
+          "role": "assistant",
+          "content": "어제: 핫픽스 배포 완료. 오늘: 디자인 리뷰. 블로커: 없음.",
+          "timestamp": "2026-04-14T09:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "이대리한테 PR 리뷰 독촉 좀 해줘",
+          "timestamp": "2026-04-14T09:05:00",
+          "intent": "team_communication"
+        },
+        {
+          "role": "assistant",
+          "content": "이대리님에게 PR 리뷰 요청 메시지를 보내겠습니다.",
+          "timestamp": "2026-04-14T09:06:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-04-14T09:00:00"
+    },
+    {
+      "session_id": "3bbab7a0-94a5-4c7d-9ff3-182a9f982480",
+      "user_id": "user_pm",
+      "turns": [
+        {
+          "role": "user",
+          "content": "디자인 리뷰 미팅 준비해야 하는데 변경사항 정리해줘",
+          "timestamp": "2026-04-15T14:00:00",
+          "intent": "meeting_prep"
+        },
+        {
+          "role": "assistant",
+          "content": "지난 스프린트 UI 변경사항을 정리했습니다. 결제 흐름 개선, 대시보드 차트 추가.",
+          "timestamp": "2026-04-15T14:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "피드백 내용 문서로 정리해줘",
+          "timestamp": "2026-04-15T15:00:00",
+          "intent": "document_drafting"
+        },
+        {
+          "role": "assistant",
+          "content": "디자인 리뷰 피드백 문서 초안을 작성하겠습니다.",
+          "timestamp": "2026-04-15T15:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "ㅋㅋ 디자인팀이 또 전면 수정했네",
+          "timestamp": "2026-04-15T15:10:00",
+          "intent": null
+        },
+        {
+          "role": "assistant",
+          "content": "변경 범위가 넓어서 스프린트 일정에 영향이 있을 수 있습니다.",
+          "timestamp": "2026-04-15T15:11:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "팀원들한테 일정 변경 공유해줘",
+          "timestamp": "2026-04-15T15:15:00",
+          "intent": "team_communication"
+        },
+        {
+          "role": "assistant",
+          "content": "일정 변경 안내를 전달하겠습니다.",
+          "timestamp": "2026-04-15T15:16:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-04-15T14:00:00"
+    },
+    {
+      "session_id": "d74d6644-65a0-494d-8356-47bb00fd0288",
+      "user_id": "user_pm",
+      "turns": [
+        {
+          "role": "user",
+          "content": "이번 주 스프린트 회고할 건데 데이터 좀 뽑아줘",
+          "timestamp": "2026-04-17T16:00:00",
+          "intent": "data_analysis"
+        },
+        {
+          "role": "assistant",
+          "content": "이번 주 벨로시티: 완료 26pt / 계획 25pt. 지난 주 대비 +4pt.",
+          "timestamp": "2026-04-17T16:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "회고 문서 작성해줘",
+          "timestamp": "2026-04-17T16:05:00",
+          "intent": "document_drafting"
+        },
+        {
+          "role": "assistant",
+          "content": "스프린트 회고 문서를 작성하겠습니다.",
+          "timestamp": "2026-04-17T16:06:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "다음 주 계획도 같이 정리해",
+          "timestamp": "2026-04-17T16:10:00",
+          "intent": "scheduling"
+        },
+        {
+          "role": "assistant",
+          "content": "다음 주 주요 일정과 목표를 정리하겠습니다.",
+          "timestamp": "2026-04-17T16:11:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-04-17T16:00:00"
+    },
+    {
+      "session_id": "6fdced0e-159f-43d8-91a4-985767ba9b56",
+      "user_id": "user_pm",
+      "turns": [
+        {
+          "role": "user",
+          "content": "백로그 우선순위 정리해줘",
+          "timestamp": "2026-04-16T14:00:00",
+          "intent": "issue_tracking"
+        },
+        {
+          "role": "assistant",
+          "content": "P0: 결제 버그 수정, P1: 대시보드 리뉴얼, P2: 문서 업데이트",
+          "timestamp": "2026-04-16T14:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "결제 버그 담당 누구지?",
+          "timestamp": "2026-04-16T14:05:00",
+          "intent": "team_communication"
+        },
+        {
+          "role": "assistant",
+          "content": "이대리님이 담당하고 있습니다.",
+          "timestamp": "2026-04-16T14:06:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-04-16T14:00:00"
+    },
+    {
+      "session_id": "6e2beec7-3fce-469b-a9e0-af2df543a796",
+      "user_id": "user_dev",
+      "turns": [
+        {
+          "role": "user",
+          "content": "오늘 리뷰할 PR 있어?",
+          "timestamp": "2026-03-23T10:00:00",
+          "intent": "code_review"
+        },
+        {
+          "role": "assistant",
+          "content": "리뷰 대기 PR: #200 인증 리팩토링, #201 테스트 추가",
+          "timestamp": "2026-03-23T10:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "PR 리뷰하다가 이상한 버그 발견. 결제 API가 간헐적으로 500 에러 뱉어",
+          "timestamp": "2026-03-23T11:00:00",
+          "intent": "troubleshooting"
+        },
+        {
+          "role": "assistant",
+          "content": "해당 코드를 분석해보겠습니다. DB 커넥션 풀 고갈 가능성이 있습니다.",
+          "timestamp": "2026-03-23T11:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "로그 좀 더 자세히 봐줘",
+          "timestamp": "2026-03-23T11:05:00",
+          "intent": "troubleshooting"
+        },
+        {
+          "role": "assistant",
+          "content": "스택 트레이스와 최근 배포 로그를 함께 분석하겠습니다.",
+          "timestamp": "2026-03-23T11:06:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-03-23T10:00:00"
+    },
+    {
+      "session_id": "1fa9b370-88db-4cf0-a195-d0baea086fa3",
+      "user_id": "user_dev",
+      "turns": [
+        {
+          "role": "user",
+          "content": "수요일 PR 리뷰하려고",
+          "timestamp": "2026-03-25T10:00:00",
+          "intent": "code_review"
+        },
+        {
+          "role": "assistant",
+          "content": "리뷰 대기: #202 캐시 레이어 추가",
+          "timestamp": "2026-03-25T10:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "리뷰 중에 N+1 쿼리 발견했어 이거 성능 터질듯",
+          "timestamp": "2026-03-25T11:00:00",
+          "intent": "troubleshooting"
+        },
+        {
+          "role": "assistant",
+          "content": "select_related/prefetch_related로 쿼리를 최적화해야 합니다. 실행 계획을 확인해볼게요.",
+          "timestamp": "2026-03-25T11:01:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-03-25T10:00:00"
+    },
+    {
+      "session_id": "b50f5d26-bafa-4c5d-8688-3b3e104b7794",
+      "user_id": "user_dev",
+      "turns": [
+        {
+          "role": "user",
+          "content": "금요일 PR 리뷰 뭐 남았어?",
+          "timestamp": "2026-03-27T10:00:00",
+          "intent": "code_review"
+        },
+        {
+          "role": "assistant",
+          "content": "리뷰 대기: #204 에러 핸들링 개선",
+          "timestamp": "2026-03-27T10:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "리뷰 완료된 PR 변경사항 정리해줘",
+          "timestamp": "2026-03-27T11:00:00",
+          "intent": "document_drafting"
+        },
+        {
+          "role": "assistant",
+          "content": "이번 주 머지된 PR의 주요 변경사항을 정리하겠습니다.",
+          "timestamp": "2026-03-27T11:01:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-03-27T10:00:00"
+    },
+    {
+      "session_id": "4e36b581-4138-4dad-8527-ee5d83f032fe",
+      "user_id": "user_dev",
+      "turns": [
+        {
+          "role": "user",
+          "content": "Redis 캐시 만료 전략 어떤 게 좋을까?",
+          "timestamp": "2026-03-24T14:00:00",
+          "intent": "knowledge_lookup"
+        },
+        {
+          "role": "assistant",
+          "content": "TTL 기반 vs LRU vs Write-through 세 가지 전략을 비교해드리겠습니다.",
+          "timestamp": "2026-03-24T14:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "그리고 하나 더, k8s pod가 oomkilled 되는데 메모리 설정 어떻게 해야 해?",
+          "timestamp": "2026-03-24T14:10:00",
+          "intent": "knowledge_lookup"
+        },
+        {
+          "role": "assistant",
+          "content": "현재 request/limit 설정을 확인하고 메모리 프로파일링을 추천합니다.",
+          "timestamp": "2026-03-24T14:11:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-03-24T14:00:00"
+    },
+    {
+      "session_id": "f51f7dd9-51ac-46ea-bf0b-95d23d5913f1",
+      "user_id": "user_dev",
+      "turns": [
+        {
+          "role": "user",
+          "content": "이번 스프린트 진행 상황 어떻게 돼?",
+          "timestamp": "2026-03-26T14:00:00",
+          "intent": "project_status"
+        },
+        {
+          "role": "assistant",
+          "content": "현재 스프린트: 결제 모듈 60% 완료, 테스트 커버리지 75%입니다.",
+          "timestamp": "2026-03-26T14:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "API 문서도 업데이트해야 하는데 변경된 엔드포인트 정리해줘",
+          "timestamp": "2026-03-26T14:05:00",
+          "intent": "document_drafting"
+        },
+        {
+          "role": "assistant",
+          "content": "변경된 API 엔드포인트 목록을 정리하겠습니다.",
+          "timestamp": "2026-03-26T14:06:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "Swagger 문서도 같이 업데이트해줘",
+          "timestamp": "2026-03-26T14:10:00",
+          "intent": "document_drafting"
+        },
+        {
+          "role": "assistant",
+          "content": "OpenAPI spec 파일을 업데이트하고 Swagger UI에 반영하겠습니다.",
+          "timestamp": "2026-03-26T14:11:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-03-26T14:00:00"
+    },
+    {
+      "session_id": "7347ee90-0ad4-47d2-881b-99587e1527c3",
+      "user_id": "user_dev",
+      "turns": [
+        {
+          "role": "user",
+          "content": "오늘 리뷰할 PR 있어?",
+          "timestamp": "2026-03-30T10:00:00",
+          "intent": "code_review"
+        },
+        {
+          "role": "assistant",
+          "content": "리뷰 대기 PR: #207 인증 리팩토링, #208 테스트 추가",
+          "timestamp": "2026-03-30T10:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "null 체크 안 하고 있어서 프로덕션에서 NPE 터질 수 있을 것 같아",
+          "timestamp": "2026-03-30T11:00:00",
+          "intent": "troubleshooting"
+        },
+        {
+          "role": "assistant",
+          "content": "Optional 타입 체크와 early return 패턴 적용을 권장합니다.",
+          "timestamp": "2026-03-30T11:01:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-03-30T10:00:00"
+    },
+    {
+      "session_id": "8c226fbd-59c4-48b2-85cc-ef5b325ced9d",
+      "user_id": "user_dev",
+      "turns": [
+        {
+          "role": "user",
+          "content": "금요일 PR 리뷰 뭐 남았어?",
+          "timestamp": "2026-04-03T10:00:00",
+          "intent": "code_review"
+        },
+        {
+          "role": "assistant",
+          "content": "리뷰 대기: #211 에러 핸들링 개선",
+          "timestamp": "2026-04-03T10:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "리뷰 완료된 PR 변경사항 정리해줘",
+          "timestamp": "2026-04-03T11:00:00",
+          "intent": "document_drafting"
+        },
+        {
+          "role": "assistant",
+          "content": "이번 주 머지된 PR의 주요 변경사항을 정리하겠습니다.",
+          "timestamp": "2026-04-03T11:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "이번 주 테스트 커버리지 어떻게 돼?",
+          "timestamp": "2026-04-03T11:05:00",
+          "intent": "project_status"
+        },
+        {
+          "role": "assistant",
+          "content": "현재 테스트 커버리지: 80%. 목표 대비 양호합니다.",
+          "timestamp": "2026-04-03T11:06:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-04-03T10:00:00"
+    },
+    {
+      "session_id": "922acc02-4db5-4243-87f6-65b38e27a978",
+      "user_id": "user_dev",
+      "turns": [
+        {
+          "role": "user",
+          "content": "Docker 멀티스테이지 빌드로 이미지 사이즈 줄이고 싶은데",
+          "timestamp": "2026-03-31T14:00:00",
+          "intent": "knowledge_lookup"
+        },
+        {
+          "role": "assistant",
+          "content": "빌드 스테이지와 런타임 스테이지를 분리하면 이미지 크기를 크게 줄일 수 있습니다.",
+          "timestamp": "2026-03-31T14:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "ㅇㅋ 고마워",
+          "timestamp": "2026-03-31T14:05:00",
+          "intent": null
+        },
+        {
+          "role": "assistant",
+          "content": "언제든 물어보세요!",
+          "timestamp": "2026-03-31T14:06:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-03-31T14:00:00"
+    },
+    {
+      "session_id": "26601913-5aa7-4344-b089-60f5dfac2646",
+      "user_id": "user_dev",
+      "turns": [
+        {
+          "role": "user",
+          "content": "CI 파이프라인이 자꾸 타임아웃 나는데 뭐가 문제지?",
+          "timestamp": "2026-04-02T15:00:00",
+          "intent": null
+        },
+        {
+          "role": "assistant",
+          "content": "CI 로그를 확인해보겠습니다. Docker 이미지 빌드 단계에서 캐시 미스가 발생하고 있을 수 있습니다.",
+          "timestamp": "2026-04-02T15:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "빌드 캐시 어떻게 설정해?",
+          "timestamp": "2026-04-02T15:10:00",
+          "intent": null
+        },
+        {
+          "role": "assistant",
+          "content": "GitHub Actions의 actions/cache를 사용하시면 빌드 시간을 크게 줄일 수 있습니다.",
+          "timestamp": "2026-04-02T15:11:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-04-02T15:00:00"
+    },
+    {
+      "session_id": "779235ca-75f3-48af-ac95-0a4cfa708b75",
+      "user_id": "user_dev",
+      "turns": [
+        {
+          "role": "user",
+          "content": "오늘 리뷰할 PR 있어?",
+          "timestamp": "2026-04-06T10:00:00",
+          "intent": "code_review"
+        },
+        {
+          "role": "assistant",
+          "content": "리뷰 대기 PR: #214 인증 리팩토링, #215 테스트 추가",
+          "timestamp": "2026-04-06T10:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "race condition 있을 것 같아 동시 결제 요청 들어오면 어떡해",
+          "timestamp": "2026-04-06T11:00:00",
+          "intent": "troubleshooting"
+        },
+        {
+          "role": "assistant",
+          "content": "비관적 락(SELECT FOR UPDATE) 또는 분산 락(Redis Lock) 적용을 검토해보겠습니다.",
+          "timestamp": "2026-04-06T11:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "로그 좀 더 자세히 봐줘",
+          "timestamp": "2026-04-06T11:05:00",
+          "intent": "troubleshooting"
+        },
+        {
+          "role": "assistant",
+          "content": "스택 트레이스와 최근 배포 로그를 함께 분석하겠습니다.",
+          "timestamp": "2026-04-06T11:06:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-04-06T10:00:00"
+    },
+    {
+      "session_id": "cf6c3d72-60de-476d-99c3-f52cdf04d0e5",
+      "user_id": "user_dev",
+      "turns": [
+        {
+          "role": "user",
+          "content": "수요일 PR 리뷰하려고",
+          "timestamp": "2026-04-08T10:00:00",
+          "intent": "code_review"
+        },
+        {
+          "role": "assistant",
+          "content": "리뷰 대기: #216 캐시 레이어 추가",
+          "timestamp": "2026-04-08T10:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "메모리 누수 의심돼 서버 장시간 돌리면 RSS가 계속 올라가",
+          "timestamp": "2026-04-08T11:00:00",
+          "intent": "troubleshooting"
+        },
+        {
+          "role": "assistant",
+          "content": "메모리 프로파일링 도구(tracemalloc)로 누수 지점을 추적해보겠습니다.",
+          "timestamp": "2026-04-08T11:01:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-04-08T10:00:00"
+    },
+    {
+      "session_id": "b51250df-1068-44a8-9068-1c57cd82b338",
+      "user_id": "user_dev",
+      "turns": [
+        {
+          "role": "user",
+          "content": "금요일 PR 리뷰 뭐 남았어?",
+          "timestamp": "2026-04-10T10:00:00",
+          "intent": "code_review"
+        },
+        {
+          "role": "assistant",
+          "content": "리뷰 대기: #218 에러 핸들링 개선",
+          "timestamp": "2026-04-10T10:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "리뷰 완료된 PR 변경사항 정리해줘",
+          "timestamp": "2026-04-10T11:00:00",
+          "intent": "document_drafting"
+        },
+        {
+          "role": "assistant",
+          "content": "이번 주 머지된 PR의 주요 변경사항을 정리하겠습니다.",
+          "timestamp": "2026-04-10T11:01:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-04-10T10:00:00"
+    },
+    {
+      "session_id": "5b5e52b2-7997-444d-9797-f0ab94cd7724",
+      "user_id": "user_dev",
+      "turns": [
+        {
+          "role": "user",
+          "content": "gRPC vs REST 어떤 상황에서 뭐 써야 해?",
+          "timestamp": "2026-04-07T14:00:00",
+          "intent": "knowledge_lookup"
+        },
+        {
+          "role": "assistant",
+          "content": "내부 마이크로서비스 간 통신은 gRPC, 외부 API는 REST가 일반적입니다.",
+          "timestamp": "2026-04-07T14:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "그리고 하나 더, celery worker가 간헐적으로 죽어 모니터링 어떻게 해?",
+          "timestamp": "2026-04-07T14:10:00",
+          "intent": "knowledge_lookup"
+        },
+        {
+          "role": "assistant",
+          "content": "Flower 대시보드와 Sentry 에러 트래킹을 병행하시면 됩니다.",
+          "timestamp": "2026-04-07T14:11:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-04-07T14:00:00"
+    },
+    {
+      "session_id": "3bab4e3e-fd43-4580-809f-ece22104726b",
+      "user_id": "user_dev",
+      "turns": [
+        {
+          "role": "user",
+          "content": "GitHub Actions workflow 파일 수정했는데 리뷰 좀",
+          "timestamp": "2026-04-09T15:00:00",
+          "intent": null
+        },
+        {
+          "role": "assistant",
+          "content": "workflow 파일을 확인하겠습니다. 캐시 키 설정과 매트릭스 전략을 검토해볼게요.",
+          "timestamp": "2026-04-09T15:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "매트릭스에 Python 3.11이랑 3.12 같이 넣으면 되지?",
+          "timestamp": "2026-04-09T15:10:00",
+          "intent": null
+        },
+        {
+          "role": "assistant",
+          "content": "네, strategy.matrix.python-version에 ['3.11', '3.12'] 설정하시면 됩니다.",
+          "timestamp": "2026-04-09T15:11:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-04-09T15:00:00"
+    },
+    {
+      "session_id": "8a0d3eaf-54e7-43bc-ac9f-1d7c804b0568",
+      "user_id": "user_dev",
+      "turns": [
+        {
+          "role": "user",
+          "content": "결제 모듈 아키텍처를 이벤트 드리븐으로 바꾸는 거 어떻게 생각해?",
+          "timestamp": "2026-04-10T16:00:00",
+          "intent": "code_review"
+        },
+        {
+          "role": "assistant",
+          "content": "이벤트 소싱 패턴을 적용하면 결제 상태 추적이 용이해집니다. 복잡도 증가는 주의해야 합니다.",
+          "timestamp": "2026-04-10T16:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "관련 레퍼런스 문서 찾아줘",
+          "timestamp": "2026-04-10T16:10:00",
+          "intent": "knowledge_lookup"
+        },
+        {
+          "role": "assistant",
+          "content": "Martin Fowler의 Event Sourcing 글과 AWS 이벤트 드리븐 아키텍처 가이드를 추천합니다.",
+          "timestamp": "2026-04-10T16:11:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-04-10T16:00:00"
+    },
+    {
+      "session_id": "a2286cef-b04a-4d33-b631-23f0f8e37500",
+      "user_id": "user_dev",
+      "turns": [
+        {
+          "role": "user",
+          "content": "오늘 리뷰할 PR 있어?",
+          "timestamp": "2026-04-13T10:00:00",
+          "intent": "code_review"
+        },
+        {
+          "role": "assistant",
+          "content": "리뷰 대기 PR: #221 인증 리팩토링, #222 테스트 추가",
+          "timestamp": "2026-04-13T10:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "API 응답 시간이 갑자기 3배 느려졌어 뭐가 바뀐 거지?",
+          "timestamp": "2026-04-13T11:00:00",
+          "intent": "troubleshooting"
+        },
+        {
+          "role": "assistant",
+          "content": "최근 배포 diff와 쿼리 실행 계획을 비교해보겠습니다.",
+          "timestamp": "2026-04-13T11:01:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-04-13T10:00:00"
+    },
+    {
+      "session_id": "350cc594-457f-48d9-bcf8-92931ac47834",
+      "user_id": "user_dev",
+      "turns": [
+        {
+          "role": "user",
+          "content": "금요일 PR 리뷰 뭐 남았어?",
+          "timestamp": "2026-04-17T10:00:00",
+          "intent": "code_review"
+        },
+        {
+          "role": "assistant",
+          "content": "리뷰 대기: #225 에러 핸들링 개선",
+          "timestamp": "2026-04-17T10:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "리뷰 완료된 PR 변경사항 정리해줘",
+          "timestamp": "2026-04-17T11:00:00",
+          "intent": "document_drafting"
+        },
+        {
+          "role": "assistant",
+          "content": "이번 주 머지된 PR의 주요 변경사항을 정리하겠습니다.",
+          "timestamp": "2026-04-17T11:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "이번 주 테스트 커버리지 어떻게 돼?",
+          "timestamp": "2026-04-17T11:05:00",
+          "intent": "project_status"
+        },
+        {
+          "role": "assistant",
+          "content": "현재 테스트 커버리지: 84%. 목표 대비 양호합니다.",
+          "timestamp": "2026-04-17T11:06:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-04-17T10:00:00"
+    },
+    {
+      "session_id": "d6816205-ed88-4614-9a09-f5d3ca7d1202",
+      "user_id": "user_dev",
+      "turns": [
+        {
+          "role": "user",
+          "content": "SQLAlchemy 2.0 마이그레이션 가이드 있어?",
+          "timestamp": "2026-04-14T14:00:00",
+          "intent": "knowledge_lookup"
+        },
+        {
+          "role": "assistant",
+          "content": "공식 migration guide를 참고하시면 됩니다. 주요 변경점은 Session.execute() 방식입니다.",
+          "timestamp": "2026-04-14T14:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "ㅇㅋ 고마워",
+          "timestamp": "2026-04-14T14:05:00",
+          "intent": null
+        },
+        {
+          "role": "assistant",
+          "content": "언제든 물어보세요!",
+          "timestamp": "2026-04-14T14:06:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-04-14T14:00:00"
+    },
+    {
+      "session_id": "ca87de59-a175-470b-8ed0-b50fea71101e",
+      "user_id": "user_dev",
+      "turns": [
+        {
+          "role": "user",
+          "content": "배포 파이프라인에서 도커 이미지 태깅이 안 돼",
+          "timestamp": "2026-04-16T15:00:00",
+          "intent": null
+        },
+        {
+          "role": "assistant",
+          "content": "docker build 스텝에서 tag 설정을 확인해보겠습니다.",
+          "timestamp": "2026-04-16T15:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "태그를 커밋 SHA로 자동 설정하는 방법은?",
+          "timestamp": "2026-04-16T15:10:00",
+          "intent": null
+        },
+        {
+          "role": "assistant",
+          "content": "GITHUB_SHA 환경 변수를 docker tag에 사용하시면 됩니다.",
+          "timestamp": "2026-04-16T15:11:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-04-16T15:00:00"
+    },
+    {
+      "session_id": "79552dad-f986-40ea-9260-f5e286100344",
+      "user_id": "user_dev",
+      "turns": [
+        {
+          "role": "user",
+          "content": "모놀리스에서 마이크로서비스로 전환할 때 뭐부터 분리해야 해?",
+          "timestamp": "2026-04-17T16:00:00",
+          "intent": "code_review"
+        },
+        {
+          "role": "assistant",
+          "content": "비즈니스 도메인 경계가 명확한 모듈부터 분리하세요. Strangler Fig 패턴을 고려해보세요.",
+          "timestamp": "2026-04-17T16:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "우리 서비스에서는 인증 모듈이 제일 독립적인 것 같은데",
+          "timestamp": "2026-04-17T16:10:00",
+          "intent": "code_review"
+        },
+        {
+          "role": "assistant",
+          "content": "인증 모듈은 좋은 후보입니다. API Gateway 뒤에 별도 서비스로 분리하는 것을 권장합니다.",
+          "timestamp": "2026-04-17T16:11:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-04-17T16:00:00"
+    },
+    {
+      "session_id": "964a704f-42cd-4a55-a3a1-7f57127c06a4",
+      "user_id": "user_new",
+      "turns": [
+        {
+          "role": "user",
+          "content": "안녕하세요~ 오늘 첫 출근인데 뭐부터 하면 될까요?",
+          "timestamp": "2026-03-23T09:00:00",
+          "intent": "onboarding"
+        },
+        {
+          "role": "assistant",
+          "content": "환영합니다! 개발 환경 설정부터 시작하세요. 온보딩 가이드를 안내해드릴게요.",
+          "timestamp": "2026-03-23T09:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "개발 환경 설정 문서 어디 있어요?",
+          "timestamp": "2026-03-23T09:05:00",
+          "intent": "knowledge_lookup"
+        },
+        {
+          "role": "assistant",
+          "content": "Confluence의 'Developer Onboarding' 페이지에 있습니다.",
+          "timestamp": "2026-03-23T09:06:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "감사합니다!",
+          "timestamp": "2026-03-23T09:10:00",
+          "intent": null
+        },
+        {
+          "role": "assistant",
+          "content": "궁금한 점 있으시면 편하게 물어보세요!",
+          "timestamp": "2026-03-23T09:11:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-03-23T09:00:00"
+    },
+    {
+      "session_id": "5b7a34c0-424e-4eb7-a3b1-e24c4c375be7",
+      "user_id": "user_new",
+      "turns": [
+        {
+          "role": "user",
+          "content": "IDE 설정 하려는데 우리 팀 추천 플러그인이 뭐예요?",
+          "timestamp": "2026-03-24T10:00:00",
+          "intent": "onboarding"
+        },
+        {
+          "role": "assistant",
+          "content": "VSCode 기준으로 ESLint, Prettier, GitLens, Python 확장을 권장합니다.",
+          "timestamp": "2026-03-24T10:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "Python 확장은 어떤 걸 설치해야 하나요?",
+          "timestamp": "2026-03-24T10:05:00",
+          "intent": "onboarding"
+        },
+        {
+          "role": "assistant",
+          "content": "ms-python.python 확장과 Pylance를 설치하시면 됩니다.",
+          "timestamp": "2026-03-24T10:06:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "넵 감사합니다~",
+          "timestamp": "2026-03-24T10:10:00",
+          "intent": null
+        },
+        {
+          "role": "assistant",
+          "content": "궁금한 점 있으시면 편하게 물어보세요!",
+          "timestamp": "2026-03-24T10:11:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-03-24T10:00:00"
+    },
+    {
+      "session_id": "8cb8056f-e539-4262-b55c-7539de8f0980",
+      "user_id": "user_new",
+      "turns": [
+        {
+          "role": "user",
+          "content": "우리 팀 코드 컨벤션이 어떻게 돼요?",
+          "timestamp": "2026-03-25T10:00:00",
+          "intent": "onboarding"
+        },
+        {
+          "role": "assistant",
+          "content": "ESLint + Prettier 조합을 사용합니다. .eslintrc 파일을 참고하세요.",
+          "timestamp": "2026-03-25T10:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "브랜치 전략은요? Git flow 쓰나요?",
+          "timestamp": "2026-03-25T10:05:00",
+          "intent": "onboarding"
+        },
+        {
+          "role": "assistant",
+          "content": "trunk-based development입니다. feature 브랜치 → PR → 머지.",
+          "timestamp": "2026-03-25T10:06:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "커밋 메시지 규칙도 있나요?",
+          "timestamp": "2026-03-25T10:10:00",
+          "intent": "onboarding"
+        },
+        {
+          "role": "assistant",
+          "content": "Conventional Commits를 따릅니다. feat:, fix:, docs: 접두사를 사용하세요.",
+          "timestamp": "2026-03-25T10:11:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-03-25T10:00:00"
+    },
+    {
+      "session_id": "c0529a91-93c9-4373-93ca-7f6d13e91f78",
+      "user_id": "user_new",
+      "turns": [
+        {
+          "role": "user",
+          "content": "팀 구성원이 어떻게 되는지 알 수 있을까요?",
+          "timestamp": "2026-03-26T14:00:00",
+          "intent": "onboarding"
+        },
+        {
+          "role": "assistant",
+          "content": "팀: PM 김과장님, 백엔드 이대리님, 데이터 최주임님, 그리고 박사원님입니다.",
+          "timestamp": "2026-03-26T14:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "각 분이 어떤 업무를 담당하시나요?",
+          "timestamp": "2026-03-26T14:05:00",
+          "intent": "onboarding"
+        },
+        {
+          "role": "assistant",
+          "content": "김과장: 프로젝트 관리, 이대리: 백엔드 개발, 최주임: 데이터 분석입니다.",
+          "timestamp": "2026-03-26T14:06:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-03-26T14:00:00"
+    },
+    {
+      "session_id": "46048a19-6428-4ea9-945d-9d6863ca40d3",
+      "user_id": "user_new",
+      "turns": [
+        {
+          "role": "user",
+          "content": "이번 주 온보딩 학습 내용 정리해서 문서로 만들어야 해요",
+          "timestamp": "2026-03-27T16:00:00",
+          "intent": "document_drafting"
+        },
+        {
+          "role": "assistant",
+          "content": "이번 주 배운 내용을 카테고리별로 정리해드리겠습니다.",
+          "timestamp": "2026-03-27T16:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "환경설정, 컨벤션, 팀 구조로 나눠서 정리해주세요",
+          "timestamp": "2026-03-27T16:05:00",
+          "intent": "document_drafting"
+        },
+        {
+          "role": "assistant",
+          "content": "세 개 섹션으로 구분하여 정리하겠습니다.",
+          "timestamp": "2026-03-27T16:06:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-03-27T16:00:00"
+    },
+    {
+      "session_id": "080a3ad6-8f22-4e09-907d-5c733494ba76",
+      "user_id": "user_new",
+      "turns": [
+        {
+          "role": "user",
+          "content": "안녕하세요~ DB 스키마 문서는 어디서 볼 수 있나요?",
+          "timestamp": "2026-03-30T09:00:00",
+          "intent": "onboarding"
+        },
+        {
+          "role": "assistant",
+          "content": "dbdocs.io에 ERD가 있습니다. 주요 테이블 관계도 설명되어 있어요.",
+          "timestamp": "2026-03-30T09:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "API 문서는요?",
+          "timestamp": "2026-03-30T09:05:00",
+          "intent": "onboarding"
+        },
+        {
+          "role": "assistant",
+          "content": "Swagger UI가 /docs 경로에 있고, Postman 컬렉션도 공유되어 있습니다.",
+          "timestamp": "2026-03-30T09:06:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-03-30T09:00:00"
+    },
+    {
+      "session_id": "cbd9c4e7-762a-46f5-8f10-dc9aff09e29f",
+      "user_id": "user_new",
+      "turns": [
+        {
+          "role": "user",
+          "content": "첫 PR 올려도 될까요? 리뷰어 누구로 지정하면 되나요?",
+          "timestamp": "2026-03-31T10:00:00",
+          "intent": "code_review"
+        },
+        {
+          "role": "assistant",
+          "content": "네! 리뷰어는 이대리님을 지정해주세요.",
+          "timestamp": "2026-03-31T10:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "감사합니다! 올렸어요",
+          "timestamp": "2026-03-31T10:10:00",
+          "intent": null
+        },
+        {
+          "role": "assistant",
+          "content": "확인하겠습니다!",
+          "timestamp": "2026-03-31T10:11:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-03-31T10:00:00"
+    },
+    {
+      "session_id": "7cfc024b-6c5a-48aa-94c8-11056942098f",
+      "user_id": "user_new",
+      "turns": [
+        {
+          "role": "user",
+          "content": "pytest fixture 어떻게 써요? conftest.py에 넣으면 되나요?",
+          "timestamp": "2026-04-01T14:00:00",
+          "intent": "knowledge_lookup"
+        },
+        {
+          "role": "assistant",
+          "content": "네, conftest.py에 공통 fixture를 정의하면 자동 인식됩니다.",
+          "timestamp": "2026-04-01T14:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "mock이랑 fixture 차이가 뭐예요?",
+          "timestamp": "2026-04-01T14:05:00",
+          "intent": "knowledge_lookup"
+        },
+        {
+          "role": "assistant",
+          "content": "fixture는 데이터/환경 셋업, mock은 외부 의존성을 가짜로 대체합니다.",
+          "timestamp": "2026-04-01T14:06:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-04-01T14:00:00"
+    },
+    {
+      "session_id": "b1547e97-67a3-4890-a253-c3a6732db27e",
+      "user_id": "user_new",
+      "turns": [
+        {
+          "role": "user",
+          "content": "코드 리뷰 피드백 반영했는데 확인해주세요",
+          "timestamp": "2026-04-02T15:00:00",
+          "intent": "code_review"
+        },
+        {
+          "role": "assistant",
+          "content": "변경사항 확인했습니다. 에러 핸들링만 수정하면 LGTM입니다.",
+          "timestamp": "2026-04-02T15:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "넵 수정했어요!",
+          "timestamp": "2026-04-02T15:05:00",
+          "intent": null
+        },
+        {
+          "role": "assistant",
+          "content": "확인 완료! 머지하겠습니다.",
+          "timestamp": "2026-04-02T15:06:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-04-02T15:00:00"
+    },
+    {
+      "session_id": "0e136dc4-d744-4e4f-bf30-594fb485fb16",
+      "user_id": "user_new",
+      "turns": [
+        {
+          "role": "user",
+          "content": "이번 주 한 일 정리해주세요",
+          "timestamp": "2026-04-03T16:00:00",
+          "intent": "project_status"
+        },
+        {
+          "role": "assistant",
+          "content": "이번 주: 1) 온보딩 마무리 2) 첫 PR 머지 3) 테스트 작성 학습",
+          "timestamp": "2026-04-03T16:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "다음 주부터 실전 투입이죠?",
+          "timestamp": "2026-04-03T16:05:00",
+          "intent": "project_status"
+        },
+        {
+          "role": "assistant",
+          "content": "네, 프로필 API 구현 태스크가 배정될 예정입니다.",
+          "timestamp": "2026-04-03T16:06:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-04-03T16:00:00"
+    },
+    {
+      "session_id": "7f2b8edf-783e-4bcd-9bf8-7599c45743de",
+      "user_id": "user_new",
+      "turns": [
+        {
+          "role": "user",
+          "content": "이번 주 제 담당 태스크 뭐예요?",
+          "timestamp": "2026-04-06T09:00:00",
+          "intent": "project_status"
+        },
+        {
+          "role": "assistant",
+          "content": "이번 주: 1) 사용자 프로필 API 구현 2) 테스트 작성 3) PR 피드백 반영",
+          "timestamp": "2026-04-06T09:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "프로필 API 스펙 문서 어디 있어요?",
+          "timestamp": "2026-04-06T09:05:00",
+          "intent": "knowledge_lookup"
+        },
+        {
+          "role": "assistant",
+          "content": "API 스펙은 Notion의 'API Design' 페이지에 정리되어 있습니다.",
+          "timestamp": "2026-04-06T09:06:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-04-06T09:00:00"
+    },
+    {
+      "session_id": "474193e3-fca2-4aac-9539-6a23633a8472",
+      "user_id": "user_new",
+      "turns": [
+        {
+          "role": "user",
+          "content": "코드 리뷰 피드백 반영했는데 확인해주세요",
+          "timestamp": "2026-04-07T10:00:00",
+          "intent": "code_review"
+        },
+        {
+          "role": "assistant",
+          "content": "확인했습니다. 에러 핸들링 부분만 수정하시면 LGTM입니다.",
+          "timestamp": "2026-04-07T10:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "에러 핸들링은 어떤 패턴이 좋을까요?",
+          "timestamp": "2026-04-07T10:05:00",
+          "intent": "knowledge_lookup"
+        },
+        {
+          "role": "assistant",
+          "content": "커스텀 예외 + 글로벌 에러 핸들러 패턴을 추천합니다.",
+          "timestamp": "2026-04-07T10:06:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "감사합니다!",
+          "timestamp": "2026-04-07T10:10:00",
+          "intent": null
+        },
+        {
+          "role": "assistant",
+          "content": "화이팅입니다!",
+          "timestamp": "2026-04-07T10:11:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-04-07T10:00:00"
+    },
+    {
+      "session_id": "35789064-9f82-4cae-8850-de4e09f9e49f",
+      "user_id": "user_new",
+      "turns": [
+        {
+          "role": "user",
+          "content": "FastAPI에서 Depends 패턴 어떻게 쓰는 건가요?",
+          "timestamp": "2026-04-08T14:00:00",
+          "intent": "knowledge_lookup"
+        },
+        {
+          "role": "assistant",
+          "content": "Depends로 의존성 주입을 선언적으로 처리합니다. DB 세션, 인증 등에 활용합니다.",
+          "timestamp": "2026-04-08T14:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "Pydantic validation은 자동으로 되는 건가요?",
+          "timestamp": "2026-04-08T14:05:00",
+          "intent": "knowledge_lookup"
+        },
+        {
+          "role": "assistant",
+          "content": "네, request body에 Pydantic 모델을 지정하면 자동 validation 됩니다.",
+          "timestamp": "2026-04-08T14:06:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-04-08T14:00:00"
+    },
+    {
+      "session_id": "51734db5-78b1-4129-9e51-0aa9ff3c949a",
+      "user_id": "user_new",
+      "turns": [
+        {
+          "role": "user",
+          "content": "API 테스트 중에 422 에러가 나는데 뭐가 문제인 건가요?",
+          "timestamp": "2026-04-08T16:00:00",
+          "intent": "troubleshooting"
+        },
+        {
+          "role": "assistant",
+          "content": "422는 validation 에러입니다. 요청 body의 필드 타입과 스키마를 확인해보세요.",
+          "timestamp": "2026-04-08T16:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "아 날짜 포맷이 잘못됐었네요 감사합니다!",
+          "timestamp": "2026-04-08T16:05:00",
+          "intent": null
+        },
+        {
+          "role": "assistant",
+          "content": "자주 있는 실수예요. ISO 8601 포맷(YYYY-MM-DD)을 사용하시면 됩니다.",
+          "timestamp": "2026-04-08T16:06:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-04-08T16:00:00"
+    },
+    {
+      "session_id": "23a87190-5848-4b10-9101-7739d2f15d19",
+      "user_id": "user_new",
+      "turns": [
+        {
+          "role": "user",
+          "content": "프로필 API 구현 다 했어요 PR 올렸는데 리뷰 부탁드려요",
+          "timestamp": "2026-04-09T10:00:00",
+          "intent": "code_review"
+        },
+        {
+          "role": "assistant",
+          "content": "PR 확인하겠습니다. 테스트 커버리지도 체크할게요.",
+          "timestamp": "2026-04-09T10:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "테스트 커버리지 80% 넘겼어요",
+          "timestamp": "2026-04-09T10:05:00",
+          "intent": "code_review"
+        },
+        {
+          "role": "assistant",
+          "content": "훌륭합니다! edge case 테스트도 포함되어 있어서 좋습니다.",
+          "timestamp": "2026-04-09T10:06:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-04-09T10:00:00"
+    },
+    {
+      "session_id": "6aec68c8-f2d7-440a-9752-d0c7c7bed604",
+      "user_id": "user_new",
+      "turns": [
+        {
+          "role": "user",
+          "content": "이번 주 진행 상황 정리해주세요",
+          "timestamp": "2026-04-10T15:00:00",
+          "intent": "project_status"
+        },
+        {
+          "role": "assistant",
+          "content": "이번 주: 프로필 API 구현 완료, PR 리뷰 진행 중, 테스트 90% 작성 완료.",
+          "timestamp": "2026-04-10T15:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "다음 주에는 뭐 하면 돼요?",
+          "timestamp": "2026-04-10T15:05:00",
+          "intent": "project_status"
+        },
+        {
+          "role": "assistant",
+          "content": "다음 주: 알림 서비스 구현, 통합 테스트 작성이 예정되어 있습니다.",
+          "timestamp": "2026-04-10T15:06:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-04-10T15:00:00"
+    },
+    {
+      "session_id": "5b7715c4-6808-411d-b4b0-63292ffaa8af",
+      "user_id": "user_new",
+      "turns": [
+        {
+          "role": "user",
+          "content": "이번 주 담당 태스크 확인할게요",
+          "timestamp": "2026-04-13T09:00:00",
+          "intent": "project_status"
+        },
+        {
+          "role": "assistant",
+          "content": "이번 주: 1) 알림 서비스 구현 2) 통합 테스트 작성",
+          "timestamp": "2026-04-13T09:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "알림 서비스 설계 문서 먼저 봐야겠어요",
+          "timestamp": "2026-04-13T09:05:00",
+          "intent": "knowledge_lookup"
+        },
+        {
+          "role": "assistant",
+          "content": "알림 서비스 설계 문서는 Wiki에 있습니다. 이벤트 기반 아키텍처로 설계되어 있어요.",
+          "timestamp": "2026-04-13T09:06:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-04-13T09:00:00"
+    },
+    {
+      "session_id": "d3ae7773-2ea0-4d9e-a864-1a7a0226d71f",
+      "user_id": "user_new",
+      "turns": [
+        {
+          "role": "user",
+          "content": "WebSocket으로 실시간 알림 구현하려면 어떻게 해야 하나요?",
+          "timestamp": "2026-04-14T10:00:00",
+          "intent": "knowledge_lookup"
+        },
+        {
+          "role": "assistant",
+          "content": "FastAPI WebSocket 엔드포인트를 사용하세요. ConnectionManager 패턴을 추천합니다.",
+          "timestamp": "2026-04-14T10:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "Redis Pub/Sub이랑 연동도 가능해요?",
+          "timestamp": "2026-04-14T10:05:00",
+          "intent": "knowledge_lookup"
+        },
+        {
+          "role": "assistant",
+          "content": "네, Redis Pub/Sub을 백엔드로 사용하면 다중 서버에서도 실시간 알림 가능합니다.",
+          "timestamp": "2026-04-14T10:06:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-04-14T10:00:00"
+    },
+    {
+      "session_id": "c9236258-b800-4e94-b390-51317ccb5f02",
+      "user_id": "user_new",
+      "turns": [
+        {
+          "role": "user",
+          "content": "알림 서비스 PR 올렸어요 설계 리뷰 부탁드려요",
+          "timestamp": "2026-04-15T14:00:00",
+          "intent": "code_review"
+        },
+        {
+          "role": "assistant",
+          "content": "PR 확인했습니다. 구조가 깔끔합니다. 에러 재시도 로직 추가를 제안합니다.",
+          "timestamp": "2026-04-15T14:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "재시도 로직은 exponential backoff로 하면 될까요?",
+          "timestamp": "2026-04-15T14:05:00",
+          "intent": "knowledge_lookup"
+        },
+        {
+          "role": "assistant",
+          "content": "네, tenacity 라이브러리의 @retry 데코레이터를 사용하시면 편리합니다.",
+          "timestamp": "2026-04-15T14:06:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-04-15T14:00:00"
+    },
+    {
+      "session_id": "57cb24d4-66e7-4d62-aca9-938db2840b15",
+      "user_id": "user_new",
+      "turns": [
+        {
+          "role": "user",
+          "content": "WebSocket 연결이 간헐적으로 끊기는데 왜 그런 건가요?",
+          "timestamp": "2026-04-16T10:00:00",
+          "intent": "troubleshooting"
+        },
+        {
+          "role": "assistant",
+          "content": "ping/pong heartbeat 미설정이 원인일 수 있습니다. WebSocket keepalive 설정을 확인해보세요.",
+          "timestamp": "2026-04-16T10:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "해결됐어요! 트러블슈팅 과정을 문서로 남겨야 할 것 같아요",
+          "timestamp": "2026-04-16T10:05:00",
+          "intent": "document_drafting"
+        },
+        {
+          "role": "assistant",
+          "content": "좋은 습관입니다. 문제 상황, 원인, 해결책을 포함한 TIL 문서를 작성하겠습니다.",
+          "timestamp": "2026-04-16T10:06:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-04-16T10:00:00"
+    },
+    {
+      "session_id": "8b068ede-62f6-4e2e-9c49-834675c996df",
+      "user_id": "user_new",
+      "turns": [
+        {
+          "role": "user",
+          "content": "통합 테스트에서 외부 API 호출은 어떻게 처리하나요?",
+          "timestamp": "2026-04-17T15:00:00",
+          "intent": "knowledge_lookup"
+        },
+        {
+          "role": "assistant",
+          "content": "VCR 패턴이나 responses 라이브러리로 HTTP 요청을 모킹하면 됩니다.",
+          "timestamp": "2026-04-17T15:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "테스트 다 통과시켰어요 이번 주 정리해주세요",
+          "timestamp": "2026-04-17T15:05:00",
+          "intent": "project_status"
+        },
+        {
+          "role": "assistant",
+          "content": "이번 주: 알림 서비스 구현 완료, 통합 테스트 작성 완료, WebSocket 이슈 해결.",
+          "timestamp": "2026-04-17T15:06:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "넵 감사합니다!",
+          "timestamp": "2026-04-17T15:10:00",
+          "intent": null
+        },
+        {
+          "role": "assistant",
+          "content": "수고하셨습니다!",
+          "timestamp": "2026-04-17T15:11:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-04-17T15:00:00"
+    },
+    {
+      "session_id": "53cbe1fc-6d0d-4a45-b93f-79f0e611ec32",
+      "user_id": "user_analyst",
+      "turns": [
+        {
+          "role": "user",
+          "content": "지난주 매출 데이터 쿼리 좀 도와줘. GROUP BY 절이 잘 안 돼",
+          "timestamp": "2026-03-23T10:00:00",
+          "intent": "data_analysis"
+        },
+        {
+          "role": "assistant",
+          "content": "GROUP BY에 집계 함수와 컬럼을 정리해드릴게요.",
+          "timestamp": "2026-03-23T10:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "서브쿼리 대신 CTE로 쓸 수 있어?",
+          "timestamp": "2026-03-23T10:10:00",
+          "intent": "data_analysis"
+        },
+        {
+          "role": "assistant",
+          "content": "네, WITH절을 사용하면 가독성이 좋아집니다.",
+          "timestamp": "2026-03-23T10:11:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "그리고 Jupyter에서 SQL 바로 실행하는 방법 있어?",
+          "timestamp": "2026-03-23T10:15:00",
+          "intent": "knowledge_lookup"
+        },
+        {
+          "role": "assistant",
+          "content": "ipython-sql 확장을 설치하면 %%sql 매직 커맨드로 실행 가능합니다.",
+          "timestamp": "2026-03-23T10:16:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-03-23T10:00:00"
+    },
+    {
+      "session_id": "ad62b62d-8092-4096-9362-66c66faa7e47",
+      "user_id": "user_analyst",
+      "turns": [
+        {
+          "role": "user",
+          "content": "Pandas로 매출 데이터 전처리하는데 결측치 처리 어떻게 하면 좋을까?",
+          "timestamp": "2026-03-24T10:00:00",
+          "intent": "data_analysis"
+        },
+        {
+          "role": "assistant",
+          "content": "결측치 패턴에 따라 dropna, fillna, interpolate를 사용합니다.",
+          "timestamp": "2026-03-24T10:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "피벗테이블 만드는 법도 알려줘",
+          "timestamp": "2026-03-24T10:05:00",
+          "intent": "data_analysis"
+        },
+        {
+          "role": "assistant",
+          "content": "pd.pivot_table(df, values='매출', index='날짜', columns='카테고리')로 만듭니다.",
+          "timestamp": "2026-03-24T10:06:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "오키 고마워",
+          "timestamp": "2026-03-24T10:10:00",
+          "intent": null
+        },
+        {
+          "role": "assistant",
+          "content": "언제든 물어보세요!",
+          "timestamp": "2026-03-24T10:11:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-03-24T10:00:00"
+    },
+    {
+      "session_id": "64a4dba6-d8f7-4214-a4e8-bc3c4896c9c6",
+      "user_id": "user_analyst",
+      "turns": [
+        {
+          "role": "user",
+          "content": "Grafana 대시보드에 신규 메트릭 추가하고 싶은데",
+          "timestamp": "2026-03-25T14:00:00",
+          "intent": null
+        },
+        {
+          "role": "assistant",
+          "content": "어떤 메트릭을 추가하실 건가요? 데이터소스 연결부터 확인해드리겠습니다.",
+          "timestamp": "2026-03-25T14:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "커스텀 패널 만드는 방법 알려줘",
+          "timestamp": "2026-03-25T14:05:00",
+          "intent": null
+        },
+        {
+          "role": "assistant",
+          "content": "Add Panel → SQL 쿼리 설정 → Visualization 타입 선택하시면 됩니다.",
+          "timestamp": "2026-03-25T14:06:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-03-25T14:00:00"
+    },
+    {
+      "session_id": "46cc04e8-0b74-4ec4-82b0-eeb325a7cad0",
+      "user_id": "user_analyst",
+      "turns": [
+        {
+          "role": "user",
+          "content": "이번 주 데이터 파이프라인 상태 업데이트할게",
+          "timestamp": "2026-03-26T11:00:00",
+          "intent": "project_status"
+        },
+        {
+          "role": "assistant",
+          "content": "현재 진행 상황을 정리해주세요.",
+          "timestamp": "2026-03-26T11:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "ETL 스케줄러 설정도 해야 해",
+          "timestamp": "2026-03-26T11:05:00",
+          "intent": "scheduling"
+        },
+        {
+          "role": "assistant",
+          "content": "Airflow DAG 설정을 도와드리겠습니다.",
+          "timestamp": "2026-03-26T11:06:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-03-26T11:00:00"
+    },
+    {
+      "session_id": "4d555f81-d65b-4a1a-a736-2f9be79c035b",
+      "user_id": "user_analyst",
+      "turns": [
+        {
+          "role": "user",
+          "content": "주간 데이터 리포트 작성해줘",
+          "timestamp": "2026-03-27T15:00:00",
+          "intent": "document_drafting"
+        },
+        {
+          "role": "assistant",
+          "content": "주간 리포트 작성하겠습니다. 핵심 지표, 이상치, 인사이트 포함.",
+          "timestamp": "2026-03-27T15:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "그래프도 같이 넣어줘",
+          "timestamp": "2026-03-27T15:05:00",
+          "intent": "document_drafting"
+        },
+        {
+          "role": "assistant",
+          "content": "matplotlib/seaborn 시각화를 리포트에 포함하겠습니다.",
+          "timestamp": "2026-03-27T15:06:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-03-27T15:00:00"
+    },
+    {
+      "session_id": "ccd92dbf-7fe4-43b6-9b1b-63e798430b67",
+      "user_id": "user_analyst",
+      "turns": [
+        {
+          "role": "user",
+          "content": "사용자 세그먼트별 리텐션율 쿼리 작성해줘",
+          "timestamp": "2026-03-30T10:00:00",
+          "intent": "data_analysis"
+        },
+        {
+          "role": "assistant",
+          "content": "코호트별 리텐션 분석 쿼리를 작성해드리겠습니다. DATE_TRUNC 활용합니다.",
+          "timestamp": "2026-03-30T10:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "WINDOW 함수 사용법도 알려줘",
+          "timestamp": "2026-03-30T10:10:00",
+          "intent": "data_analysis"
+        },
+        {
+          "role": "assistant",
+          "content": "ROW_NUMBER, LAG, LEAD 등의 윈도우 함수를 안내해드리겠습니다.",
+          "timestamp": "2026-03-30T10:11:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "참 데이터 파이프라인 스케줄링은 Airflow로 해야 하나?",
+          "timestamp": "2026-03-30T10:15:00",
+          "intent": "knowledge_lookup"
+        },
+        {
+          "role": "assistant",
+          "content": "Airflow가 표준이지만, 간단한 작업은 Prefect이나 cron도 옵션입니다.",
+          "timestamp": "2026-03-30T10:16:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "넵넵 고마워",
+          "timestamp": "2026-03-30T10:20:00",
+          "intent": null
+        },
+        {
+          "role": "assistant",
+          "content": "언제든요!",
+          "timestamp": "2026-03-30T10:21:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-03-30T10:00:00"
+    },
+    {
+      "session_id": "adcc094d-d54b-418d-8e85-6f191953f19c",
+      "user_id": "user_analyst",
+      "turns": [
+        {
+          "role": "user",
+          "content": "DataFrame merge할 때 left join이랑 inner join 차이가 뭐야?",
+          "timestamp": "2026-03-31T10:00:00",
+          "intent": "data_analysis"
+        },
+        {
+          "role": "assistant",
+          "content": "left join은 왼쪽 테이블 전체 유지, inner join은 교집합만 반환합니다.",
+          "timestamp": "2026-03-31T10:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "merge 성능 최적화하려면?",
+          "timestamp": "2026-03-31T10:05:00",
+          "intent": "data_analysis"
+        },
+        {
+          "role": "assistant",
+          "content": "인덱스 기반 join이나 categorical dtype 변환이 효과적입니다.",
+          "timestamp": "2026-03-31T10:06:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-03-31T10:00:00"
+    },
+    {
+      "session_id": "64b982a0-f180-4e0f-8a62-6e751f5917d0",
+      "user_id": "user_analyst",
+      "turns": [
+        {
+          "role": "user",
+          "content": "주간 리포트 자동화 대시보드 만들려고 하는데",
+          "timestamp": "2026-04-01T14:00:00",
+          "intent": null
+        },
+        {
+          "role": "assistant",
+          "content": "Grafana Provisioning이나 Superset을 활용하시면 됩니다.",
+          "timestamp": "2026-04-01T14:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "DAU, WAU, 매출 추이를 한 화면에 보고 싶어",
+          "timestamp": "2026-04-01T14:05:00",
+          "intent": null
+        },
+        {
+          "role": "assistant",
+          "content": "멀티 패널 대시보드로 구성하겠습니다. 시계열 + 바 차트 조합이 적합합니다.",
+          "timestamp": "2026-04-01T14:06:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-04-01T14:00:00"
+    },
+    {
+      "session_id": "1700edf3-d680-496e-9d10-299bf2bea2c4",
+      "user_id": "user_analyst",
+      "turns": [
+        {
+          "role": "user",
+          "content": "ETL 작업 진행상황 공유할게. 80% 완료됐어",
+          "timestamp": "2026-04-02T11:00:00",
+          "intent": "project_status"
+        },
+        {
+          "role": "assistant",
+          "content": "좋습니다. 남은 20%는 어떤 작업인가요?",
+          "timestamp": "2026-04-02T11:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "데이터 검증 로직이랑 에러 핸들링이 남았어",
+          "timestamp": "2026-04-02T11:05:00",
+          "intent": "project_status"
+        },
+        {
+          "role": "assistant",
+          "content": "검증 로직은 Great Expectations로 자동화하면 효율적입니다.",
+          "timestamp": "2026-04-02T11:06:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "넵넵",
+          "timestamp": "2026-04-02T11:10:00",
+          "intent": null
+        },
+        {
+          "role": "assistant",
+          "content": "추가 사항 있으시면 말씀해주세요.",
+          "timestamp": "2026-04-02T11:11:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-04-02T11:00:00"
+    },
+    {
+      "session_id": "67e9113c-b8cf-466d-870b-1cd422d0d17e",
+      "user_id": "user_analyst",
+      "turns": [
+        {
+          "role": "user",
+          "content": "이상치 탐지 결과 좀 봐줘",
+          "timestamp": "2026-04-03T15:00:00",
+          "intent": "data_analysis"
+        },
+        {
+          "role": "assistant",
+          "content": "Z-score 기반 이상치 탐지 결과: 3건의 이상치 발견.",
+          "timestamp": "2026-04-03T15:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "오키 보고서에 넣어줘",
+          "timestamp": "2026-04-03T15:05:00",
+          "intent": "document_drafting"
+        },
+        {
+          "role": "assistant",
+          "content": "이상치 분석 결과를 보고서에 추가하겠습니다.",
+          "timestamp": "2026-04-03T15:06:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-04-03T15:00:00"
+    },
+    {
+      "session_id": "dacab8ea-d4ca-49bc-b336-dea1aec9733d",
+      "user_id": "user_analyst",
+      "turns": [
+        {
+          "role": "user",
+          "content": "이번 달 신규 가입자 퍼널 분석 쿼리 필요해",
+          "timestamp": "2026-04-06T10:00:00",
+          "intent": "data_analysis"
+        },
+        {
+          "role": "assistant",
+          "content": "퍼널 분석용 CTE 기반 쿼리를 작성해드리겠습니다.",
+          "timestamp": "2026-04-06T10:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "인덱스 안 타는 것 같은데 실행 계획 봐줘",
+          "timestamp": "2026-04-06T10:10:00",
+          "intent": "data_analysis"
+        },
+        {
+          "role": "assistant",
+          "content": "EXPLAIN ANALYZE로 실행 계획을 확인해보겠습니다.",
+          "timestamp": "2026-04-06T10:11:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "dbt로 데이터 변환 자동화하는 게 좋을까?",
+          "timestamp": "2026-04-06T10:15:00",
+          "intent": "knowledge_lookup"
+        },
+        {
+          "role": "assistant",
+          "content": "dbt는 SQL 기반 변환에 최적입니다. 버전 관리와 테스트도 지원합니다.",
+          "timestamp": "2026-04-06T10:16:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-04-06T10:00:00"
+    },
+    {
+      "session_id": "3481523e-29c6-413f-8218-f45aeb42facb",
+      "user_id": "user_analyst",
+      "turns": [
+        {
+          "role": "user",
+          "content": "시계열 데이터 리샘플링 어떻게 해?",
+          "timestamp": "2026-04-07T10:00:00",
+          "intent": "data_analysis"
+        },
+        {
+          "role": "assistant",
+          "content": "df.resample('W').mean()으로 주간 집계가 가능합니다.",
+          "timestamp": "2026-04-07T10:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "rolling average도 같이 보고 싶어",
+          "timestamp": "2026-04-07T10:05:00",
+          "intent": "data_analysis"
+        },
+        {
+          "role": "assistant",
+          "content": "df.rolling(window=7).mean()을 적용하시면 됩니다.",
+          "timestamp": "2026-04-07T10:06:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "오키 고마워",
+          "timestamp": "2026-04-07T10:10:00",
+          "intent": null
+        },
+        {
+          "role": "assistant",
+          "content": "언제든 물어보세요!",
+          "timestamp": "2026-04-07T10:11:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-04-07T10:00:00"
+    },
+    {
+      "session_id": "41b4b6d3-2a49-4ee2-81b6-60615fca2ad7",
+      "user_id": "user_analyst",
+      "turns": [
+        {
+          "role": "user",
+          "content": "경영진 대시보드에 Funnel 차트 추가해야 해",
+          "timestamp": "2026-04-08T14:00:00",
+          "intent": null
+        },
+        {
+          "role": "assistant",
+          "content": "Google Analytics 연동이나 자체 이벤트 로그 기반으로 Funnel 구성 가능합니다.",
+          "timestamp": "2026-04-08T14:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "전환율 단계별로 보여줘야 하는데 어떤 차트가 좋을까",
+          "timestamp": "2026-04-08T14:05:00",
+          "intent": null
+        },
+        {
+          "role": "assistant",
+          "content": "Plotly funnel chart나 D3.js 기반 커스텀 차트를 추천합니다.",
+          "timestamp": "2026-04-08T14:06:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-04-08T14:00:00"
+    },
+    {
+      "session_id": "3b6afe1c-ddeb-4648-bd65-25035d175d5b",
+      "user_id": "user_analyst",
+      "turns": [
+        {
+          "role": "user",
+          "content": "대시보드 개발 진행률 보고할게",
+          "timestamp": "2026-04-09T11:00:00",
+          "intent": "project_status"
+        },
+        {
+          "role": "assistant",
+          "content": "진행 상황을 정리해드리겠습니다.",
+          "timestamp": "2026-04-09T11:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "김과장님한테 공유할 자료도 만들어줘",
+          "timestamp": "2026-04-09T11:05:00",
+          "intent": "team_communication"
+        },
+        {
+          "role": "assistant",
+          "content": "PM님께 공유할 진행 상황 요약을 작성하겠습니다.",
+          "timestamp": "2026-04-09T11:06:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-04-09T11:00:00"
+    },
+    {
+      "session_id": "0535f492-d265-47a9-a998-6004efc77953",
+      "user_id": "user_analyst",
+      "turns": [
+        {
+          "role": "user",
+          "content": "주간 데이터 리포트 작성해줘",
+          "timestamp": "2026-04-10T15:00:00",
+          "intent": "document_drafting"
+        },
+        {
+          "role": "assistant",
+          "content": "주간 리포트 작성하겠습니다. 핵심 지표, 이상치, 인사이트 포함.",
+          "timestamp": "2026-04-10T15:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "그래프도 같이 넣어줘",
+          "timestamp": "2026-04-10T15:05:00",
+          "intent": "document_drafting"
+        },
+        {
+          "role": "assistant",
+          "content": "matplotlib/seaborn 시각화를 리포트에 포함하겠습니다.",
+          "timestamp": "2026-04-10T15:06:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-04-10T15:00:00"
+    },
+    {
+      "session_id": "13199764-ec82-48ed-a135-87b677cdf9b5",
+      "user_id": "user_analyst",
+      "turns": [
+        {
+          "role": "user",
+          "content": "A/B 테스트 결과 데이터 추출 쿼리 작성해줘",
+          "timestamp": "2026-04-13T10:00:00",
+          "intent": "data_analysis"
+        },
+        {
+          "role": "assistant",
+          "content": "A/B 그룹별 주요 지표 비교 쿼리를 작성하겠습니다.",
+          "timestamp": "2026-04-13T10:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "통계적 유의성은 어떻게 계산해?",
+          "timestamp": "2026-04-13T10:10:00",
+          "intent": "data_analysis"
+        },
+        {
+          "role": "assistant",
+          "content": "scipy.stats의 chi2_contingency나 t-test를 활용하시면 됩니다.",
+          "timestamp": "2026-04-13T10:11:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "데이터 품질 모니터링은 어떻게 하면 좋아?",
+          "timestamp": "2026-04-13T10:15:00",
+          "intent": "knowledge_lookup"
+        },
+        {
+          "role": "assistant",
+          "content": "Great Expectations 같은 도구로 데이터 검증 파이프라인을 구축하시면 됩니다.",
+          "timestamp": "2026-04-13T10:16:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "넵넵 고마워",
+          "timestamp": "2026-04-13T10:20:00",
+          "intent": null
+        },
+        {
+          "role": "assistant",
+          "content": "언제든요!",
+          "timestamp": "2026-04-13T10:21:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-04-13T10:00:00"
+    },
+    {
+      "session_id": "4bfea055-bf5f-48e2-aa1c-359b6b7b2c18",
+      "user_id": "user_analyst",
+      "turns": [
+        {
+          "role": "user",
+          "content": "대용량 CSV 읽을 때 메모리 터지는데 어떡해?",
+          "timestamp": "2026-04-14T10:00:00",
+          "intent": "data_analysis"
+        },
+        {
+          "role": "assistant",
+          "content": "chunksize 파라미터로 분할 읽기하거나, dtype 최적화하세요.",
+          "timestamp": "2026-04-14T10:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "Parquet 포맷으로 변환하는 게 나을까?",
+          "timestamp": "2026-04-14T10:05:00",
+          "intent": "data_analysis"
+        },
+        {
+          "role": "assistant",
+          "content": "네, Parquet은 컬럼 기반이라 분석 쿼리에 훨씬 효율적입니다.",
+          "timestamp": "2026-04-14T10:06:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-04-14T10:00:00"
+    },
+    {
+      "session_id": "ad694b92-fd96-4c73-9e09-89d975c3b646",
+      "user_id": "user_analyst",
+      "turns": [
+        {
+          "role": "user",
+          "content": "리텐션 코호트 분석 시각화하려면 어떻게 해?",
+          "timestamp": "2026-04-15T14:00:00",
+          "intent": null
+        },
+        {
+          "role": "assistant",
+          "content": "Pandas 코호트 테이블 → seaborn heatmap으로 시각화하면 됩니다.",
+          "timestamp": "2026-04-15T14:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "matplotlib로도 할 수 있어?",
+          "timestamp": "2026-04-15T14:05:00",
+          "intent": null
+        },
+        {
+          "role": "assistant",
+          "content": "네, plt.pcolormesh로도 가능합니다. 다만 seaborn이 더 깔끔합니다.",
+          "timestamp": "2026-04-15T14:06:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-04-15T14:00:00"
+    },
+    {
+      "session_id": "f5583776-a147-44ba-ba5d-f35d9060870d",
+      "user_id": "user_analyst",
+      "turns": [
+        {
+          "role": "user",
+          "content": "이번 분기 데이터 프로젝트 현황 정리해줘",
+          "timestamp": "2026-04-16T11:00:00",
+          "intent": "project_status"
+        },
+        {
+          "role": "assistant",
+          "content": "분기별 데이터 프로젝트 현황을 정리하겠습니다.",
+          "timestamp": "2026-04-16T11:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "KPI 달성률도 같이 넣어줘",
+          "timestamp": "2026-04-16T11:05:00",
+          "intent": "project_status"
+        },
+        {
+          "role": "assistant",
+          "content": "KPI 달성률을 포함하여 정리하겠습니다.",
+          "timestamp": "2026-04-16T11:06:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "넵넵",
+          "timestamp": "2026-04-16T11:10:00",
+          "intent": null
+        },
+        {
+          "role": "assistant",
+          "content": "추가 사항 있으시면 말씀해주세요.",
+          "timestamp": "2026-04-16T11:11:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-04-16T11:00:00"
+    },
+    {
+      "session_id": "f1c838df-0277-4d53-a49d-05c041abd7fe",
+      "user_id": "user_analyst",
+      "turns": [
+        {
+          "role": "user",
+          "content": "이상치 탐지 결과 좀 봐줘",
+          "timestamp": "2026-04-17T15:00:00",
+          "intent": "data_analysis"
+        },
+        {
+          "role": "assistant",
+          "content": "Z-score 기반 이상치 탐지 결과: 3건의 이상치 발견.",
+          "timestamp": "2026-04-17T15:01:00",
+          "intent": null
+        },
+        {
+          "role": "user",
+          "content": "오키 보고서에 넣어줘",
+          "timestamp": "2026-04-17T15:05:00",
+          "intent": "document_drafting"
+        },
+        {
+          "role": "assistant",
+          "content": "이상치 분석 결과를 보고서에 추가하겠습니다.",
+          "timestamp": "2026-04-17T15:06:00",
+          "intent": null
+        }
+      ],
+      "created_at": "2026-04-17T15:00:00"
+    }
+  ]
+}
