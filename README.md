@@ -246,6 +246,25 @@ Decay Sweep → prune → re-classify orphans → mitosis → fusion
 
 상세 분석: [`docs/analysis_report_v2.md`](docs/analysis_report_v2.md)
 
+### v2 장기 시뮬레이션 (624턴, 4유저×56일)
+
+| 지표 | 결과 |
+|------|------|
+| 총 턴 | **624** (4유저, 224세션, 56일, 4 phases) |
+| Bootstrap 카테고리 | **7개** (k-means auto) |
+| 최종 카테고리 | **4개** (Fusion 4회, Discovery 1회) |
+| Fusion 이벤트 | **4회** (5개 카테고리 연속 병합 → strategic_tech_ops) |
+| Discovery 이벤트 | **1회** (`tech_guide` 자동 생성) |
+| Extinction (merge 경유) | **8개** (부모 카테고리 자연 소멸) |
+| Mitosis | **0회** (개선 필요: 분열 조건 강화 예정) |
+| 메모리 | **191개** (4유저 합산) |
+| Prediction 생성률 | **62.3%** (389/624턴) |
+| 메모리 활용률 | **99.4%** (620/624턴) |
+| 평균 latency | **1,623ms/턴** |
+| 에러 | **0건** |
+
+상세 분석: [`docs/analysis_report_v2_long.md`](docs/analysis_report_v2_long.md)
+
 ## Research References
 
 - Mnemosyne (2025): Edge-based temporal decay + boosting
