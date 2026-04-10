@@ -124,6 +124,8 @@ class DecayEngine:
         new_content: str | None = None,
         subject_key: str | None = None,
         fact_registry: dict[str, str] | None = None,
+        degree_cap: int | None = None,
+        propagation_stats: dict | None = None,
     ) -> list[str]:
         """교통 네트워크 link failure propagation 적용.
 
@@ -207,6 +209,13 @@ class DecayEngine:
             entity_id, hop = queue.popleft()
             if entity_id in visited or hop > propagation_depth:
                 continue
+
+            # degree_cap: 고차수 노드 전파 차단 (방어 baseline)
+            if degree_cap is not None:
+                entity_degree = graph_store.entity_graph.degree(entity_id)
+                if entity_degree > degree_cap:
+                    continue
+
             visited.add(entity_id)
             hop_map[entity_id] = hop
 
@@ -221,6 +230,11 @@ class DecayEngine:
         # --- 3단계: 영향받은 memory weight 갱신 ---
         affected_ids: list[str] = []
 
+        # propagation_stats: hop별 damage 통계 수집 (실험 분석용, 선택적)
+        if propagation_stats is not None:
+            propagation_stats.setdefault("per_hop", {})
+            propagation_stats.setdefault("entities_per_hop", {})
+
         for entity_id, hop in hop_map.items():
             memory_ids = graph_store.get_memory_ids_for_entity(entity_id)
             if not memory_ids:
@@ -232,6 +246,11 @@ class DecayEngine:
             base_factor = decay_per_hop ** hop
             adjusted_factor = 1 - (1 - base_factor) / in_degree
 
+            if propagation_stats is not None:
+                hop_key = str(hop)
+                propagation_stats["entities_per_hop"].setdefault(hop_key, 0)
+                propagation_stats["entities_per_hop"][hop_key] += 1
+
             memories = await metadata_store.get_memories_by_ids(list(memory_ids))
             for mem in memories:
                 if mem.id == invalidated_memory_id:
@@ -241,10 +260,25 @@ class DecayEngine:
                     if not any(kw in mem.content for kw in changed_keywords):
                         continue
 
+                old_weight = mem.decay_weight
                 new_weight = mem.decay_weight * adjusted_factor
                 new_weight = max(new_weight, 0.0)
                 await metadata_store.update_decay_weight(mem.id, new_weight)
                 affected_ids.append(mem.id)
+
+                # hop별 damage 통계 기록
+                if propagation_stats is not None:
+                    hop_key = str(hop)
+                    hop_stats = propagation_stats["per_hop"].setdefault(
+                        hop_key, {"memories_affected": 0, "total_weight_loss": 0.0,
+                                  "killed": 0, "weight_drops": []}
+                    )
+                    hop_stats["memories_affected"] += 1
+                    weight_loss = old_weight - new_weight
+                    hop_stats["total_weight_loss"] += weight_loss
+                    hop_stats["weight_drops"].append(round(weight_loss, 4))
+                    if new_weight < 0.1:
+                        hop_stats["killed"] += 1
 
         return affected_ids
 

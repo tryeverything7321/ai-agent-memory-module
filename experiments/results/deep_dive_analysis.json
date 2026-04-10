@@ -1,0 +1,1259 @@
+{
+  "topology_analysis": {
+    "6k": {
+      "scale": "6k",
+      "basic_stats": {
+        "num_nodes": 414,
+        "num_edges": 520,
+        "mean_degree": 2.512,
+        "median_degree": 2.0,
+        "std_degree": 2.299,
+        "max_degree": 23,
+        "skewness": 4.661,
+        "kurtosis": 34.149
+      },
+      "power_law": {
+        "k_min_2": {
+          "alpha": 2.481,
+          "alpha_se": 0.088,
+          "k_min": 2,
+          "n_tail": 284,
+          "n_total": 414,
+          "ks_statistic": 0.3434,
+          "ks_p_value": 0.0,
+          "interpretation": "scale-free"
+        },
+        "k_min_3": {
+          "alpha": 3.487,
+          "alpha_se": 0.187,
+          "k_min": 3,
+          "n_tail": 176,
+          "n_total": 414,
+          "ks_statistic": 0.3589,
+          "ks_p_value": 0.0,
+          "interpretation": "scale-free"
+        },
+        "k_min_5": {
+          "alpha": 3.306,
+          "alpha_se": 0.414,
+          "k_min": 5,
+          "n_tail": 31,
+          "n_total": 414,
+          "ks_statistic": 0.2682,
+          "ks_p_value": 0.0185,
+          "interpretation": "scale-free"
+        }
+      },
+      "percolation": {
+        "mean_degree": 2.512,
+        "mean_degree_squared": 11.594,
+        "kappa": 4.615,
+        "fc_random_failure": 0.7234,
+        "fc_interpretation": "Random failure에 대해 노드의 72.3%를 제거해야 붕괴",
+        "hub_attack_analysis": [
+          {
+            "pct_removed": 1,
+            "nodes_removed": 4,
+            "remaining_mean_degree": 2.351,
+            "remaining_kappa": 3.407,
+            "giant_component_likely": "True"
+          },
+          {
+            "pct_removed": 2,
+            "nodes_removed": 8,
+            "remaining_mean_degree": 2.278,
+            "remaining_kappa": 3.125,
+            "giant_component_likely": "True"
+          },
+          {
+            "pct_removed": 5,
+            "nodes_removed": 20,
+            "remaining_mean_degree": 2.16,
+            "remaining_kappa": 2.845,
+            "giant_component_likely": "True"
+          },
+          {
+            "pct_removed": 10,
+            "nodes_removed": 41,
+            "remaining_mean_degree": 2.027,
+            "remaining_kappa": 2.627,
+            "giant_component_likely": "True"
+          },
+          {
+            "pct_removed": 20,
+            "nodes_removed": 82,
+            "remaining_mean_degree": 1.804,
+            "remaining_kappa": 2.302,
+            "giant_component_likely": "True"
+          }
+        ]
+      },
+      "gini_coefficient": 0.3795,
+      "hub_concentration": {
+        "top_1pct": {
+          "nodes": 4,
+          "degree_share": 7.3
+        },
+        "top_5pct": {
+          "nodes": 20,
+          "degree_share": 18.2
+        },
+        "top_10pct": {
+          "nodes": 41,
+          "degree_share": 27.3
+        },
+        "top_20pct": {
+          "nodes": 82,
+          "degree_share": 42.4
+        }
+      },
+      "ccdf_data": [
+        {
+          "degree": 0,
+          "count": 29,
+          "ccdf": 0.929952
+        },
+        {
+          "degree": 1,
+          "count": 101,
+          "ccdf": 0.68599
+        },
+        {
+          "degree": 2,
+          "count": 108,
+          "ccdf": 0.425121
+        },
+        {
+          "degree": 3,
+          "count": 101,
+          "ccdf": 0.181159
+        },
+        {
+          "degree": 4,
+          "count": 44,
+          "ccdf": 0.074879
+        },
+        {
+          "degree": 5,
+          "count": 15,
+          "ccdf": 0.038647
+        },
+        {
+          "degree": 6,
+          "count": 4,
+          "ccdf": 0.028986
+        },
+        {
+          "degree": 7,
+          "count": 2,
+          "ccdf": 0.024155
+        },
+        {
+          "degree": 8,
+          "count": 4,
+          "ccdf": 0.014493
+        },
+        {
+          "degree": 11,
+          "count": 1,
+          "ccdf": 0.012077
+        },
+        {
+          "degree": 12,
+          "count": 1,
+          "ccdf": 0.009662
+        },
+        {
+          "degree": 13,
+          "count": 1,
+          "ccdf": 0.007246
+        },
+        {
+          "degree": 17,
+          "count": 1,
+          "ccdf": 0.004831
+        },
+        {
+          "degree": 23,
+          "count": 2,
+          "ccdf": 0.0
+        }
+      ]
+    },
+    "32k": {
+      "scale": "32k",
+      "basic_stats": {
+        "num_nodes": 1732,
+        "num_edges": 2600,
+        "mean_degree": 3.002,
+        "median_degree": 2.0,
+        "std_degree": 5.955,
+        "max_degree": 121,
+        "skewness": 13.01,
+        "kurtosis": 218.867
+      },
+      "power_law": {
+        "k_min_2": {
+          "alpha": 2.346,
+          "alpha_se": 0.039,
+          "k_min": 2,
+          "n_tail": 1167,
+          "n_total": 1732,
+          "ks_statistic": 0.3202,
+          "ks_p_value": 0.0,
+          "interpretation": "scale-free"
+        },
+        "k_min_3": {
+          "alpha": 2.923,
+          "alpha_se": 0.072,
+          "k_min": 3,
+          "n_tail": 715,
+          "n_total": 1732,
+          "ks_statistic": 0.2944,
+          "ks_p_value": 0.0,
+          "interpretation": "scale-free"
+        },
+        "k_min_5": {
+          "alpha": 2.704,
+          "alpha_se": 0.122,
+          "k_min": 5,
+          "n_tail": 196,
+          "n_total": 1732,
+          "ks_statistic": 0.1622,
+          "ks_p_value": 0.0,
+          "interpretation": "scale-free"
+        }
+      },
+      "percolation": {
+        "mean_degree": 3.002,
+        "mean_degree_squared": 44.471,
+        "kappa": 14.812,
+        "fc_random_failure": 0.9276,
+        "fc_interpretation": "Random failure에 대해 노드의 92.8%를 제거해야 붕괴",
+        "hub_attack_analysis": [
+          {
+            "pct_removed": 1,
+            "nodes_removed": 17,
+            "remaining_mean_degree": 2.563,
+            "remaining_kappa": 4.611,
+            "giant_component_likely": "True"
+          },
+          {
+            "pct_removed": 2,
+            "nodes_removed": 34,
+            "remaining_mean_degree": 2.427,
+            "remaining_kappa": 3.831,
+            "giant_component_likely": "True"
+          },
+          {
+            "pct_removed": 5,
+            "nodes_removed": 86,
+            "remaining_mean_degree": 2.219,
+            "remaining_kappa": 3.132,
+            "giant_component_likely": "True"
+          },
+          {
+            "pct_removed": 10,
+            "nodes_removed": 173,
+            "remaining_mean_degree": 2.028,
+            "remaining_kappa": 2.726,
+            "giant_component_likely": "True"
+          },
+          {
+            "pct_removed": 20,
+            "nodes_removed": 346,
+            "remaining_mean_degree": 1.765,
+            "remaining_kappa": 2.307,
+            "giant_component_likely": "True"
+          }
+        ]
+      },
+      "gini_coefficient": 0.4874,
+      "hub_concentration": {
+        "top_1pct": {
+          "nodes": 17,
+          "degree_share": 15.5
+        },
+        "top_5pct": {
+          "nodes": 86,
+          "degree_share": 29.8
+        },
+        "top_10pct": {
+          "nodes": 173,
+          "degree_share": 39.2
+        },
+        "top_20pct": {
+          "nodes": 346,
+          "degree_share": 53.0
+        }
+      },
+      "ccdf_data": [
+        {
+          "degree": 0,
+          "count": 143,
+          "ccdf": 0.917436
+        },
+        {
+          "degree": 1,
+          "count": 422,
+          "ccdf": 0.673788
+        },
+        {
+          "degree": 2,
+          "count": 452,
+          "ccdf": 0.412818
+        },
+        {
+          "degree": 3,
+          "count": 356,
+          "ccdf": 0.207275
+        },
+        {
+          "degree": 4,
+          "count": 163,
+          "ccdf": 0.113164
+        },
+        {
+          "degree": 5,
+          "count": 64,
+          "ccdf": 0.076212
+        },
+        {
+          "degree": 6,
+          "count": 35,
+          "ccdf": 0.056005
+        },
+        {
+          "degree": 7,
+          "count": 20,
+          "ccdf": 0.044457
+        },
+        {
+          "degree": 8,
+          "count": 17,
+          "ccdf": 0.034642
+        },
+        {
+          "degree": 9,
+          "count": 7,
+          "ccdf": 0.0306
+        },
+        {
+          "degree": 10,
+          "count": 9,
+          "ccdf": 0.025404
+        },
+        {
+          "degree": 11,
+          "count": 6,
+          "ccdf": 0.02194
+        },
+        {
+          "degree": 12,
+          "count": 2,
+          "ccdf": 0.020785
+        },
+        {
+          "degree": 13,
+          "count": 2,
+          "ccdf": 0.01963
+        },
+        {
+          "degree": 14,
+          "count": 6,
+          "ccdf": 0.016166
+        },
+        {
+          "degree": 15,
+          "count": 1,
+          "ccdf": 0.015589
+        },
+        {
+          "degree": 16,
+          "count": 1,
+          "ccdf": 0.015012
+        },
+        {
+          "degree": 17,
+          "count": 6,
+          "ccdf": 0.011547
+        },
+        {
+          "degree": 18,
+          "count": 1,
+          "ccdf": 0.01097
+        },
+        {
+          "degree": 19,
+          "count": 1,
+          "ccdf": 0.010393
+        },
+        {
+          "degree": 20,
+          "count": 1,
+          "ccdf": 0.009815
+        },
+        {
+          "degree": 21,
+          "count": 2,
+          "ccdf": 0.008661
+        },
+        {
+          "degree": 22,
+          "count": 2,
+          "ccdf": 0.007506
+        },
+        {
+          "degree": 23,
+          "count": 1,
+          "ccdf": 0.006928
+        },
+        {
+          "degree": 25,
+          "count": 1,
+          "ccdf": 0.006351
+        },
+        {
+          "degree": 26,
+          "count": 3,
+          "ccdf": 0.004619
+        },
+        {
+          "degree": 32,
+          "count": 1,
+          "ccdf": 0.004042
+        },
+        {
+          "degree": 41,
+          "count": 1,
+          "ccdf": 0.003464
+        },
+        {
+          "degree": 58,
+          "count": 1,
+          "ccdf": 0.002887
+        },
+        {
+          "degree": 66,
+          "count": 1,
+          "ccdf": 0.002309
+        },
+        {
+          "degree": 68,
+          "count": 1,
+          "ccdf": 0.001732
+        },
+        {
+          "degree": 86,
+          "count": 1,
+          "ccdf": 0.001155
+        },
+        {
+          "degree": 121,
+          "count": 2,
+          "ccdf": 0.0
+        }
+      ]
+    },
+    "64k": {
+      "scale": "64k",
+      "basic_stats": {
+        "num_nodes": 3187,
+        "num_edges": 5199,
+        "mean_degree": 3.263,
+        "median_degree": 2.0,
+        "std_degree": 9.728,
+        "max_degree": 298,
+        "skewness": 21.497,
+        "kurtosis": 577.52
+      },
+      "power_law": {
+        "k_min_2": {
+          "alpha": 2.304,
+          "alpha_se": 0.028,
+          "k_min": 2,
+          "n_tail": 2161,
+          "n_total": 3187,
+          "ks_statistic": 0.3123,
+          "ks_p_value": 0.0,
+          "interpretation": "scale-free"
+        },
+        "k_min_3": {
+          "alpha": 2.853,
+          "alpha_se": 0.05,
+          "k_min": 3,
+          "n_tail": 1358,
+          "n_total": 3187,
+          "ks_statistic": 0.286,
+          "ks_p_value": 0.0,
+          "interpretation": "scale-free"
+        },
+        "k_min_5": {
+          "alpha": 2.617,
+          "alpha_se": 0.081,
+          "k_min": 5,
+          "n_tail": 395,
+          "n_total": 3187,
+          "ks_statistic": 0.1541,
+          "ks_p_value": 0.0,
+          "interpretation": "scale-free"
+        }
+      },
+      "percolation": {
+        "mean_degree": 3.263,
+        "mean_degree_squared": 105.278,
+        "kappa": 32.268,
+        "fc_random_failure": 0.968,
+        "fc_interpretation": "Random failure에 대해 노드의 96.8%를 제거해야 붕괴",
+        "hub_attack_analysis": [
+          {
+            "pct_removed": 1,
+            "nodes_removed": 31,
+            "remaining_mean_degree": 2.643,
+            "remaining_kappa": 5.189,
+            "giant_component_likely": "True"
+          },
+          {
+            "pct_removed": 2,
+            "nodes_removed": 63,
+            "remaining_mean_degree": 2.482,
+            "remaining_kappa": 4.158,
+            "giant_component_likely": "True"
+          },
+          {
+            "pct_removed": 5,
+            "nodes_removed": 159,
+            "remaining_mean_degree": 2.246,
+            "remaining_kappa": 3.276,
+            "giant_component_likely": "True"
+          },
+          {
+            "pct_removed": 10,
+            "nodes_removed": 318,
+            "remaining_mean_degree": 2.037,
+            "remaining_kappa": 2.815,
+            "giant_component_likely": "True"
+          },
+          {
+            "pct_removed": 20,
+            "nodes_removed": 637,
+            "remaining_mean_degree": 1.762,
+            "remaining_kappa": 2.373,
+            "giant_component_likely": "True"
+          }
+        ]
+      },
+      "gini_coefficient": 0.5338,
+      "hub_concentration": {
+        "top_1pct": {
+          "nodes": 31,
+          "degree_share": 19.8
+        },
+        "top_5pct": {
+          "nodes": 159,
+          "degree_share": 34.6
+        },
+        "top_10pct": {
+          "nodes": 318,
+          "degree_share": 43.8
+        },
+        "top_20pct": {
+          "nodes": 637,
+          "degree_share": 56.8
+        }
+      },
+      "ccdf_data": [
+        {
+          "degree": 0,
+          "count": 342,
+          "ccdf": 0.892689
+        },
+        {
+          "degree": 1,
+          "count": 684,
+          "ccdf": 0.678067
+        },
+        {
+          "degree": 2,
+          "count": 803,
+          "ccdf": 0.426106
+        },
+        {
+          "degree": 3,
+          "count": 682,
+          "ccdf": 0.212112
+        },
+        {
+          "degree": 4,
+          "count": 281,
+          "ccdf": 0.123941
+        },
+        {
+          "degree": 5,
+          "count": 118,
+          "ccdf": 0.086916
+        },
+        {
+          "degree": 6,
+          "count": 76,
+          "ccdf": 0.063069
+        },
+        {
+          "degree": 7,
+          "count": 54,
+          "ccdf": 0.046125
+        },
+        {
+          "degree": 8,
+          "count": 26,
+          "ccdf": 0.037967
+        },
+        {
+          "degree": 9,
+          "count": 11,
+          "ccdf": 0.034515
+        },
+        {
+          "degree": 10,
+          "count": 7,
+          "ccdf": 0.032319
+        },
+        {
+          "degree": 11,
+          "count": 13,
+          "ccdf": 0.02824
+        },
+        {
+          "degree": 12,
+          "count": 14,
+          "ccdf": 0.023847
+        },
+        {
+          "degree": 13,
+          "count": 5,
+          "ccdf": 0.022278
+        },
+        {
+          "degree": 14,
+          "count": 4,
+          "ccdf": 0.021023
+        },
+        {
+          "degree": 15,
+          "count": 9,
+          "ccdf": 0.018199
+        },
+        {
+          "degree": 16,
+          "count": 3,
+          "ccdf": 0.017258
+        },
+        {
+          "degree": 17,
+          "count": 4,
+          "ccdf": 0.016003
+        },
+        {
+          "degree": 18,
+          "count": 8,
+          "ccdf": 0.013492
+        },
+        {
+          "degree": 19,
+          "count": 3,
+          "ccdf": 0.012551
+        },
+        {
+          "degree": 20,
+          "count": 2,
+          "ccdf": 0.011923
+        },
+        {
+          "degree": 21,
+          "count": 2,
+          "ccdf": 0.011296
+        },
+        {
+          "degree": 22,
+          "count": 2,
+          "ccdf": 0.010668
+        },
+        {
+          "degree": 23,
+          "count": 1,
+          "ccdf": 0.010355
+        },
+        {
+          "degree": 24,
+          "count": 2,
+          "ccdf": 0.009727
+        },
+        {
+          "degree": 25,
+          "count": 1,
+          "ccdf": 0.009413
+        },
+        {
+          "degree": 26,
+          "count": 2,
+          "ccdf": 0.008786
+        },
+        {
+          "degree": 27,
+          "count": 4,
+          "ccdf": 0.007531
+        },
+        {
+          "degree": 28,
+          "count": 1,
+          "ccdf": 0.007217
+        },
+        {
+          "degree": 29,
+          "count": 2,
+          "ccdf": 0.006589
+        },
+        {
+          "degree": 30,
+          "count": 1,
+          "ccdf": 0.006275
+        },
+        {
+          "degree": 31,
+          "count": 1,
+          "ccdf": 0.005962
+        },
+        {
+          "degree": 32,
+          "count": 1,
+          "ccdf": 0.005648
+        },
+        {
+          "degree": 33,
+          "count": 2,
+          "ccdf": 0.00502
+        },
+        {
+          "degree": 37,
+          "count": 1,
+          "ccdf": 0.004707
+        },
+        {
+          "degree": 38,
+          "count": 1,
+          "ccdf": 0.004393
+        },
+        {
+          "degree": 41,
+          "count": 1,
+          "ccdf": 0.004079
+        },
+        {
+          "degree": 43,
+          "count": 1,
+          "ccdf": 0.003765
+        },
+        {
+          "degree": 44,
+          "count": 1,
+          "ccdf": 0.003452
+        },
+        {
+          "degree": 47,
+          "count": 1,
+          "ccdf": 0.003138
+        },
+        {
+          "degree": 48,
+          "count": 1,
+          "ccdf": 0.002824
+        },
+        {
+          "degree": 53,
+          "count": 1,
+          "ccdf": 0.00251
+        },
+        {
+          "degree": 59,
+          "count": 2,
+          "ccdf": 0.001883
+        },
+        {
+          "degree": 124,
+          "count": 1,
+          "ccdf": 0.001569
+        },
+        {
+          "degree": 127,
+          "count": 1,
+          "ccdf": 0.001255
+        },
+        {
+          "degree": 138,
+          "count": 1,
+          "ccdf": 0.000941
+        },
+        {
+          "degree": 174,
+          "count": 1,
+          "ccdf": 0.000628
+        },
+        {
+          "degree": 296,
+          "count": 1,
+          "ccdf": 0.000314
+        },
+        {
+          "degree": 298,
+          "count": 1,
+          "ccdf": 0.0
+        }
+      ]
+    }
+  },
+  "multirun_statistics": {
+    "6k": {
+      "attack_1_facts": {
+        "bfs": {
+          "n_runs": 7,
+          "metrics": {
+            "avg_damage_ratio_pct": {
+              "n": 7,
+              "mean": 1.619,
+              "std": 2.47,
+              "se": 0.934,
+              "ci_95": [
+                -0.666,
+                3.903
+              ],
+              "min": 0.0,
+              "max": 5.23,
+              "cv": 152.6
+            },
+            "avg_kill_ratio_pct": {
+              "n": 7,
+              "mean": 0.207,
+              "std": 0.219,
+              "se": 0.083,
+              "ci_95": [
+                0.004,
+                0.41
+              ],
+              "min": 0.0,
+              "max": 0.58,
+              "cv": 105.8
+            },
+            "avg_em_drop_pp": {
+              "n": 7,
+              "mean": 0.0,
+              "std": 0.0,
+              "se": 0.0,
+              "ci_95": [
+                0.0,
+                0.0
+              ],
+              "min": 0.0,
+              "max": 0.0,
+              "cv": 0.0
+            },
+            "avg_f1_drop_pp": {
+              "n": 7,
+              "mean": 0.0,
+              "std": 0.0,
+              "se": 0.0,
+              "ci_95": [
+                0.0,
+                0.0
+              ],
+              "min": 0.0,
+              "max": 0.0,
+              "cv": 0.0
+            }
+          }
+        },
+        "attribute_aware": {
+          "n_runs": 7,
+          "metrics": {
+            "avg_damage_ratio_pct": {
+              "n": 7,
+              "mean": -0.041,
+              "std": 0.11,
+              "se": 0.041,
+              "ci_95": [
+                -0.143,
+                0.06
+              ],
+              "min": -0.29,
+              "max": 0.0,
+              "cv": 264.6
+            },
+            "avg_kill_ratio_pct": {
+              "n": 7,
+              "mean": 0.0,
+              "std": 0.0,
+              "se": 0.0,
+              "ci_95": [
+                0.0,
+                0.0
+              ],
+              "min": 0.0,
+              "max": 0.0,
+              "cv": 0.0
+            },
+            "avg_em_drop_pp": {
+              "n": 7,
+              "mean": 1.429,
+              "std": 2.44,
+              "se": 0.922,
+              "ci_95": [
+                -0.828,
+                3.685
+              ],
+              "min": 0.0,
+              "max": 5.0,
+              "cv": 170.8
+            },
+            "avg_f1_drop_pp": {
+              "n": 7,
+              "mean": 1.429,
+              "std": 2.44,
+              "se": 0.922,
+              "ci_95": [
+                -0.828,
+                3.685
+              ],
+              "min": 0.0,
+              "max": 5.0,
+              "cv": 170.8
+            }
+          }
+        },
+        "bfs_vs_attr_significance": {
+          "t_statistic": 1.776,
+          "p_value": 0.125875,
+          "cohens_d": 0.949,
+          "significant_at_005": "False",
+          "significant_at_001": "False",
+          "effect_size": "large"
+        }
+      },
+      "attack_3_facts": {
+        "bfs": {
+          "n_runs": 6,
+          "metrics": {
+            "avg_damage_ratio_pct": {
+              "n": 6,
+              "mean": 8.913,
+              "std": 13.81,
+              "se": 5.638,
+              "ci_95": [
+                -5.579,
+                23.406
+              ],
+              "min": -0.29,
+              "max": 26.74,
+              "cv": 154.9
+            },
+            "avg_kill_ratio_pct": {
+              "n": 6,
+              "mean": 1.985,
+              "std": 1.975,
+              "se": 0.806,
+              "ci_95": [
+                -0.088,
+                4.058
+              ],
+              "min": 0.0,
+              "max": 4.36,
+              "cv": 99.5
+            },
+            "avg_em_drop_pp": {
+              "n": 6,
+              "mean": 3.333,
+              "std": 5.164,
+              "se": 2.108,
+              "ci_95": [
+                -2.086,
+                8.753
+              ],
+              "min": 0.0,
+              "max": 10.0,
+              "cv": 154.9
+            },
+            "avg_f1_drop_pp": {
+              "n": 6,
+              "mean": 3.333,
+              "std": 5.164,
+              "se": 2.108,
+              "ci_95": [
+                -2.086,
+                8.753
+              ],
+              "min": 0.0,
+              "max": 10.0,
+              "cv": 154.9
+            }
+          }
+        },
+        "attribute_aware": {
+          "n_runs": 6,
+          "metrics": {
+            "avg_damage_ratio_pct": {
+              "n": 6,
+              "mean": -0.145,
+              "std": 0.355,
+              "se": 0.145,
+              "ci_95": [
+                -0.518,
+                0.228
+              ],
+              "min": -0.87,
+              "max": 0.0,
+              "cv": 244.9
+            },
+            "avg_kill_ratio_pct": {
+              "n": 6,
+              "mean": 0.0,
+              "std": 0.0,
+              "se": 0.0,
+              "ci_95": [
+                0.0,
+                0.0
+              ],
+              "min": 0.0,
+              "max": 0.0,
+              "cv": 0.0
+            },
+            "avg_em_drop_pp": {
+              "n": 6,
+              "mean": 0.0,
+              "std": 0.0,
+              "se": 0.0,
+              "ci_95": [
+                0.0,
+                0.0
+              ],
+              "min": 0.0,
+              "max": 0.0,
+              "cv": 0.0
+            },
+            "avg_f1_drop_pp": {
+              "n": 6,
+              "mean": 0.0,
+              "std": 0.0,
+              "se": 0.0,
+              "ci_95": [
+                0.0,
+                0.0
+              ],
+              "min": 0.0,
+              "max": 0.0,
+              "cv": 0.0
+            }
+          }
+        },
+        "bfs_vs_attr_significance": {
+          "t_statistic": 1.6062,
+          "p_value": 0.169065,
+          "cohens_d": 0.927,
+          "significant_at_005": "False",
+          "significant_at_001": "False",
+          "effect_size": "large"
+        }
+      },
+      "attack_5_facts": {
+        "bfs": {
+          "n_runs": 6,
+          "metrics": {
+            "avg_damage_ratio_pct": {
+              "n": 6,
+              "mean": 13.277,
+              "std": 20.569,
+              "se": 8.397,
+              "ci_95": [
+                -8.309,
+                34.862
+              ],
+              "min": -0.29,
+              "max": 39.83,
+              "cv": 154.9
+            },
+            "avg_kill_ratio_pct": {
+              "n": 6,
+              "mean": 6.492,
+              "std": 8.531,
+              "se": 3.483,
+              "ci_95": [
+                -2.461,
+                15.445
+              ],
+              "min": 0.0,
+              "max": 17.44,
+              "cv": 131.4
+            },
+            "avg_em_drop_pp": {
+              "n": 6,
+              "mean": 2.5,
+              "std": 6.124,
+              "se": 2.5,
+              "ci_95": [
+                -3.926,
+                8.926
+              ],
+              "min": -5.0,
+              "max": 10.0,
+              "cv": 244.9
+            },
+            "avg_f1_drop_pp": {
+              "n": 6,
+              "mean": 2.5,
+              "std": 6.124,
+              "se": 2.5,
+              "ci_95": [
+                -3.926,
+                8.926
+              ],
+              "min": -5.0,
+              "max": 10.0,
+              "cv": 244.9
+            }
+          }
+        },
+        "attribute_aware": {
+          "n_runs": 6,
+          "metrics": {
+            "avg_damage_ratio_pct": {
+              "n": 6,
+              "mean": -0.145,
+              "std": 0.655,
+              "se": 0.267,
+              "ci_95": [
+                -0.832,
+                0.542
+              ],
+              "min": -1.45,
+              "max": 0.29,
+              "cv": 451.7
+            },
+            "avg_kill_ratio_pct": {
+              "n": 6,
+              "mean": 0.0,
+              "std": 0.0,
+              "se": 0.0,
+              "ci_95": [
+                0.0,
+                0.0
+              ],
+              "min": 0.0,
+              "max": 0.0,
+              "cv": 0.0
+            },
+            "avg_em_drop_pp": {
+              "n": 6,
+              "mean": 1.667,
+              "std": 2.582,
+              "se": 1.054,
+              "ci_95": [
+                -1.043,
+                4.376
+              ],
+              "min": 0.0,
+              "max": 5.0,
+              "cv": 154.9
+            },
+            "avg_f1_drop_pp": {
+              "n": 6,
+              "mean": 1.667,
+              "std": 2.582,
+              "se": 1.054,
+              "ci_95": [
+                -1.043,
+                4.376
+              ],
+              "min": 0.0,
+              "max": 5.0,
+              "cv": 154.9
+            }
+          }
+        },
+        "bfs_vs_attr_significance": {
+          "t_statistic": 1.5975,
+          "p_value": 0.17092,
+          "cohens_d": 0.922,
+          "significant_at_005": "False",
+          "significant_at_001": "False",
+          "effect_size": "large"
+        }
+      }
+    },
+    "32k": {
+      "attack_1_facts": {
+        "bfs": {
+          "n_runs": 1,
+          "note": "insufficient runs for statistics"
+        },
+        "attribute_aware": {
+          "n_runs": 1,
+          "note": "insufficient runs for statistics"
+        }
+      },
+      "attack_3_facts": {
+        "bfs": {
+          "n_runs": 1,
+          "note": "insufficient runs for statistics"
+        },
+        "attribute_aware": {
+          "n_runs": 1,
+          "note": "insufficient runs for statistics"
+        }
+      },
+      "attack_5_facts": {
+        "bfs": {
+          "n_runs": 1,
+          "note": "insufficient runs for statistics"
+        },
+        "attribute_aware": {
+          "n_runs": 1,
+          "note": "insufficient runs for statistics"
+        }
+      }
+    }
+  },
+  "cross_scale_trend": {
+    "trend": [
+      {
+        "scale": "6k",
+        "nodes": 414,
+        "edges": 520,
+        "mean_k": 2.512,
+        "max_k": 23,
+        "gini": 0.3795,
+        "alpha": 2.481,
+        "kappa": 4.615,
+        "fc_random": 0.7234
+      },
+      {
+        "scale": "32k",
+        "nodes": 1732,
+        "edges": 2600,
+        "mean_k": 3.002,
+        "max_k": 121,
+        "gini": 0.4874,
+        "alpha": 2.346,
+        "kappa": 14.812,
+        "fc_random": 0.9276
+      },
+      {
+        "scale": "64k",
+        "nodes": 3187,
+        "edges": 5199,
+        "mean_k": 3.263,
+        "max_k": 298,
+        "gini": 0.5338,
+        "alpha": 2.304,
+        "kappa": 32.268,
+        "fc_random": 0.968
+      }
+    ]
+  }
+}
