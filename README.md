@@ -265,18 +265,130 @@ Decay Sweep → prune → re-classify orphans → mitosis → fusion
 
 상세 분석: [`docs/analysis_report_v2_long.md`](docs/analysis_report_v2_long.md)
 
-## Research References
+## Research: Graph-aware Selective Forgetting
 
-- Mnemosyne (2025): Edge-based temporal decay + boosting
-- A-Mem (OpenReview): Agentic Memory
-- MAGMA (2026): Multi-graph agentic memory
-- EverMemOS (2026): Self-organizing memory OS
-- M+ (ICML 2025): Co-trained retriever with latent memory
-- Mem0, Letta/MemGPT: Production memory frameworks
+### 논문
+
+**"Collateral Damage in Graph-based Memory Forgetting: Quantification, Exploitation, and Defense"**
+
+AI 메모리 시스템의 graph-based invalidation propagation 취약성을 최초로 분석한 연구. 교통공학의 network failure propagation theory를 AI 메모리에 적용.
+
+- 📄 LaTeX 소스: [`paper/main.tex`](paper/main.tex) (12페이지, Figure 2, Table 13, Finding 11)
+- 🎯 타겟: ICML 2026 Workshop — [Agents in the Wild: Safety, Security, and Beyond](https://agentwild-workshop.github.io/icml2026/)
+
+### 핵심 발견 (4 Contributions)
+
+| # | Contribution | 핵심 수치 |
+|---|-------------|----------|
+| **C1** | Scale trend — BFS propagation의 collateral damage | 68.9–78.5% damage, hub degree 23→298 (superlinear) |
+| **C2** | Cross-task contamination — 무관한 task 오염 | EM −5.0pp, F1 −18.2pp |
+| **C3** | Adversarial hub exploitation — 5 fake facts 공격 | 57.3% valid memory 파괴 (32K) |
+| **C4** | Attribute-aware defense — 교통공학 방향성 전파 | 78–100% 방어율, BFS 대비 80× 효과 |
+
+### Graph Topology Analysis
+
+Entity co-occurrence graph의 scale-free 특성 확인:
+
+| Scale | α (MLE) | κ (heterogeneity) | Max Hub Degree |
+|-------|---------|-------------------|---------------|
+| 6K | 2.48±0.09 | 4.6 | 23 |
+| 32K | 2.35±0.04 | 14.8 | 121 |
+| 64K | 2.30±0.03 | 32.3 | 298 |
+
+### 통계적 유의성
+
+- **Wilcoxon signed-rank**: p=0.0022 (19 paired observations)
+- **Bootstrap 95% BCa CI**: [2.82, 15.67]pp (0 제외)
+- **Cohen's d**: 0.66–0.95 (medium–large effect)
+
+### 실험 인프라
+
+| Component | Specification |
+|-----------|--------------|
+| LLM | google/gemma-4-31B-it (DooGPU reserved3) |
+| Embedding | BAAI/bge-m3 1024-dim (DooGPU reserved9) |
+| Benchmark | MemoryAgentBench (ICLR 2026) |
+| Context | 6K, 32K, 64K (FactConsolidation) + 65K (EventQA) |
+
+### 실험 코드 구조
+
+```
+experiments/
+├── adversarial_attack.py       # C3: Hub exploitation (white/black-box)
+├── cross_task_experiment.py     # C2: Cross-task contamination
+├── deep_dive_analysis.py        # Topology: power-law, percolation, hub stats
+├── deep_dive_experiments.py     # Depth tracking, black-box, degree-cap
+├── statistical_analysis.py      # Wilcoxon, bootstrap, stratified analysis
+├── generate_figures.py          # Paper figure generation (matplotlib)
+└── results/                     # 46개 JSON 결과 파일
+    ├── adversarial_attack_*.json
+    ├── benchmark_factconsolidation_*.json
+    ├── deep_dive_*.json
+    └── statistical_analysis.json
+
+paper/
+├── main.tex                     # 12p LaTeX paper
+├── references.bib               # 17 BibTeX entries
+├── figures/
+│   ├── fig_degree_distribution.pdf  # CCDF log-log plot
+│   └── fig_propagation_damage.pdf   # Depth vs damage curve
+├── Makefile
+└── .gitignore
+
+docs/
+├── paper_draft_v2.md            # Markdown draft
+├── deep_dive_analysis.md        # Topology + deep-dive results
+└── statistical_analysis.md      # Statistical significance report
+```
+
+### 논문 빌드
+
+```bash
+cd paper
+make          # pdflatex → bibtex → pdflatex × 2
+# 또는
+pdflatex main.tex && bibtex main && pdflatex main.tex && pdflatex main.tex
+```
+
+### 실험 재현
+
+```bash
+# 환경 설정
+source .venv/bin/activate
+
+# Scale trend (C1) — 6K/32K/64K context
+PYTHONPATH=. python experiments/adversarial_attack.py --context_size 6k
+PYTHONPATH=. python experiments/adversarial_attack.py --context_size 32k
+
+# Cross-task (C2)
+PYTHONPATH=. python experiments/cross_task_experiment.py
+
+# Deep-dive analysis (topology + depth + defense)
+PYTHONPATH=. python experiments/deep_dive_analysis.py
+PYTHONPATH=. python experiments/deep_dive_experiments.py
+
+# Statistical analysis (기존 결과에서 Wilcoxon + bootstrap)
+PYTHONPATH=. python experiments/statistical_analysis.py
+
+# Figure generation
+PYTHONPATH=. python experiments/generate_figures.py
+```
+
+---
 
 ## Intent Taxonomy (12 categories)
 
 `weekly_report` · `issue_tracking` · `scheduling` · `knowledge_lookup` · `code_review` · `meeting_prep` · `data_analysis` · `team_communication` · `document_drafting` · `project_status` · `onboarding` · `troubleshooting`
+
+## Research References
+
+- [Mem0](https://arxiv.org/abs/2504.19413) (2025): Directed labeled KG + LLM conflict detection
+- [MemGPT/Letta](https://arxiv.org/abs/2310.08560) (2023): OS-inspired virtual context management
+- [A-Mem](https://arxiv.org/abs/2502.12110) (NeurIPS 2025): Zettelkasten-style agentic memory
+- [MAGMA](https://arxiv.org/abs/2601.03236) (2026): Multi-graph agentic memory
+- [Mnemosyne](https://arxiv.org/abs/2510.08601) (2025): Per-memory temporal decay (reverse sigmoid)
+- [Zep](https://blog.getzep.com) (2025): Temporal knowledge graph
+- [MemoryAgentBench](https://arxiv.org/abs/2502.XXXXX) (ICLR 2026): LLM agent memory benchmark
 
 ## Design Documents
 
