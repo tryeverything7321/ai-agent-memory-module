@@ -1,0 +1,578 @@
+{
+  "config": {
+    "sub_dataset": "factconsolidation_sh_6k",
+    "chunk_size": 4096,
+    "max_queries": 20,
+    "propagation_depth": 2,
+    "decay_per_hop": 0.9,
+    "llm_url": null,
+    "llm_model": null,
+    "embed_url": null,
+    "embed_model": null
+  },
+  "comparison": {
+    "exact_match": {
+      "baseline": 75.0,
+      "experiment": 75.0,
+      "delta": 0.0
+    },
+    "substring_exact_match": {
+      "baseline": 75.0,
+      "experiment": 75.0,
+      "delta": 0.0
+    },
+    "f1": {
+      "baseline": 75.0,
+      "experiment": 75.0,
+      "delta": 0.0
+    }
+  },
+  "baseline": {
+    "arm": "Baseline",
+    "metrics": {
+      "exact_match": 75.0,
+      "substring_exact_match": 75.0,
+      "f1": 75.0,
+      "total_queries": 20,
+      "avg_query_time": 0.15595940351486207,
+      "total_memorize_time": 27.016161680221558,
+      "total_query_time": 3.119188070297241
+    },
+    "results": [
+      {
+        "context_id": 0,
+        "query_id": 0,
+        "question": "Which sport is goaltender associated with?",
+        "ground_truth": [
+          "pesäpallo"
+        ],
+        "prediction": "ice hockey",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.14990234375
+      },
+      {
+        "context_id": 0,
+        "query_id": 1,
+        "question": "What is Nobuhiro Watsuki famous for?",
+        "ground_truth": [
+          "The Fairly OddParents"
+        ],
+        "prediction": "The Fairly OddParents",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.1825728416442871
+      },
+      {
+        "context_id": 0,
+        "query_id": 2,
+        "question": "Which country was rugby union created in?",
+        "ground_truth": [
+          "India"
+        ],
+        "prediction": "India",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.15413975715637207
+      },
+      {
+        "context_id": 0,
+        "query_id": 3,
+        "question": "What is Ferdowsi famous for?",
+        "ground_truth": [
+          "Shahnameh"
+        ],
+        "prediction": "Shahnameh",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.1597881317138672
+      },
+      {
+        "context_id": 0,
+        "query_id": 4,
+        "question": "Which university was Joan Didion educated at?",
+        "ground_truth": [
+          "University of California, Berkeley"
+        ],
+        "prediction": "Unknown",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.13525032997131348
+      },
+      {
+        "context_id": 0,
+        "query_id": 5,
+        "question": "Who is the author of The Marriage of Figaro?",
+        "ground_truth": [
+          "Thomas Kyd"
+        ],
+        "prediction": "Thomas Kyd",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.1732327938079834
+      },
+      {
+        "context_id": 0,
+        "query_id": 6,
+        "question": "Which sport is Tunisia national football team associated with?",
+        "ground_truth": [
+          "basketball"
+        ],
+        "prediction": "association football",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.1624162197113037
+      },
+      {
+        "context_id": 0,
+        "query_id": 7,
+        "question": "Which sport is quarterback associated with?",
+        "ground_truth": [
+          "Muay Thai"
+        ],
+        "prediction": "Unknown",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.16098427772521973
+      },
+      {
+        "context_id": 0,
+        "query_id": 8,
+        "question": "What is the official language of Japan?",
+        "ground_truth": [
+          "Swedish"
+        ],
+        "prediction": "Swedish",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.17786121368408203
+      },
+      {
+        "context_id": 0,
+        "query_id": 9,
+        "question": "What is the name of the current head of the Tucson government?",
+        "ground_truth": [
+          "Jonathan Rothschild"
+        ],
+        "prediction": "Jonathan Rothschild",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.14889264106750488
+      },
+      {
+        "context_id": 0,
+        "query_id": 10,
+        "question": "What is the name of the current head of the Italy government?",
+        "ground_truth": [
+          "Giuseppe Conte"
+        ],
+        "prediction": "Giuseppe Conte",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.16599106788635254
+      },
+      {
+        "context_id": 0,
+        "query_id": 11,
+        "question": "Who performed Meredith Grey?",
+        "ground_truth": [
+          "Ellen Pompeo"
+        ],
+        "prediction": "Ellen Pompeo",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.15001344680786133
+      },
+      {
+        "context_id": 0,
+        "query_id": 12,
+        "question": "What position does Robert Parish play?",
+        "ground_truth": [
+          "quarterback"
+        ],
+        "prediction": "quarterback",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.1475050449371338
+      },
+      {
+        "context_id": 0,
+        "query_id": 13,
+        "question": "What is the country of citizenship of Cédric Klapisch?",
+        "ground_truth": [
+          "Malaysia"
+        ],
+        "prediction": "Malaysia",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.13902568817138672
+      },
+      {
+        "context_id": 0,
+        "query_id": 14,
+        "question": "Who is the author of Sidereus Nuncius?",
+        "ground_truth": [
+          "Samuel Beckett"
+        ],
+        "prediction": "Samuel Beckett",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.15053486824035645
+      },
+      {
+        "context_id": 0,
+        "query_id": 15,
+        "question": "Which continent is Germany located in?",
+        "ground_truth": [
+          "Africa"
+        ],
+        "prediction": "Africa",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.15458321571350098
+      },
+      {
+        "context_id": 0,
+        "query_id": 16,
+        "question": "Which religion is Kingdom of Ireland affiliated with?",
+        "ground_truth": [
+          "Zoroastrianism"
+        ],
+        "prediction": "Zoroastrianism",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.17853760719299316
+      },
+      {
+        "context_id": 0,
+        "query_id": 17,
+        "question": "Which country was association football created in?",
+        "ground_truth": [
+          "Italy"
+        ],
+        "prediction": "England",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.14588356018066406
+      },
+      {
+        "context_id": 0,
+        "query_id": 18,
+        "question": "Who is the developer of Windows Phone?",
+        "ground_truth": [
+          "Microsoft"
+        ],
+        "prediction": "Microsoft",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.13730812072753906
+      },
+      {
+        "context_id": 0,
+        "query_id": 19,
+        "question": "Who is the chief executive officer of Microsoft?",
+        "ground_truth": [
+          "Steve Jobs"
+        ],
+        "prediction": "Steve Jobs",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.14476490020751953
+      }
+    ]
+  },
+  "experiment": {
+    "arm": "Experiment",
+    "metrics": {
+      "exact_match": 75.0,
+      "substring_exact_match": 75.0,
+      "f1": 75.0,
+      "total_queries": 20,
+      "avg_query_time": 0.15203266143798827,
+      "total_memorize_time": 26.86230993270874,
+      "total_query_time": 3.0406532287597656
+    },
+    "results": [
+      {
+        "context_id": 0,
+        "query_id": 0,
+        "question": "Which sport is goaltender associated with?",
+        "ground_truth": [
+          "pesäpallo"
+        ],
+        "prediction": "ice hockey",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.16829371452331543
+      },
+      {
+        "context_id": 0,
+        "query_id": 1,
+        "question": "What is Nobuhiro Watsuki famous for?",
+        "ground_truth": [
+          "The Fairly OddParents"
+        ],
+        "prediction": "The Fairly OddParents",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.1856088638305664
+      },
+      {
+        "context_id": 0,
+        "query_id": 2,
+        "question": "Which country was rugby union created in?",
+        "ground_truth": [
+          "India"
+        ],
+        "prediction": "India",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.13445138931274414
+      },
+      {
+        "context_id": 0,
+        "query_id": 3,
+        "question": "What is Ferdowsi famous for?",
+        "ground_truth": [
+          "Shahnameh"
+        ],
+        "prediction": "Shahnameh",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.1649036407470703
+      },
+      {
+        "context_id": 0,
+        "query_id": 4,
+        "question": "Which university was Joan Didion educated at?",
+        "ground_truth": [
+          "University of California, Berkeley"
+        ],
+        "prediction": "Unknown",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.1480257511138916
+      },
+      {
+        "context_id": 0,
+        "query_id": 5,
+        "question": "Who is the author of The Marriage of Figaro?",
+        "ground_truth": [
+          "Thomas Kyd"
+        ],
+        "prediction": "Thomas Kyd",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.16866731643676758
+      },
+      {
+        "context_id": 0,
+        "query_id": 6,
+        "question": "Which sport is Tunisia national football team associated with?",
+        "ground_truth": [
+          "basketball"
+        ],
+        "prediction": "association football",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.1468827724456787
+      },
+      {
+        "context_id": 0,
+        "query_id": 7,
+        "question": "Which sport is quarterback associated with?",
+        "ground_truth": [
+          "Muay Thai"
+        ],
+        "prediction": "Unknown",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.14118003845214844
+      },
+      {
+        "context_id": 0,
+        "query_id": 8,
+        "question": "What is the official language of Japan?",
+        "ground_truth": [
+          "Swedish"
+        ],
+        "prediction": "Swedish",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.13511371612548828
+      },
+      {
+        "context_id": 0,
+        "query_id": 9,
+        "question": "What is the name of the current head of the Tucson government?",
+        "ground_truth": [
+          "Jonathan Rothschild"
+        ],
+        "prediction": "Jonathan Rothschild",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.14828038215637207
+      },
+      {
+        "context_id": 0,
+        "query_id": 10,
+        "question": "What is the name of the current head of the Italy government?",
+        "ground_truth": [
+          "Giuseppe Conte"
+        ],
+        "prediction": "Giuseppe Conte",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.15791845321655273
+      },
+      {
+        "context_id": 0,
+        "query_id": 11,
+        "question": "Who performed Meredith Grey?",
+        "ground_truth": [
+          "Ellen Pompeo"
+        ],
+        "prediction": "Ellen Pompeo",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.14769363403320312
+      },
+      {
+        "context_id": 0,
+        "query_id": 12,
+        "question": "What position does Robert Parish play?",
+        "ground_truth": [
+          "quarterback"
+        ],
+        "prediction": "quarterback",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.1533980369567871
+      },
+      {
+        "context_id": 0,
+        "query_id": 13,
+        "question": "What is the country of citizenship of Cédric Klapisch?",
+        "ground_truth": [
+          "Malaysia"
+        ],
+        "prediction": "Malaysia",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.13709449768066406
+      },
+      {
+        "context_id": 0,
+        "query_id": 14,
+        "question": "Who is the author of Sidereus Nuncius?",
+        "ground_truth": [
+          "Samuel Beckett"
+        ],
+        "prediction": "Samuel Beckett",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.1489877700805664
+      },
+      {
+        "context_id": 0,
+        "query_id": 15,
+        "question": "Which continent is Germany located in?",
+        "ground_truth": [
+          "Africa"
+        ],
+        "prediction": "Africa",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.13599753379821777
+      },
+      {
+        "context_id": 0,
+        "query_id": 16,
+        "question": "Which religion is Kingdom of Ireland affiliated with?",
+        "ground_truth": [
+          "Zoroastrianism"
+        ],
+        "prediction": "Zoroastrianism",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.1841886043548584
+      },
+      {
+        "context_id": 0,
+        "query_id": 17,
+        "question": "Which country was association football created in?",
+        "ground_truth": [
+          "Italy"
+        ],
+        "prediction": "England",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.1383378505706787
+      },
+      {
+        "context_id": 0,
+        "query_id": 18,
+        "question": "Who is the developer of Windows Phone?",
+        "ground_truth": [
+          "Microsoft"
+        ],
+        "prediction": "Microsoft",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.1477956771850586
+      },
+      {
+        "context_id": 0,
+        "query_id": 19,
+        "question": "Who is the chief executive officer of Microsoft?",
+        "ground_truth": [
+          "Steve Jobs"
+        ],
+        "prediction": "Steve Jobs",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.14783358573913574
+      }
+    ]
+  }
+}

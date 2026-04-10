@@ -1,0 +1,2658 @@
+{
+  "config": {
+    "sub_dataset": "factconsolidation_sh_6k",
+    "chunk_size": 4096,
+    "max_queries": null,
+    "propagation_depth": 1,
+    "decay_per_hop": 0.3,
+    "llm_url": null,
+    "llm_model": null,
+    "embed_url": null,
+    "embed_model": null
+  },
+  "comparison": {
+    "exact_match": {
+      "baseline": 78.0,
+      "experiment": 76.0,
+      "delta": -2.0
+    },
+    "substring_exact_match": {
+      "baseline": 78.0,
+      "experiment": 76.0,
+      "delta": -2.0
+    },
+    "f1": {
+      "baseline": 78.4,
+      "experiment": 76.4,
+      "delta": -2.0
+    }
+  },
+  "baseline": {
+    "arm": "Baseline",
+    "metrics": {
+      "exact_match": 78.0,
+      "substring_exact_match": 78.0,
+      "f1": 78.4,
+      "total_queries": 100,
+      "avg_query_time": 0.1666298246383667,
+      "total_memorize_time": 26.325936555862427,
+      "total_query_time": 16.66298246383667
+    },
+    "results": [
+      {
+        "context_id": 0,
+        "query_id": 0,
+        "question": "Which sport is goaltender associated with?",
+        "ground_truth": [
+          "pesäpallo"
+        ],
+        "prediction": "ice hockey",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.2171463966369629
+      },
+      {
+        "context_id": 0,
+        "query_id": 1,
+        "question": "What is Nobuhiro Watsuki famous for?",
+        "ground_truth": [
+          "The Fairly OddParents"
+        ],
+        "prediction": "The Fairly OddParents",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.22574448585510254
+      },
+      {
+        "context_id": 0,
+        "query_id": 2,
+        "question": "Which country was rugby union created in?",
+        "ground_truth": [
+          "India"
+        ],
+        "prediction": "India",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.2317032814025879
+      },
+      {
+        "context_id": 0,
+        "query_id": 3,
+        "question": "What is Ferdowsi famous for?",
+        "ground_truth": [
+          "Shahnameh"
+        ],
+        "prediction": "Shahnameh",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.16364526748657227
+      },
+      {
+        "context_id": 0,
+        "query_id": 4,
+        "question": "Which university was Joan Didion educated at?",
+        "ground_truth": [
+          "University of California, Berkeley"
+        ],
+        "prediction": "Unknown",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.13365912437438965
+      },
+      {
+        "context_id": 0,
+        "query_id": 5,
+        "question": "Who is the author of The Marriage of Figaro?",
+        "ground_truth": [
+          "Thomas Kyd"
+        ],
+        "prediction": "Thomas Kyd",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.17264318466186523
+      },
+      {
+        "context_id": 0,
+        "query_id": 6,
+        "question": "Which sport is Tunisia national football team associated with?",
+        "ground_truth": [
+          "basketball"
+        ],
+        "prediction": "association football",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.14600157737731934
+      },
+      {
+        "context_id": 0,
+        "query_id": 7,
+        "question": "Which sport is quarterback associated with?",
+        "ground_truth": [
+          "Muay Thai"
+        ],
+        "prediction": "Unknown",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.13801074028015137
+      },
+      {
+        "context_id": 0,
+        "query_id": 8,
+        "question": "What is the official language of Japan?",
+        "ground_truth": [
+          "Swedish"
+        ],
+        "prediction": "Swedish",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.13383817672729492
+      },
+      {
+        "context_id": 0,
+        "query_id": 9,
+        "question": "What is the name of the current head of the Tucson government?",
+        "ground_truth": [
+          "Jonathan Rothschild"
+        ],
+        "prediction": "Jonathan Rothschild",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.15639281272888184
+      },
+      {
+        "context_id": 0,
+        "query_id": 10,
+        "question": "What is the name of the current head of the Italy government?",
+        "ground_truth": [
+          "Giuseppe Conte"
+        ],
+        "prediction": "Giuseppe Conte",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.17160725593566895
+      },
+      {
+        "context_id": 0,
+        "query_id": 11,
+        "question": "Who performed Meredith Grey?",
+        "ground_truth": [
+          "Ellen Pompeo"
+        ],
+        "prediction": "Ellen Pompeo",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.1562032699584961
+      },
+      {
+        "context_id": 0,
+        "query_id": 12,
+        "question": "What position does Robert Parish play?",
+        "ground_truth": [
+          "quarterback"
+        ],
+        "prediction": "quarterback",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.1467726230621338
+      },
+      {
+        "context_id": 0,
+        "query_id": 13,
+        "question": "What is the country of citizenship of Cédric Klapisch?",
+        "ground_truth": [
+          "Malaysia"
+        ],
+        "prediction": "Malaysia",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.15627503395080566
+      },
+      {
+        "context_id": 0,
+        "query_id": 14,
+        "question": "Who is the author of Sidereus Nuncius?",
+        "ground_truth": [
+          "Samuel Beckett"
+        ],
+        "prediction": "Samuel Beckett",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.16504621505737305
+      },
+      {
+        "context_id": 0,
+        "query_id": 15,
+        "question": "Which continent is Germany located in?",
+        "ground_truth": [
+          "Africa"
+        ],
+        "prediction": "Africa",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.16225361824035645
+      },
+      {
+        "context_id": 0,
+        "query_id": 16,
+        "question": "Which religion is Kingdom of Ireland affiliated with?",
+        "ground_truth": [
+          "Zoroastrianism"
+        ],
+        "prediction": "Zoroastrianism",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.19029903411865234
+      },
+      {
+        "context_id": 0,
+        "query_id": 17,
+        "question": "Which country was association football created in?",
+        "ground_truth": [
+          "Italy"
+        ],
+        "prediction": "England",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.140242338180542
+      },
+      {
+        "context_id": 0,
+        "query_id": 18,
+        "question": "Who is the developer of Windows Phone?",
+        "ground_truth": [
+          "Microsoft"
+        ],
+        "prediction": "Microsoft",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.142866849899292
+      },
+      {
+        "context_id": 0,
+        "query_id": 19,
+        "question": "Who is the chief executive officer of Microsoft?",
+        "ground_truth": [
+          "Steve Jobs"
+        ],
+        "prediction": "Steve Jobs",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.16106581687927246
+      },
+      {
+        "context_id": 0,
+        "query_id": 20,
+        "question": "Who is the chairperson of Harvard University?",
+        "ground_truth": [
+          "Peter Diamandis"
+        ],
+        "prediction": "Peter Diamandis",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.17160820960998535
+      },
+      {
+        "context_id": 0,
+        "query_id": 21,
+        "question": "Who founded Church of Scotland?",
+        "ground_truth": [
+          "John Knox"
+        ],
+        "prediction": "John Knox",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.14883756637573242
+      },
+      {
+        "context_id": 0,
+        "query_id": 22,
+        "question": "Which sport is Galwegians RFC associated with?",
+        "ground_truth": [
+          "rugby union"
+        ],
+        "prediction": "I do not have information about Galwegians RFC",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.22606182098388672
+      },
+      {
+        "context_id": 0,
+        "query_id": 23,
+        "question": "Who is the director of American Broadcasting Company?",
+        "ground_truth": [
+          "Ernst Heinkel"
+        ],
+        "prediction": "Ernst Heinkel",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.1765916347503662
+      },
+      {
+        "context_id": 0,
+        "query_id": 24,
+        "question": "Which city did Gennady Rozhdestvensky die in?",
+        "ground_truth": [
+          "United States of America"
+        ],
+        "prediction": "United States of America",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.16908764839172363
+      },
+      {
+        "context_id": 0,
+        "query_id": 25,
+        "question": "What is the capital of Tang Empire?",
+        "ground_truth": [
+          "Beaumont"
+        ],
+        "prediction": "Beaumont",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.16150450706481934
+      },
+      {
+        "context_id": 0,
+        "query_id": 26,
+        "question": "Who is the director of British Broadcasting Corporation?",
+        "ground_truth": [
+          "Narendra Modi"
+        ],
+        "prediction": "Narendra Modi",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.21705269813537598
+      },
+      {
+        "context_id": 0,
+        "query_id": 27,
+        "question": "What is the country of citizenship of Benjamin Mazar?",
+        "ground_truth": [
+          "Israel"
+        ],
+        "prediction": "Israel",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.1366426944732666
+      },
+      {
+        "context_id": 0,
+        "query_id": 28,
+        "question": "What type of music does Michael Mantler play?",
+        "ground_truth": [
+          "post-punk"
+        ],
+        "prediction": "post-punk",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.16008949279785156
+      },
+      {
+        "context_id": 0,
+        "query_id": 29,
+        "question": "Which city did Oscar Wilde die in?",
+        "ground_truth": [
+          "Guangzhou"
+        ],
+        "prediction": "Guangzhou",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.16056084632873535
+      },
+      {
+        "context_id": 0,
+        "query_id": 30,
+        "question": "Which country was baseball created in?",
+        "ground_truth": [
+          "Japan"
+        ],
+        "prediction": "United States of America",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.17192935943603516
+      },
+      {
+        "context_id": 0,
+        "query_id": 31,
+        "question": "What is the country of citizenship of Ernst Heinkel?",
+        "ground_truth": [
+          "Tang Empire"
+        ],
+        "prediction": "Tang Empire",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.14641165733337402
+      },
+      {
+        "context_id": 0,
+        "query_id": 32,
+        "question": "Which city is the headquarter of The University of the Arts located in?",
+        "ground_truth": [
+          "Philadelphia"
+        ],
+        "prediction": "Philadelphia",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.13701796531677246
+      },
+      {
+        "context_id": 0,
+        "query_id": 33,
+        "question": "Which country was rap rock created in?",
+        "ground_truth": [
+          "Russian Empire"
+        ],
+        "prediction": "United States of America",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.17122173309326172
+      },
+      {
+        "context_id": 0,
+        "query_id": 34,
+        "question": "Where was Christianity founded?",
+        "ground_truth": [
+          "Taipei"
+        ],
+        "prediction": "I do not have that information.",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.21315479278564453
+      },
+      {
+        "context_id": 0,
+        "query_id": 35,
+        "question": "What is the official language of United States of America?",
+        "ground_truth": [
+          "German"
+        ],
+        "prediction": "German",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.13651633262634277
+      },
+      {
+        "context_id": 0,
+        "query_id": 36,
+        "question": "Who performed Past Masters?",
+        "ground_truth": [
+          "Madonna"
+        ],
+        "prediction": "Madonna",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.13355708122253418
+      },
+      {
+        "context_id": 0,
+        "query_id": 37,
+        "question": "What is the capital of Japan?",
+        "ground_truth": [
+          "Tokyo"
+        ],
+        "prediction": "Tokyo",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.13401126861572266
+      },
+      {
+        "context_id": 0,
+        "query_id": 38,
+        "question": "What is the capital of France?",
+        "ground_truth": [
+          "Harare"
+        ],
+        "prediction": "Harare",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.14365887641906738
+      },
+      {
+        "context_id": 0,
+        "query_id": 39,
+        "question": "Who is the developer of SteamOS?",
+        "ground_truth": [
+          "ABB Group"
+        ],
+        "prediction": "Valve Corporation",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.14779329299926758
+      },
+      {
+        "context_id": 0,
+        "query_id": 40,
+        "question": "Which city is the headquarter of University of Bucharest located in?",
+        "ground_truth": [
+          "Ankara"
+        ],
+        "prediction": "Ankara",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.15209507942199707
+      },
+      {
+        "context_id": 0,
+        "query_id": 41,
+        "question": "Which sport is wide receiver associated with?",
+        "ground_truth": [
+          "rugby"
+        ],
+        "prediction": "rugby",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.15409064292907715
+      },
+      {
+        "context_id": 0,
+        "query_id": 42,
+        "question": "What position does Hines Ward play?",
+        "ground_truth": [
+          "cornerback"
+        ],
+        "prediction": "Unknown",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.16951608657836914
+      },
+      {
+        "context_id": 0,
+        "query_id": 43,
+        "question": "What is the capital of Australia?",
+        "ground_truth": [
+          "Oderzo"
+        ],
+        "prediction": "Oderzo",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.15597867965698242
+      },
+      {
+        "context_id": 0,
+        "query_id": 44,
+        "question": "Which continent is Malaysia located in?",
+        "ground_truth": [
+          "Antarctica"
+        ],
+        "prediction": "Antarctica",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.1473526954650879
+      },
+      {
+        "context_id": 0,
+        "query_id": 45,
+        "question": "Who is the author of A Wizard of Earthsea?",
+        "ground_truth": [
+          "Pius XII"
+        ],
+        "prediction": "Pius XII",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.16330838203430176
+      },
+      {
+        "context_id": 0,
+        "query_id": 46,
+        "question": "Who performed Free as a Bird?",
+        "ground_truth": [
+          "The Beatles"
+        ],
+        "prediction": "The Beatles",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.20573902130126953
+      },
+      {
+        "context_id": 0,
+        "query_id": 47,
+        "question": "Who is the author of Our Mutual Friend?",
+        "ground_truth": [
+          "Charles Darwin"
+        ],
+        "prediction": "Charles Darwin",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.14539170265197754
+      },
+      {
+        "context_id": 0,
+        "query_id": 48,
+        "question": "Which country was basketball created in?",
+        "ground_truth": [
+          "Soviet Union"
+        ],
+        "prediction": "United States of America",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.16909027099609375
+      },
+      {
+        "context_id": 0,
+        "query_id": 49,
+        "question": "What is the country of citizenship of Hal Needham?",
+        "ground_truth": [
+          "United States of America"
+        ],
+        "prediction": "United States of America",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.1737358570098877
+      },
+      {
+        "context_id": 0,
+        "query_id": 50,
+        "question": "Which continent is Bengaluru located in?",
+        "ground_truth": [
+          "Oceania"
+        ],
+        "prediction": "Oceania",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.20325422286987305
+      },
+      {
+        "context_id": 0,
+        "query_id": 51,
+        "question": "Which sport is Slovakia national football team associated with?",
+        "ground_truth": [
+          "cricket"
+        ],
+        "prediction": "cricket",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.1527562141418457
+      },
+      {
+        "context_id": 0,
+        "query_id": 52,
+        "question": "What is the name of the current head of state in United States of America?",
+        "ground_truth": [
+          "Connachta"
+        ],
+        "prediction": "Donald Trump",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.14775943756103516
+      },
+      {
+        "context_id": 0,
+        "query_id": 53,
+        "question": "Which religion is Imelda Marcos affiliated with?",
+        "ground_truth": [
+          "atheism"
+        ],
+        "prediction": "Catholicism",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.14827990531921387
+      },
+      {
+        "context_id": 0,
+        "query_id": 54,
+        "question": "What type of music does Dana International play?",
+        "ground_truth": [
+          "Australian hip hop"
+        ],
+        "prediction": "Australian hip hop",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.15801644325256348
+      },
+      {
+        "context_id": 0,
+        "query_id": 55,
+        "question": "What is the country of citizenship of Sable?",
+        "ground_truth": [
+          "Czech Republic"
+        ],
+        "prediction": "Czech Republic",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.14639544486999512
+      },
+      {
+        "context_id": 0,
+        "query_id": 56,
+        "question": "Which country was Charlie Hebdo created in?",
+        "ground_truth": [
+          "Italy"
+        ],
+        "prediction": "Italy",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.15978002548217773
+      },
+      {
+        "context_id": 0,
+        "query_id": 57,
+        "question": "Who is Elvis Presley married to?",
+        "ground_truth": [
+          "Charles the Bold"
+        ],
+        "prediction": "Charles the Bold",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.19070744514465332
+      },
+      {
+        "context_id": 0,
+        "query_id": 58,
+        "question": "Who performed Hermione Granger?",
+        "ground_truth": [
+          "Kylie Minogue"
+        ],
+        "prediction": "Kylie Minogue",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.2280879020690918
+      },
+      {
+        "context_id": 0,
+        "query_id": 59,
+        "question": "Which sport is Bo Ryan associated with?",
+        "ground_truth": [
+          "association football"
+        ],
+        "prediction": "basketball",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.13908076286315918
+      },
+      {
+        "context_id": 0,
+        "query_id": 60,
+        "question": "What type of music does John McVie play?",
+        "ground_truth": [
+          "rap rock"
+        ],
+        "prediction": "rap rock",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.15046191215515137
+      },
+      {
+        "context_id": 0,
+        "query_id": 61,
+        "question": "What position does Rogério Ceni play?",
+        "ground_truth": [
+          "flanker"
+        ],
+        "prediction": "flanker",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.1453840732574463
+      },
+      {
+        "context_id": 0,
+        "query_id": 62,
+        "question": "Who is the chief executive officer of Twitter?",
+        "ground_truth": [
+          "Bernard Arnault"
+        ],
+        "prediction": "Bernard Arnault",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.16678524017333984
+      },
+      {
+        "context_id": 0,
+        "query_id": 63,
+        "question": "What language does Kylie Minogue speak?",
+        "ground_truth": [
+          "German"
+        ],
+        "prediction": "German",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.13933801651000977
+      },
+      {
+        "context_id": 0,
+        "query_id": 64,
+        "question": "Which sport is Darryl Strawberry associated with?",
+        "ground_truth": [
+          "baseball"
+        ],
+        "prediction": "baseball",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.1453557014465332
+      },
+      {
+        "context_id": 0,
+        "query_id": 65,
+        "question": "Which sport is placekicker associated with?",
+        "ground_truth": [
+          "rugby"
+        ],
+        "prediction": "rugby",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.16200637817382812
+      },
+      {
+        "context_id": 0,
+        "query_id": 66,
+        "question": "What kind of work does Stephen McNeil do?",
+        "ground_truth": [
+          "journalist"
+        ],
+        "prediction": "journalist",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.18473005294799805
+      },
+      {
+        "context_id": 0,
+        "query_id": 67,
+        "question": "Who is the employer of Dave Filoni?",
+        "ground_truth": [
+          "British Broadcasting Corporation"
+        ],
+        "prediction": "British Broadcasting Corporation",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.17877507209777832
+      },
+      {
+        "context_id": 0,
+        "query_id": 68,
+        "question": "Which continent is San Francisco located in?",
+        "ground_truth": [
+          "North America"
+        ],
+        "prediction": "North America",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.16397786140441895
+      },
+      {
+        "context_id": 0,
+        "query_id": 69,
+        "question": "Where was Canadair founded?",
+        "ground_truth": [
+          "Tucson"
+        ],
+        "prediction": "Tucson",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.16166448593139648
+      },
+      {
+        "context_id": 0,
+        "query_id": 70,
+        "question": "Which company is AP1000 produced by?",
+        "ground_truth": [
+          "Canadair"
+        ],
+        "prediction": "Canadair",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.16890311241149902
+      },
+      {
+        "context_id": 0,
+        "query_id": 71,
+        "question": "What is the country of citizenship of Ayumi Hamasaki?",
+        "ground_truth": [
+          "Japan"
+        ],
+        "prediction": "Japan",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.13584685325622559
+      },
+      {
+        "context_id": 0,
+        "query_id": 72,
+        "question": "What position does Blair Walsh play?",
+        "ground_truth": [
+          "placekicker"
+        ],
+        "prediction": "placekicker",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.16527938842773438
+      },
+      {
+        "context_id": 0,
+        "query_id": 73,
+        "question": "Who is Tony Blair married to?",
+        "ground_truth": [
+          "Alan Jay Lerner"
+        ],
+        "prediction": "Alan Jay Lerner",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.24273920059204102
+      },
+      {
+        "context_id": 0,
+        "query_id": 74,
+        "question": "Who is the author of Endymion?",
+        "ground_truth": [
+          "John Keats"
+        ],
+        "prediction": "John Keats",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.16530299186706543
+      },
+      {
+        "context_id": 0,
+        "query_id": 75,
+        "question": "Who is the author of Lady Windermere's Fan?",
+        "ground_truth": [
+          "Oscar Wilde"
+        ],
+        "prediction": "Oscar Wilde",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.14827847480773926
+      },
+      {
+        "context_id": 0,
+        "query_id": 76,
+        "question": "What is the name of the current head of the Japan government?",
+        "ground_truth": [
+          "Shinzō Abe"
+        ],
+        "prediction": "Shinzō Abe",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.17343616485595703
+      },
+      {
+        "context_id": 0,
+        "query_id": 77,
+        "question": "Who is the chairperson of Congolese Party of Labour?",
+        "ground_truth": [
+          "Stephen McNeil"
+        ],
+        "prediction": "Stephen McNeil",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.15023088455200195
+      },
+      {
+        "context_id": 0,
+        "query_id": 78,
+        "question": "Which sport is flanker associated with?",
+        "ground_truth": [
+          "rugby union"
+        ],
+        "prediction": "Unknown",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.14457297325134277
+      },
+      {
+        "context_id": 0,
+        "query_id": 79,
+        "question": "What is the capital of Czech Republic?",
+        "ground_truth": [
+          "Prague"
+        ],
+        "prediction": "Prague",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.15281343460083008
+      },
+      {
+        "context_id": 0,
+        "query_id": 80,
+        "question": "What position does Lisa Leslie play?",
+        "ground_truth": [
+          "goaltender"
+        ],
+        "prediction": "Unknown",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.15083980560302734
+      },
+      {
+        "context_id": 0,
+        "query_id": 81,
+        "question": "What is the name of the current head of state in Soviet Union?",
+        "ground_truth": [
+          "Elizabeth II"
+        ],
+        "prediction": "Elizabeth II",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.1931149959564209
+      },
+      {
+        "context_id": 0,
+        "query_id": 82,
+        "question": "What is the country of citizenship of Ferdinand von Richthofen?",
+        "ground_truth": [
+          "Canada"
+        ],
+        "prediction": "Canada",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.15576767921447754
+      },
+      {
+        "context_id": 0,
+        "query_id": 83,
+        "question": "Which religion is Karen Armstrong affiliated with?",
+        "ground_truth": [
+          "Church of Scotland"
+        ],
+        "prediction": "Catholic Church",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.4,
+        "query_time": 0.15998029708862305
+      },
+      {
+        "context_id": 0,
+        "query_id": 84,
+        "question": "Who was Vito Corleone created by?",
+        "ground_truth": [
+          "Nobuhiro Watsuki"
+        ],
+        "prediction": "Nobuhiro Watsuki",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.2222452163696289
+      },
+      {
+        "context_id": 0,
+        "query_id": 85,
+        "question": "What is the capital of Romania?",
+        "ground_truth": [
+          "Rajanpur"
+        ],
+        "prediction": "Rajanpur",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.1705319881439209
+      },
+      {
+        "context_id": 0,
+        "query_id": 86,
+        "question": "Which continent is India located in?",
+        "ground_truth": [
+          "Africa"
+        ],
+        "prediction": "Africa",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.15494585037231445
+      },
+      {
+        "context_id": 0,
+        "query_id": 87,
+        "question": "Which city did Olga of Kiev die in?",
+        "ground_truth": [
+          "Rodez"
+        ],
+        "prediction": "Rodez",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.19068312644958496
+      },
+      {
+        "context_id": 0,
+        "query_id": 88,
+        "question": "Who founded Sasanian Empire?",
+        "ground_truth": [
+          "Walter Chrysler"
+        ],
+        "prediction": "Walter Chrysler",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.1683974266052246
+      },
+      {
+        "context_id": 0,
+        "query_id": 89,
+        "question": "Which city did Pedro Pierluisi work in?",
+        "ground_truth": [
+          "Washington, D.C."
+        ],
+        "prediction": "Unknown",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.1819915771484375
+      },
+      {
+        "context_id": 0,
+        "query_id": 90,
+        "question": "Which sport is Surrey Senior Cup associated with?",
+        "ground_truth": [
+          "basketball"
+        ],
+        "prediction": "association football",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.1503462791442871
+      },
+      {
+        "context_id": 0,
+        "query_id": 91,
+        "question": "What is the country of citizenship of Narendra Modi?",
+        "ground_truth": [
+          "Australia"
+        ],
+        "prediction": "Australia",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.1362900733947754
+      },
+      {
+        "context_id": 0,
+        "query_id": 92,
+        "question": "Who is Victoria Beckham married to?",
+        "ground_truth": [
+          "David Beckham"
+        ],
+        "prediction": "Unknown",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.13438081741333008
+      },
+      {
+        "context_id": 0,
+        "query_id": 93,
+        "question": "What is the country of citizenship of Charles Messier?",
+        "ground_truth": [
+          "Iran"
+        ],
+        "prediction": "Iran",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.14767765998840332
+      },
+      {
+        "context_id": 0,
+        "query_id": 94,
+        "question": "Who was Rand al'Thor created by?",
+        "ground_truth": [
+          "Ferdowsi"
+        ],
+        "prediction": "Ferdowsi",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.1781473159790039
+      },
+      {
+        "context_id": 0,
+        "query_id": 95,
+        "question": "What position does Mike D'Antoni play?",
+        "ground_truth": [
+          "point guard"
+        ],
+        "prediction": "Unknown",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.13885021209716797
+      },
+      {
+        "context_id": 0,
+        "query_id": 96,
+        "question": "What is the country of citizenship of Colin Irwin?",
+        "ground_truth": [
+          "Israel"
+        ],
+        "prediction": "Israel",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.17772984504699707
+      },
+      {
+        "context_id": 0,
+        "query_id": 97,
+        "question": "Who is Walter Chrysler's child?",
+        "ground_truth": [
+          "Charles Frederick, Duke of Holstein-Gottorp"
+        ],
+        "prediction": "Charles Frederick, Duke of Holstein-Gottorp",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.3992171287536621
+      },
+      {
+        "context_id": 0,
+        "query_id": 98,
+        "question": "Who is Charles Darwin married to?",
+        "ground_truth": [
+          "Amala Paul"
+        ],
+        "prediction": "Amala Paul",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.16877031326293945
+      },
+      {
+        "context_id": 0,
+        "query_id": 99,
+        "question": "What position does Irving Fryar play?",
+        "ground_truth": [
+          "wide receiver"
+        ],
+        "prediction": "wide receiver",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.15204977989196777
+      }
+    ]
+  },
+  "experiment": {
+    "arm": "Experiment",
+    "metrics": {
+      "exact_match": 76.0,
+      "substring_exact_match": 76.0,
+      "f1": 76.4,
+      "total_queries": 100,
+      "avg_query_time": 0.18863574028015137,
+      "total_memorize_time": 30.53627061843872,
+      "total_query_time": 18.863574028015137
+    },
+    "results": [
+      {
+        "context_id": 0,
+        "query_id": 0,
+        "question": "Which sport is goaltender associated with?",
+        "ground_truth": [
+          "pesäpallo"
+        ],
+        "prediction": "ice hockey",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.1551513671875
+      },
+      {
+        "context_id": 0,
+        "query_id": 1,
+        "question": "What is Nobuhiro Watsuki famous for?",
+        "ground_truth": [
+          "The Fairly OddParents"
+        ],
+        "prediction": "The Fairly OddParents",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.19802308082580566
+      },
+      {
+        "context_id": 0,
+        "query_id": 2,
+        "question": "Which country was rugby union created in?",
+        "ground_truth": [
+          "India"
+        ],
+        "prediction": "England",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.1414623260498047
+      },
+      {
+        "context_id": 0,
+        "query_id": 3,
+        "question": "What is Ferdowsi famous for?",
+        "ground_truth": [
+          "Shahnameh"
+        ],
+        "prediction": "Shahnameh",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.15836024284362793
+      },
+      {
+        "context_id": 0,
+        "query_id": 4,
+        "question": "Which university was Joan Didion educated at?",
+        "ground_truth": [
+          "University of California, Berkeley"
+        ],
+        "prediction": "Unknown",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.14738035202026367
+      },
+      {
+        "context_id": 0,
+        "query_id": 5,
+        "question": "Who is the author of The Marriage of Figaro?",
+        "ground_truth": [
+          "Thomas Kyd"
+        ],
+        "prediction": "Thomas Kyd",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.17911481857299805
+      },
+      {
+        "context_id": 0,
+        "query_id": 6,
+        "question": "Which sport is Tunisia national football team associated with?",
+        "ground_truth": [
+          "basketball"
+        ],
+        "prediction": "association football",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.1816854476928711
+      },
+      {
+        "context_id": 0,
+        "query_id": 7,
+        "question": "Which sport is quarterback associated with?",
+        "ground_truth": [
+          "Muay Thai"
+        ],
+        "prediction": "Unknown",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.1431729793548584
+      },
+      {
+        "context_id": 0,
+        "query_id": 8,
+        "question": "What is the official language of Japan?",
+        "ground_truth": [
+          "Swedish"
+        ],
+        "prediction": "Swedish",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.13686418533325195
+      },
+      {
+        "context_id": 0,
+        "query_id": 9,
+        "question": "What is the name of the current head of the Tucson government?",
+        "ground_truth": [
+          "Jonathan Rothschild"
+        ],
+        "prediction": "Jonathan Rothschild",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.15169739723205566
+      },
+      {
+        "context_id": 0,
+        "query_id": 10,
+        "question": "What is the name of the current head of the Italy government?",
+        "ground_truth": [
+          "Giuseppe Conte"
+        ],
+        "prediction": "Giuseppe Conte",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.16518235206604004
+      },
+      {
+        "context_id": 0,
+        "query_id": 11,
+        "question": "Who performed Meredith Grey?",
+        "ground_truth": [
+          "Ellen Pompeo"
+        ],
+        "prediction": "Ellen Pompeo",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.14729690551757812
+      },
+      {
+        "context_id": 0,
+        "query_id": 12,
+        "question": "What position does Robert Parish play?",
+        "ground_truth": [
+          "quarterback"
+        ],
+        "prediction": "quarterback",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.15105891227722168
+      },
+      {
+        "context_id": 0,
+        "query_id": 13,
+        "question": "What is the country of citizenship of Cédric Klapisch?",
+        "ground_truth": [
+          "Malaysia"
+        ],
+        "prediction": "Malaysia",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.15582895278930664
+      },
+      {
+        "context_id": 0,
+        "query_id": 14,
+        "question": "Who is the author of Sidereus Nuncius?",
+        "ground_truth": [
+          "Samuel Beckett"
+        ],
+        "prediction": "Samuel Beckett",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.26564836502075195
+      },
+      {
+        "context_id": 0,
+        "query_id": 15,
+        "question": "Which continent is Germany located in?",
+        "ground_truth": [
+          "Africa"
+        ],
+        "prediction": "Africa",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.20522046089172363
+      },
+      {
+        "context_id": 0,
+        "query_id": 16,
+        "question": "Which religion is Kingdom of Ireland affiliated with?",
+        "ground_truth": [
+          "Zoroastrianism"
+        ],
+        "prediction": "Zoroastrianism",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.24654912948608398
+      },
+      {
+        "context_id": 0,
+        "query_id": 17,
+        "question": "Which country was association football created in?",
+        "ground_truth": [
+          "Italy"
+        ],
+        "prediction": "England",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.20599079132080078
+      },
+      {
+        "context_id": 0,
+        "query_id": 18,
+        "question": "Who is the developer of Windows Phone?",
+        "ground_truth": [
+          "Microsoft"
+        ],
+        "prediction": "Microsoft",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.16932368278503418
+      },
+      {
+        "context_id": 0,
+        "query_id": 19,
+        "question": "Who is the chief executive officer of Microsoft?",
+        "ground_truth": [
+          "Steve Jobs"
+        ],
+        "prediction": "Steve Jobs",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.22116518020629883
+      },
+      {
+        "context_id": 0,
+        "query_id": 20,
+        "question": "Who is the chairperson of Harvard University?",
+        "ground_truth": [
+          "Peter Diamandis"
+        ],
+        "prediction": "Peter Diamandis",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.273284912109375
+      },
+      {
+        "context_id": 0,
+        "query_id": 21,
+        "question": "Who founded Church of Scotland?",
+        "ground_truth": [
+          "John Knox"
+        ],
+        "prediction": "John Knox",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.16483736038208008
+      },
+      {
+        "context_id": 0,
+        "query_id": 22,
+        "question": "Which sport is Galwegians RFC associated with?",
+        "ground_truth": [
+          "rugby union"
+        ],
+        "prediction": "I do not have information about Galwegians RFC",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.26978468894958496
+      },
+      {
+        "context_id": 0,
+        "query_id": 23,
+        "question": "Who is the director of American Broadcasting Company?",
+        "ground_truth": [
+          "Ernst Heinkel"
+        ],
+        "prediction": "Ernst Heinkel",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.18706631660461426
+      },
+      {
+        "context_id": 0,
+        "query_id": 24,
+        "question": "Which city did Gennady Rozhdestvensky die in?",
+        "ground_truth": [
+          "United States of America"
+        ],
+        "prediction": "United States of America",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.1858987808227539
+      },
+      {
+        "context_id": 0,
+        "query_id": 25,
+        "question": "What is the capital of Tang Empire?",
+        "ground_truth": [
+          "Beaumont"
+        ],
+        "prediction": "Beaumont",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.1609058380126953
+      },
+      {
+        "context_id": 0,
+        "query_id": 26,
+        "question": "Who is the director of British Broadcasting Corporation?",
+        "ground_truth": [
+          "Narendra Modi"
+        ],
+        "prediction": "Narendra Modi",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.2510974407196045
+      },
+      {
+        "context_id": 0,
+        "query_id": 27,
+        "question": "What is the country of citizenship of Benjamin Mazar?",
+        "ground_truth": [
+          "Israel"
+        ],
+        "prediction": "Israel",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.18628215789794922
+      },
+      {
+        "context_id": 0,
+        "query_id": 28,
+        "question": "What type of music does Michael Mantler play?",
+        "ground_truth": [
+          "post-punk"
+        ],
+        "prediction": "post-punk",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.21613073348999023
+      },
+      {
+        "context_id": 0,
+        "query_id": 29,
+        "question": "Which city did Oscar Wilde die in?",
+        "ground_truth": [
+          "Guangzhou"
+        ],
+        "prediction": "Guangzhou",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.18362069129943848
+      },
+      {
+        "context_id": 0,
+        "query_id": 30,
+        "question": "Which country was baseball created in?",
+        "ground_truth": [
+          "Japan"
+        ],
+        "prediction": "Japan",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.14599943161010742
+      },
+      {
+        "context_id": 0,
+        "query_id": 31,
+        "question": "What is the country of citizenship of Ernst Heinkel?",
+        "ground_truth": [
+          "Tang Empire"
+        ],
+        "prediction": "Tang Empire",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.1561424732208252
+      },
+      {
+        "context_id": 0,
+        "query_id": 32,
+        "question": "Which city is the headquarter of The University of the Arts located in?",
+        "ground_truth": [
+          "Philadelphia"
+        ],
+        "prediction": "Philadelphia",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 1.17333984375
+      },
+      {
+        "context_id": 0,
+        "query_id": 33,
+        "question": "Which country was rap rock created in?",
+        "ground_truth": [
+          "Russian Empire"
+        ],
+        "prediction": "United States of America",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.1825554370880127
+      },
+      {
+        "context_id": 0,
+        "query_id": 34,
+        "question": "Where was Christianity founded?",
+        "ground_truth": [
+          "Taipei"
+        ],
+        "prediction": "Taipei",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.16587233543395996
+      },
+      {
+        "context_id": 0,
+        "query_id": 35,
+        "question": "What is the official language of United States of America?",
+        "ground_truth": [
+          "German"
+        ],
+        "prediction": "Unknown",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.2152104377746582
+      },
+      {
+        "context_id": 0,
+        "query_id": 36,
+        "question": "Who performed Past Masters?",
+        "ground_truth": [
+          "Madonna"
+        ],
+        "prediction": "Madonna",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.1386561393737793
+      },
+      {
+        "context_id": 0,
+        "query_id": 37,
+        "question": "What is the capital of Japan?",
+        "ground_truth": [
+          "Tokyo"
+        ],
+        "prediction": "Tokyo",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.13412189483642578
+      },
+      {
+        "context_id": 0,
+        "query_id": 38,
+        "question": "What is the capital of France?",
+        "ground_truth": [
+          "Harare"
+        ],
+        "prediction": "Unknown",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.14077520370483398
+      },
+      {
+        "context_id": 0,
+        "query_id": 39,
+        "question": "Who is the developer of SteamOS?",
+        "ground_truth": [
+          "ABB Group"
+        ],
+        "prediction": "Valve Corporation",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.14527320861816406
+      },
+      {
+        "context_id": 0,
+        "query_id": 40,
+        "question": "Which city is the headquarter of University of Bucharest located in?",
+        "ground_truth": [
+          "Ankara"
+        ],
+        "prediction": "Ankara",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.15459370613098145
+      },
+      {
+        "context_id": 0,
+        "query_id": 41,
+        "question": "Which sport is wide receiver associated with?",
+        "ground_truth": [
+          "rugby"
+        ],
+        "prediction": "rugby",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.15036535263061523
+      },
+      {
+        "context_id": 0,
+        "query_id": 42,
+        "question": "What position does Hines Ward play?",
+        "ground_truth": [
+          "cornerback"
+        ],
+        "prediction": "Unknown",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.14021754264831543
+      },
+      {
+        "context_id": 0,
+        "query_id": 43,
+        "question": "What is the capital of Australia?",
+        "ground_truth": [
+          "Oderzo"
+        ],
+        "prediction": "I do not have that information.",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.22468256950378418
+      },
+      {
+        "context_id": 0,
+        "query_id": 44,
+        "question": "Which continent is Malaysia located in?",
+        "ground_truth": [
+          "Antarctica"
+        ],
+        "prediction": "Antarctica",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.15477228164672852
+      },
+      {
+        "context_id": 0,
+        "query_id": 45,
+        "question": "Who is the author of A Wizard of Earthsea?",
+        "ground_truth": [
+          "Pius XII"
+        ],
+        "prediction": "Pius XII",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.1616983413696289
+      },
+      {
+        "context_id": 0,
+        "query_id": 46,
+        "question": "Who performed Free as a Bird?",
+        "ground_truth": [
+          "The Beatles"
+        ],
+        "prediction": "The Beatles",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.14690017700195312
+      },
+      {
+        "context_id": 0,
+        "query_id": 47,
+        "question": "Who is the author of Our Mutual Friend?",
+        "ground_truth": [
+          "Charles Darwin"
+        ],
+        "prediction": "Charles Darwin",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.14914798736572266
+      },
+      {
+        "context_id": 0,
+        "query_id": 48,
+        "question": "Which country was basketball created in?",
+        "ground_truth": [
+          "Soviet Union"
+        ],
+        "prediction": "Not mentioned in knowledge pool.",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.19096851348876953
+      },
+      {
+        "context_id": 0,
+        "query_id": 49,
+        "question": "What is the country of citizenship of Hal Needham?",
+        "ground_truth": [
+          "United States of America"
+        ],
+        "prediction": "United States of America",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.17441105842590332
+      },
+      {
+        "context_id": 0,
+        "query_id": 50,
+        "question": "Which continent is Bengaluru located in?",
+        "ground_truth": [
+          "Oceania"
+        ],
+        "prediction": "Oceania",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.14902639389038086
+      },
+      {
+        "context_id": 0,
+        "query_id": 51,
+        "question": "Which sport is Slovakia national football team associated with?",
+        "ground_truth": [
+          "cricket"
+        ],
+        "prediction": "cricket",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.16363167762756348
+      },
+      {
+        "context_id": 0,
+        "query_id": 52,
+        "question": "What is the name of the current head of state in United States of America?",
+        "ground_truth": [
+          "Connachta"
+        ],
+        "prediction": "Donald Trump",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.1579587459564209
+      },
+      {
+        "context_id": 0,
+        "query_id": 53,
+        "question": "Which religion is Imelda Marcos affiliated with?",
+        "ground_truth": [
+          "atheism"
+        ],
+        "prediction": "Catholicism",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.1523301601409912
+      },
+      {
+        "context_id": 0,
+        "query_id": 54,
+        "question": "What type of music does Dana International play?",
+        "ground_truth": [
+          "Australian hip hop"
+        ],
+        "prediction": "Australian hip hop",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.1596393585205078
+      },
+      {
+        "context_id": 0,
+        "query_id": 55,
+        "question": "What is the country of citizenship of Sable?",
+        "ground_truth": [
+          "Czech Republic"
+        ],
+        "prediction": "Czech Republic",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.15176963806152344
+      },
+      {
+        "context_id": 0,
+        "query_id": 56,
+        "question": "Which country was Charlie Hebdo created in?",
+        "ground_truth": [
+          "Italy"
+        ],
+        "prediction": "Italy",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.15151739120483398
+      },
+      {
+        "context_id": 0,
+        "query_id": 57,
+        "question": "Who is Elvis Presley married to?",
+        "ground_truth": [
+          "Charles the Bold"
+        ],
+        "prediction": "Charles the Bold",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.15717411041259766
+      },
+      {
+        "context_id": 0,
+        "query_id": 58,
+        "question": "Who performed Hermione Granger?",
+        "ground_truth": [
+          "Kylie Minogue"
+        ],
+        "prediction": "Kylie Minogue",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.16860651969909668
+      },
+      {
+        "context_id": 0,
+        "query_id": 59,
+        "question": "Which sport is Bo Ryan associated with?",
+        "ground_truth": [
+          "association football"
+        ],
+        "prediction": "basketball",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.15616250038146973
+      },
+      {
+        "context_id": 0,
+        "query_id": 60,
+        "question": "What type of music does John McVie play?",
+        "ground_truth": [
+          "rap rock"
+        ],
+        "prediction": "rap rock",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.18017339706420898
+      },
+      {
+        "context_id": 0,
+        "query_id": 61,
+        "question": "What position does Rogério Ceni play?",
+        "ground_truth": [
+          "flanker"
+        ],
+        "prediction": "flanker",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.1462845802307129
+      },
+      {
+        "context_id": 0,
+        "query_id": 62,
+        "question": "Who is the chief executive officer of Twitter?",
+        "ground_truth": [
+          "Bernard Arnault"
+        ],
+        "prediction": "Bernard Arnault",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.17545342445373535
+      },
+      {
+        "context_id": 0,
+        "query_id": 63,
+        "question": "What language does Kylie Minogue speak?",
+        "ground_truth": [
+          "German"
+        ],
+        "prediction": "German",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.13301658630371094
+      },
+      {
+        "context_id": 0,
+        "query_id": 64,
+        "question": "Which sport is Darryl Strawberry associated with?",
+        "ground_truth": [
+          "baseball"
+        ],
+        "prediction": "baseball",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.1346745491027832
+      },
+      {
+        "context_id": 0,
+        "query_id": 65,
+        "question": "Which sport is placekicker associated with?",
+        "ground_truth": [
+          "rugby"
+        ],
+        "prediction": "rugby",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.14706158638000488
+      },
+      {
+        "context_id": 0,
+        "query_id": 66,
+        "question": "What kind of work does Stephen McNeil do?",
+        "ground_truth": [
+          "journalist"
+        ],
+        "prediction": "journalist",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.13373851776123047
+      },
+      {
+        "context_id": 0,
+        "query_id": 67,
+        "question": "Who is the employer of Dave Filoni?",
+        "ground_truth": [
+          "British Broadcasting Corporation"
+        ],
+        "prediction": "British Broadcasting Corporation",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.1671919822692871
+      },
+      {
+        "context_id": 0,
+        "query_id": 68,
+        "question": "Which continent is San Francisco located in?",
+        "ground_truth": [
+          "North America"
+        ],
+        "prediction": "North America",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.22326064109802246
+      },
+      {
+        "context_id": 0,
+        "query_id": 69,
+        "question": "Where was Canadair founded?",
+        "ground_truth": [
+          "Tucson"
+        ],
+        "prediction": "Tucson",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.15961265563964844
+      },
+      {
+        "context_id": 0,
+        "query_id": 70,
+        "question": "Which company is AP1000 produced by?",
+        "ground_truth": [
+          "Canadair"
+        ],
+        "prediction": "Canadair",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.16198420524597168
+      },
+      {
+        "context_id": 0,
+        "query_id": 71,
+        "question": "What is the country of citizenship of Ayumi Hamasaki?",
+        "ground_truth": [
+          "Japan"
+        ],
+        "prediction": "Japan",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.14378571510314941
+      },
+      {
+        "context_id": 0,
+        "query_id": 72,
+        "question": "What position does Blair Walsh play?",
+        "ground_truth": [
+          "placekicker"
+        ],
+        "prediction": "placekicker",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.18319368362426758
+      },
+      {
+        "context_id": 0,
+        "query_id": 73,
+        "question": "Who is Tony Blair married to?",
+        "ground_truth": [
+          "Alan Jay Lerner"
+        ],
+        "prediction": "Alan Jay Lerner",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.17010951042175293
+      },
+      {
+        "context_id": 0,
+        "query_id": 74,
+        "question": "Who is the author of Endymion?",
+        "ground_truth": [
+          "John Keats"
+        ],
+        "prediction": "John Keats",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.16928553581237793
+      },
+      {
+        "context_id": 0,
+        "query_id": 75,
+        "question": "Who is the author of Lady Windermere's Fan?",
+        "ground_truth": [
+          "Oscar Wilde"
+        ],
+        "prediction": "Oscar Wilde",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.15738368034362793
+      },
+      {
+        "context_id": 0,
+        "query_id": 76,
+        "question": "What is the name of the current head of the Japan government?",
+        "ground_truth": [
+          "Shinzō Abe"
+        ],
+        "prediction": "Shinzō Abe",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.17082810401916504
+      },
+      {
+        "context_id": 0,
+        "query_id": 77,
+        "question": "Who is the chairperson of Congolese Party of Labour?",
+        "ground_truth": [
+          "Stephen McNeil"
+        ],
+        "prediction": "Stephen McNeil",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.1486496925354004
+      },
+      {
+        "context_id": 0,
+        "query_id": 78,
+        "question": "Which sport is flanker associated with?",
+        "ground_truth": [
+          "rugby union"
+        ],
+        "prediction": "Unknown",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.13491463661193848
+      },
+      {
+        "context_id": 0,
+        "query_id": 79,
+        "question": "What is the capital of Czech Republic?",
+        "ground_truth": [
+          "Prague"
+        ],
+        "prediction": "Prague",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.14546513557434082
+      },
+      {
+        "context_id": 0,
+        "query_id": 80,
+        "question": "What position does Lisa Leslie play?",
+        "ground_truth": [
+          "goaltender"
+        ],
+        "prediction": "Unknown",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.13440251350402832
+      },
+      {
+        "context_id": 0,
+        "query_id": 81,
+        "question": "What is the name of the current head of state in Soviet Union?",
+        "ground_truth": [
+          "Elizabeth II"
+        ],
+        "prediction": "Elizabeth II",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.14582037925720215
+      },
+      {
+        "context_id": 0,
+        "query_id": 82,
+        "question": "What is the country of citizenship of Ferdinand von Richthofen?",
+        "ground_truth": [
+          "Canada"
+        ],
+        "prediction": "Canada",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 1.1573188304901123
+      },
+      {
+        "context_id": 0,
+        "query_id": 83,
+        "question": "Which religion is Karen Armstrong affiliated with?",
+        "ground_truth": [
+          "Church of Scotland"
+        ],
+        "prediction": "Catholic Church",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.4,
+        "query_time": 0.1481468677520752
+      },
+      {
+        "context_id": 0,
+        "query_id": 84,
+        "question": "Who was Vito Corleone created by?",
+        "ground_truth": [
+          "Nobuhiro Watsuki"
+        ],
+        "prediction": "Nobuhiro Watsuki",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.18186378479003906
+      },
+      {
+        "context_id": 0,
+        "query_id": 85,
+        "question": "What is the capital of Romania?",
+        "ground_truth": [
+          "Rajanpur"
+        ],
+        "prediction": "Rajanpur",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.16791319847106934
+      },
+      {
+        "context_id": 0,
+        "query_id": 86,
+        "question": "Which continent is India located in?",
+        "ground_truth": [
+          "Africa"
+        ],
+        "prediction": "I do not have that information.",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.21108317375183105
+      },
+      {
+        "context_id": 0,
+        "query_id": 87,
+        "question": "Which city did Olga of Kiev die in?",
+        "ground_truth": [
+          "Rodez"
+        ],
+        "prediction": "Rodez",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.16757750511169434
+      },
+      {
+        "context_id": 0,
+        "query_id": 88,
+        "question": "Who founded Sasanian Empire?",
+        "ground_truth": [
+          "Walter Chrysler"
+        ],
+        "prediction": "Walter Chrysler",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.20516228675842285
+      },
+      {
+        "context_id": 0,
+        "query_id": 89,
+        "question": "Which city did Pedro Pierluisi work in?",
+        "ground_truth": [
+          "Washington, D.C."
+        ],
+        "prediction": "Unknown",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.13527774810791016
+      },
+      {
+        "context_id": 0,
+        "query_id": 90,
+        "question": "Which sport is Surrey Senior Cup associated with?",
+        "ground_truth": [
+          "basketball"
+        ],
+        "prediction": "association football",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.14802789688110352
+      },
+      {
+        "context_id": 0,
+        "query_id": 91,
+        "question": "What is the country of citizenship of Narendra Modi?",
+        "ground_truth": [
+          "Australia"
+        ],
+        "prediction": "Australia",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.1346430778503418
+      },
+      {
+        "context_id": 0,
+        "query_id": 92,
+        "question": "Who is Victoria Beckham married to?",
+        "ground_truth": [
+          "David Beckham"
+        ],
+        "prediction": "David Beckham",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.15763282775878906
+      },
+      {
+        "context_id": 0,
+        "query_id": 93,
+        "question": "What is the country of citizenship of Charles Messier?",
+        "ground_truth": [
+          "Iran"
+        ],
+        "prediction": "Iran",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.1584327220916748
+      },
+      {
+        "context_id": 0,
+        "query_id": 94,
+        "question": "Who was Rand al'Thor created by?",
+        "ground_truth": [
+          "Ferdowsi"
+        ],
+        "prediction": "Ferdowsi",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.16969799995422363
+      },
+      {
+        "context_id": 0,
+        "query_id": 95,
+        "question": "What position does Mike D'Antoni play?",
+        "ground_truth": [
+          "point guard"
+        ],
+        "prediction": "Unknown",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.14308786392211914
+      },
+      {
+        "context_id": 0,
+        "query_id": 96,
+        "question": "What is the country of citizenship of Colin Irwin?",
+        "ground_truth": [
+          "Israel"
+        ],
+        "prediction": "Israel",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.13922667503356934
+      },
+      {
+        "context_id": 0,
+        "query_id": 97,
+        "question": "Who is Walter Chrysler's child?",
+        "ground_truth": [
+          "Charles Frederick, Duke of Holstein-Gottorp"
+        ],
+        "prediction": "Charles Frederick, Duke of Holstein-Gottorp",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.22827839851379395
+      },
+      {
+        "context_id": 0,
+        "query_id": 98,
+        "question": "Who is Charles Darwin married to?",
+        "ground_truth": [
+          "Amala Paul"
+        ],
+        "prediction": "Amala Paul",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.1770641803741455
+      },
+      {
+        "context_id": 0,
+        "query_id": 99,
+        "question": "What position does Irving Fryar play?",
+        "ground_truth": [
+          "wide receiver"
+        ],
+        "prediction": "wide receiver",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.14824199676513672
+      }
+    ]
+  }
+}

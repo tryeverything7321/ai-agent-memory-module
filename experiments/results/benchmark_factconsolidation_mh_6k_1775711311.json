@@ -1,0 +1,188 @@
+{
+  "config": {
+    "sub_dataset": "factconsolidation_mh_6k",
+    "chunk_size": 4096,
+    "max_queries": 5,
+    "propagation_depth": 2,
+    "decay_per_hop": 0.5,
+    "llm_url": null,
+    "llm_model": null,
+    "embed_url": null,
+    "embed_model": null
+  },
+  "comparison": {
+    "exact_match": {
+      "baseline": 20.0,
+      "experiment": 20.0,
+      "delta": 0.0
+    },
+    "substring_exact_match": {
+      "baseline": 20.0,
+      "experiment": 20.0,
+      "delta": 0.0
+    },
+    "f1": {
+      "baseline": 20.0,
+      "experiment": 20.0,
+      "delta": 0.0
+    }
+  },
+  "baseline": {
+    "arm": "Baseline",
+    "metrics": {
+      "exact_match": 20.0,
+      "substring_exact_match": 20.0,
+      "f1": 20.0,
+      "total_queries": 5,
+      "avg_query_time": 0.1688178539276123,
+      "total_memorize_time": 31.177576065063477,
+      "total_query_time": 0.8440892696380615
+    },
+    "results": [
+      {
+        "context_id": 0,
+        "query_id": 0,
+        "question": "What is the country of citizenship of the spouse of the author of Our Mutual Friend?",
+        "ground_truth": [
+          "Belgium"
+        ],
+        "prediction": "Unknown",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.21069622039794922
+      },
+      {
+        "context_id": 0,
+        "query_id": 1,
+        "question": "In which location did the spouse of Igor of Kiev pass away?",
+        "ground_truth": [
+          "Rodez"
+        ],
+        "prediction": "Rodez",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.15816235542297363
+      },
+      {
+        "context_id": 0,
+        "query_id": 2,
+        "question": "Which country is the birthplace of the sport associated with Steve Sax?",
+        "ground_truth": [
+          "Italy"
+        ],
+        "prediction": "England",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.14568448066711426
+      },
+      {
+        "context_id": 0,
+        "query_id": 3,
+        "question": "Which city serves as the capital of the country of origin for the sport of the Tunisia national football team?",
+        "ground_truth": [
+          "Russellville"
+        ],
+        "prediction": "Tehran",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.16547036170959473
+      },
+      {
+        "context_id": 0,
+        "query_id": 4,
+        "question": "What is the sport that Blair Walsh plays in which he is known for his position on the team?",
+        "ground_truth": [
+          "rugby"
+        ],
+        "prediction": "American football",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.1640758514404297
+      }
+    ]
+  },
+  "experiment": {
+    "arm": "Experiment",
+    "metrics": {
+      "exact_match": 20.0,
+      "substring_exact_match": 20.0,
+      "f1": 20.0,
+      "total_queries": 5,
+      "avg_query_time": 0.1597996711730957,
+      "total_memorize_time": 31.94200825691223,
+      "total_query_time": 0.7989983558654785
+    },
+    "results": [
+      {
+        "context_id": 0,
+        "query_id": 0,
+        "question": "What is the country of citizenship of the spouse of the author of Our Mutual Friend?",
+        "ground_truth": [
+          "Belgium"
+        ],
+        "prediction": "Unknown",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.18919801712036133
+      },
+      {
+        "context_id": 0,
+        "query_id": 1,
+        "question": "In which location did the spouse of Igor of Kiev pass away?",
+        "ground_truth": [
+          "Rodez"
+        ],
+        "prediction": "Rodez",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.1665058135986328
+      },
+      {
+        "context_id": 0,
+        "query_id": 2,
+        "question": "Which country is the birthplace of the sport associated with Steve Sax?",
+        "ground_truth": [
+          "Italy"
+        ],
+        "prediction": "England",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.14262771606445312
+      },
+      {
+        "context_id": 0,
+        "query_id": 3,
+        "question": "Which city serves as the capital of the country of origin for the sport of the Tunisia national football team?",
+        "ground_truth": [
+          "Russellville"
+        ],
+        "prediction": "London",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.15595769882202148
+      },
+      {
+        "context_id": 0,
+        "query_id": 4,
+        "question": "What is the sport that Blair Walsh plays in which he is known for his position on the team?",
+        "ground_truth": [
+          "rugby"
+        ],
+        "prediction": "American football",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.14470911026000977
+      }
+    ]
+  }
+}

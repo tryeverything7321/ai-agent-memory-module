@@ -1,0 +1,391 @@
+{
+  "timestamp": "2026-04-09T13:19:29.514808",
+  "config": {
+    "propagation_depth": 2,
+    "decay_per_hop": 0.5,
+    "scenarios": 10
+  },
+  "baseline": {
+    "aggregate": {
+      "avg_stale_rate": 0.33999999999999997,
+      "avg_valid_precision": 0.66,
+      "avg_f1": 0.66
+    },
+    "scenarios": [
+      {
+        "stale_count": 3,
+        "valid_count": 2,
+        "total": 5,
+        "stale_rate": 0.6,
+        "valid_precision": 0.4,
+        "f1": 0.4000000000000001,
+        "scenario_id": "FC1",
+        "scenario_desc": "프로젝트 담당자 변경",
+        "propagate": false,
+        "weight_changes": {},
+        "pruned_count": 0
+      },
+      {
+        "stale_count": 1,
+        "valid_count": 4,
+        "total": 5,
+        "stale_rate": 0.2,
+        "valid_precision": 0.8,
+        "f1": 0.8000000000000002,
+        "scenario_id": "FC2",
+        "scenario_desc": "미팅 일정 변경",
+        "propagate": false,
+        "weight_changes": {},
+        "pruned_count": 0
+      },
+      {
+        "stale_count": 2,
+        "valid_count": 3,
+        "total": 5,
+        "stale_rate": 0.4,
+        "valid_precision": 0.6,
+        "f1": 0.6,
+        "scenario_id": "FC3",
+        "scenario_desc": "팀 구조 변경",
+        "propagate": false,
+        "weight_changes": {},
+        "pruned_count": 0
+      },
+      {
+        "stale_count": 2,
+        "valid_count": 3,
+        "total": 5,
+        "stale_rate": 0.4,
+        "valid_precision": 0.6,
+        "f1": 0.6,
+        "scenario_id": "FC4",
+        "scenario_desc": "프로젝트 기술 스택 변경",
+        "propagate": false,
+        "weight_changes": {},
+        "pruned_count": 0
+      },
+      {
+        "stale_count": 1,
+        "valid_count": 4,
+        "total": 5,
+        "stale_rate": 0.2,
+        "valid_precision": 0.8,
+        "f1": 0.8000000000000002,
+        "scenario_id": "FC5",
+        "scenario_desc": "담당 업무 변경",
+        "propagate": false,
+        "weight_changes": {},
+        "pruned_count": 0
+      },
+      {
+        "stale_count": 1,
+        "valid_count": 4,
+        "total": 5,
+        "stale_rate": 0.2,
+        "valid_precision": 0.8,
+        "f1": 0.8000000000000002,
+        "scenario_id": "FC6",
+        "scenario_desc": "서버 환경 변경",
+        "propagate": false,
+        "weight_changes": {},
+        "pruned_count": 0
+      },
+      {
+        "stale_count": 3,
+        "valid_count": 2,
+        "total": 5,
+        "stale_rate": 0.6,
+        "valid_precision": 0.4,
+        "f1": 0.4000000000000001,
+        "scenario_id": "FC7",
+        "scenario_desc": "고객사 담당 변경",
+        "propagate": false,
+        "weight_changes": {},
+        "pruned_count": 0
+      },
+      {
+        "stale_count": 1,
+        "valid_count": 4,
+        "total": 5,
+        "stale_rate": 0.2,
+        "valid_precision": 0.8,
+        "f1": 0.8000000000000002,
+        "scenario_id": "FC8",
+        "scenario_desc": "프로젝트 일정 변경",
+        "propagate": false,
+        "weight_changes": {},
+        "pruned_count": 0
+      },
+      {
+        "stale_count": 2,
+        "valid_count": 3,
+        "total": 5,
+        "stale_rate": 0.4,
+        "valid_precision": 0.6,
+        "f1": 0.6,
+        "scenario_id": "FC9",
+        "scenario_desc": "보고 라인 변경",
+        "propagate": false,
+        "weight_changes": {},
+        "pruned_count": 0
+      },
+      {
+        "stale_count": 1,
+        "valid_count": 4,
+        "total": 5,
+        "stale_rate": 0.2,
+        "valid_precision": 0.8,
+        "f1": 0.8000000000000002,
+        "scenario_id": "FC10",
+        "scenario_desc": "도구/플랫폼 변경",
+        "propagate": false,
+        "weight_changes": {},
+        "pruned_count": 0
+      }
+    ]
+  },
+  "experiment": {
+    "aggregate": {
+      "avg_stale_rate": 0.36,
+      "avg_valid_precision": 0.64,
+      "avg_f1": 0.64
+    },
+    "scenarios": [
+      {
+        "stale_count": 3,
+        "valid_count": 2,
+        "total": 5,
+        "stale_rate": 0.6,
+        "valid_precision": 0.4,
+        "f1": 0.4000000000000001,
+        "scenario_id": "FC1",
+        "scenario_desc": "프로젝트 담당자 변경",
+        "propagate": true,
+        "weight_changes": {
+          "463405bb-63ee-4d27-bab9-7b145aad0488": {
+            "content": "김철수는 판교사무실에서 근무한다",
+            "before": 0.85,
+            "after": 0.425
+          }
+        },
+        "pruned_count": 0
+      },
+      {
+        "stale_count": 1,
+        "valid_count": 4,
+        "total": 5,
+        "stale_rate": 0.2,
+        "valid_precision": 0.8,
+        "f1": 0.8000000000000002,
+        "scenario_id": "FC2",
+        "scenario_desc": "미팅 일정 변경",
+        "propagate": true,
+        "weight_changes": {
+          "216dea2a-f9a4-4391-9f86-987f8bcfc334": {
+            "content": "박지훈이 주간회의에 참석한다",
+            "before": 0.95,
+            "after": 0.475
+          },
+          "1765b14c-0ad5-4a67-9ef0-8d8e77e2f7be": {
+            "content": "박지훈이 회의실A를 예약했다",
+            "before": 0.85,
+            "after": 0.425
+          }
+        },
+        "pruned_count": 0
+      },
+      {
+        "stale_count": 2,
+        "valid_count": 3,
+        "total": 5,
+        "stale_rate": 0.4,
+        "valid_precision": 0.6,
+        "f1": 0.6,
+        "scenario_id": "FC3",
+        "scenario_desc": "팀 구조 변경",
+        "propagate": true,
+        "weight_changes": {
+          "eb1a3e5b-e4f2-4c2b-9500-b0316144b843": {
+            "content": "DevOps팀이 AWS 인프라를 담당한다",
+            "before": 0.95,
+            "after": 0.7125
+          },
+          "3dcb9de3-a18c-4417-bbfc-776b5e67c4d6": {
+            "content": "최민수는 AWS 전문가이다",
+            "before": 0.9,
+            "after": 0.675
+          }
+        },
+        "pruned_count": 0
+      },
+      {
+        "stale_count": 2,
+        "valid_count": 3,
+        "total": 5,
+        "stale_rate": 0.4,
+        "valid_precision": 0.6,
+        "f1": 0.6,
+        "scenario_id": "FC4",
+        "scenario_desc": "프로젝트 기술 스택 변경",
+        "propagate": true,
+        "weight_changes": {
+          "48b39bc2-1fa4-49cc-9e9f-c5c635e3e8cf": {
+            "content": "정수현이 프로젝트Beta에 참여하고 있다",
+            "before": 0.95,
+            "after": 0.475
+          },
+          "cbfe8cb1-6c24-4a80-a69b-e012ae211d8a": {
+            "content": "정수현은 React 전문 개발자이다",
+            "before": 0.9,
+            "after": 0.45
+          }
+        },
+        "pruned_count": 0
+      },
+      {
+        "stale_count": 1,
+        "valid_count": 4,
+        "total": 5,
+        "stale_rate": 0.2,
+        "valid_precision": 0.8,
+        "f1": 0.8000000000000002,
+        "scenario_id": "FC5",
+        "scenario_desc": "담당 업무 변경",
+        "propagate": true,
+        "weight_changes": {
+          "036911f7-d7c6-48c1-b7bc-5d6421c199a6": {
+            "content": "한지민은 데이터팀 소속이다",
+            "before": 0.95,
+            "after": 0.475
+          },
+          "4771fbdd-3365-4422-87a6-53ff53ed621f": {
+            "content": "데이터팀이 데이터분석 업무를 책임진다",
+            "before": 0.9,
+            "after": 0.45
+          }
+        },
+        "pruned_count": 0
+      },
+      {
+        "stale_count": 1,
+        "valid_count": 4,
+        "total": 5,
+        "stale_rate": 0.2,
+        "valid_precision": 0.8,
+        "f1": 0.8000000000000002,
+        "scenario_id": "FC6",
+        "scenario_desc": "서버 환경 변경",
+        "propagate": true,
+        "weight_changes": {
+          "7e3160d3-e3d0-4364-b451-03d2129aa157": {
+            "content": "배포팀이 운영서버를 관리한다",
+            "before": 0.95,
+            "after": 0.475
+          },
+          "93a8df04-3746-4f87-929f-6630cf009b94": {
+            "content": "배포팀이 AWS-Seoul 리전을 담당한다",
+            "before": 0.9,
+            "after": 0.45
+          }
+        },
+        "pruned_count": 0
+      },
+      {
+        "stale_count": 3,
+        "valid_count": 2,
+        "total": 5,
+        "stale_rate": 0.6,
+        "valid_precision": 0.4,
+        "f1": 0.4000000000000001,
+        "scenario_id": "FC7",
+        "scenario_desc": "고객사 담당 변경",
+        "propagate": true,
+        "weight_changes": {
+          "7b91b5f5-69d8-4dde-a14b-579a416511e1": {
+            "content": "영업1팀이 고객사A 계약서를 작성했다",
+            "before": 0.95,
+            "after": 0.7125
+          },
+          "3d904af1-ed71-481a-902c-0fa310f7e9a5": {
+            "content": "고객사A 계약서는 6월 만료 예정이다",
+            "before": 0.9,
+            "after": 0.675
+          }
+        },
+        "pruned_count": 0
+      },
+      {
+        "stale_count": 1,
+        "valid_count": 4,
+        "total": 5,
+        "stale_rate": 0.2,
+        "valid_precision": 0.8,
+        "f1": 0.8000000000000002,
+        "scenario_id": "FC8",
+        "scenario_desc": "프로젝트 일정 변경",
+        "propagate": true,
+        "weight_changes": {
+          "99485551-4d24-45af-a9ba-31eeff37bf00": {
+            "content": "QA팀이 프로젝트Gamma를 테스트 중이다",
+            "before": 0.95,
+            "after": 0.475
+          },
+          "717a8536-58f0-45fc-abd1-aadc0398704b": {
+            "content": "QA팀이 4월릴리스를 준비하고 있다",
+            "before": 0.9,
+            "after": 0.45
+          }
+        },
+        "pruned_count": 0
+      },
+      {
+        "stale_count": 2,
+        "valid_count": 3,
+        "total": 5,
+        "stale_rate": 0.4,
+        "valid_precision": 0.6,
+        "f1": 0.6,
+        "scenario_id": "FC9",
+        "scenario_desc": "보고 라인 변경",
+        "propagate": true,
+        "weight_changes": {
+          "c0b0ff20-6fe5-4ed2-a137-d5720e9d449f": {
+            "content": "신입사원A는 기획팀 소속이다",
+            "before": 0.95,
+            "after": 0.7125
+          },
+          "dd7157a1-a24b-4dd3-92fa-6459d4f85af9": {
+            "content": "팀장B가 기획팀을 리드한다",
+            "before": 0.9,
+            "after": 0.675
+          }
+        },
+        "pruned_count": 0
+      },
+      {
+        "stale_count": 2,
+        "valid_count": 3,
+        "total": 5,
+        "stale_rate": 0.4,
+        "valid_precision": 0.6,
+        "f1": 0.6,
+        "scenario_id": "FC10",
+        "scenario_desc": "도구/플랫폼 변경",
+        "propagate": true,
+        "weight_changes": {
+          "ce8c61de-1507-479e-9126-f60d03a31c28": {
+            "content": "PM장윤서가 Jira를 관리한다",
+            "before": 0.95,
+            "after": 0.475
+          },
+          "d02f8402-9344-4c6a-b841-3b1ccb94be4f": {
+            "content": "PM장윤서가 개발팀의 PM이다",
+            "before": 0.9,
+            "after": 0.45
+          }
+        },
+        "pruned_count": 0
+      }
+    ]
+  }
+}

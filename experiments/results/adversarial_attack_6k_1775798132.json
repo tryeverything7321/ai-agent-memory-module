@@ -1,0 +1,1991 @@
+{
+  "config": {
+    "sub_dataset": "factconsolidation_mh_6k",
+    "context_size": "6k",
+    "num_attack_facts": [
+      1,
+      3,
+      5
+    ],
+    "chunk_size": 4096,
+    "propagation_depth": 2,
+    "decay_per_hop": 0.5,
+    "max_contexts": 1,
+    "max_queries": 10,
+    "timestamp": "2026-04-10 14:15:32"
+  },
+  "summary": {
+    "attack_1_facts": {
+      "bfs": {
+        "num_contexts": 1,
+        "avg_damage_ratio_pct": 5.23,
+        "avg_kill_ratio_pct": 0.29,
+        "avg_newly_decayed": 18.0,
+        "avg_newly_killed": 1.0,
+        "avg_pre_attack_em": 20.0,
+        "avg_post_attack_em": 20.0,
+        "avg_em_drop_pp": 0.0,
+        "avg_f1_drop_pp": 0.0
+      },
+      "attribute_aware": {
+        "num_contexts": 1,
+        "avg_damage_ratio_pct": 0.0,
+        "avg_kill_ratio_pct": 0.0,
+        "avg_newly_decayed": 0.0,
+        "avg_newly_killed": 0.0,
+        "avg_pre_attack_em": 20.0,
+        "avg_post_attack_em": 20.0,
+        "avg_em_drop_pp": 0.0,
+        "avg_f1_drop_pp": 0.0
+      },
+      "bfs_vs_attr": {
+        "damage_ratio_diff": 5.23,
+        "kill_ratio_diff": 0.29,
+        "em_drop_diff": 0.0,
+        "bfs_more_vulnerable": true
+      }
+    },
+    "attack_3_facts": {
+      "bfs": {
+        "num_contexts": 1,
+        "avg_damage_ratio_pct": 26.74,
+        "avg_kill_ratio_pct": 4.36,
+        "avg_newly_decayed": 92.0,
+        "avg_newly_killed": 15.0,
+        "avg_pre_attack_em": 20.0,
+        "avg_post_attack_em": 10.0,
+        "avg_em_drop_pp": 10.0,
+        "avg_f1_drop_pp": 10.0
+      },
+      "attribute_aware": {
+        "num_contexts": 1,
+        "avg_damage_ratio_pct": 0.0,
+        "avg_kill_ratio_pct": 0.0,
+        "avg_newly_decayed": 0.0,
+        "avg_newly_killed": 0.0,
+        "avg_pre_attack_em": 20.0,
+        "avg_post_attack_em": 20.0,
+        "avg_em_drop_pp": 0.0,
+        "avg_f1_drop_pp": 0.0
+      },
+      "bfs_vs_attr": {
+        "damage_ratio_diff": 26.74,
+        "kill_ratio_diff": 4.36,
+        "em_drop_diff": 10.0,
+        "bfs_more_vulnerable": true
+      }
+    },
+    "attack_5_facts": {
+      "bfs": {
+        "num_contexts": 1,
+        "avg_damage_ratio_pct": 39.83,
+        "avg_kill_ratio_pct": 17.44,
+        "avg_newly_decayed": 137.0,
+        "avg_newly_killed": 60.0,
+        "avg_pre_attack_em": 20.0,
+        "avg_post_attack_em": 10.0,
+        "avg_em_drop_pp": 10.0,
+        "avg_f1_drop_pp": 10.0
+      },
+      "attribute_aware": {
+        "num_contexts": 1,
+        "avg_damage_ratio_pct": 0.29,
+        "avg_kill_ratio_pct": 0.0,
+        "avg_newly_decayed": 1.0,
+        "avg_newly_killed": 0.0,
+        "avg_pre_attack_em": 20.0,
+        "avg_post_attack_em": 20.0,
+        "avg_em_drop_pp": 0.0,
+        "avg_f1_drop_pp": 0.0
+      },
+      "bfs_vs_attr": {
+        "damage_ratio_diff": 39.54,
+        "kill_ratio_diff": 17.44,
+        "em_drop_diff": 10.0,
+        "bfs_more_vulnerable": true
+      }
+    }
+  },
+  "experiments": [
+    {
+      "mode": "bfs",
+      "num_attack_facts": 1,
+      "target_hub": {
+        "entity": "United States",
+        "degree": 23,
+        "memory_count": 27,
+        "hub_registry_keys": 3,
+        "high_impact_keys_found": 2,
+        "attacked_keys": [
+          "University:location"
+        ],
+        "attacked_key_degrees": [
+          17
+        ]
+      },
+      "top_5_hubs": [
+        {
+          "entity": "United States",
+          "degree": 23,
+          "memory_count": 27
+        },
+        {
+          "entity": "America",
+          "degree": 23,
+          "memory_count": 27
+        },
+        {
+          "entity": "University",
+          "degree": 17,
+          "memory_count": 12
+        },
+        {
+          "entity": "France",
+          "degree": 13,
+          "memory_count": 11
+        },
+        {
+          "entity": "United Kingdom",
+          "degree": 12,
+          "memory_count": 12
+        }
+      ],
+      "attack_facts": [
+        "554. The location of University is Mickey Mouse."
+      ],
+      "pre_attack_state": {
+        "total": 456,
+        "valid": 344,
+        "invalid": 112,
+        "decayed_below_1.0": 0,
+        "decayed_below_0.5": 0,
+        "decayed_below_0.3": 0,
+        "decayed_below_0.1": 0,
+        "avg_weight": 1.0,
+        "min_weight": 1.0
+      },
+      "post_attack_state": {
+        "total": 457,
+        "valid": 344,
+        "invalid": 113,
+        "decayed_below_1.0": 18,
+        "decayed_below_0.5": 13,
+        "decayed_below_0.3": 8,
+        "decayed_below_0.1": 1,
+        "avg_weight": 0.9650254360465116,
+        "min_weight": 0.0625
+      },
+      "damage": {
+        "pre_valid": 344,
+        "post_valid": 344,
+        "newly_invalidated": 1,
+        "newly_decayed": 18,
+        "newly_killed": 1,
+        "damage_ratio_pct": 5.232558139534884,
+        "kill_ratio_pct": 0.29069767441860467,
+        "pre_avg_weight": 1.0,
+        "post_avg_weight": 0.9650254360465116,
+        "weight_drop": 0.03497456395348841
+      },
+      "pre_attack_metrics": {
+        "exact_match": 20.0,
+        "substring_exact_match": 20.0,
+        "f1": 23.333333333333332,
+        "total_queries": 10
+      },
+      "post_attack_metrics": {
+        "exact_match": 20.0,
+        "substring_exact_match": 20.0,
+        "f1": 23.333333333333332,
+        "total_queries": 10
+      },
+      "em_drop_pp": 0.0,
+      "f1_drop_pp": 0.0,
+      "context_idx": 0
+    },
+    {
+      "mode": "attribute_aware",
+      "num_attack_facts": 1,
+      "target_hub": {
+        "entity": "United States",
+        "degree": 23,
+        "memory_count": 27,
+        "hub_registry_keys": 3,
+        "high_impact_keys_found": 2,
+        "attacked_keys": [
+          "University:location"
+        ],
+        "attacked_key_degrees": [
+          17
+        ]
+      },
+      "top_5_hubs": [
+        {
+          "entity": "United States",
+          "degree": 23,
+          "memory_count": 27
+        },
+        {
+          "entity": "America",
+          "degree": 23,
+          "memory_count": 27
+        },
+        {
+          "entity": "University",
+          "degree": 17,
+          "memory_count": 12
+        },
+        {
+          "entity": "France",
+          "degree": 13,
+          "memory_count": 11
+        },
+        {
+          "entity": "United Kingdom",
+          "degree": 12,
+          "memory_count": 12
+        }
+      ],
+      "attack_facts": [
+        "554. The location of University is Mickey Mouse."
+      ],
+      "pre_attack_state": {
+        "total": 456,
+        "valid": 344,
+        "invalid": 112,
+        "decayed_below_1.0": 0,
+        "decayed_below_0.5": 0,
+        "decayed_below_0.3": 0,
+        "decayed_below_0.1": 0,
+        "avg_weight": 1.0,
+        "min_weight": 1.0
+      },
+      "post_attack_state": {
+        "total": 457,
+        "valid": 344,
+        "invalid": 113,
+        "decayed_below_1.0": 0,
+        "decayed_below_0.5": 0,
+        "decayed_below_0.3": 0,
+        "decayed_below_0.1": 0,
+        "avg_weight": 1.0,
+        "min_weight": 1.0
+      },
+      "damage": {
+        "pre_valid": 344,
+        "post_valid": 344,
+        "newly_invalidated": 1,
+        "newly_decayed": 0,
+        "newly_killed": 0,
+        "damage_ratio_pct": 0.0,
+        "kill_ratio_pct": 0.0,
+        "pre_avg_weight": 1.0,
+        "post_avg_weight": 1.0,
+        "weight_drop": 0.0
+      },
+      "pre_attack_metrics": {
+        "exact_match": 20.0,
+        "substring_exact_match": 20.0,
+        "f1": 23.333333333333332,
+        "total_queries": 10
+      },
+      "post_attack_metrics": {
+        "exact_match": 20.0,
+        "substring_exact_match": 20.0,
+        "f1": 23.333333333333332,
+        "total_queries": 10
+      },
+      "em_drop_pp": 0.0,
+      "f1_drop_pp": 0.0,
+      "context_idx": 0
+    },
+    {
+      "mode": "bfs",
+      "num_attack_facts": 3,
+      "target_hub": {
+        "entity": "United States",
+        "degree": 23,
+        "memory_count": 27,
+        "hub_registry_keys": 3,
+        "high_impact_keys_found": 6,
+        "attacked_keys": [
+          "University:location",
+          "France:capital",
+          "France:location"
+        ],
+        "attacked_key_degrees": [
+          17,
+          13,
+          13
+        ]
+      },
+      "top_5_hubs": [
+        {
+          "entity": "United States",
+          "degree": 23,
+          "memory_count": 27
+        },
+        {
+          "entity": "America",
+          "degree": 23,
+          "memory_count": 27
+        },
+        {
+          "entity": "University",
+          "degree": 17,
+          "memory_count": 12
+        },
+        {
+          "entity": "France",
+          "degree": 13,
+          "memory_count": 11
+        },
+        {
+          "entity": "United Kingdom",
+          "degree": 12,
+          "memory_count": 12
+        }
+      ],
+      "attack_facts": [
+        "554. The location of University is Mickey Mouse.",
+        "555. The capital of France is Klingon.",
+        "556. The location of France is Los Angeles."
+      ],
+      "pre_attack_state": {
+        "total": 456,
+        "valid": 344,
+        "invalid": 112,
+        "decayed_below_1.0": 0,
+        "decayed_below_0.5": 0,
+        "decayed_below_0.3": 0,
+        "decayed_below_0.1": 0,
+        "avg_weight": 1.0,
+        "min_weight": 1.0
+      },
+      "post_attack_state": {
+        "total": 459,
+        "valid": 344,
+        "invalid": 115,
+        "decayed_below_1.0": 92,
+        "decayed_below_0.5": 65,
+        "decayed_below_0.3": 48,
+        "decayed_below_0.1": 15,
+        "avg_weight": 0.8244162974975022,
+        "min_weight": 0.0087890625
+      },
+      "damage": {
+        "pre_valid": 344,
+        "post_valid": 344,
+        "newly_invalidated": 3,
+        "newly_decayed": 92,
+        "newly_killed": 15,
+        "damage_ratio_pct": 26.744186046511626,
+        "kill_ratio_pct": 4.3604651162790695,
+        "pre_avg_weight": 1.0,
+        "post_avg_weight": 0.8244162974975022,
+        "weight_drop": 0.17558370250249777
+      },
+      "pre_attack_metrics": {
+        "exact_match": 20.0,
+        "substring_exact_match": 20.0,
+        "f1": 23.333333333333332,
+        "total_queries": 10
+      },
+      "post_attack_metrics": {
+        "exact_match": 10.0,
+        "substring_exact_match": 10.0,
+        "f1": 13.333333333333334,
+        "total_queries": 10
+      },
+      "em_drop_pp": 10.0,
+      "f1_drop_pp": 9.999999999999998,
+      "context_idx": 0
+    },
+    {
+      "mode": "attribute_aware",
+      "num_attack_facts": 3,
+      "target_hub": {
+        "entity": "United States",
+        "degree": 23,
+        "memory_count": 27,
+        "hub_registry_keys": 3,
+        "high_impact_keys_found": 6,
+        "attacked_keys": [
+          "University:location",
+          "France:capital",
+          "France:location"
+        ],
+        "attacked_key_degrees": [
+          17,
+          13,
+          13
+        ]
+      },
+      "top_5_hubs": [
+        {
+          "entity": "United States",
+          "degree": 23,
+          "memory_count": 27
+        },
+        {
+          "entity": "America",
+          "degree": 23,
+          "memory_count": 27
+        },
+        {
+          "entity": "University",
+          "degree": 17,
+          "memory_count": 12
+        },
+        {
+          "entity": "France",
+          "degree": 13,
+          "memory_count": 11
+        },
+        {
+          "entity": "United Kingdom",
+          "degree": 12,
+          "memory_count": 12
+        }
+      ],
+      "attack_facts": [
+        "554. The location of University is Mickey Mouse.",
+        "555. The capital of France is Klingon.",
+        "556. The location of France is Los Angeles."
+      ],
+      "pre_attack_state": {
+        "total": 456,
+        "valid": 344,
+        "invalid": 112,
+        "decayed_below_1.0": 0,
+        "decayed_below_0.5": 0,
+        "decayed_below_0.3": 0,
+        "decayed_below_0.1": 0,
+        "avg_weight": 1.0,
+        "min_weight": 1.0
+      },
+      "post_attack_state": {
+        "total": 459,
+        "valid": 344,
+        "invalid": 115,
+        "decayed_below_1.0": 0,
+        "decayed_below_0.5": 0,
+        "decayed_below_0.3": 0,
+        "decayed_below_0.1": 0,
+        "avg_weight": 1.0,
+        "min_weight": 1.0
+      },
+      "damage": {
+        "pre_valid": 344,
+        "post_valid": 344,
+        "newly_invalidated": 3,
+        "newly_decayed": 0,
+        "newly_killed": 0,
+        "damage_ratio_pct": 0.0,
+        "kill_ratio_pct": 0.0,
+        "pre_avg_weight": 1.0,
+        "post_avg_weight": 1.0,
+        "weight_drop": 0.0
+      },
+      "pre_attack_metrics": {
+        "exact_match": 20.0,
+        "substring_exact_match": 20.0,
+        "f1": 23.333333333333332,
+        "total_queries": 10
+      },
+      "post_attack_metrics": {
+        "exact_match": 20.0,
+        "substring_exact_match": 20.0,
+        "f1": 23.333333333333332,
+        "total_queries": 10
+      },
+      "em_drop_pp": 0.0,
+      "f1_drop_pp": 0.0,
+      "context_idx": 0
+    },
+    {
+      "mode": "bfs",
+      "num_attack_facts": 5,
+      "target_hub": {
+        "entity": "United States",
+        "degree": 23,
+        "memory_count": 27,
+        "hub_registry_keys": 3,
+        "high_impact_keys_found": 10,
+        "attacked_keys": [
+          "University:location",
+          "France:capital",
+          "France:location",
+          "United Kingdom:location",
+          "United Kingdom:capital"
+        ],
+        "attacked_key_degrees": [
+          17,
+          13,
+          13,
+          12,
+          12
+        ]
+      },
+      "top_5_hubs": [
+        {
+          "entity": "United States",
+          "degree": 23,
+          "memory_count": 27
+        },
+        {
+          "entity": "America",
+          "degree": 23,
+          "memory_count": 27
+        },
+        {
+          "entity": "University",
+          "degree": 17,
+          "memory_count": 12
+        },
+        {
+          "entity": "France",
+          "degree": 13,
+          "memory_count": 11
+        },
+        {
+          "entity": "United Kingdom",
+          "degree": 12,
+          "memory_count": 12
+        }
+      ],
+      "attack_facts": [
+        "554. The location of University is Mickey Mouse.",
+        "555. The capital of France is Klingon.",
+        "556. The location of France is Los Angeles.",
+        "557. The location of United Kingdom is zero.",
+        "558. The capital of United Kingdom is Donald Duck."
+      ],
+      "pre_attack_state": {
+        "total": 456,
+        "valid": 344,
+        "invalid": 112,
+        "decayed_below_1.0": 0,
+        "decayed_below_0.5": 0,
+        "decayed_below_0.3": 0,
+        "decayed_below_0.1": 0,
+        "avg_weight": 1.0,
+        "min_weight": 1.0
+      },
+      "post_attack_state": {
+        "total": 461,
+        "valid": 344,
+        "invalid": 117,
+        "decayed_below_1.0": 137,
+        "decayed_below_0.5": 98,
+        "decayed_below_0.3": 73,
+        "decayed_below_0.1": 60,
+        "avg_weight": 0.7258249034600006,
+        "min_weight": 4.470348358154297e-05
+      },
+      "damage": {
+        "pre_valid": 344,
+        "post_valid": 344,
+        "newly_invalidated": 5,
+        "newly_decayed": 137,
+        "newly_killed": 60,
+        "damage_ratio_pct": 39.825581395348834,
+        "kill_ratio_pct": 17.441860465116278,
+        "pre_avg_weight": 1.0,
+        "post_avg_weight": 0.7258249034600006,
+        "weight_drop": 0.2741750965399994
+      },
+      "pre_attack_metrics": {
+        "exact_match": 20.0,
+        "substring_exact_match": 20.0,
+        "f1": 23.333333333333332,
+        "total_queries": 10
+      },
+      "post_attack_metrics": {
+        "exact_match": 10.0,
+        "substring_exact_match": 10.0,
+        "f1": 13.333333333333334,
+        "total_queries": 10
+      },
+      "em_drop_pp": 10.0,
+      "f1_drop_pp": 9.999999999999998,
+      "context_idx": 0
+    },
+    {
+      "mode": "attribute_aware",
+      "num_attack_facts": 5,
+      "target_hub": {
+        "entity": "United States",
+        "degree": 23,
+        "memory_count": 27,
+        "hub_registry_keys": 3,
+        "high_impact_keys_found": 10,
+        "attacked_keys": [
+          "University:location",
+          "France:capital",
+          "France:location",
+          "United Kingdom:location",
+          "United Kingdom:capital"
+        ],
+        "attacked_key_degrees": [
+          17,
+          13,
+          13,
+          12,
+          12
+        ]
+      },
+      "top_5_hubs": [
+        {
+          "entity": "United States",
+          "degree": 23,
+          "memory_count": 27
+        },
+        {
+          "entity": "America",
+          "degree": 23,
+          "memory_count": 27
+        },
+        {
+          "entity": "University",
+          "degree": 17,
+          "memory_count": 12
+        },
+        {
+          "entity": "France",
+          "degree": 13,
+          "memory_count": 11
+        },
+        {
+          "entity": "United Kingdom",
+          "degree": 12,
+          "memory_count": 12
+        }
+      ],
+      "attack_facts": [
+        "554. The location of University is Mickey Mouse.",
+        "555. The capital of France is Klingon.",
+        "556. The location of France is Los Angeles.",
+        "557. The location of United Kingdom is zero.",
+        "558. The capital of United Kingdom is Donald Duck."
+      ],
+      "pre_attack_state": {
+        "total": 456,
+        "valid": 344,
+        "invalid": 112,
+        "decayed_below_1.0": 0,
+        "decayed_below_0.5": 0,
+        "decayed_below_0.3": 0,
+        "decayed_below_0.1": 0,
+        "avg_weight": 1.0,
+        "min_weight": 1.0
+      },
+      "post_attack_state": {
+        "total": 461,
+        "valid": 344,
+        "invalid": 117,
+        "decayed_below_1.0": 1,
+        "decayed_below_0.5": 0,
+        "decayed_below_0.3": 0,
+        "decayed_below_0.1": 0,
+        "avg_weight": 0.9997577519379846,
+        "min_weight": 0.9166666666666666
+      },
+      "damage": {
+        "pre_valid": 344,
+        "post_valid": 344,
+        "newly_invalidated": 5,
+        "newly_decayed": 1,
+        "newly_killed": 0,
+        "damage_ratio_pct": 0.29069767441860467,
+        "kill_ratio_pct": 0.0,
+        "pre_avg_weight": 1.0,
+        "post_avg_weight": 0.9997577519379846,
+        "weight_drop": 0.0002422480620154488
+      },
+      "pre_attack_metrics": {
+        "exact_match": 20.0,
+        "substring_exact_match": 20.0,
+        "f1": 23.333333333333332,
+        "total_queries": 10
+      },
+      "post_attack_metrics": {
+        "exact_match": 20.0,
+        "substring_exact_match": 20.0,
+        "f1": 23.333333333333332,
+        "total_queries": 10
+      },
+      "em_drop_pp": 0.0,
+      "f1_drop_pp": 0.0,
+      "context_idx": 0
+    }
+  ],
+  "per_query_details": [
+    {
+      "context_idx": 0,
+      "mode": "bfs",
+      "num_attack_facts": 1,
+      "detail": {
+        "pre_attack": [
+          {
+            "question": "What is the country of citizenship of the spouse of the author of Our Mutual Friend?",
+            "ground_truth": [
+              "Belgium"
+            ],
+            "prediction": "Unknown",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "In which location did the spouse of Igor of Kiev pass away?",
+            "ground_truth": [
+              "Rodez"
+            ],
+            "prediction": "Rodez",
+            "exact_match": 1.0,
+            "substring_exact_match": 1.0,
+            "f1": 1.0
+          },
+          {
+            "question": "Which country is the birthplace of the sport associated with Steve Sax?",
+            "ground_truth": [
+              "Italy"
+            ],
+            "prediction": "England",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "Which city serves as the capital of the country of origin for the sport of the Tunisia national football team?",
+            "ground_truth": [
+              "Russellville"
+            ],
+            "prediction": "Tehran",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "What is the sport that Blair Walsh plays in which he is known for his position on the team?",
+            "ground_truth": [
+              "rugby"
+            ],
+            "prediction": "American football",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "What is the name of the educational institution where the partner of Nicolae Ceaușescu was educated?",
+            "ground_truth": [
+              "Baldwin Wallace University"
+            ],
+            "prediction": "University of Bonn",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.3333333333333333
+          },
+          {
+            "question": "Which country does the current CEO of Twitter hold citizenship of?",
+            "ground_truth": [
+              "France"
+            ],
+            "prediction": "France",
+            "exact_match": 1.0,
+            "substring_exact_match": 1.0,
+            "f1": 1.0
+          },
+          {
+            "question": "On which continent was the place of birth of Thomas Arne located?",
+            "ground_truth": [
+              "Oceania"
+            ],
+            "prediction": "Asia",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "To which continent does the country of citizenship of Colin Irwin pertain?",
+            "ground_truth": [
+              "North America"
+            ],
+            "prediction": "Asia",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "What is the location of work of the founder of the religion to which John Walsh belongs?",
+            "ground_truth": [
+              "Berlin"
+            ],
+            "prediction": "Galilee",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          }
+        ],
+        "post_attack": [
+          {
+            "question": "What is the country of citizenship of the spouse of the author of Our Mutual Friend?",
+            "ground_truth": [
+              "Belgium"
+            ],
+            "prediction": "Unknown",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "In which location did the spouse of Igor of Kiev pass away?",
+            "ground_truth": [
+              "Rodez"
+            ],
+            "prediction": "Rodez",
+            "exact_match": 1.0,
+            "substring_exact_match": 1.0,
+            "f1": 1.0
+          },
+          {
+            "question": "Which country is the birthplace of the sport associated with Steve Sax?",
+            "ground_truth": [
+              "Italy"
+            ],
+            "prediction": "England",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "Which city serves as the capital of the country of origin for the sport of the Tunisia national football team?",
+            "ground_truth": [
+              "Russellville"
+            ],
+            "prediction": "Tehran",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "What is the sport that Blair Walsh plays in which he is known for his position on the team?",
+            "ground_truth": [
+              "rugby"
+            ],
+            "prediction": "American football",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "What is the name of the educational institution where the partner of Nicolae Ceaușescu was educated?",
+            "ground_truth": [
+              "Baldwin Wallace University"
+            ],
+            "prediction": "University of Bucharest",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.3333333333333333
+          },
+          {
+            "question": "Which country does the current CEO of Twitter hold citizenship of?",
+            "ground_truth": [
+              "France"
+            ],
+            "prediction": "France",
+            "exact_match": 1.0,
+            "substring_exact_match": 1.0,
+            "f1": 1.0
+          },
+          {
+            "question": "On which continent was the place of birth of Thomas Arne located?",
+            "ground_truth": [
+              "Oceania"
+            ],
+            "prediction": "Asia",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "To which continent does the country of citizenship of Colin Irwin pertain?",
+            "ground_truth": [
+              "North America"
+            ],
+            "prediction": "Asia",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "What is the location of work of the founder of the religion to which John Walsh belongs?",
+            "ground_truth": [
+              "Berlin"
+            ],
+            "prediction": "Galilee",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "context_idx": 0,
+      "mode": "attribute_aware",
+      "num_attack_facts": 1,
+      "detail": {
+        "pre_attack": [
+          {
+            "question": "What is the country of citizenship of the spouse of the author of Our Mutual Friend?",
+            "ground_truth": [
+              "Belgium"
+            ],
+            "prediction": "Unknown",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "In which location did the spouse of Igor of Kiev pass away?",
+            "ground_truth": [
+              "Rodez"
+            ],
+            "prediction": "Rodez",
+            "exact_match": 1.0,
+            "substring_exact_match": 1.0,
+            "f1": 1.0
+          },
+          {
+            "question": "Which country is the birthplace of the sport associated with Steve Sax?",
+            "ground_truth": [
+              "Italy"
+            ],
+            "prediction": "England",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "Which city serves as the capital of the country of origin for the sport of the Tunisia national football team?",
+            "ground_truth": [
+              "Russellville"
+            ],
+            "prediction": "Tehran",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "What is the sport that Blair Walsh plays in which he is known for his position on the team?",
+            "ground_truth": [
+              "rugby"
+            ],
+            "prediction": "American football",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "What is the name of the educational institution where the partner of Nicolae Ceaușescu was educated?",
+            "ground_truth": [
+              "Baldwin Wallace University"
+            ],
+            "prediction": "University of Bonn",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.3333333333333333
+          },
+          {
+            "question": "Which country does the current CEO of Twitter hold citizenship of?",
+            "ground_truth": [
+              "France"
+            ],
+            "prediction": "France",
+            "exact_match": 1.0,
+            "substring_exact_match": 1.0,
+            "f1": 1.0
+          },
+          {
+            "question": "On which continent was the place of birth of Thomas Arne located?",
+            "ground_truth": [
+              "Oceania"
+            ],
+            "prediction": "Asia",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "To which continent does the country of citizenship of Colin Irwin pertain?",
+            "ground_truth": [
+              "North America"
+            ],
+            "prediction": "Asia",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "What is the location of work of the founder of the religion to which John Walsh belongs?",
+            "ground_truth": [
+              "Berlin"
+            ],
+            "prediction": "Galilee",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          }
+        ],
+        "post_attack": [
+          {
+            "question": "What is the country of citizenship of the spouse of the author of Our Mutual Friend?",
+            "ground_truth": [
+              "Belgium"
+            ],
+            "prediction": "Unknown",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "In which location did the spouse of Igor of Kiev pass away?",
+            "ground_truth": [
+              "Rodez"
+            ],
+            "prediction": "Rodez",
+            "exact_match": 1.0,
+            "substring_exact_match": 1.0,
+            "f1": 1.0
+          },
+          {
+            "question": "Which country is the birthplace of the sport associated with Steve Sax?",
+            "ground_truth": [
+              "Italy"
+            ],
+            "prediction": "England",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "Which city serves as the capital of the country of origin for the sport of the Tunisia national football team?",
+            "ground_truth": [
+              "Russellville"
+            ],
+            "prediction": "Tehran",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "What is the sport that Blair Walsh plays in which he is known for his position on the team?",
+            "ground_truth": [
+              "rugby"
+            ],
+            "prediction": "American football",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "What is the name of the educational institution where the partner of Nicolae Ceaușescu was educated?",
+            "ground_truth": [
+              "Baldwin Wallace University"
+            ],
+            "prediction": "University of Bucharest",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.3333333333333333
+          },
+          {
+            "question": "Which country does the current CEO of Twitter hold citizenship of?",
+            "ground_truth": [
+              "France"
+            ],
+            "prediction": "France",
+            "exact_match": 1.0,
+            "substring_exact_match": 1.0,
+            "f1": 1.0
+          },
+          {
+            "question": "On which continent was the place of birth of Thomas Arne located?",
+            "ground_truth": [
+              "Oceania"
+            ],
+            "prediction": "Asia",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "To which continent does the country of citizenship of Colin Irwin pertain?",
+            "ground_truth": [
+              "North America"
+            ],
+            "prediction": "Asia",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "What is the location of work of the founder of the religion to which John Walsh belongs?",
+            "ground_truth": [
+              "Berlin"
+            ],
+            "prediction": "Galilee",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "context_idx": 0,
+      "mode": "bfs",
+      "num_attack_facts": 3,
+      "detail": {
+        "pre_attack": [
+          {
+            "question": "What is the country of citizenship of the spouse of the author of Our Mutual Friend?",
+            "ground_truth": [
+              "Belgium"
+            ],
+            "prediction": "Unknown",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "In which location did the spouse of Igor of Kiev pass away?",
+            "ground_truth": [
+              "Rodez"
+            ],
+            "prediction": "Rodez",
+            "exact_match": 1.0,
+            "substring_exact_match": 1.0,
+            "f1": 1.0
+          },
+          {
+            "question": "Which country is the birthplace of the sport associated with Steve Sax?",
+            "ground_truth": [
+              "Italy"
+            ],
+            "prediction": "England",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "Which city serves as the capital of the country of origin for the sport of the Tunisia national football team?",
+            "ground_truth": [
+              "Russellville"
+            ],
+            "prediction": "Tehran",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "What is the sport that Blair Walsh plays in which he is known for his position on the team?",
+            "ground_truth": [
+              "rugby"
+            ],
+            "prediction": "American football",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "What is the name of the educational institution where the partner of Nicolae Ceaușescu was educated?",
+            "ground_truth": [
+              "Baldwin Wallace University"
+            ],
+            "prediction": "University of Bonn",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.3333333333333333
+          },
+          {
+            "question": "Which country does the current CEO of Twitter hold citizenship of?",
+            "ground_truth": [
+              "France"
+            ],
+            "prediction": "France",
+            "exact_match": 1.0,
+            "substring_exact_match": 1.0,
+            "f1": 1.0
+          },
+          {
+            "question": "On which continent was the place of birth of Thomas Arne located?",
+            "ground_truth": [
+              "Oceania"
+            ],
+            "prediction": "Asia",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "To which continent does the country of citizenship of Colin Irwin pertain?",
+            "ground_truth": [
+              "North America"
+            ],
+            "prediction": "Asia",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "What is the location of work of the founder of the religion to which John Walsh belongs?",
+            "ground_truth": [
+              "Berlin"
+            ],
+            "prediction": "Galilee",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          }
+        ],
+        "post_attack": [
+          {
+            "question": "What is the country of citizenship of the spouse of the author of Our Mutual Friend?",
+            "ground_truth": [
+              "Belgium"
+            ],
+            "prediction": "Unknown",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "In which location did the spouse of Igor of Kiev pass away?",
+            "ground_truth": [
+              "Rodez"
+            ],
+            "prediction": "Rodez",
+            "exact_match": 1.0,
+            "substring_exact_match": 1.0,
+            "f1": 1.0
+          },
+          {
+            "question": "Which country is the birthplace of the sport associated with Steve Sax?",
+            "ground_truth": [
+              "Italy"
+            ],
+            "prediction": "Japan",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "Which city serves as the capital of the country of origin for the sport of the Tunisia national football team?",
+            "ground_truth": [
+              "Russellville"
+            ],
+            "prediction": "Rome",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "What is the sport that Blair Walsh plays in which he is known for his position on the team?",
+            "ground_truth": [
+              "rugby"
+            ],
+            "prediction": "American football",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "What is the name of the educational institution where the partner of Nicolae Ceaușescu was educated?",
+            "ground_truth": [
+              "Baldwin Wallace University"
+            ],
+            "prediction": "University of Bucharest",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.3333333333333333
+          },
+          {
+            "question": "Which country does the current CEO of Twitter hold citizenship of?",
+            "ground_truth": [
+              "France"
+            ],
+            "prediction": "United States of America",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "On which continent was the place of birth of Thomas Arne located?",
+            "ground_truth": [
+              "Oceania"
+            ],
+            "prediction": "I do not have information about Thomas Arne's",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "To which continent does the country of citizenship of Colin Irwin pertain?",
+            "ground_truth": [
+              "North America"
+            ],
+            "prediction": "Unknown",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "What is the location of work of the founder of the religion to which John Walsh belongs?",
+            "ground_truth": [
+              "Berlin"
+            ],
+            "prediction": "Galilee",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "context_idx": 0,
+      "mode": "attribute_aware",
+      "num_attack_facts": 3,
+      "detail": {
+        "pre_attack": [
+          {
+            "question": "What is the country of citizenship of the spouse of the author of Our Mutual Friend?",
+            "ground_truth": [
+              "Belgium"
+            ],
+            "prediction": "Unknown",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "In which location did the spouse of Igor of Kiev pass away?",
+            "ground_truth": [
+              "Rodez"
+            ],
+            "prediction": "Rodez",
+            "exact_match": 1.0,
+            "substring_exact_match": 1.0,
+            "f1": 1.0
+          },
+          {
+            "question": "Which country is the birthplace of the sport associated with Steve Sax?",
+            "ground_truth": [
+              "Italy"
+            ],
+            "prediction": "England",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "Which city serves as the capital of the country of origin for the sport of the Tunisia national football team?",
+            "ground_truth": [
+              "Russellville"
+            ],
+            "prediction": "Tehran",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "What is the sport that Blair Walsh plays in which he is known for his position on the team?",
+            "ground_truth": [
+              "rugby"
+            ],
+            "prediction": "American football",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "What is the name of the educational institution where the partner of Nicolae Ceaușescu was educated?",
+            "ground_truth": [
+              "Baldwin Wallace University"
+            ],
+            "prediction": "University of Bonn",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.3333333333333333
+          },
+          {
+            "question": "Which country does the current CEO of Twitter hold citizenship of?",
+            "ground_truth": [
+              "France"
+            ],
+            "prediction": "France",
+            "exact_match": 1.0,
+            "substring_exact_match": 1.0,
+            "f1": 1.0
+          },
+          {
+            "question": "On which continent was the place of birth of Thomas Arne located?",
+            "ground_truth": [
+              "Oceania"
+            ],
+            "prediction": "Asia",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "To which continent does the country of citizenship of Colin Irwin pertain?",
+            "ground_truth": [
+              "North America"
+            ],
+            "prediction": "Asia",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "What is the location of work of the founder of the religion to which John Walsh belongs?",
+            "ground_truth": [
+              "Berlin"
+            ],
+            "prediction": "Galilee",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          }
+        ],
+        "post_attack": [
+          {
+            "question": "What is the country of citizenship of the spouse of the author of Our Mutual Friend?",
+            "ground_truth": [
+              "Belgium"
+            ],
+            "prediction": "Unknown",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "In which location did the spouse of Igor of Kiev pass away?",
+            "ground_truth": [
+              "Rodez"
+            ],
+            "prediction": "Rodez",
+            "exact_match": 1.0,
+            "substring_exact_match": 1.0,
+            "f1": 1.0
+          },
+          {
+            "question": "Which country is the birthplace of the sport associated with Steve Sax?",
+            "ground_truth": [
+              "Italy"
+            ],
+            "prediction": "England",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "Which city serves as the capital of the country of origin for the sport of the Tunisia national football team?",
+            "ground_truth": [
+              "Russellville"
+            ],
+            "prediction": "Tehran",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "What is the sport that Blair Walsh plays in which he is known for his position on the team?",
+            "ground_truth": [
+              "rugby"
+            ],
+            "prediction": "American football",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "What is the name of the educational institution where the partner of Nicolae Ceaușescu was educated?",
+            "ground_truth": [
+              "Baldwin Wallace University"
+            ],
+            "prediction": "University of Bonn",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.3333333333333333
+          },
+          {
+            "question": "Which country does the current CEO of Twitter hold citizenship of?",
+            "ground_truth": [
+              "France"
+            ],
+            "prediction": "France",
+            "exact_match": 1.0,
+            "substring_exact_match": 1.0,
+            "f1": 1.0
+          },
+          {
+            "question": "On which continent was the place of birth of Thomas Arne located?",
+            "ground_truth": [
+              "Oceania"
+            ],
+            "prediction": "Asia",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "To which continent does the country of citizenship of Colin Irwin pertain?",
+            "ground_truth": [
+              "North America"
+            ],
+            "prediction": "Asia",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "What is the location of work of the founder of the religion to which John Walsh belongs?",
+            "ground_truth": [
+              "Berlin"
+            ],
+            "prediction": "Galilee",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "context_idx": 0,
+      "mode": "bfs",
+      "num_attack_facts": 5,
+      "detail": {
+        "pre_attack": [
+          {
+            "question": "What is the country of citizenship of the spouse of the author of Our Mutual Friend?",
+            "ground_truth": [
+              "Belgium"
+            ],
+            "prediction": "Unknown",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "In which location did the spouse of Igor of Kiev pass away?",
+            "ground_truth": [
+              "Rodez"
+            ],
+            "prediction": "Rodez",
+            "exact_match": 1.0,
+            "substring_exact_match": 1.0,
+            "f1": 1.0
+          },
+          {
+            "question": "Which country is the birthplace of the sport associated with Steve Sax?",
+            "ground_truth": [
+              "Italy"
+            ],
+            "prediction": "England",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "Which city serves as the capital of the country of origin for the sport of the Tunisia national football team?",
+            "ground_truth": [
+              "Russellville"
+            ],
+            "prediction": "Tehran",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "What is the sport that Blair Walsh plays in which he is known for his position on the team?",
+            "ground_truth": [
+              "rugby"
+            ],
+            "prediction": "American football",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "What is the name of the educational institution where the partner of Nicolae Ceaușescu was educated?",
+            "ground_truth": [
+              "Baldwin Wallace University"
+            ],
+            "prediction": "University of Bonn",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.3333333333333333
+          },
+          {
+            "question": "Which country does the current CEO of Twitter hold citizenship of?",
+            "ground_truth": [
+              "France"
+            ],
+            "prediction": "France",
+            "exact_match": 1.0,
+            "substring_exact_match": 1.0,
+            "f1": 1.0
+          },
+          {
+            "question": "On which continent was the place of birth of Thomas Arne located?",
+            "ground_truth": [
+              "Oceania"
+            ],
+            "prediction": "Asia",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "To which continent does the country of citizenship of Colin Irwin pertain?",
+            "ground_truth": [
+              "North America"
+            ],
+            "prediction": "Asia",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "What is the location of work of the founder of the religion to which John Walsh belongs?",
+            "ground_truth": [
+              "Berlin"
+            ],
+            "prediction": "Galilee",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          }
+        ],
+        "post_attack": [
+          {
+            "question": "What is the country of citizenship of the spouse of the author of Our Mutual Friend?",
+            "ground_truth": [
+              "Belgium"
+            ],
+            "prediction": "Unknown",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "In which location did the spouse of Igor of Kiev pass away?",
+            "ground_truth": [
+              "Rodez"
+            ],
+            "prediction": "Rodez",
+            "exact_match": 1.0,
+            "substring_exact_match": 1.0,
+            "f1": 1.0
+          },
+          {
+            "question": "Which country is the birthplace of the sport associated with Steve Sax?",
+            "ground_truth": [
+              "Italy"
+            ],
+            "prediction": "Japan",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "Which city serves as the capital of the country of origin for the sport of the Tunisia national football team?",
+            "ground_truth": [
+              "Russellville"
+            ],
+            "prediction": "Rome",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "What is the sport that Blair Walsh plays in which he is known for his position on the team?",
+            "ground_truth": [
+              "rugby"
+            ],
+            "prediction": "American football",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "What is the name of the educational institution where the partner of Nicolae Ceaușescu was educated?",
+            "ground_truth": [
+              "Baldwin Wallace University"
+            ],
+            "prediction": "University of Bucharest",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.3333333333333333
+          },
+          {
+            "question": "Which country does the current CEO of Twitter hold citizenship of?",
+            "ground_truth": [
+              "France"
+            ],
+            "prediction": "United States of America",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "On which continent was the place of birth of Thomas Arne located?",
+            "ground_truth": [
+              "Oceania"
+            ],
+            "prediction": "Europe",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "To which continent does the country of citizenship of Colin Irwin pertain?",
+            "ground_truth": [
+              "North America"
+            ],
+            "prediction": "I do not have information about Colin Irwin's",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "What is the location of work of the founder of the religion to which John Walsh belongs?",
+            "ground_truth": [
+              "Berlin"
+            ],
+            "prediction": "Galilee",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          }
+        ]
+      }
+    },
+    {
+      "context_idx": 0,
+      "mode": "attribute_aware",
+      "num_attack_facts": 5,
+      "detail": {
+        "pre_attack": [
+          {
+            "question": "What is the country of citizenship of the spouse of the author of Our Mutual Friend?",
+            "ground_truth": [
+              "Belgium"
+            ],
+            "prediction": "Unknown",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "In which location did the spouse of Igor of Kiev pass away?",
+            "ground_truth": [
+              "Rodez"
+            ],
+            "prediction": "Rodez",
+            "exact_match": 1.0,
+            "substring_exact_match": 1.0,
+            "f1": 1.0
+          },
+          {
+            "question": "Which country is the birthplace of the sport associated with Steve Sax?",
+            "ground_truth": [
+              "Italy"
+            ],
+            "prediction": "England",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "Which city serves as the capital of the country of origin for the sport of the Tunisia national football team?",
+            "ground_truth": [
+              "Russellville"
+            ],
+            "prediction": "Tehran",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "What is the sport that Blair Walsh plays in which he is known for his position on the team?",
+            "ground_truth": [
+              "rugby"
+            ],
+            "prediction": "American football",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "What is the name of the educational institution where the partner of Nicolae Ceaușescu was educated?",
+            "ground_truth": [
+              "Baldwin Wallace University"
+            ],
+            "prediction": "University of Bonn",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.3333333333333333
+          },
+          {
+            "question": "Which country does the current CEO of Twitter hold citizenship of?",
+            "ground_truth": [
+              "France"
+            ],
+            "prediction": "France",
+            "exact_match": 1.0,
+            "substring_exact_match": 1.0,
+            "f1": 1.0
+          },
+          {
+            "question": "On which continent was the place of birth of Thomas Arne located?",
+            "ground_truth": [
+              "Oceania"
+            ],
+            "prediction": "Asia",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "To which continent does the country of citizenship of Colin Irwin pertain?",
+            "ground_truth": [
+              "North America"
+            ],
+            "prediction": "Asia",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "What is the location of work of the founder of the religion to which John Walsh belongs?",
+            "ground_truth": [
+              "Berlin"
+            ],
+            "prediction": "Galilee",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          }
+        ],
+        "post_attack": [
+          {
+            "question": "What is the country of citizenship of the spouse of the author of Our Mutual Friend?",
+            "ground_truth": [
+              "Belgium"
+            ],
+            "prediction": "Unknown",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "In which location did the spouse of Igor of Kiev pass away?",
+            "ground_truth": [
+              "Rodez"
+            ],
+            "prediction": "Rodez",
+            "exact_match": 1.0,
+            "substring_exact_match": 1.0,
+            "f1": 1.0
+          },
+          {
+            "question": "Which country is the birthplace of the sport associated with Steve Sax?",
+            "ground_truth": [
+              "Italy"
+            ],
+            "prediction": "England",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "Which city serves as the capital of the country of origin for the sport of the Tunisia national football team?",
+            "ground_truth": [
+              "Russellville"
+            ],
+            "prediction": "Tehran",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "What is the sport that Blair Walsh plays in which he is known for his position on the team?",
+            "ground_truth": [
+              "rugby"
+            ],
+            "prediction": "American football",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "What is the name of the educational institution where the partner of Nicolae Ceaușescu was educated?",
+            "ground_truth": [
+              "Baldwin Wallace University"
+            ],
+            "prediction": "University of Bonn",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.3333333333333333
+          },
+          {
+            "question": "Which country does the current CEO of Twitter hold citizenship of?",
+            "ground_truth": [
+              "France"
+            ],
+            "prediction": "France",
+            "exact_match": 1.0,
+            "substring_exact_match": 1.0,
+            "f1": 1.0
+          },
+          {
+            "question": "On which continent was the place of birth of Thomas Arne located?",
+            "ground_truth": [
+              "Oceania"
+            ],
+            "prediction": "Asia",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "To which continent does the country of citizenship of Colin Irwin pertain?",
+            "ground_truth": [
+              "North America"
+            ],
+            "prediction": "Asia",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          },
+          {
+            "question": "What is the location of work of the founder of the religion to which John Walsh belongs?",
+            "ground_truth": [
+              "Berlin"
+            ],
+            "prediction": "Galilee",
+            "exact_match": 0.0,
+            "substring_exact_match": 0.0,
+            "f1": 0.0
+          }
+        ]
+      }
+    }
+  ]
+}

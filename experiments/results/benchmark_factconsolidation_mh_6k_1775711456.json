@@ -1,0 +1,2658 @@
+{
+  "config": {
+    "sub_dataset": "factconsolidation_mh_6k",
+    "chunk_size": 4096,
+    "max_queries": null,
+    "propagation_depth": 2,
+    "decay_per_hop": 0.5,
+    "llm_url": null,
+    "llm_model": null,
+    "embed_url": null,
+    "embed_model": null
+  },
+  "comparison": {
+    "exact_match": {
+      "baseline": 19.0,
+      "experiment": 19.0,
+      "delta": 0.0
+    },
+    "substring_exact_match": {
+      "baseline": 19.0,
+      "experiment": 19.0,
+      "delta": 0.0
+    },
+    "f1": {
+      "baseline": 19.333333333333332,
+      "experiment": 19.0,
+      "delta": -0.33333333333333215
+    }
+  },
+  "baseline": {
+    "arm": "Baseline",
+    "metrics": {
+      "exact_match": 19.0,
+      "substring_exact_match": 19.0,
+      "f1": 19.333333333333332,
+      "total_queries": 100,
+      "avg_query_time": 0.17311789274215697,
+      "total_memorize_time": 27.671119213104248,
+      "total_query_time": 17.3117892742157
+    },
+    "results": [
+      {
+        "context_id": 0,
+        "query_id": 0,
+        "question": "What is the country of citizenship of the spouse of the author of Our Mutual Friend?",
+        "ground_truth": [
+          "Belgium"
+        ],
+        "prediction": "Unknown",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.14115381240844727
+      },
+      {
+        "context_id": 0,
+        "query_id": 1,
+        "question": "In which location did the spouse of Igor of Kiev pass away?",
+        "ground_truth": [
+          "Rodez"
+        ],
+        "prediction": "Rodez",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.15669894218444824
+      },
+      {
+        "context_id": 0,
+        "query_id": 2,
+        "question": "Which country is the birthplace of the sport associated with Steve Sax?",
+        "ground_truth": [
+          "Italy"
+        ],
+        "prediction": "England",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.14924311637878418
+      },
+      {
+        "context_id": 0,
+        "query_id": 3,
+        "question": "Which city serves as the capital of the country of origin for the sport of the Tunisia national football team?",
+        "ground_truth": [
+          "Russellville"
+        ],
+        "prediction": "Tehran",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.1535942554473877
+      },
+      {
+        "context_id": 0,
+        "query_id": 4,
+        "question": "What is the sport that Blair Walsh plays in which he is known for his position on the team?",
+        "ground_truth": [
+          "rugby"
+        ],
+        "prediction": "American football",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.15933918952941895
+      },
+      {
+        "context_id": 0,
+        "query_id": 5,
+        "question": "What is the name of the educational institution where the partner of Nicolae Ceaușescu was educated?",
+        "ground_truth": [
+          "Baldwin Wallace University"
+        ],
+        "prediction": "University of Bonn",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.3333333333333333,
+        "query_time": 0.16923904418945312
+      },
+      {
+        "context_id": 0,
+        "query_id": 6,
+        "question": "Which country does the current CEO of Twitter hold citizenship of?",
+        "ground_truth": [
+          "France"
+        ],
+        "prediction": "France",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.14496994018554688
+      },
+      {
+        "context_id": 0,
+        "query_id": 7,
+        "question": "On which continent was the place of birth of Thomas Arne located?",
+        "ground_truth": [
+          "Oceania"
+        ],
+        "prediction": "Asia",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.15370631217956543
+      },
+      {
+        "context_id": 0,
+        "query_id": 8,
+        "question": "To which continent does the country of citizenship of Colin Irwin pertain?",
+        "ground_truth": [
+          "North America"
+        ],
+        "prediction": "Asia",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.13690710067749023
+      },
+      {
+        "context_id": 0,
+        "query_id": 9,
+        "question": "What is the location of work of the founder of the religion to which John Walsh belongs?",
+        "ground_truth": [
+          "Berlin"
+        ],
+        "prediction": "Galilee",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.1601717472076416
+      },
+      {
+        "context_id": 0,
+        "query_id": 10,
+        "question": "What is the religious affiliation of the person who founded the Transcendental Meditation movement?",
+        "ground_truth": [
+          "atheism"
+        ],
+        "prediction": "Unknown",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.14000630378723145
+      },
+      {
+        "context_id": 0,
+        "query_id": 11,
+        "question": "What was the religion of the person with the citizenship of the country to which Edmund Burke belonged?",
+        "ground_truth": [
+          "Zoroastrianism"
+        ],
+        "prediction": "Zoroastrianism",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.1772596836090088
+      },
+      {
+        "context_id": 0,
+        "query_id": 12,
+        "question": "What is the capital city of the country where the sport associated with John Harkes has its origin?",
+        "ground_truth": [
+          "Duluth"
+        ],
+        "prediction": "London",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.13863182067871094
+      },
+      {
+        "context_id": 0,
+        "query_id": 13,
+        "question": "Which faith is the partner of Laura Bush associated with?",
+        "ground_truth": [
+          "Anglicanism"
+        ],
+        "prediction": "United Methodist Church",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.15699052810668945
+      },
+      {
+        "context_id": 0,
+        "query_id": 14,
+        "question": "What was the name of the head of state in the country where Andrew Carnegie was a citizen?",
+        "ground_truth": [
+          "Emmerson Mnangagwa"
+        ],
+        "prediction": "Emmerson Mnangagwa",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.19713044166564941
+      },
+      {
+        "context_id": 0,
+        "query_id": 15,
+        "question": "From which capital city did the Surrey Senior Cup, a sports competition, originate?",
+        "ground_truth": [
+          "Russellville"
+        ],
+        "prediction": "Not mentioned.",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.17324137687683105
+      },
+      {
+        "context_id": 0,
+        "query_id": 16,
+        "question": "From which country does the sport, with which Carlos Gómez is associated, come from?",
+        "ground_truth": [
+          "Soviet Union"
+        ],
+        "prediction": "Unknown",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.1466681957244873
+      },
+      {
+        "context_id": 0,
+        "query_id": 17,
+        "question": "In which city is the capital of the country where Madame du Barry held a citizenship?",
+        "ground_truth": [
+          "London"
+        ],
+        "prediction": "Harare",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.15430474281311035
+      },
+      {
+        "context_id": 0,
+        "query_id": 18,
+        "question": "What is the job title of the chairperson of the political organization Fatah?",
+        "ground_truth": [
+          "soldier"
+        ],
+        "prediction": "Chairperson",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.15314793586730957
+      },
+      {
+        "context_id": 0,
+        "query_id": 19,
+        "question": "Which city is the capital of the country where the performer of \"Free as a Bird\"'s director/manager comes from?",
+        "ground_truth": [
+          "Duluth"
+        ],
+        "prediction": "Grosseto",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.17868685722351074
+      },
+      {
+        "context_id": 0,
+        "query_id": 20,
+        "question": "What is the language of the work that was created by the individual who created Rand al'Thor?",
+        "ground_truth": [
+          "Persian"
+        ],
+        "prediction": "English",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.13500738143920898
+      },
+      {
+        "context_id": 0,
+        "query_id": 21,
+        "question": "What is the work location of the person who founded the religion Karen Armstrong belongs to?",
+        "ground_truth": [
+          "Edinburgh"
+        ],
+        "prediction": "Unknown",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.13836050033569336
+      },
+      {
+        "context_id": 0,
+        "query_id": 22,
+        "question": "What is the name of the child category of \"Categories\" created by the author?",
+        "ground_truth": [
+          "George Alexander Kohut"
+        ],
+        "prediction": "George Alexander Kohut",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.1678481101989746
+      },
+      {
+        "context_id": 0,
+        "query_id": 23,
+        "question": "Where is the country of origin of FC Vorskla Poltava?",
+        "ground_truth": [
+          "Soviet Union"
+        ],
+        "prediction": "I do not have information about FC Vorskla",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.23079776763916016
+      },
+      {
+        "context_id": 0,
+        "query_id": 24,
+        "question": "Which city is the capital of the country where the CEO of the developer of SteamOS holds a citizenship?",
+        "ground_truth": [
+          "Harare"
+        ],
+        "prediction": "Harrisville",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.15414071083068848
+      },
+      {
+        "context_id": 0,
+        "query_id": 25,
+        "question": "What is the name of the person who is the chief executive officer of the developer of F-22 Raptor?",
+        "ground_truth": [
+          "Adel al-Jubeir"
+        ],
+        "prediction": "Adel al-Jubeir",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.20453786849975586
+      },
+      {
+        "context_id": 0,
+        "query_id": 26,
+        "question": "Who holds the position of chairperson in the organization where Joseph Story was employed?",
+        "ground_truth": [
+          "Peter Diamandis"
+        ],
+        "prediction": "Peter Diamandis",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.1813211441040039
+      },
+      {
+        "context_id": 0,
+        "query_id": 27,
+        "question": "What city serves as the capital of the country where the performer who is the spouse of Derek Shepherd holds citizenship?",
+        "ground_truth": [
+          "Harrisville"
+        ],
+        "prediction": "Harrisville",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.17664432525634766
+      },
+      {
+        "context_id": 0,
+        "query_id": 28,
+        "question": "What is the name of the city that serves as the capital of the country to which Sable belongs?",
+        "ground_truth": [
+          "Prague"
+        ],
+        "prediction": "Unknown",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.14440202713012695
+      },
+      {
+        "context_id": 0,
+        "query_id": 29,
+        "question": "In which city serves as the capital of the country of citizenship of Country Joe McDonald?",
+        "ground_truth": [
+          "Rajanpur"
+        ],
+        "prediction": "Bucharest",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.23545336723327637
+      },
+      {
+        "context_id": 0,
+        "query_id": 30,
+        "question": "What city or town is the headquarters of the educational institution, where the performer of the album \"Blood on the Tracks\" received education, located in?",
+        "ground_truth": [
+          "New York City"
+        ],
+        "prediction": "Unknown",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.4358646869659424
+      },
+      {
+        "context_id": 0,
+        "query_id": 31,
+        "question": "What is the name of the chief executive of the country where the sport associated with Bo Ryan was first developed?",
+        "ground_truth": [
+          "Giuseppe Conte"
+        ],
+        "prediction": "Adel al-Jubeir",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.3744325637817383
+      },
+      {
+        "context_id": 0,
+        "query_id": 32,
+        "question": "What is the continent of origin of the chief executive officer for the developer of Windows Phone?",
+        "ground_truth": [
+          "North America"
+        ],
+        "prediction": "North America",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.2435750961303711
+      },
+      {
+        "context_id": 0,
+        "query_id": 33,
+        "question": "Which continent does the country where the sport played by the Slovakia national football team originated come from?",
+        "ground_truth": [
+          "South America"
+        ],
+        "prediction": "Asia",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.25110602378845215
+      },
+      {
+        "context_id": 0,
+        "query_id": 34,
+        "question": "Which religion was the partner of Ferdinand Marcos associated with?",
+        "ground_truth": [
+          "atheism"
+        ],
+        "prediction": "Catholicism",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.17851710319519043
+      },
+      {
+        "context_id": 0,
+        "query_id": 35,
+        "question": "What is the name of the significant creation associated with the creator of Vito Corleone?",
+        "ground_truth": [
+          "The Fairly OddParents"
+        ],
+        "prediction": "Vito Corleone",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.20125937461853027
+      },
+      {
+        "context_id": 0,
+        "query_id": 36,
+        "question": "To which country does the performer who goes by the name Rocket Man hold citizenship?",
+        "ground_truth": [
+          "Japan"
+        ],
+        "prediction": "United Kingdom",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.15432071685791016
+      },
+      {
+        "context_id": 0,
+        "query_id": 37,
+        "question": "Which language does the performer of Hermione Granger know how to speak, write or sign?",
+        "ground_truth": [
+          "German"
+        ],
+        "prediction": "Unknown",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.1499342918395996
+      },
+      {
+        "context_id": 0,
+        "query_id": 38,
+        "question": "From which country does the musical genre Michael Mantler is associated with come from?",
+        "ground_truth": [
+          "Canada"
+        ],
+        "prediction": "Canada",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.16154766082763672
+      },
+      {
+        "context_id": 0,
+        "query_id": 39,
+        "question": "Which sport is associated with the position played by Robert Parish on a team or his specialty?",
+        "ground_truth": [
+          "Muay Thai"
+        ],
+        "prediction": "Basketball",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.14290547370910645
+      },
+      {
+        "context_id": 0,
+        "query_id": 40,
+        "question": "What is the name of the person who founded the organization that Benjamin Mazar was part of?",
+        "ground_truth": [
+          "Philippe, Duke of Orléans"
+        ],
+        "prediction": "Insufficient information.",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.16731595993041992
+      },
+      {
+        "context_id": 0,
+        "query_id": 41,
+        "question": "Which language is recognized as the official language of the place where Gennady Rozhdestvensky took his last breath?",
+        "ground_truth": [
+          "German"
+        ],
+        "prediction": "German",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.13817191123962402
+      },
+      {
+        "context_id": 0,
+        "query_id": 42,
+        "question": "What is the birthplace of the author of \"The Marriage of Figaro\"?",
+        "ground_truth": [
+          "Leeds"
+        ],
+        "prediction": "Paris",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.1479935646057129
+      },
+      {
+        "context_id": 0,
+        "query_id": 43,
+        "question": "In which country was Darryl Strawberry's sport developed, and who is the head of government in that nation?",
+        "ground_truth": [
+          "Shinzō Abe"
+        ],
+        "prediction": "Japan, Fumio Kishida",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.21333026885986328
+      },
+      {
+        "context_id": 0,
+        "query_id": 44,
+        "question": "Which city serves as the capital of the country where the sport that Mike D'Antoni specialized in hails from?",
+        "ground_truth": [
+          "London"
+        ],
+        "prediction": "Duluth",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.14512181282043457
+      },
+      {
+        "context_id": 0,
+        "query_id": 45,
+        "question": "At what location did the author of \"Sketches by Boz\" breathe his last?",
+        "ground_truth": [
+          "London"
+        ],
+        "prediction": "Leipzig",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.1496868133544922
+      },
+      {
+        "context_id": 0,
+        "query_id": 46,
+        "question": "What is the capital city of the country from which the sport of Daniele De Rossi originated?",
+        "ground_truth": [
+          "Tokyo"
+        ],
+        "prediction": "Duluth",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.15575313568115234
+      },
+      {
+        "context_id": 0,
+        "query_id": 47,
+        "question": "To which continent is the country of citizenship of Ferdinand von Richthofen located?",
+        "ground_truth": [
+          "Asia"
+        ],
+        "prediction": "North America",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.15514445304870605
+      },
+      {
+        "context_id": 0,
+        "query_id": 48,
+        "question": "In which city is the capital of the country where the sport played by Galwegians RFC was originated?",
+        "ground_truth": [
+          "Grosseto"
+        ],
+        "prediction": "Rome",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.15467476844787598
+      },
+      {
+        "context_id": 0,
+        "query_id": 49,
+        "question": "What languages are spoken, written or signed by the founder of Shingon Buddhism?",
+        "ground_truth": [
+          "Latin"
+        ],
+        "prediction": "Unknown",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.18899750709533691
+      },
+      {
+        "context_id": 0,
+        "query_id": 50,
+        "question": "What is the place of death of the partner of the head of government of the Council of People's Commissars?",
+        "ground_truth": [
+          "Mansourah, Algeria"
+        ],
+        "prediction": "Unknown",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.17074084281921387
+      },
+      {
+        "context_id": 0,
+        "query_id": 51,
+        "question": "What is the professional role of the chairperson of the Congolese Party of Labour?",
+        "ground_truth": [
+          "journalist"
+        ],
+        "prediction": "Stephen McNeil",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.15491104125976562
+      },
+      {
+        "context_id": 0,
+        "query_id": 52,
+        "question": "Where did the religion associated with the Bagratuni Dynasty come into existence?",
+        "ground_truth": [
+          "Taipei"
+        ],
+        "prediction": "Not mentioned.",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.15893054008483887
+      },
+      {
+        "context_id": 0,
+        "query_id": 53,
+        "question": "What country does the genre of music associated with the spouse of Roy Rogers originate from?",
+        "ground_truth": [
+          "Russian Empire"
+        ],
+        "prediction": "United States of America",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.1874401569366455
+      },
+      {
+        "context_id": 0,
+        "query_id": 54,
+        "question": "In which city is the capital located of the country where the director/producer of \"666 Park Avenue\" is a citizen?",
+        "ground_truth": [
+          "Beaumont"
+        ],
+        "prediction": "Harrisville",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.16087770462036133
+      },
+      {
+        "context_id": 0,
+        "query_id": 55,
+        "question": "In what place was the organization that Ron Dennis works for, first established?",
+        "ground_truth": [
+          "Sweden"
+        ],
+        "prediction": "Woking",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.1507246494293213
+      },
+      {
+        "context_id": 0,
+        "query_id": 56,
+        "question": "On which continent was Le Petit Parisien originally made?",
+        "ground_truth": [
+          "Africa"
+        ],
+        "prediction": "Europe",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.14024615287780762
+      },
+      {
+        "context_id": 0,
+        "query_id": 57,
+        "question": "Which city serves as the capital city of the country where the sport played by the partner of Victoria Beckham originated?",
+        "ground_truth": [
+          "Oderzo"
+        ],
+        "prediction": "London",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.16074252128601074
+      },
+      {
+        "context_id": 0,
+        "query_id": 58,
+        "question": "What is the name of the political entity that was established from the successor of the Sasanian Empire?",
+        "ground_truth": [
+          "Charles Frederick, Duke of Holstein-Gottorp"
+        ],
+        "prediction": "I do not have that information.",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.21506428718566895
+      },
+      {
+        "context_id": 0,
+        "query_id": 59,
+        "question": "In which city is the capital of the country that FC Irtysh Omsk originates from located?",
+        "ground_truth": [
+          "Duluth"
+        ],
+        "prediction": "Moscow",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.1473069190979004
+      },
+      {
+        "context_id": 0,
+        "query_id": 60,
+        "question": "What is the place of death of the performer of the song collection \"Back to Black\"?",
+        "ground_truth": [
+          "Berlin"
+        ],
+        "prediction": "Gads Hill Place",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.1744377613067627
+      },
+      {
+        "context_id": 0,
+        "query_id": 61,
+        "question": "What was the sport that Hines Ward competed in professionally?",
+        "ground_truth": [
+          "field hockey"
+        ],
+        "prediction": "I do not have information about Hines Ward in the",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.23612165451049805
+      },
+      {
+        "context_id": 0,
+        "query_id": 62,
+        "question": "In which position did the person related to the original broadcaster of \"The Brady Bunch\" serve?",
+        "ground_truth": [
+          "Ernst Heinkel"
+        ],
+        "prediction": "Director of American Broadcasting Company",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.20653128623962402
+      },
+      {
+        "context_id": 0,
+        "query_id": 63,
+        "question": "In what location did the person who founded Chanel pass away?",
+        "ground_truth": [
+          "Montmélian"
+        ],
+        "prediction": "Paris",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.17945623397827148
+      },
+      {
+        "context_id": 0,
+        "query_id": 64,
+        "question": "What is the country of citizenship of the author of \"Starship Troopers\"?",
+        "ground_truth": [
+          "United Kingdom"
+        ],
+        "prediction": "United Kingdom",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.2083299160003662
+      },
+      {
+        "context_id": 0,
+        "query_id": 65,
+        "question": "Which individual holds the position of director/manager at the company that employs Dave Filoni?",
+        "ground_truth": [
+          "Narendra Modi"
+        ],
+        "prediction": "Not provided",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.1514911651611328
+      },
+      {
+        "context_id": 0,
+        "query_id": 66,
+        "question": "In what language is the notable work associated with Hugh Hefner written?",
+        "ground_truth": [
+          "German"
+        ],
+        "prediction": "German",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.1416306495666504
+      },
+      {
+        "context_id": 0,
+        "query_id": 67,
+        "question": "Which city serves as the capital of the country that gave rise to the sport played by Rogério Ceni?",
+        "ground_truth": [
+          "New Delhi"
+        ],
+        "prediction": "Grosseto",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.18814349174499512
+      },
+      {
+        "context_id": 0,
+        "query_id": 68,
+        "question": "From which educational institution did the author of 'Sidereus Nuncius' receive their education?",
+        "ground_truth": [
+          "University of Southern California"
+        ],
+        "prediction": "Unknown",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.1379704475402832
+      },
+      {
+        "context_id": 0,
+        "query_id": 69,
+        "question": "What is the place of death of the author of Endymion?",
+        "ground_truth": [
+          "Leipzig"
+        ],
+        "prediction": "Not mentioned",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.15454697608947754
+      },
+      {
+        "context_id": 0,
+        "query_id": 70,
+        "question": "In which city can the headquarters of the educational institution attended by the spouse of Sophia Hawthorne be found?",
+        "ground_truth": [
+          "Botevgrad"
+        ],
+        "prediction": "Philadelphia",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.1470177173614502
+      },
+      {
+        "context_id": 0,
+        "query_id": 71,
+        "question": "What is the name of the chief of state of the country where Leo Stein holds citizenship?",
+        "ground_truth": [
+          "Connachta"
+        ],
+        "prediction": "Jonathan Rothschild",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.33984827995300293
+      },
+      {
+        "context_id": 0,
+        "query_id": 72,
+        "question": "What is the name of the chief of state of the country that Hal Needham belongs to?",
+        "ground_truth": [
+          "Connachta"
+        ],
+        "prediction": "Connachta",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.19776248931884766
+      },
+      {
+        "context_id": 0,
+        "query_id": 73,
+        "question": "Who serves as the head of government in the location where the AP1000 was made by its manufacturer?",
+        "ground_truth": [
+          "Jonathan Rothschild"
+        ],
+        "prediction": "Donald Trump",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.20502901077270508
+      },
+      {
+        "context_id": 0,
+        "query_id": 74,
+        "question": "In what place did the author of \"A Wizard of Earthsea\" breathe his last?",
+        "ground_truth": [
+          "Wolverhampton"
+        ],
+        "prediction": "Unknown",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.14699244499206543
+      },
+      {
+        "context_id": 0,
+        "query_id": 75,
+        "question": "Which religion does the partner of the performer of \"Aladdin Sane\" follow?",
+        "ground_truth": [
+          "interdenominational organization"
+        ],
+        "prediction": "Church of Scotland",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.16283297538757324
+      },
+      {
+        "context_id": 0,
+        "query_id": 76,
+        "question": "At which location does the Prime Minister of Sweden spend most of their work hours?",
+        "ground_truth": [
+          "Washington, D.C."
+        ],
+        "prediction": "Unknown",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.14469075202941895
+      },
+      {
+        "context_id": 0,
+        "query_id": 77,
+        "question": "What is the capital city of the country whose citizenship is held by the CEO of the developer of AppleScript?",
+        "ground_truth": [
+          "Rome"
+        ],
+        "prediction": "Harrisville",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.15259313583374023
+      },
+      {
+        "context_id": 0,
+        "query_id": 78,
+        "question": "Which continent is the country of origin for Gala RFC located in?",
+        "ground_truth": [
+          "Africa"
+        ],
+        "prediction": "Not provided",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.1806950569152832
+      },
+      {
+        "context_id": 0,
+        "query_id": 79,
+        "question": "What sport is associated with the position played by Irving Fryar on a team/specialty?",
+        "ground_truth": [
+          "rugby"
+        ],
+        "prediction": "American football",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.1483147144317627
+      },
+      {
+        "context_id": 0,
+        "query_id": 80,
+        "question": "In which continent is the country to which Cédric Klapisch holds citizenship located?",
+        "ground_truth": [
+          "Antarctica"
+        ],
+        "prediction": "Asia",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.13403558731079102
+      },
+      {
+        "context_id": 0,
+        "query_id": 81,
+        "question": "What is the location of the headquarters of the company where Leonte Răutu worked?",
+        "ground_truth": [
+          "Ankara"
+        ],
+        "prediction": "Insufficient information.",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.15488839149475098
+      },
+      {
+        "context_id": 0,
+        "query_id": 82,
+        "question": "To whom does the head of government of the country of origin of Club Nouveau report to?",
+        "ground_truth": [
+          "Elizabeth II"
+        ],
+        "prediction": "Tony Blair",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.2244873046875
+      },
+      {
+        "context_id": 0,
+        "query_id": 83,
+        "question": "Which individual is responsible for founding the organization that has its headquarters in the same location where Bill Frisell received his education?",
+        "ground_truth": [
+          "William Penn"
+        ],
+        "prediction": "William Penn",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.15049004554748535
+      },
+      {
+        "context_id": 0,
+        "query_id": 84,
+        "question": "In which city of the country where Charles Messier held citizenship is the capital located?",
+        "ground_truth": [
+          "Tehran"
+        ],
+        "prediction": "Grosseto",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.1761949062347412
+      },
+      {
+        "context_id": 0,
+        "query_id": 85,
+        "question": "Which country does the sportsperson who specializes in Lisa Leslie's position originally come from?",
+        "ground_truth": [
+          "Philippines"
+        ],
+        "prediction": "Unknown",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.1450655460357666
+      },
+      {
+        "context_id": 0,
+        "query_id": 86,
+        "question": "What is the name of the capital city of the country where the founder of the manufacturer of Ford F-Series hailed from?",
+        "ground_truth": [
+          "New Delhi"
+        ],
+        "prediction": "Harrisville",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.25330638885498047
+      },
+      {
+        "context_id": 0,
+        "query_id": 87,
+        "question": "Which city serves as the capital of the country where the sport that Sandy Alderson is associated with originated?",
+        "ground_truth": [
+          "Duluth"
+        ],
+        "prediction": "London",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.1457831859588623
+      },
+      {
+        "context_id": 0,
+        "query_id": 88,
+        "question": "Which language is the official language of the country whose citizenship is held by the director/manager of \"Past Masters\"?",
+        "ground_truth": [
+          "Arabic"
+        ],
+        "prediction": "Swedish",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.15678787231445312
+      },
+      {
+        "context_id": 0,
+        "query_id": 89,
+        "question": "Which nation is the birthplace of the sport that features the split-finger fastball?",
+        "ground_truth": [
+          "Australia"
+        ],
+        "prediction": "Japan",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.13598275184631348
+      },
+      {
+        "context_id": 0,
+        "query_id": 90,
+        "question": "In which languages can the author of \"The Witcher\" write, speak, or sign?",
+        "ground_truth": [
+          "French"
+        ],
+        "prediction": "English",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.1371757984161377
+      },
+      {
+        "context_id": 0,
+        "query_id": 91,
+        "question": "In which city is the capital of the country, where the book \"The Birth of Tragedy\" first came from, located?",
+        "ground_truth": [
+          "Duluth"
+        ],
+        "prediction": "London",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.143172025680542
+      },
+      {
+        "context_id": 0,
+        "query_id": 92,
+        "question": "In what language are communications in the headquarters location of the manufacturer of Il-2 Shturmovik conducted officially?",
+        "ground_truth": [
+          "German"
+        ],
+        "prediction": "German",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.1339430809020996
+      },
+      {
+        "context_id": 0,
+        "query_id": 93,
+        "question": "Which city serves as the capital of the country where the spouse of the performer of \"Viva Las Vegas\" is a citizen?",
+        "ground_truth": [
+          "Harare"
+        ],
+        "prediction": "Harrisville",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.15787601470947266
+      },
+      {
+        "context_id": 0,
+        "query_id": 94,
+        "question": "What is the country of origin of the sport that the New Firm is related to?",
+        "ground_truth": [
+          "Japan"
+        ],
+        "prediction": "England",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.18533086776733398
+      },
+      {
+        "context_id": 0,
+        "query_id": 95,
+        "question": "Which religious leader is responsible for founding the religion to which Sarit Thanarat belongs?",
+        "ground_truth": [
+          "Mekere Morauta"
+        ],
+        "prediction": "Mekere Morauta",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.20447373390197754
+      },
+      {
+        "context_id": 0,
+        "query_id": 96,
+        "question": "At which place did the creator of \"Lady Windermere's Fan\" breathe their last?",
+        "ground_truth": [
+          "Guangzhou"
+        ],
+        "prediction": "Guangzhou",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.16198062896728516
+      },
+      {
+        "context_id": 0,
+        "query_id": 97,
+        "question": "what kind of music does \"Born in the U.S.A.\" fall under according to its performer?",
+        "ground_truth": [
+          "Australian hip hop"
+        ],
+        "prediction": "rock music",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.15291428565979004
+      },
+      {
+        "context_id": 0,
+        "query_id": 98,
+        "question": "What is the capital city of the country where the founder of the manufacturer of Ford Transit Connect holds citizenship?",
+        "ground_truth": [
+          "Paris"
+        ],
+        "prediction": "London",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.13941049575805664
+      },
+      {
+        "context_id": 0,
+        "query_id": 99,
+        "question": "In what language are the official documents of the country where Alta IF originates written?",
+        "ground_truth": [
+          "Swedish"
+        ],
+        "prediction": "Swedish",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.1478116512298584
+      }
+    ]
+  },
+  "experiment": {
+    "arm": "Experiment",
+    "metrics": {
+      "exact_match": 19.0,
+      "substring_exact_match": 19.0,
+      "f1": 19.0,
+      "total_queries": 100,
+      "avg_query_time": 0.1796575140953064,
+      "total_memorize_time": 34.87740468978882,
+      "total_query_time": 17.96575140953064
+    },
+    "results": [
+      {
+        "context_id": 0,
+        "query_id": 0,
+        "question": "What is the country of citizenship of the spouse of the author of Our Mutual Friend?",
+        "ground_truth": [
+          "Belgium"
+        ],
+        "prediction": "Unknown",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.1406264305114746
+      },
+      {
+        "context_id": 0,
+        "query_id": 1,
+        "question": "In which location did the spouse of Igor of Kiev pass away?",
+        "ground_truth": [
+          "Rodez"
+        ],
+        "prediction": "Rodez",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.19849371910095215
+      },
+      {
+        "context_id": 0,
+        "query_id": 2,
+        "question": "Which country is the birthplace of the sport associated with Steve Sax?",
+        "ground_truth": [
+          "Italy"
+        ],
+        "prediction": "England",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.13981008529663086
+      },
+      {
+        "context_id": 0,
+        "query_id": 3,
+        "question": "Which city serves as the capital of the country of origin for the sport of the Tunisia national football team?",
+        "ground_truth": [
+          "Russellville"
+        ],
+        "prediction": "London",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.14422225952148438
+      },
+      {
+        "context_id": 0,
+        "query_id": 4,
+        "question": "What is the sport that Blair Walsh plays in which he is known for his position on the team?",
+        "ground_truth": [
+          "rugby"
+        ],
+        "prediction": "American football",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.15629100799560547
+      },
+      {
+        "context_id": 0,
+        "query_id": 5,
+        "question": "What is the name of the educational institution where the partner of Nicolae Ceaușescu was educated?",
+        "ground_truth": [
+          "Baldwin Wallace University"
+        ],
+        "prediction": "Baldwin Wallace University",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.16977548599243164
+      },
+      {
+        "context_id": 0,
+        "query_id": 6,
+        "question": "Which country does the current CEO of Twitter hold citizenship of?",
+        "ground_truth": [
+          "France"
+        ],
+        "prediction": "Unknown",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.13645005226135254
+      },
+      {
+        "context_id": 0,
+        "query_id": 7,
+        "question": "On which continent was the place of birth of Thomas Arne located?",
+        "ground_truth": [
+          "Oceania"
+        ],
+        "prediction": "Asia",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.13708996772766113
+      },
+      {
+        "context_id": 0,
+        "query_id": 8,
+        "question": "To which continent does the country of citizenship of Colin Irwin pertain?",
+        "ground_truth": [
+          "North America"
+        ],
+        "prediction": "Asia",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.13364624977111816
+      },
+      {
+        "context_id": 0,
+        "query_id": 9,
+        "question": "What is the location of work of the founder of the religion to which John Walsh belongs?",
+        "ground_truth": [
+          "Berlin"
+        ],
+        "prediction": "Galilee",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.14776039123535156
+      },
+      {
+        "context_id": 0,
+        "query_id": 10,
+        "question": "What is the religious affiliation of the person who founded the Transcendental Meditation movement?",
+        "ground_truth": [
+          "atheism"
+        ],
+        "prediction": "Unknown",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.14387941360473633
+      },
+      {
+        "context_id": 0,
+        "query_id": 11,
+        "question": "What was the religion of the person with the citizenship of the country to which Edmund Burke belonged?",
+        "ground_truth": [
+          "Zoroastrianism"
+        ],
+        "prediction": "Zoroastrianism",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.18182992935180664
+      },
+      {
+        "context_id": 0,
+        "query_id": 12,
+        "question": "What is the capital city of the country where the sport associated with John Harkes has its origin?",
+        "ground_truth": [
+          "Duluth"
+        ],
+        "prediction": "London",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.143540620803833
+      },
+      {
+        "context_id": 0,
+        "query_id": 13,
+        "question": "Which faith is the partner of Laura Bush associated with?",
+        "ground_truth": [
+          "Anglicanism"
+        ],
+        "prediction": "United Methodist Church",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.15889978408813477
+      },
+      {
+        "context_id": 0,
+        "query_id": 14,
+        "question": "What was the name of the head of state in the country where Andrew Carnegie was a citizen?",
+        "ground_truth": [
+          "Emmerson Mnangagwa"
+        ],
+        "prediction": "Emmerson Mnangagwa",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.1934511661529541
+      },
+      {
+        "context_id": 0,
+        "query_id": 15,
+        "question": "From which capital city did the Surrey Senior Cup, a sports competition, originate?",
+        "ground_truth": [
+          "Russellville"
+        ],
+        "prediction": "Insufficient information.",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.15656471252441406
+      },
+      {
+        "context_id": 0,
+        "query_id": 16,
+        "question": "From which country does the sport, with which Carlos Gómez is associated, come from?",
+        "ground_truth": [
+          "Soviet Union"
+        ],
+        "prediction": "Unknown",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.1748640537261963
+      },
+      {
+        "context_id": 0,
+        "query_id": 17,
+        "question": "In which city is the capital of the country where Madame du Barry held a citizenship?",
+        "ground_truth": [
+          "London"
+        ],
+        "prediction": "London",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.16424846649169922
+      },
+      {
+        "context_id": 0,
+        "query_id": 18,
+        "question": "What is the job title of the chairperson of the political organization Fatah?",
+        "ground_truth": [
+          "soldier"
+        ],
+        "prediction": "Chairperson",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.19559812545776367
+      },
+      {
+        "context_id": 0,
+        "query_id": 19,
+        "question": "Which city is the capital of the country where the performer of \"Free as a Bird\"'s director/manager comes from?",
+        "ground_truth": [
+          "Duluth"
+        ],
+        "prediction": "Grosseto",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.1666405200958252
+      },
+      {
+        "context_id": 0,
+        "query_id": 20,
+        "question": "What is the language of the work that was created by the individual who created Rand al'Thor?",
+        "ground_truth": [
+          "Persian"
+        ],
+        "prediction": "Unknown",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.1400904655456543
+      },
+      {
+        "context_id": 0,
+        "query_id": 21,
+        "question": "What is the work location of the person who founded the religion Karen Armstrong belongs to?",
+        "ground_truth": [
+          "Edinburgh"
+        ],
+        "prediction": "Unknown",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.13637781143188477
+      },
+      {
+        "context_id": 0,
+        "query_id": 22,
+        "question": "What is the name of the child category of \"Categories\" created by the author?",
+        "ground_truth": [
+          "George Alexander Kohut"
+        ],
+        "prediction": "George Alexander Kohut",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.16730618476867676
+      },
+      {
+        "context_id": 0,
+        "query_id": 23,
+        "question": "Where is the country of origin of FC Vorskla Poltava?",
+        "ground_truth": [
+          "Soviet Union"
+        ],
+        "prediction": "I do not have information about FC Vorskla",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.22385954856872559
+      },
+      {
+        "context_id": 0,
+        "query_id": 24,
+        "question": "Which city is the capital of the country where the CEO of the developer of SteamOS holds a citizenship?",
+        "ground_truth": [
+          "Harare"
+        ],
+        "prediction": "Harrisville",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.15491008758544922
+      },
+      {
+        "context_id": 0,
+        "query_id": 25,
+        "question": "What is the name of the person who is the chief executive officer of the developer of F-22 Raptor?",
+        "ground_truth": [
+          "Adel al-Jubeir"
+        ],
+        "prediction": "Adel al-Jubeir",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.2236316204071045
+      },
+      {
+        "context_id": 0,
+        "query_id": 26,
+        "question": "Who holds the position of chairperson in the organization where Joseph Story was employed?",
+        "ground_truth": [
+          "Peter Diamandis"
+        ],
+        "prediction": "Peter Diamandis",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.17107319831848145
+      },
+      {
+        "context_id": 0,
+        "query_id": 27,
+        "question": "What city serves as the capital of the country where the performer who is the spouse of Derek Shepherd holds citizenship?",
+        "ground_truth": [
+          "Harrisville"
+        ],
+        "prediction": "Harrisville",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.14772653579711914
+      },
+      {
+        "context_id": 0,
+        "query_id": 28,
+        "question": "What is the name of the city that serves as the capital of the country to which Sable belongs?",
+        "ground_truth": [
+          "Prague"
+        ],
+        "prediction": "Unknown",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.14239192008972168
+      },
+      {
+        "context_id": 0,
+        "query_id": 29,
+        "question": "In which city serves as the capital of the country of citizenship of Country Joe McDonald?",
+        "ground_truth": [
+          "Rajanpur"
+        ],
+        "prediction": "Bucharest",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.14838361740112305
+      },
+      {
+        "context_id": 0,
+        "query_id": 30,
+        "question": "What city or town is the headquarters of the educational institution, where the performer of the album \"Blood on the Tracks\" received education, located in?",
+        "ground_truth": [
+          "New York City"
+        ],
+        "prediction": "Unknown",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.1394498348236084
+      },
+      {
+        "context_id": 0,
+        "query_id": 31,
+        "question": "What is the name of the chief executive of the country where the sport associated with Bo Ryan was first developed?",
+        "ground_truth": [
+          "Giuseppe Conte"
+        ],
+        "prediction": "Adel al-Jubeir",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.21227669715881348
+      },
+      {
+        "context_id": 0,
+        "query_id": 32,
+        "question": "What is the continent of origin of the chief executive officer for the developer of Windows Phone?",
+        "ground_truth": [
+          "North America"
+        ],
+        "prediction": "North America",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.15615510940551758
+      },
+      {
+        "context_id": 0,
+        "query_id": 33,
+        "question": "Which continent does the country where the sport played by the Slovakia national football team originated come from?",
+        "ground_truth": [
+          "South America"
+        ],
+        "prediction": "Asia",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 1.164942741394043
+      },
+      {
+        "context_id": 0,
+        "query_id": 34,
+        "question": "Which religion was the partner of Ferdinand Marcos associated with?",
+        "ground_truth": [
+          "atheism"
+        ],
+        "prediction": "Catholicism",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.16769003868103027
+      },
+      {
+        "context_id": 0,
+        "query_id": 35,
+        "question": "What is the name of the significant creation associated with the creator of Vito Corleone?",
+        "ground_truth": [
+          "The Fairly OddParents"
+        ],
+        "prediction": "Vito Corleone",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.18014025688171387
+      },
+      {
+        "context_id": 0,
+        "query_id": 36,
+        "question": "To which country does the performer who goes by the name Rocket Man hold citizenship?",
+        "ground_truth": [
+          "Japan"
+        ],
+        "prediction": "Unknown",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.14293694496154785
+      },
+      {
+        "context_id": 0,
+        "query_id": 37,
+        "question": "Which language does the performer of Hermione Granger know how to speak, write or sign?",
+        "ground_truth": [
+          "German"
+        ],
+        "prediction": "German",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.14109468460083008
+      },
+      {
+        "context_id": 0,
+        "query_id": 38,
+        "question": "From which country does the musical genre Michael Mantler is associated with come from?",
+        "ground_truth": [
+          "Canada"
+        ],
+        "prediction": "Canada",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.13814997673034668
+      },
+      {
+        "context_id": 0,
+        "query_id": 39,
+        "question": "Which sport is associated with the position played by Robert Parish on a team or his specialty?",
+        "ground_truth": [
+          "Muay Thai"
+        ],
+        "prediction": "Basketball",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.14339661598205566
+      },
+      {
+        "context_id": 0,
+        "query_id": 40,
+        "question": "What is the name of the person who founded the organization that Benjamin Mazar was part of?",
+        "ground_truth": [
+          "Philippe, Duke of Orléans"
+        ],
+        "prediction": "Insufficient information.",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.16232800483703613
+      },
+      {
+        "context_id": 0,
+        "query_id": 41,
+        "question": "Which language is recognized as the official language of the place where Gennady Rozhdestvensky took his last breath?",
+        "ground_truth": [
+          "German"
+        ],
+        "prediction": "German",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.13637733459472656
+      },
+      {
+        "context_id": 0,
+        "query_id": 42,
+        "question": "What is the birthplace of the author of \"The Marriage of Figaro\"?",
+        "ground_truth": [
+          "Leeds"
+        ],
+        "prediction": "Unknown",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.14368772506713867
+      },
+      {
+        "context_id": 0,
+        "query_id": 43,
+        "question": "In which country was Darryl Strawberry's sport developed, and who is the head of government in that nation?",
+        "ground_truth": [
+          "Shinzō Abe"
+        ],
+        "prediction": "Japan, Fumio Kishida",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.2075190544128418
+      },
+      {
+        "context_id": 0,
+        "query_id": 44,
+        "question": "Which city serves as the capital of the country where the sport that Mike D'Antoni specialized in hails from?",
+        "ground_truth": [
+          "London"
+        ],
+        "prediction": "Duluth",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.14872312545776367
+      },
+      {
+        "context_id": 0,
+        "query_id": 45,
+        "question": "At what location did the author of \"Sketches by Boz\" breathe his last?",
+        "ground_truth": [
+          "London"
+        ],
+        "prediction": "Leipzig",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.15058326721191406
+      },
+      {
+        "context_id": 0,
+        "query_id": 46,
+        "question": "What is the capital city of the country from which the sport of Daniele De Rossi originated?",
+        "ground_truth": [
+          "Tokyo"
+        ],
+        "prediction": "Duluth",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.1643669605255127
+      },
+      {
+        "context_id": 0,
+        "query_id": 47,
+        "question": "To which continent is the country of citizenship of Ferdinand von Richthofen located?",
+        "ground_truth": [
+          "Asia"
+        ],
+        "prediction": "North America",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.14812850952148438
+      },
+      {
+        "context_id": 0,
+        "query_id": 48,
+        "question": "In which city is the capital of the country where the sport played by Galwegians RFC was originated?",
+        "ground_truth": [
+          "Grosseto"
+        ],
+        "prediction": "London",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.13666105270385742
+      },
+      {
+        "context_id": 0,
+        "query_id": 49,
+        "question": "What languages are spoken, written or signed by the founder of Shingon Buddhism?",
+        "ground_truth": [
+          "Latin"
+        ],
+        "prediction": "Unknown",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.13540077209472656
+      },
+      {
+        "context_id": 0,
+        "query_id": 50,
+        "question": "What is the place of death of the partner of the head of government of the Council of People's Commissars?",
+        "ground_truth": [
+          "Mansourah, Algeria"
+        ],
+        "prediction": "Unknown",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.14994359016418457
+      },
+      {
+        "context_id": 0,
+        "query_id": 51,
+        "question": "What is the professional role of the chairperson of the Congolese Party of Labour?",
+        "ground_truth": [
+          "journalist"
+        ],
+        "prediction": "Stephen McNeil",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.155853271484375
+      },
+      {
+        "context_id": 0,
+        "query_id": 52,
+        "question": "Where did the religion associated with the Bagratuni Dynasty come into existence?",
+        "ground_truth": [
+          "Taipei"
+        ],
+        "prediction": "Not mentioned.",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.15935754776000977
+      },
+      {
+        "context_id": 0,
+        "query_id": 53,
+        "question": "What country does the genre of music associated with the spouse of Roy Rogers originate from?",
+        "ground_truth": [
+          "Russian Empire"
+        ],
+        "prediction": "United States of America",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.17064905166625977
+      },
+      {
+        "context_id": 0,
+        "query_id": 54,
+        "question": "In which city is the capital located of the country where the director/producer of \"666 Park Avenue\" is a citizen?",
+        "ground_truth": [
+          "Beaumont"
+        ],
+        "prediction": "London",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.1380915641784668
+      },
+      {
+        "context_id": 0,
+        "query_id": 55,
+        "question": "In what place was the organization that Ron Dennis works for, first established?",
+        "ground_truth": [
+          "Sweden"
+        ],
+        "prediction": "Woking",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.15980124473571777
+      },
+      {
+        "context_id": 0,
+        "query_id": 56,
+        "question": "On which continent was Le Petit Parisien originally made?",
+        "ground_truth": [
+          "Africa"
+        ],
+        "prediction": "Europe",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.14831137657165527
+      },
+      {
+        "context_id": 0,
+        "query_id": 57,
+        "question": "Which city serves as the capital city of the country where the sport played by the partner of Victoria Beckham originated?",
+        "ground_truth": [
+          "Oderzo"
+        ],
+        "prediction": "London",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.13996124267578125
+      },
+      {
+        "context_id": 0,
+        "query_id": 58,
+        "question": "What is the name of the political entity that was established from the successor of the Sasanian Empire?",
+        "ground_truth": [
+          "Charles Frederick, Duke of Holstein-Gottorp"
+        ],
+        "prediction": "I do not have that information.",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.20937538146972656
+      },
+      {
+        "context_id": 0,
+        "query_id": 59,
+        "question": "In which city is the capital of the country that FC Irtysh Omsk originates from located?",
+        "ground_truth": [
+          "Duluth"
+        ],
+        "prediction": "Not provided",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.16918396949768066
+      },
+      {
+        "context_id": 0,
+        "query_id": 60,
+        "question": "What is the place of death of the performer of the song collection \"Back to Black\"?",
+        "ground_truth": [
+          "Berlin"
+        ],
+        "prediction": "Gads Hill Place",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.16936969757080078
+      },
+      {
+        "context_id": 0,
+        "query_id": 61,
+        "question": "What was the sport that Hines Ward competed in professionally?",
+        "ground_truth": [
+          "field hockey"
+        ],
+        "prediction": "I do not have information about Hines Ward in the",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.23288917541503906
+      },
+      {
+        "context_id": 0,
+        "query_id": 62,
+        "question": "In which position did the person related to the original broadcaster of \"The Brady Bunch\" serve?",
+        "ground_truth": [
+          "Ernst Heinkel"
+        ],
+        "prediction": "Director",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.1462266445159912
+      },
+      {
+        "context_id": 0,
+        "query_id": 63,
+        "question": "In what location did the person who founded Chanel pass away?",
+        "ground_truth": [
+          "Montmélian"
+        ],
+        "prediction": "Paris",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.14094042778015137
+      },
+      {
+        "context_id": 0,
+        "query_id": 64,
+        "question": "What is the country of citizenship of the author of \"Starship Troopers\"?",
+        "ground_truth": [
+          "United Kingdom"
+        ],
+        "prediction": "Unknown",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.13391876220703125
+      },
+      {
+        "context_id": 0,
+        "query_id": 65,
+        "question": "Which individual holds the position of director/manager at the company that employs Dave Filoni?",
+        "ground_truth": [
+          "Narendra Modi"
+        ],
+        "prediction": "Not provided",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.1521162986755371
+      },
+      {
+        "context_id": 0,
+        "query_id": 66,
+        "question": "In what language is the notable work associated with Hugh Hefner written?",
+        "ground_truth": [
+          "German"
+        ],
+        "prediction": "German",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.1432790756225586
+      },
+      {
+        "context_id": 0,
+        "query_id": 67,
+        "question": "Which city serves as the capital of the country that gave rise to the sport played by Rogério Ceni?",
+        "ground_truth": [
+          "New Delhi"
+        ],
+        "prediction": "Grosseto",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.1732487678527832
+      },
+      {
+        "context_id": 0,
+        "query_id": 68,
+        "question": "From which educational institution did the author of 'Sidereus Nuncius' receive their education?",
+        "ground_truth": [
+          "University of Southern California"
+        ],
+        "prediction": "Unknown",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.21863341331481934
+      },
+      {
+        "context_id": 0,
+        "query_id": 69,
+        "question": "What is the place of death of the author of Endymion?",
+        "ground_truth": [
+          "Leipzig"
+        ],
+        "prediction": "Unknown",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.21655631065368652
+      },
+      {
+        "context_id": 0,
+        "query_id": 70,
+        "question": "In which city can the headquarters of the educational institution attended by the spouse of Sophia Hawthorne be found?",
+        "ground_truth": [
+          "Botevgrad"
+        ],
+        "prediction": "Philadelphia",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.13629770278930664
+      },
+      {
+        "context_id": 0,
+        "query_id": 71,
+        "question": "What is the name of the chief of state of the country where Leo Stein holds citizenship?",
+        "ground_truth": [
+          "Connachta"
+        ],
+        "prediction": "Insufficient information.",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.16304564476013184
+      },
+      {
+        "context_id": 0,
+        "query_id": 72,
+        "question": "What is the name of the chief of state of the country that Hal Needham belongs to?",
+        "ground_truth": [
+          "Connachta"
+        ],
+        "prediction": "Donald Trump",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.15196752548217773
+      },
+      {
+        "context_id": 0,
+        "query_id": 73,
+        "question": "Who serves as the head of government in the location where the AP1000 was made by its manufacturer?",
+        "ground_truth": [
+          "Jonathan Rothschild"
+        ],
+        "prediction": "Donald Trump",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.16735434532165527
+      },
+      {
+        "context_id": 0,
+        "query_id": 74,
+        "question": "In what place did the author of \"A Wizard of Earthsea\" breathe his last?",
+        "ground_truth": [
+          "Wolverhampton"
+        ],
+        "prediction": "Unknown",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.15297508239746094
+      },
+      {
+        "context_id": 0,
+        "query_id": 75,
+        "question": "Which religion does the partner of the performer of \"Aladdin Sane\" follow?",
+        "ground_truth": [
+          "interdenominational organization"
+        ],
+        "prediction": "Church of Scotland",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.15932297706604004
+      },
+      {
+        "context_id": 0,
+        "query_id": 76,
+        "question": "At which location does the Prime Minister of Sweden spend most of their work hours?",
+        "ground_truth": [
+          "Washington, D.C."
+        ],
+        "prediction": "Stockholm",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.1510181427001953
+      },
+      {
+        "context_id": 0,
+        "query_id": 77,
+        "question": "What is the capital city of the country whose citizenship is held by the CEO of the developer of AppleScript?",
+        "ground_truth": [
+          "Rome"
+        ],
+        "prediction": "Harrisville",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.15552139282226562
+      },
+      {
+        "context_id": 0,
+        "query_id": 78,
+        "question": "Which continent is the country of origin for Gala RFC located in?",
+        "ground_truth": [
+          "Africa"
+        ],
+        "prediction": "Europe",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.13637018203735352
+      },
+      {
+        "context_id": 0,
+        "query_id": 79,
+        "question": "What sport is associated with the position played by Irving Fryar on a team/specialty?",
+        "ground_truth": [
+          "rugby"
+        ],
+        "prediction": "American football",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.15613079071044922
+      },
+      {
+        "context_id": 0,
+        "query_id": 80,
+        "question": "In which continent is the country to which Cédric Klapisch holds citizenship located?",
+        "ground_truth": [
+          "Antarctica"
+        ],
+        "prediction": "Asia",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.1421828269958496
+      },
+      {
+        "context_id": 0,
+        "query_id": 81,
+        "question": "What is the location of the headquarters of the company where Leonte Răutu worked?",
+        "ground_truth": [
+          "Ankara"
+        ],
+        "prediction": "I do not have information about where Leonte R",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.2345445156097412
+      },
+      {
+        "context_id": 0,
+        "query_id": 82,
+        "question": "To whom does the head of government of the country of origin of Club Nouveau report to?",
+        "ground_truth": [
+          "Elizabeth II"
+        ],
+        "prediction": "Tony Blair",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.17329072952270508
+      },
+      {
+        "context_id": 0,
+        "query_id": 83,
+        "question": "Which individual is responsible for founding the organization that has its headquarters in the same location where Bill Frisell received his education?",
+        "ground_truth": [
+          "William Penn"
+        ],
+        "prediction": "William Penn",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 1.171849250793457
+      },
+      {
+        "context_id": 0,
+        "query_id": 84,
+        "question": "In which city of the country where Charles Messier held citizenship is the capital located?",
+        "ground_truth": [
+          "Tehran"
+        ],
+        "prediction": "Grosseto",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.18706178665161133
+      },
+      {
+        "context_id": 0,
+        "query_id": 85,
+        "question": "Which country does the sportsperson who specializes in Lisa Leslie's position originally come from?",
+        "ground_truth": [
+          "Philippines"
+        ],
+        "prediction": "Unknown",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.1398487091064453
+      },
+      {
+        "context_id": 0,
+        "query_id": 86,
+        "question": "What is the name of the capital city of the country where the founder of the manufacturer of Ford F-Series hailed from?",
+        "ground_truth": [
+          "New Delhi"
+        ],
+        "prediction": "Harrisville",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.14643096923828125
+      },
+      {
+        "context_id": 0,
+        "query_id": 87,
+        "question": "Which city serves as the capital of the country where the sport that Sandy Alderson is associated with originated?",
+        "ground_truth": [
+          "Duluth"
+        ],
+        "prediction": "Harrisville",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.14632296562194824
+      },
+      {
+        "context_id": 0,
+        "query_id": 88,
+        "question": "Which language is the official language of the country whose citizenship is held by the director/manager of \"Past Masters\"?",
+        "ground_truth": [
+          "Arabic"
+        ],
+        "prediction": "Swedish",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.13988184928894043
+      },
+      {
+        "context_id": 0,
+        "query_id": 89,
+        "question": "Which nation is the birthplace of the sport that features the split-finger fastball?",
+        "ground_truth": [
+          "Australia"
+        ],
+        "prediction": "Japan",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.14103031158447266
+      },
+      {
+        "context_id": 0,
+        "query_id": 90,
+        "question": "In which languages can the author of \"The Witcher\" write, speak, or sign?",
+        "ground_truth": [
+          "French"
+        ],
+        "prediction": "Unknown",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.13961434364318848
+      },
+      {
+        "context_id": 0,
+        "query_id": 91,
+        "question": "In which city is the capital of the country, where the book \"The Birth of Tragedy\" first came from, located?",
+        "ground_truth": [
+          "Duluth"
+        ],
+        "prediction": "London",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.14579033851623535
+      },
+      {
+        "context_id": 0,
+        "query_id": 92,
+        "question": "In what language are communications in the headquarters location of the manufacturer of Il-2 Shturmovik conducted officially?",
+        "ground_truth": [
+          "German"
+        ],
+        "prediction": "German",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.1470625400543213
+      },
+      {
+        "context_id": 0,
+        "query_id": 93,
+        "question": "Which city serves as the capital of the country where the spouse of the performer of \"Viva Las Vegas\" is a citizen?",
+        "ground_truth": [
+          "Harare"
+        ],
+        "prediction": "Harrisville",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.15010881423950195
+      },
+      {
+        "context_id": 0,
+        "query_id": 94,
+        "question": "What is the country of origin of the sport that the New Firm is related to?",
+        "ground_truth": [
+          "Japan"
+        ],
+        "prediction": "England",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.13953447341918945
+      },
+      {
+        "context_id": 0,
+        "query_id": 95,
+        "question": "Which religious leader is responsible for founding the religion to which Sarit Thanarat belongs?",
+        "ground_truth": [
+          "Mekere Morauta"
+        ],
+        "prediction": "Mekere Morauta",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.18491506576538086
+      },
+      {
+        "context_id": 0,
+        "query_id": 96,
+        "question": "At which place did the creator of \"Lady Windermere's Fan\" breathe their last?",
+        "ground_truth": [
+          "Guangzhou"
+        ],
+        "prediction": "Guangzhou",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.16167736053466797
+      },
+      {
+        "context_id": 0,
+        "query_id": 97,
+        "question": "what kind of music does \"Born in the U.S.A.\" fall under according to its performer?",
+        "ground_truth": [
+          "Australian hip hop"
+        ],
+        "prediction": "rock music",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.14798188209533691
+      },
+      {
+        "context_id": 0,
+        "query_id": 98,
+        "question": "What is the capital city of the country where the founder of the manufacturer of Ford Transit Connect holds citizenship?",
+        "ground_truth": [
+          "Paris"
+        ],
+        "prediction": "Harrisville",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.16575860977172852
+      },
+      {
+        "context_id": 0,
+        "query_id": 99,
+        "question": "In what language are the official documents of the country where Alta IF originates written?",
+        "ground_truth": [
+          "Swedish"
+        ],
+        "prediction": "Swedish",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.14371132850646973
+      }
+    ]
+  }
+}
