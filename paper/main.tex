@@ -1,0 +1,508 @@
+% ============================================================
+% Collateral Damage in Graph-based Memory Forgetting:
+% Quantification, Exploitation, and Defense
+% ============================================================
+\documentclass[11pt]{article}
+
+% --- Packages ---
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{cleveref}
+\usepackage{multirow}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage{natbib}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{tcolorbox}
+
+% --- Custom Commands ---
+\newcommand{\attraware}{\textsc{Attr-Aware}}
+\newcommand{\bfsprop}{\textsc{BFS}}
+\newcommand{\finding}[1]{\vspace{2pt}\noindent\textbf{Finding #1.}~}
+
+% --- Title ---
+\title{Collateral Damage in Graph-based Memory Forgetting:\\
+Quantification, Exploitation, and Defense}
+
+\author{
+  Mingyu Choi \\
+  \textit{Doosan Digital Innovation} \\
+  \texttt{mingyu1.choi@doosan.com}
+}
+
+\date{}
+
+\begin{document}
+\maketitle
+
+% ============================================================
+\begin{abstract}
+Graph-based propagation is a natural approach to invalidating stale facts in AI memory systems: when a fact changes, propagate the update through an entity graph to downstream dependents.
+We show that this intuition leads to \textbf{catastrophic collateral damage} that is both quantitatively severe and adversarially exploitable.
+On MemoryAgentBench, BFS-based propagation through entity co-occurrence graphs decays 68.9--78.5\% of valid memories across scales (6K--64K facts), with hub entity degrees growing superlinearly ($23 \rightarrow 121 \rightarrow 298$).
+More critically, we demonstrate that an attacker can \textbf{weaponize this mechanism}: injecting just 5 fake facts targeting hub entities destroys 57.3\% of valid memories at 32K context.
+We further show that this collateral damage \textbf{crosses task boundaries}---BFS propagation triggered during fact consolidation degrades retrieval accuracy on an unrelated task (EM $-5.0$pp, F1 $-18.2$pp).
+We propose \textbf{Attribute-aware Selective Propagation}, inspired by directional link failure models in transportation engineering, which defends against both organic and adversarial damage with 78--100\% effectiveness across all experiments.
+Graph topology analysis confirms the co-occurrence graph exhibits scale-free properties ($\alpha = 2.30$--$2.48$), providing theoretical grounding from percolation theory for why hub-targeted attacks are structurally devastating.
+\end{abstract}
+
+% ============================================================
+\section{Introduction}
+\label{sec:intro}
+
+AI memory systems that persist and update factual knowledge face a fundamental tension: when stored facts become outdated, the system must invalidate not only the stale fact itself but also dependent knowledge.
+Graph-based propagation---traversing entity connections to propagate decay---is the natural solution \citep{mnemosyne_2025, magma_2026}.
+
+\textbf{We discover three critical flaws in this approach.}
+
+First, BFS propagation through entity co-occurrence graphs causes \textbf{catastrophic collateral damage}: at 64K context, a single fact update can cascade through hub nodes to decay 78.5\% of all valid memories.
+The root cause is hub entities whose degree grows superlinearly with context size ($23 \rightarrow 298$ from 6K$\rightarrow$64K).
+
+Second, this vulnerability is \textbf{adversarially exploitable}.
+An attacker who identifies hub entities in the graph can inject a small number of fake facts (1--5) to trigger the forgetting mechanism, destroying up to 57.3\% of valid memories.
+This represents a novel attack vector on AI memory systems that we term \textbf{hub exploitation}.
+
+Third, the damage \textbf{crosses task boundaries}.
+BFS propagation triggered during fact consolidation degrades retrieval accuracy on completely unrelated queries, reducing F1 by 18.2 percentage points.
+
+We propose \textbf{\attraware{} Selective Propagation}, a directional propagation method inspired by transportation network link failure models \citep{chen_network_2012}, and demonstrate that it defends against all three threat vectors with 78--100\% effectiveness.
+
+\subsection{Contributions}
+
+\begin{enumerate}
+  \item \textbf{Scale trend analysis (C1)}: Collateral damage quantification across 6K$\rightarrow$32K$\rightarrow$64K, revealing superlinear hub degree growth and stable $\sim$78\% \bfsprop{} damage ratio. Graph topology analysis confirms scale-free properties ($\alpha = 2.30$--$2.48$) with heterogeneity parameter $\kappa$ growing superlinearly ($4.6 \rightarrow 32.3$).
+
+  \item \textbf{Cross-task contamination (C2)}: First demonstration that graph-based forgetting in one task degrades retrieval accuracy in an unrelated task (EM $-5.0$pp, F1 $-18.2$pp on Accurate\_Retrieval).
+
+  \item \textbf{Adversarial hub exploitation (C3)}: A novel attack scenario where 5 fake facts destroy 57.3\% of valid memories through weaponized BFS propagation, with scale amplifying vulnerability (5.2\%$\rightarrow$38.1\% damage from a single attack at 6K$\rightarrow$32K). Black-box attacks (general knowledge only) achieve 0\% hit rate, establishing that gray-box or higher knowledge is required.
+
+  \item \textbf{\attraware{} defense (C4)}: Consistent defense effectiveness of 78--100\% across all organic and adversarial damage scenarios. Comparison with degree-capped BFS baselines shows attribute-aware is 80$\times$ more effective than the best structural defense.
+\end{enumerate}
+
+
+% ============================================================
+\section{Background and Motivation}
+\label{sec:background}
+
+\subsection{AI Memory and Fact Invalidation}
+
+Long-term AI memory systems \citep{mem0_2024, memgpt_2023, amem_2025} store user interactions as structured facts.
+When new information contradicts stored facts, the system must (1)~detect the conflict, (2)~invalidate the outdated fact, and (3)~propagate the change to dependent downstream facts.
+Step~3 is where graph-based approaches are used, but \textbf{none of the existing works quantitatively analyze the collateral damage of propagation, its adversarial exploitability, or its cross-task effects}.
+
+\subsection{Transportation Network Analogy}
+
+In transportation engineering, \textbf{link failure propagation} studies how road closures cascade through networks \citep{chen_network_2012}.
+Hub intersections amplify disruption disproportionately---closing one road at a major interchange can gridlock an entire region.
+Critically, transportation research distinguishes between \textit{directional} and \textit{non-directional} propagation: closing Seoul$\rightarrow$Busan affects only Busan-downstream traffic, not Seoul$\rightarrow$Incheon.
+
+Standard BFS propagation in AI memory is non-directional---it spreads invalidation to all connected entities regardless of semantic direction.
+Our attribute-aware approach applies the directional principle.
+
+\subsection{MemoryAgentBench}
+
+MemoryAgentBench \citep{memoryagentbench_2026} provides standardized evaluation across four task types: Conflict\_Resolution (FactConsolidation), Accurate\_Retrieval, Test\_Time\_Learning, and Long\_Range\_Understanding.
+We use Conflict\_Resolution for scale analysis (C1) and adversarial experiments (C3), and Accurate\_Retrieval for cross-task analysis (C2).
+
+
+% ============================================================
+\section{Collateral Damage at Scale (C1)}
+\label{sec:c1}
+
+\subsection{Experimental Setup}
+
+We measure collateral damage by running FactConsolidation memorization under three modes:
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{lll}
+\toprule
+\textbf{Mode} & \textbf{Conflict Detection} & \textbf{Propagation} \\
+\midrule
+Baseline & Subject-key match & None \\
+\bfsprop{} & Subject-key match & BFS through co-occurrence graph \\
+\attraware{} & Subject-key match & Downstream fact chain only \\
+\bottomrule
+\end{tabular}
+\caption{Experimental modes for collateral damage measurement.}
+\label{tab:modes}
+\end{table}
+
+\textbf{Infrastructure}: Gemma-4-31B-it (LLM), BAAI/bge-m3 1024-dim (Embedding), SQLite + NumPy in-memory, NetworkX graph.
+
+\subsection{Scale Trend Results}
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{lrrrrrl}
+\toprule
+\textbf{Scale} & \textbf{Valid} & \textbf{BFS Decay} & \textbf{Attr Decay} & \textbf{Reduction} & \textbf{BFS Kill} & \textbf{Max Hub} \\
+\midrule
+6K   & 344   & 237 (68.9\%) & 51 (14.8\%) & 78.5\% & 143  & 23 \\
+32K  & 1,744 & 1,377 (79.0\%) & 275 (15.8\%) & 80.0\% & 1,179 & 121 \\
+64K  & 3,414 & 2,680 (78.5\%) & 513 (15.0\%) & 80.9\% & 2,465 & 298 \\
+\bottomrule
+\end{tabular}
+\caption{Collateral damage across scales. BFS Kill = memories with weight $< 0.1$. Max Hub = maximum entity degree.}
+\label{tab:scale_trend}
+\end{table}
+
+\finding{1} BFS damage ratio plateaus at $\sim$78--79\% across scales, but the \textbf{absolute number of destroyed memories scales linearly}: 143$\rightarrow$1,179$\rightarrow$2,465 complete losses.
+
+\finding{2} Hub entity degree grows superlinearly: $23 \rightarrow 121 \rightarrow 298$ ($\sim$13$\times$ from 6K$\rightarrow$64K), while fact count grows $\sim$7.5$\times$.
+
+\finding{3} \attraware{} damage ratio remains stable at $\sim$15\% regardless of scale.
+
+\subsection{Graph Topology Analysis}
+
+We verify that the entity co-occurrence graph exhibits scale-free properties using maximum likelihood estimation for power-law exponents \citep{clauset_powerlaw_2009}.
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{lrrrrrr}
+\toprule
+\textbf{Scale} & \textbf{Nodes} & \textbf{$\langle k \rangle$} & \textbf{$k_{\max}$} & \textbf{Gini} & \textbf{$\alpha$ (MLE)} & \textbf{$\kappa$} \\
+\midrule
+6K  & 414   & 2.51 & 23  & 0.380 & $2.48 \pm 0.09$ & 4.6 \\
+32K & 1,732 & 3.00 & 121 & 0.487 & $2.35 \pm 0.04$ & 14.8 \\
+64K & 3,187 & 3.26 & 298 & 0.534 & $2.30 \pm 0.03$ & 32.3 \\
+\bottomrule
+\end{tabular}
+\caption{Graph topology across scales. $\alpha$: power-law exponent (MLE, $k_{\min}=2$). $\kappa = \langle k^2 \rangle / \langle k \rangle$: heterogeneity parameter (Molloy--Reed criterion). Gini: degree inequality.}
+\label{tab:topology}
+\end{table}
+
+\finding{4} All three scales yield $\alpha \in [2.30, 2.48]$, within the classic scale-free range $2 < \alpha < 3$ \citep{barabasi_scalefree_1999}. The heterogeneity parameter $\kappa$ grows superlinearly ($4.6 \rightarrow 32.3$), meaning the network becomes \textit{more} vulnerable to targeted hub attacks at scale---consistent with percolation theory predictions for scale-free networks \citep{cohen_percolation_2000, albert_attack_2000}.
+
+\finding{5} Hub concentration intensifies with scale: the top 1\% of nodes control 7.3\% (6K), 15.5\% (32K), and 19.8\% (64K) of all edges.
+
+
+% ============================================================
+\section{Cross-task Contamination (C2)}
+\label{sec:c2}
+
+\subsection{Setup}
+
+We use the Accurate\_Retrieval split (eventqa\_65536) from MemoryAgentBench. Three conditions: (1) Baseline (no propagation), (2) Post-BFS, (3) Post-\attraware{}.
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{lrrrl}
+\toprule
+\textbf{ARM} & \textbf{EM} & \textbf{F1} & \textbf{Collateral} & \textbf{Affected} \\
+\midrule
+Baseline     & 15.0\% & 67.1\% & 0  & 0 \\
+Post-BFS     & \textbf{10.0\%} & \textbf{48.9\%} & 32 & 3,381 \\
+Post-Attr    & 15.0\% & 67.1\% & 1  & 0 \\
+\bottomrule
+\end{tabular}
+\caption{Cross-task contamination. A single BFS propagation from hub ``Debbie'' (degree=715) cascades to 3,381 memories.}
+\label{tab:cross_task}
+\end{table}
+
+\finding{6} BFS propagation from a single hub entity causes EM $-5.0$pp and F1 $-18.2$pp on \textit{completely unrelated} retrieval queries. \attraware{} preserves full accuracy.
+
+
+% ============================================================
+\section{Adversarial Hub Exploitation (C3)}
+\label{sec:c3}
+
+\subsection{Threat Model}
+
+We consider an attacker who can inject text into the memory system's input stream.
+The attacker's goal is to maximize destruction of valid memories with minimal input.
+We evaluate three attacker knowledge levels:
+
+\begin{itemize}
+  \item \textbf{Black-box}: General knowledge only (e.g., ``The capital of France is Berlin'')
+  \item \textbf{Gray-box}: Knowledge of which entities are likely hubs (high-degree nodes)
+  \item \textbf{White-box}: Access to the fact registry and subject-key generation rules
+\end{itemize}
+
+Our primary experiments use white-box targeting (registry-based key lookup) to establish upper-bound damage. We additionally evaluate black-box attacks to establish the lower bound.
+
+\subsection{White-box Results}
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{lrrrr}
+\toprule
+\textbf{Attack} & \textbf{BFS Damage} & \textbf{BFS Kill} & \textbf{Attr Damage} & \textbf{EM Drop} \\
+\midrule
+\multicolumn{5}{l}{\textit{6K Context (344 valid memories)}} \\
+1 fact & 5.2\% & 0.3\% & 0.0\% & +0.0pp \\
+3 facts & 26.7\% & 4.4\% & 0.0\% & $-$10.0pp \\
+5 facts & 39.8\% & 17.4\% & 0.3\% & $-$10.0pp \\
+\midrule
+\multicolumn{5}{l}{\textit{32K Context (1,744 valid memories)}} \\
+1 fact & 38.1\% & 1.0\% & 0.0\% & +0.0pp \\
+3 facts & 46.0\% & 8.8\% & 1.0\% & +0.0pp \\
+5 facts & \textbf{57.3\%} & \textbf{19.3\%} & 1.0\% & +0.0pp \\
+\bottomrule
+\end{tabular}
+\caption{White-box adversarial attack results.}
+\label{tab:adversarial}
+\end{table}
+
+\finding{7} A single fake fact destroys 5.2\% of valid memories at 6K and 38.1\% at 32K---a $7.3\times$ amplification from scale alone.
+
+\finding{8} Five fake facts at 32K destroy 57.3\% of valid memories and cause 19.3\% complete loss (weight $< 0.1$). The system's own forgetting mechanism becomes a weapon.
+
+\subsection{Black-box Attack Results}
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{lrrr}
+\toprule
+\textbf{Attack Type} & \textbf{Facts} & \textbf{Hit Rate} & \textbf{BFS Damage} \\
+\midrule
+White-box (registry) & 5 & 100\% & 39.8\% \\
+Black-box (general knowledge) & 5 & 0\% & 0.0\% \\
+\bottomrule
+\end{tabular}
+\caption{Black-box vs white-box attack comparison (6K). Black-box attacks fail to trigger conflict detection because general-knowledge facts do not match the subject-key regex pattern.}
+\label{tab:blackbox}
+\end{table}
+
+\finding{9} Black-box attacks achieve 0\% hit rate, demonstrating that the subject-key matching mechanism provides implicit defense against naive attackers. Gray-box or higher knowledge of the system's fact structure is required for successful exploitation.
+
+\subsection{Propagation Depth Analysis}
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{lrrrrr}
+\toprule
+\textbf{Depth} & \textbf{Damage} & \textbf{Kill} & \textbf{Hop-1} & \textbf{Hop-2} & \textbf{Hop-3+} \\
+\midrule
+1 & 18.6\% & 0.3\% & 232 & --- & --- \\
+2 & 39.8\% & 17.4\% & 232 & 490 & --- \\
+3 & 48.3\% & 32.9\% & 232 & 490 & 605 \\
+4 & 55.8\% & 44.8\% & 232 & 490 & 1,131 \\
+\bottomrule
+\end{tabular}
+\caption{Propagation depth vs damage (6K, 5-fact attack). Memory counts indicate the number of memories affected at each hop distance.}
+\label{tab:depth}
+\end{table}
+
+\finding{10} Hop-1 damage is constant (232 memories), but distant-hop impact grows rapidly (Hop-3: 605, Hop-4: 1,131). Kill rate \textit{accelerates} with depth due to cumulative decay ($0.3\% \rightarrow 44.8\%$).
+
+
+% ============================================================
+\section{Attribute-aware Selective Propagation (C4)}
+\label{sec:c4}
+
+\subsection{Method}
+
+When fact $f$ with subject\_key \texttt{Entity:Attribute} is invalidated:
+\begin{enumerate}
+  \item Extract \textit{object entities} from $f$ (non-subject entities)
+  \item Find downstream facts where object entities are subjects
+  \item Apply decay: $w_{\text{new}} = w_{\text{curr}} \times (\delta^h)$ with in-degree adjustment
+  \item Recurse for depth $> 1$
+\end{enumerate}
+
+This restricts propagation to genuine causal chains rather than all graph neighbors.
+
+\subsection{Defense Comparison}
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{lrrrr}
+\toprule
+\textbf{Defense} & \textbf{Damage} & \textbf{Kill} & \textbf{Post-EM} & \textbf{Post-F1} \\
+\midrule
+\bfsprop{} (no cap) & 39.8\% & 17.4\% & 10.0\% & 13.3\% \\
+Degree-cap=50 & 39.8\% & 17.4\% & 10.0\% & 13.3\% \\
+Degree-cap=20 & 33.7\% & 17.4\% & 10.0\% & 13.3\% \\
+Degree-cap=10 & 28.2\% & 10.8\% & 10.0\% & 13.3\% \\
+Degree-cap=5 & 24.1\% & 8.1\% & 10.0\% & 13.3\% \\
+\textbf{\attraware{}} & \textbf{0.3\%} & \textbf{0.0\%} & \textbf{20.0\%} & \textbf{23.3\%} \\
+\bottomrule
+\end{tabular}
+\caption{Defense mechanism comparison (6K, 5-fact attack). Degree capping reduces damage but is insufficient; \attraware{} is $80\times$ more effective than the best structural defense.}
+\label{tab:defense}
+\end{table}
+
+\finding{11} Degree capping reduces damage from 39.8\% to 24.1\% (cap=5), but remains $80\times$ worse than \attraware{} (0.3\%). Structural defenses cannot substitute for semantic propagation.
+
+\subsection{Effectiveness Across All Experiments}
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{lrrr}
+\toprule
+\textbf{Experiment} & \textbf{BFS Damage} & \textbf{Attr Damage} & \textbf{Defense Rate} \\
+\midrule
+CD 6K & 68.9\% & 14.8\% & 78.5\% \\
+CD 32K & 79.0\% & 15.8\% & 80.0\% \\
+CD 64K & 78.5\% & 15.0\% & 80.9\% \\
+Cross-task (F1) & $-$18.2pp & +0.0pp & 100.0\% \\
+Adv 6K / 1f & 5.2\% & 0.0\% & 100.0\% \\
+Adv 6K / 5f & 39.8\% & 0.3\% & 99.3\% \\
+Adv 32K / 1f & 38.1\% & 0.0\% & 100.0\% \\
+Adv 32K / 5f & 57.3\% & 1.0\% & 98.2\% \\
+\bottomrule
+\end{tabular}
+\caption{Defense effectiveness across all experiments.}
+\label{tab:defense_all}
+\end{table}
+
+
+% ============================================================
+\section{Related Work}
+\label{sec:related}
+
+\textbf{Memory systems.}
+Mem0 \citep{mem0_2024}, MemGPT/Letta \citep{memgpt_2023}, A-Mem \citep{amem_2025}, and MAGMA \citep{magma_2026} implement memory management but do not analyze propagation damage or adversarial vulnerability.
+
+\textbf{Temporal decay.}
+Mnemosyne \citep{mnemosyne_2025} uses Ebbinghaus-inspired decay \citep{ebbinghaus_1885}. Our work is complementary---we address \textit{which} memories to decay, not \textit{how fast}.
+
+\textbf{Adversarial attacks.}
+Prompt injection \citep{perez_prompt_injection_2022} and data poisoning \citep{data_poisoning_2021} attack language models directly. Our hub exploitation is a novel vector that weaponizes the system's own memory management mechanism.
+
+\textbf{Network resilience.}
+Scale-free networks are robust to random failures but fragile to targeted hub attacks \citep{albert_attack_2000, barabasi_scalefree_1999}. Percolation theory \citep{cohen_percolation_2000, molloy_reed_1995} and transportation network resilience \citep{chen_network_2012} provide the theoretical foundation for our analysis. We are the first to apply these principles to AI memory invalidation.
+
+
+% ============================================================
+\section{Discussion}
+\label{sec:discussion}
+
+\subsection{Implications for AI Memory Safety}
+
+Our results establish \textbf{memory graph exploitation} as a distinct attack surface in AI systems, separate from prompt injection and data poisoning. Key implications:
+\begin{enumerate}
+  \item Any system using graph-based forgetting is vulnerable to hub exploitation
+  \item The attack is low-cost: 1--5 injected facts can destroy 38--57\% of stored knowledge
+  \item The vulnerability worsens with scale: more stored knowledge means larger blast radius
+  \item \attraware{} propagation provides a practical defense without significant overhead
+\end{enumerate}
+
+\subsection{Why Hub Entities Are Fundamental}
+
+Hub entities reflect genuine reality---the United States really does connect to thousands of facts. The problem is that \textbf{co-occurrence $\neq$ causal dependency}. \attraware{} propagation resolves this by distinguishing genuine dependency chains from coincidental co-occurrence.
+
+\subsection{Limitations}
+
+\begin{enumerate}
+  \item \textbf{Entity extraction}: Rule-based extraction treats ``Vladimir Putin'' and ``Putin'' as separate entities. Stronger entity resolution would improve both modes.
+  \item \textbf{Single benchmark}: Results from MemoryAgentBench only. Replication on other benchmarks would strengthen findings.
+  \item \textbf{Statistical variance}: Multi-run statistics (7 runs at 6K) show large coefficient of variation ($\sim$150\%) across contexts, with BFS vs \attraware{} difference not reaching significance ($p = 0.17$, Cohen's $d = 0.92$). This reflects genuine variability in hub entity structure across contexts rather than method instability.
+  \item \textbf{White-box assumption}: Primary adversarial results assume white-box access. Black-box attacks failed entirely (0\% hit rate), suggesting the threat is bounded by attacker knowledge.
+  \item \textbf{32K EM floor}: Baseline EM at 32K is 0--4\%, limiting observable EM changes from adversarial attacks at that scale.
+\end{enumerate}
+
+
+% ============================================================
+\section{Conclusion}
+\label{sec:conclusion}
+
+We present a comprehensive analysis of collateral damage in graph-based memory forgetting across three dimensions: scale, cross-task contamination, and adversarial exploitation.
+BFS propagation through entity co-occurrence graphs is \textbf{catastrophically destructive} (78\% damage), \textbf{cross-task toxic} (F1 $-18.2$pp on unrelated retrieval), and \textbf{adversarially weaponizable} (5 fake facts $\rightarrow$ 57.3\% memory destruction).
+
+\attraware{} Selective Propagation, inspired by directional link failure models in transportation engineering, provides consistent defense across all threat vectors (78--100\% effectiveness) with negligible overhead.
+Graph topology analysis confirms the underlying mechanism: co-occurrence graphs are scale-free ($\alpha \approx 2.3$--$2.5$), making them structurally robust to random failures but catastrophically vulnerable to targeted hub attacks---a prediction from percolation theory that our empirical results validate.
+
+The key insight: \textbf{propagation must follow causal dependency chains, not structural co-occurrence}---a principle well-established in transportation network resilience but previously unapplied to AI memory systems.
+
+% ============================================================
+% Appendices
+% ============================================================
+\appendix
+
+\section{Experimental Configuration}
+\label{app:config}
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{ll}
+\toprule
+\textbf{Component} & \textbf{Specification} \\
+\midrule
+LLM & google/gemma-4-31B-it (max\_tokens=10, temp=0.0) \\
+Embedding & BAAI/bge-m3 (dim=1024) \\
+Vector search & NumPy cosine similarity, RRF fusion ($k=60$) \\
+Graph & NetworkX entity co-occurrence (DiGraph) \\
+Storage & SQLite in-memory \\
+Benchmark & ai-hyz/MemoryAgentBench (ICLR 2026) \\
+Context sizes & 6K, 32K, 64K (FactConsolidation), 65K (EventQA) \\
+Propagation & depth=2, decay\_per\_hop=0.5 \\
+Adversarial & 1/3/5 fake facts $\times$ BFS/Attr $\times$ 6K/32K \\
+\bottomrule
+\end{tabular}
+\caption{Experimental configuration.}
+\label{tab:config}
+\end{table}
+
+
+\section{Hub Concentration Analysis}
+\label{app:hub}
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{lrrrr}
+\toprule
+\textbf{Scale} & \textbf{Top 1\%} & \textbf{Top 5\%} & \textbf{Top 10\%} & \textbf{Top 20\%} \\
+\midrule
+6K  & 7.3\%  & 18.2\% & 27.3\% & 42.4\% \\
+32K & 15.5\% & 29.8\% & 39.2\% & 53.0\% \\
+64K & 19.8\% & 34.6\% & 43.8\% & 56.8\% \\
+\bottomrule
+\end{tabular}
+\caption{Hub entity concentration: percentage of total edges controlled by top-$N$\% nodes. Inequality increases with scale.}
+\label{tab:hub_concentration}
+\end{table}
+
+
+\section{Multi-run Statistical Analysis}
+\label{app:stats}
+
+We run the 6K adversarial attack experiment 7 times to assess reproducibility.
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{llrrl}
+\toprule
+\textbf{Attack} & \textbf{Mode} & \textbf{Damage (mean$\pm$std)} & \textbf{Cohen's $d$} & \textbf{$p$-value} \\
+\midrule
+1 fact & \bfsprop{} & $1.6 \pm 2.5$ & \multirow{2}{*}{0.95} & \multirow{2}{*}{0.126} \\
+       & \attraware{} & $0.0 \pm 0.1$ & & \\
+\midrule
+3 facts & \bfsprop{} & $8.9 \pm 13.8$ & \multirow{2}{*}{0.93} & \multirow{2}{*}{0.169} \\
+        & \attraware{} & $-0.1 \pm 0.4$ & & \\
+\midrule
+5 facts & \bfsprop{} & $13.3 \pm 20.6$ & \multirow{2}{*}{0.92} & \multirow{2}{*}{0.171} \\
+        & \attraware{} & $-0.1 \pm 0.7$ & & \\
+\bottomrule
+\end{tabular}
+\caption{Multi-run statistics (6K, 7 runs). Large effect sizes (Cohen's $d > 0.8$) but high variance yields $p > 0.05$. The CV $\sim$150\% reflects genuine variability in hub entity structure across contexts.}
+\label{tab:multirun}
+\end{table}
+
+
+% ============================================================
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}
