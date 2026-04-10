@@ -50,3 +50,20 @@ Generated from experiments/analyze_all.py
 | Adv 32K / 1f | 38.1% | 0.0% | 100.0% |
 | Adv 32K / 3f | 46.0% | 1.0% | 97.8% |
 | Adv 32K / 5f | 57.3% | 1.0% | 98.2% |
+
+## Table 4: Cross-task Impact (C2) — Accurate_Retrieval (eventqa_65536)
+
+BFS propagation의 collateral damage가 conflict resolution뿐 아니라 retrieval accuracy에도 부정적 영향.
+
+| ARM | EM | SubEM | F1 | Collateral Damage | Memories Affected |
+|-----|-----|-------|-----|-------------------|-------------------|
+| Baseline (no propagation) | 15.0% | 15.0% | 67.1% | 0 | 0 |
+| Post-BFS | 10.0% | 10.0% | 48.9% | 32 | 3,381 |
+| Post-Attribute-aware | 15.0% | 15.0% | 67.1% | 1 | 0 |
+
+| Metric | Baseline → BFS | Baseline → Attr | BFS → Attr (recovery) |
+|--------|---------------|-----------------|----------------------|
+| EM | **-5.0pp** | +0.0pp | **+5.0pp** |
+| F1 | **-18.2pp** | +0.0pp | **+18.2pp** |
+
+**Key finding**: A single BFS propagation from a hub entity (degree=715) affects 3,381 memories, destroys 32 retrievable memories, and drops F1 by 18.2pp. Attribute-aware propagation preserves full retrieval accuracy.
