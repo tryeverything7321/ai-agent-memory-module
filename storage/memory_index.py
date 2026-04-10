@@ -67,22 +67,33 @@ class MemoryIndex:
             scores[memory_id] = scores.get(memory_id, 0) + 0.8 / (k + rank + 1)
 
         # --- Top-N 추출 + Memory 객체 조회 ---
-        sorted_ids = sorted(scores.items(), key=lambda x: -x[1])[:top_k]
-        if not sorted_ids:
+        # 1차: RRF 점수 기준 후보군 (2x top_k로 여유 확보)
+        candidate_ids = sorted(scores.items(), key=lambda x: -x[1])[:top_k * 2]
+        if not candidate_ids:
             return []
 
-        memory_ids = [mid for mid, _ in sorted_ids]
+        memory_ids = [mid for mid, _ in candidate_ids]
         memories = await self._metadata.get_memories_by_ids(memory_ids)
         memory_map = {m.id: m for m in memories}
 
-        results = []
-        for memory_id, score in sorted_ids:
+        # 2차: invalid 메모리 제외 + RRF * decay_weight로 최종 점수
+        weighted = []
+        for memory_id, rrf_score in candidate_ids:
             if memory_id in memory_map:
-                results.append(SearchResult(
-                    memory=memory_map[memory_id],
-                    score=score,
-                    source="fusion",
-                ))
+                mem = memory_map[memory_id]
+                if not mem.is_valid:
+                    continue  # 무효화된 메모리 제외
+                final_score = rrf_score * mem.decay_weight
+                weighted.append((memory_id, final_score, rrf_score))
+
+        weighted.sort(key=lambda x: -x[1])
+        results = []
+        for memory_id, final_score, rrf_score in weighted[:top_k]:
+            results.append(SearchResult(
+                memory=memory_map[memory_id],
+                score=final_score,
+                source="fusion",
+            ))
         return results
 
     async def _search_vector(

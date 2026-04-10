@@ -150,6 +150,11 @@ class MetadataStore:
         self._conn.commit()
         return cursor.rowcount
 
+    async def get_all_memories_unfiltered(self) -> list[Memory]:
+        """모든 메모리 반환 (valid + invalid) — 분석용"""
+        rows = self._conn.execute("SELECT * FROM memories").fetchall()
+        return [self._row_to_memory(r) for r in rows]
+
     async def get_all_valid_memories(self, user_id: str) -> list[Memory]:
         rows = self._conn.execute(
             "SELECT * FROM memories WHERE user_id = ? AND is_valid = 1",

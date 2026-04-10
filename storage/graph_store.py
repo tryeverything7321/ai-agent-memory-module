@@ -28,8 +28,33 @@ class GraphStore:
     # --- Entity Graph ---
 
     def add_entity(self, entity_id: str, **attrs) -> None:
-        self.entity_graph.add_node(entity_id, **attrs)
+        """엔티티 추가/갱신 — memory_id는 1:N으로 누적"""
+        memory_id = attrs.pop("memory_id", None)
+        if entity_id in self.entity_graph:
+            # 기존 노드: memory_id만 추가, 나머지 attrs 병합
+            existing = self.entity_graph.nodes[entity_id]
+            if memory_id:
+                memory_ids = existing.get("memory_ids", set())
+                if isinstance(memory_ids, list):
+                    memory_ids = set(memory_ids)
+                memory_ids.add(memory_id)
+                existing["memory_ids"] = memory_ids
+            existing.update(attrs)
+        else:
+            # 새 노드: memory_ids set으로 초기화
+            memory_ids = {memory_id} if memory_id else set()
+            self.entity_graph.add_node(entity_id, memory_ids=memory_ids, **attrs)
         self._on_change()
+
+    def get_memory_ids_for_entity(self, entity_id: str) -> set[str]:
+        """엔티티에 연결된 모든 memory_id 반환"""
+        if entity_id not in self.entity_graph:
+            return set()
+        node_data = self.entity_graph.nodes[entity_id]
+        memory_ids = node_data.get("memory_ids", set())
+        if isinstance(memory_ids, list):
+            return set(memory_ids)
+        return memory_ids
 
     def add_relation(self, source: str, target: str, relation_type: str, **attrs) -> None:
         self.entity_graph.add_edge(source, target, relation_type=relation_type, **attrs)
@@ -134,7 +159,13 @@ class GraphStore:
         await self._load_graph("intent_graph", self.intent_graph)
 
     async def _save_graph(self, name: str, graph: nx.DiGraph) -> None:
-        nodes = [(n, dict(d)) for n, d in graph.nodes(data=True)]
+        # set→list 변환 (JSON 직렬화 호환)
+        nodes = []
+        for n, d in graph.nodes(data=True):
+            serialized = dict(d)
+            if "memory_ids" in serialized and isinstance(serialized["memory_ids"], set):
+                serialized["memory_ids"] = list(serialized["memory_ids"])
+            nodes.append((n, serialized))
         edges = [(u, v, dict(d)) for u, v, d in graph.edges(data=True)]
         await self._metadata_store.save_graph_data(name, nodes, edges)
 
@@ -142,6 +173,9 @@ class GraphStore:
         nodes, edges = await self._metadata_store.load_graph_data(name)
         graph.clear()
         for node_id, node_data in nodes:
+            # list→set 복원 (JSON 역직렬화 호환)
+            if "memory_ids" in node_data and isinstance(node_data["memory_ids"], list):
+                node_data["memory_ids"] = set(node_data["memory_ids"])
             graph.add_node(node_id, **node_data)
         for source, target, edge_data in edges:
             graph.add_edge(source, target, **edge_data)
