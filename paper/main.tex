@@ -45,8 +45,9 @@ Quantification, Exploitation, and Defense}
 
 % ============================================================
 \begin{abstract}
-Graph-based propagation is a natural approach to invalidating stale facts in AI memory systems: when a fact changes, propagate the update through an entity graph to downstream dependents.
-We show that this intuition leads to \textbf{catastrophic collateral damage} that is both quantitatively severe and adversarially exploitable.
+Modern AI memory systems maintain entity graphs for retrieval and detect factual conflicts individually, but none propagate invalidation to downstream dependent facts.
+Graph-based propagation---cascading updates through entity connections---is the architecturally natural next step, yet remains unimplemented and unexamined.
+We implement this approach and show that the intuition leads to \textbf{catastrophic collateral damage} that is both quantitatively severe and adversarially exploitable.
 On MemoryAgentBench, BFS-based propagation through entity co-occurrence graphs decays 68.9--78.5\% of valid memories across scales (6K--64K facts), with hub entity degrees growing superlinearly ($23 \rightarrow 121 \rightarrow 298$).
 More critically, we demonstrate that an attacker can \textbf{weaponize this mechanism}: injecting just 5 fake facts targeting hub entities destroys 57.3\% of valid memories at 32K context.
 We further show that this collateral damage \textbf{crosses task boundaries}---BFS propagation triggered during fact consolidation degrades retrieval accuracy on an unrelated task (EM $-5.0$pp, F1 $-18.2$pp).
@@ -59,9 +60,11 @@ Graph topology analysis confirms the co-occurrence graph exhibits scale-free pro
 \label{sec:intro}
 
 AI memory systems that persist and update factual knowledge face a fundamental tension: when stored facts become outdated, the system must invalidate not only the stale fact itself but also dependent knowledge.
-Graph-based propagation---traversing entity connections to propagate decay---is the natural solution \citep{mnemosyne_2025, magma_2026}.
+Modern memory systems already maintain entity graphs for retrieval \citep{mem0_2024, magma_2026} and detect factual conflicts \citep{mem0_2024}, but none propagate invalidation to downstream dependent facts---each outdated fact is handled in isolation.
+As memory scales to thousands of facts, this \textit{individual invalidation} approach becomes untenable: a single entity change can leave hundreds of dependent facts silently stale.
+Graph-based propagation---traversing entity connections to cascade invalidation---is the architecturally natural next step, analogous to \texttt{CASCADE} operations in relational databases.
 
-\textbf{We discover three critical flaws in this approach.}
+\textbf{We implement this ``obvious'' approach and discover three critical flaws.}
 
 First, BFS propagation through entity co-occurrence graphs causes \textbf{catastrophic collateral damage}: at 64K context, a single fact update can cascade through hub nodes to decay 78.5\% of all valid memories.
 The root cause is hub entities whose degree grows superlinearly with context size ($23 \rightarrow 298$ from 6K$\rightarrow$64K).
@@ -94,9 +97,21 @@ We propose \textbf{\attraware{} Selective Propagation}, a directional propagatio
 
 \subsection{AI Memory and Fact Invalidation}
 
-Long-term AI memory systems \citep{mem0_2024, memgpt_2023, amem_2025} store user interactions as structured facts.
-When new information contradicts stored facts, the system must (1)~detect the conflict, (2)~invalidate the outdated fact, and (3)~propagate the change to dependent downstream facts.
-Step~3 is where graph-based approaches are used, but \textbf{none of the existing works quantitatively analyze the collateral damage of propagation, its adversarial exploitability, or its cross-task effects}.
+Long-term AI memory systems store user interactions as structured facts and increasingly maintain entity graphs for retrieval.
+Mem0$^g$ \citep{mem0_2024} builds a directed labeled knowledge graph with LLM-powered conflict detection that marks contradicted edges as invalid.
+MAGMA \citep{magma_2026} maintains four orthogonal graphs (semantic, temporal, causal, entity) for policy-guided retrieval.
+A-Mem \citep{amem_2025} creates Zettelkasten-style linked notes with selective LLM-driven ``memory evolution.''
+Zep \citep{zep_2025} uses a temporal knowledge graph with edge-level contradiction detection.
+MemGPT/Letta \citep{memgpt_2023} takes an OS-inspired approach with hierarchical context management rather than graph structures.
+Mnemosyne \citep{mnemosyne_2025} applies per-memory temporal decay via reverse sigmoid functions, independent of graph connections.
+
+\textbf{A critical gap emerges.}
+These systems handle fact invalidation \textit{individually}: when a conflict is detected, only the directly contradicted fact is updated.
+No existing system propagates invalidation to downstream dependent facts through the entity graph.
+Yet as memory scales, individual invalidation leaves dependent facts silently stale---if ``The president of Russia is X'' is invalidated, facts referencing ``the president of Russia'' remain untouched.
+
+Graph-based invalidation propagation is the architecturally natural solution: the graph infrastructure already exists (for retrieval), conflict detection is already implemented (for individual facts), and the missing piece is simply traversing connections to cascade updates---analogous to \texttt{CASCADE} operations in relational databases or failure propagation in transportation networks.
+\textbf{We implement this approach and show it is catastrophically flawed.}
 
 \subsection{Transportation Network Analogy}
 
@@ -308,15 +323,33 @@ Black-box (general knowledge) & 5 & 0\% & 0.0\% \\
 
 \subsection{Method}
 
-When fact $f$ with subject\_key \texttt{Entity:Attribute} is invalidated:
-\begin{enumerate}
-  \item Extract \textit{object entities} from $f$ (non-subject entities)
-  \item Find downstream facts where object entities are subjects
-  \item Apply decay: $w_{\text{new}} = w_{\text{curr}} \times (\delta^h)$ with in-degree adjustment
-  \item Recurse for depth $> 1$
-\end{enumerate}
+When fact $f$ with subject\_key \texttt{Entity:Attribute} is invalidated, \attraware{} propagation restricts the decay cascade to genuine causal chains rather than all graph neighbors:
 
-This restricts propagation to genuine causal chains rather than all graph neighbors.
+\begin{algorithm}[h]
+\caption{\attraware{} Selective Propagation}
+\label{alg:attraware}
+\begin{algorithmic}[1]
+\REQUIRE Invalidated fact $f$, entity graph $G$, depth $d$, decay factor $\delta$
+\STATE $E_{\text{subj}} \leftarrow$ subject entities from $f$.\texttt{subject\_key}
+\STATE $E_{\text{obj}} \leftarrow$ entities in $f$ $\setminus$ $E_{\text{subj}}$ \COMMENT{object entities}
+\STATE $K_{\text{changed}} \leftarrow E_{\text{subj}}$ \COMMENT{changed keywords for semantic filter}
+\FOR{each entity $e \in E_{\text{obj}}$}
+  \STATE $M_e \leftarrow$ memories linked to $e$ in $G$
+  \FOR{each memory $m \in M_e$}
+    \IF{$m$ contains any keyword in $K_{\text{changed}}$}
+      \STATE $\alpha \leftarrow \max(\text{in\_degree}(e), 1)$
+      \STATE $m.w \leftarrow m.w \times \left(1 - \frac{1 - \delta}{~\alpha~}\right)$
+    \ENDIF
+  \ENDFOR
+  \IF{hop $< d$}
+    \STATE Recurse on downstream successors of $e$
+  \ENDIF
+\ENDFOR
+\end{algorithmic}
+\end{algorithm}
+
+The in-degree adjustment (line~8--9) dampens decay for highly-connected entities, reflecting the intuition that a fact referenced by many sources is less likely to be fully invalidated by a single upstream change.
+\bfsprop{} propagation differs by visiting \textit{all} neighbors (both successors and predecessors) without the semantic filter (line~7) or in-degree adjustment.
 
 \subsection{Defense Comparison}
 
@@ -370,10 +403,15 @@ Adv 32K / 5f & 57.3\% & 1.0\% & 98.2\% \\
 \label{sec:related}
 
 \textbf{Memory systems.}
-Mem0 \citep{mem0_2024}, MemGPT/Letta \citep{memgpt_2023}, A-Mem \citep{amem_2025}, and MAGMA \citep{magma_2026} implement memory management but do not analyze propagation damage or adversarial vulnerability.
+Modern AI memory systems increasingly maintain entity graphs but handle invalidation individually.
+Mem0$^g$ \citep{mem0_2024} builds a directed labeled knowledge graph with LLM-powered conflict detection, but marks only the directly contradicted edge as invalid without cascading to dependent facts.
+MAGMA \citep{magma_2026} maintains four orthogonal graphs for retrieval but implements no conflict resolution or invalidation mechanism.
+A-Mem \citep{amem_2025} supports LLM-driven ``memory evolution'' that selectively updates linked notes, but does not propagate invalidation through entity connections.
+MemGPT/Letta \citep{memgpt_2023} uses OS-inspired hierarchical context management without graph-based structures.
+None of these systems implement or analyze graph-based invalidation propagation, the approach we study here.
 
 \textbf{Temporal decay.}
-Mnemosyne \citep{mnemosyne_2025} uses Ebbinghaus-inspired decay \citep{ebbinghaus_1885}. Our work is complementary---we address \textit{which} memories to decay, not \textit{how fast}.
+Mnemosyne \citep{mnemosyne_2025} applies per-memory temporal decay via reverse sigmoid functions \citep{ebbinghaus_1885}, where each memory decays independently of graph connections. Our work is complementary---we address \textit{which} memories to decay through graph propagation, not \textit{how fast} individual memories fade.
 
 \textbf{Adversarial attacks.}
 Prompt injection \citep{perez_prompt_injection_2022} and data poisoning \citep{data_poisoning_2021} attack language models directly. Our hub exploitation is a novel vector that weaponizes the system's own memory management mechanism.
@@ -390,7 +428,7 @@ Scale-free networks are robust to random failures but fragile to targeted hub at
 
 Our results establish \textbf{memory graph exploitation} as a distinct attack surface in AI systems, separate from prompt injection and data poisoning. Key implications:
 \begin{enumerate}
-  \item Any system using graph-based forgetting is vulnerable to hub exploitation
+  \item Any system that adopts graph-based invalidation propagation---an architecturally natural extension of existing graph-augmented memory systems---will be vulnerable to hub exploitation unless propagation is semantically constrained
   \item The attack is low-cost: 1--5 injected facts can destroy 38--57\% of stored knowledge
   \item The vulnerability worsens with scale: more stored knowledge means larger blast radius
   \item \attraware{} propagation provides a practical defense without significant overhead
@@ -410,13 +448,22 @@ Hub entities reflect genuine reality---the United States really does connect to 
   \item \textbf{32K EM floor}: Baseline EM at 32K is 0--4\%, limiting observable EM changes from adversarial attacks at that scale.
 \end{enumerate}
 
+\subsection{Future Work}
+
+\begin{enumerate}
+  \item \textbf{Relation-type graph}: Replace entity co-occurrence with typed-relation graphs (e.g., \texttt{president\_of}, \texttt{located\_in}) and compare propagation behavior. Typed edges may naturally suppress hub formation by requiring semantic specificity for connection.
+  \item \textbf{Learned propagation}: Replace rule-based \attraware{} with a GNN-based propagation policy that learns which downstream facts to decay from training data.
+  \item \textbf{Adaptive depth}: Adjust propagation depth based on local graph topology (hub proximity, local density) rather than using a fixed global depth.
+  \item \textbf{Cross-system validation}: Apply the same attack methodology to production memory systems (Mem0$^g$, Zep) once they implement graph-based invalidation propagation.
+\end{enumerate}
+
 
 % ============================================================
 \section{Conclusion}
 \label{sec:conclusion}
 
-We present a comprehensive analysis of collateral damage in graph-based memory forgetting across three dimensions: scale, cross-task contamination, and adversarial exploitation.
-BFS propagation through entity co-occurrence graphs is \textbf{catastrophically destructive} (78\% damage), \textbf{cross-task toxic} (F1 $-18.2$pp on unrelated retrieval), and \textbf{adversarially weaponizable} (5 fake facts $\rightarrow$ 57.3\% memory destruction).
+As AI memory systems evolve from flat stores to graph-augmented architectures, graph-based invalidation propagation is the architecturally natural next step for maintaining fact consistency at scale.
+We are the first to implement and systematically analyze this approach, revealing that naive BFS propagation through entity co-occurrence graphs is \textbf{catastrophically destructive} (78\% damage), \textbf{cross-task toxic} (F1 $-18.2$pp on unrelated retrieval), and \textbf{adversarially weaponizable} (5 fake facts $\rightarrow$ 57.3\% memory destruction).
 
 \attraware{} Selective Propagation, inspired by directional link failure models in transportation engineering, provides consistent defense across all threat vectors (78--100\% effectiveness) with negligible overhead.
 Graph topology analysis confirms the underlying mechanism: co-occurrence graphs are scale-free ($\alpha \approx 2.3$--$2.5$), making them structurally robust to random failures but catastrophically vulnerable to targeted hub attacks---a prediction from percolation theory that our empirical results validate.
