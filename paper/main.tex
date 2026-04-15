@@ -491,7 +491,7 @@ The in-degree adjustment (lines~10--11) dampens decay for highly-connected entit
 \paragraph{Computational overhead.}
 A key design property of \attraware{} is that it requires \textbf{no LLM calls at propagation time}.
 Every operation in Algorithm~\ref{alg:attraware}---subject--object entity decomposition (line~3), keyword membership test (line~9), in-degree lookup (line~10), and weight update (line~11)---is a string-matching or arithmetic operation over pre-existing metadata.
-The subject\_key is assigned at memory \textit{insertion} time as a lightweight tagging step (see \Cref{app:graph}), so no additional inference is needed during propagation.
+The subject\_key is assigned at memory \textit{insertion} time as a lightweight tagging step (see \Cref{app:graph_construction}), so no additional inference is needed during propagation.
 The worst-case time complexity is $O(|E_{\text{obj}}| \times \bar{M} \times |K|)$ where $\bar{M}$ is the average number of memories per entity and $|K| = |K_{\text{changed}}|$; in our experiments, each propagation step completes in under 10\,ms on commodity hardware.
 This makes the method compatible with real-time memory maintenance in production agent systems, in contrast to approaches that would require LLM-based causal reasoning per edge.
 
