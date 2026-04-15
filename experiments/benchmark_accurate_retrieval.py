@@ -194,19 +194,29 @@ def find_high_degree_entity(adapter: MemoryModuleAdapter) -> tuple[str, int] | N
     Returns:
         (entity_name, degree) 또는 None
     """
+    result = find_high_degree_entities(adapter, top_k=1)
+    return result[0] if result else None
+
+
+def find_high_degree_entities(
+    adapter: MemoryModuleAdapter, top_k: int = 5
+) -> list[tuple[str, int]]:
+    """그래프에서 degree 기준 상위 N개 hub entity 반환
+
+    Returns:
+        [(entity_name, degree), ...] degree 내림차순
+    """
     graph = adapter._graph_store.entity_graph
     if graph.number_of_nodes() == 0:
-        return None
+        return []
 
-    best_entity = None
-    best_degree = -1
+    node_degrees = []
     for node in graph.nodes:
         degree = graph.in_degree(node) + graph.out_degree(node)
-        if degree > best_degree:
-            best_degree = degree
-            best_entity = node
+        node_degrees.append((node, degree))
 
-    return (best_entity, best_degree) if best_entity else None
+    node_degrees.sort(key=lambda x: x[1], reverse=True)
+    return node_degrees[:top_k]
 
 
 def find_fact_for_entity(
@@ -397,8 +407,13 @@ async def run_sample(
     max_queries: int | None,
     propagation_depth: int,
     decay_per_hop: float,
+    num_hubs: int = 1,
 ) -> dict:
     """하나의 sample에 대해 3개 arm(Baseline, BFS, Attribute-aware) 실행
+
+    Args:
+        num_hubs: 실험할 hub entity 수. 1이면 기존 단일 hub 실험,
+                  >1이면 상위 N개 hub 각각에서 propagation → measure → restore 루프.
 
     Returns:
         dict: 각 arm의 메트릭 + collateral damage 통계
@@ -446,10 +461,13 @@ async def run_sample(
                 f"retrievable={baseline_stats['retrievable']}")
 
     # Hub entity 식별 (BFS/Attr-aware에서 사용)
-    hub_info = find_high_degree_entity(baseline_adapter)
-    hub_entity = hub_info[0] if hub_info else None
-    hub_degree = hub_info[1] if hub_info else 0
-    logger.info(f"  Hub entity: {hub_entity} (degree={hub_degree})")
+    all_hubs = find_high_degree_entities(baseline_adapter, top_k=num_hubs)
+    hub_entity = all_hubs[0][0] if all_hubs else None
+    hub_degree = all_hubs[0][1] if all_hubs else 0
+    logger.info(f"  Top hub: {hub_entity} (degree={hub_degree})")
+    if num_hubs > 1:
+        logger.info(f"  Multi-hub: {len(all_hubs)} hubs → "
+                     f"{[(h[0], h[1]) for h in all_hubs]}")
 
     # Baseline query 평가
     q_start = time.time()
@@ -466,6 +484,7 @@ async def run_sample(
         "query_time": baseline_query_time,
         "hub_entity": hub_entity,
         "hub_degree": hub_degree,
+        "all_hubs": [{"entity": h[0], "degree": h[1]} for h in all_hubs],
     }
     logger.info(f"  Baseline EM={baseline_eval['metrics'].get('exact_match', 0):.1f}%, "
                 f"F1={baseline_eval['metrics'].get('f1', 0):.1f}%")
@@ -477,109 +496,135 @@ async def run_sample(
         return results
 
     # ================================================================
-    # ARM 2: Post-BFS — memorize → BFS 전파 → query
+    # Multi-hub 또는 단일 hub 실험
     # ================================================================
-    logger.info(f"[Sample {sample_idx}] ARM 2: Post-BFS 전파")
+    hubs_to_test = all_hubs if num_hubs > 1 else [(hub_entity, hub_degree)]
 
-    bfs_adapter = MemoryModuleAdapter(
-        graph_propagation=True,
-        semantic_filter=False,
-        attribute_aware=False,
-        propagation_depth=propagation_depth,
-        decay_per_hop=decay_per_hop,
-        llm_client=llm_client,
-        embedding_provider=embedding_provider,
-        db_path=":memory:",
-    )
+    # --- ARM 2 & 3: BFS / Attribute-aware (hub별 snapshot-restore 루프) ---
+    for arm_name, arm_config in [
+        ("bfs", {"semantic_filter": False, "attribute_aware": False}),
+        ("attribute_aware", {"semantic_filter": True, "attribute_aware": True}),
+    ]:
+        arm_label = arm_name.upper().replace("_", "-")
+        arm_idx = 2 if arm_name == "bfs" else 3
+        logger.info(f"[Sample {sample_idx}] ARM {arm_idx}: Post-{arm_label} 전파")
 
-    # Memorize (동일 데이터)
-    for chunk in chunks:
-        await bfs_adapter.async_send_message(chunk, memorizing=True)
+        adapter = MemoryModuleAdapter(
+            graph_propagation=True,
+            semantic_filter=arm_config["semantic_filter"],
+            attribute_aware=arm_config["attribute_aware"],
+            propagation_depth=propagation_depth,
+            decay_per_hop=decay_per_hop,
+            llm_client=llm_client,
+            embedding_provider=embedding_provider,
+            db_path=":memory:",
+        )
 
-    bfs_pre_stats = await count_memory_stats(bfs_adapter)
+        # Memorize (동일 데이터)
+        for chunk in chunks:
+            await adapter.async_send_message(chunk, memorizing=True)
 
-    # BFS 전파 트리거
-    bfs_propagation = await trigger_propagation(bfs_adapter, hub_entity, mode="bfs")
-    logger.info(f"  BFS 전파: {bfs_propagation.get('affected_count', 0)}개 메모리 영향")
+        # Weight 스냅샷 (multi-hub restore용)
+        weight_snapshot = await adapter._metadata_store.snapshot_weights()
 
-    bfs_post_stats = await count_memory_stats(bfs_adapter)
-    collateral_bfs = bfs_pre_stats["retrievable"] - bfs_post_stats["retrievable"]
-    logger.info(f"  Collateral damage: {collateral_bfs}개 메모리 검색 불능 "
-                f"({bfs_pre_stats['retrievable']} → {bfs_post_stats['retrievable']})")
+        per_hub_results = []
+        for hub_idx, (h_entity, h_degree) in enumerate(hubs_to_test):
+            if hub_idx > 0:
+                # 이전 hub의 전파 효과 복원
+                await adapter._metadata_store.restore_weights(weight_snapshot)
 
-    # BFS 후 query 평가
-    bfs_eval = await evaluate_queries(bfs_adapter, questions, answers, max_queries)
+            logger.info(f"  [{arm_label}] Hub {hub_idx+1}/{len(hubs_to_test)}: "
+                        f"'{h_entity}' (degree={h_degree})")
 
-    results["bfs"] = {
-        "metrics": bfs_eval["metrics"],
-        "per_query": bfs_eval["per_query"],
-        "memory_stats_pre": bfs_pre_stats,
-        "memory_stats_post": bfs_post_stats,
-        "propagation": {
-            "affected_count": bfs_propagation.get("affected_count", 0),
-            "trigger_subject_key": bfs_propagation.get("trigger_subject_key"),
-            "trigger_content": bfs_propagation.get("trigger_content"),
-        },
-        "collateral_damage": collateral_bfs,
-    }
-    logger.info(f"  Post-BFS EM={bfs_eval['metrics'].get('exact_match', 0):.1f}%, "
-                f"F1={bfs_eval['metrics'].get('f1', 0):.1f}%")
+            pre_stats = await count_memory_stats(adapter)
+            propagation = await trigger_propagation(adapter, h_entity, mode=arm_name)
+            post_stats = await count_memory_stats(adapter)
+            collateral = pre_stats["retrievable"] - post_stats["retrievable"]
 
-    # ================================================================
-    # ARM 3: Post-Attribute-aware — memorize → Attr-aware 전파 → query
-    # ================================================================
-    logger.info(f"[Sample {sample_idx}] ARM 3: Post-Attribute-aware 전파")
+            logger.info(f"    전파: {propagation.get('affected_count', 0)}개 영향, "
+                        f"collateral={collateral}")
 
-    attr_adapter = MemoryModuleAdapter(
-        graph_propagation=True,
-        semantic_filter=True,
-        attribute_aware=True,
-        propagation_depth=propagation_depth,
-        decay_per_hop=decay_per_hop,
-        llm_client=llm_client,
-        embedding_provider=embedding_provider,
-        db_path=":memory:",
-    )
+            # Query 평가
+            eval_result = await evaluate_queries(
+                adapter, questions, answers, max_queries
+            )
+            em = eval_result["metrics"].get("exact_match", 0)
+            f1 = eval_result["metrics"].get("f1", 0)
+            logger.info(f"    EM={em:.1f}%, F1={f1:.1f}%")
 
-    # Memorize (동일 데이터)
-    for chunk in chunks:
-        await attr_adapter.async_send_message(chunk, memorizing=True)
+            per_hub_results.append({
+                "hub_entity": h_entity,
+                "hub_degree": h_degree,
+                "metrics": eval_result["metrics"],
+                "per_query": eval_result["per_query"],
+                "memory_stats_pre": pre_stats,
+                "memory_stats_post": post_stats,
+                "propagation": {
+                    "affected_count": propagation.get("affected_count", 0),
+                    "trigger_subject_key": propagation.get("trigger_subject_key"),
+                    "trigger_content": propagation.get("trigger_content"),
+                },
+                "collateral_damage": collateral,
+            })
 
-    attr_pre_stats = await count_memory_stats(attr_adapter)
+        # 집계: 단일 hub이면 기존 형식 유지, multi-hub이면 평균+분산 추가
+        if len(per_hub_results) == 1:
+            results[arm_name] = per_hub_results[0]
+        else:
+            # Multi-hub 평균 메트릭
+            avg_em = sum(r["metrics"].get("exact_match", 0) for r in per_hub_results) / len(per_hub_results)
+            avg_f1 = sum(r["metrics"].get("f1", 0) for r in per_hub_results) / len(per_hub_results)
+            avg_collateral = sum(r["collateral_damage"] for r in per_hub_results) / len(per_hub_results)
 
-    # Attribute-aware 전파 트리거
-    attr_propagation = await trigger_propagation(
-        attr_adapter, hub_entity, mode="attribute_aware"
-    )
-    logger.info(f"  Attr-aware 전파: {attr_propagation.get('affected_count', 0)}개 메모리 영향")
+            import statistics
+            em_values = [r["metrics"].get("exact_match", 0) for r in per_hub_results]
+            f1_values = [r["metrics"].get("f1", 0) for r in per_hub_results]
+            collateral_values = [r["collateral_damage"] for r in per_hub_results]
 
-    attr_post_stats = await count_memory_stats(attr_adapter)
-    collateral_attr = attr_pre_stats["retrievable"] - attr_post_stats["retrievable"]
-    logger.info(f"  Collateral damage: {collateral_attr}개 메모리 검색 불능 "
-                f"({attr_pre_stats['retrievable']} → {attr_post_stats['retrievable']})")
+            std_em = statistics.stdev(em_values) if len(em_values) > 1 else 0
+            std_f1 = statistics.stdev(f1_values) if len(f1_values) > 1 else 0
+            std_collateral = statistics.stdev(collateral_values) if len(collateral_values) > 1 else 0
 
-    # Attribute-aware 후 query 평가
-    attr_eval = await evaluate_queries(attr_adapter, questions, answers, max_queries)
+            results[arm_name] = {
+                "metrics": {
+                    "exact_match": avg_em,
+                    "f1": avg_f1,
+                    "total_queries": per_hub_results[0]["metrics"].get("total_queries", 0),
+                },
+                "per_query": per_hub_results[0]["per_query"],  # 첫 hub 기준
+                "memory_stats_pre": per_hub_results[0]["memory_stats_pre"],
+                "memory_stats_post": per_hub_results[-1]["memory_stats_post"],
+                "collateral_damage": avg_collateral,
+                "multi_hub": {
+                    "num_hubs": len(per_hub_results),
+                    "avg_em": round(avg_em, 2),
+                    "std_em": round(std_em, 2),
+                    "avg_f1": round(avg_f1, 2),
+                    "std_f1": round(std_f1, 2),
+                    "avg_collateral": round(avg_collateral, 2),
+                    "std_collateral": round(std_collateral, 2),
+                    "per_hub": [
+                        {
+                            "hub_entity": r["hub_entity"],
+                            "hub_degree": r["hub_degree"],
+                            "em": r["metrics"].get("exact_match", 0),
+                            "f1": r["metrics"].get("f1", 0),
+                            "collateral": r["collateral_damage"],
+                            "affected": r["propagation"]["affected_count"],
+                        }
+                        for r in per_hub_results
+                    ],
+                },
+            }
+            logger.info(f"  [{arm_label}] Multi-hub 평균: "
+                        f"EM={avg_em:.1f}±{std_em:.1f}%, "
+                        f"F1={avg_f1:.1f}±{std_f1:.1f}%, "
+                        f"collateral={avg_collateral:.1f}±{std_collateral:.1f}")
 
-    results["attribute_aware"] = {
-        "metrics": attr_eval["metrics"],
-        "per_query": attr_eval["per_query"],
-        "memory_stats_pre": attr_pre_stats,
-        "memory_stats_post": attr_post_stats,
-        "propagation": {
-            "affected_count": attr_propagation.get("affected_count", 0),
-            "trigger_subject_key": attr_propagation.get("trigger_subject_key"),
-            "trigger_content": attr_propagation.get("trigger_content"),
-        },
-        "collateral_damage": collateral_attr,
-    }
-    logger.info(f"  Post-Attr EM={attr_eval['metrics'].get('exact_match', 0):.1f}%, "
-                f"F1={attr_eval['metrics'].get('f1', 0):.1f}%")
+        await adapter.reset()
 
-    # 어댑터 정리
+    # Baseline 어댑터 정리
     await baseline_adapter.reset()
-    await bfs_adapter.reset()
-    await attr_adapter.reset()
 
     return results
 
@@ -629,6 +674,7 @@ async def run_benchmark(args):
             max_queries=args.max_queries,
             propagation_depth=args.propagation_depth,
             decay_per_hop=args.decay_per_hop,
+            num_hubs=args.num_hubs,
         )
         all_results.append(sample_result)
 
@@ -668,6 +714,7 @@ async def run_benchmark(args):
             "max_queries": args.max_queries,
             "propagation_depth": args.propagation_depth,
             "decay_per_hop": args.decay_per_hop,
+            "num_hubs": args.num_hubs,
             "llm_url": llm_url,
             "embed_url": embed_url,
         },
@@ -774,6 +821,10 @@ def parse_args():
     parser.add_argument(
         "--decay_per_hop", type=float, default=0.5,
         help="홉당 감쇄율"
+    )
+    parser.add_argument(
+        "--num_hubs", type=int, default=1,
+        help="실험할 hub entity 수 (1=기존 단일 hub, >1=multi-hub 평균±std)"
     )
 
     # DooGPU 엔드포인트

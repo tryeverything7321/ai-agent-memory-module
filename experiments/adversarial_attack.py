@@ -10,6 +10,11 @@
   Phase 3 (Measure):  decay된 메모리 수, kill 수, EM 하락 측정
   BFS vs Attribute-aware 비교
 
+공격 모드:
+  white-box: fact_registry 접근 → 정확한 subject_key로 100% hit
+  gray-box:  hub entity 이름만 알고 common attribute 후보로 시도 → partial hit
+  black-box: 랜덤 entity + 랜덤 attribute → 0% hit
+
 사용법:
   PYTHONPATH=/home/mingyu1choi/PJT/memory_module \\
     .venv/bin/python experiments/adversarial_attack.py
@@ -17,6 +22,10 @@
   # 공격 fact 수 지정
   PYTHONPATH=/home/mingyu1choi/PJT/memory_module \\
     .venv/bin/python experiments/adversarial_attack.py --num_attack_facts 1 3 5
+
+  # gray-box 모드 실행
+  PYTHONPATH=/home/mingyu1choi/PJT/memory_module \\
+    .venv/bin/python experiments/adversarial_attack.py --mode graybox --context_size 6k
 
   # context size 변경
   PYTHONPATH=/home/mingyu1choi/PJT/memory_module \\
@@ -308,6 +317,327 @@ def generate_attack_facts_from_registry(
         attack_facts.append((f"{serial}. {fact_text}", key))
 
     return attack_facts
+
+
+# --- Gray-box 공격 ---
+
+# 공격자가 "일반 상식"으로 시도할 수 있는 attribute 후보
+COMMON_ATTRIBUTES = [
+    "capital", "president", "population", "location", "founder",
+    "birthday", "birthplace", "spouse", "occupation", "language",
+    "currency", "continent", "religion", "area", "leader",
+    "nickname", "color", "mascot", "motto", "anthem",
+    "largest city", "official language", "national animal",
+    "head of state", "prime minister",
+]
+
+
+def generate_graybox_attack_facts(
+    hub_entities: list[dict],
+    num_facts: int,
+    existing_serial_max: int,
+) -> list[tuple[str, str | None]]:
+    """Gray-box 공격: hub entity 이름 + common attribute 조합으로 가짜 fact 생성
+
+    공격자가 아는 것: hub entity 이름 (frequency 분석으로 추정 가능)
+    공격자가 모르는 것: 정확한 subject_key attribute, fact_registry 내용
+
+    Returns:
+        list[tuple[str, str | None]]: [(fact_line, guessed_key), ...]
+            guessed_key는 "entity:attribute" 형식 — 실제 매칭 여부는 실험 중 확인
+    """
+    attack_facts = []
+    attr_idx = 0
+
+    for i in range(num_facts):
+        # hub entity를 round-robin으로 선택
+        hub = hub_entities[i % len(hub_entities)]
+        entity_name = hub["entity"]
+        attribute = COMMON_ATTRIBUTES[attr_idx % len(COMMON_ATTRIBUTES)]
+        attr_idx += 1
+
+        fake_value = FAKE_VALUES[i % len(FAKE_VALUES)]
+        serial = existing_serial_max + 200 + i
+
+        fact_text = f"The {attribute} of {entity_name} is {fake_value}."
+        guessed_key = f"{entity_name.lower()}:{attribute}"
+        attack_facts.append((f"{serial}. {fact_text}", guessed_key))
+
+    return attack_facts
+
+
+async def run_graybox_experiment(
+    context: str,
+    questions: list[str],
+    answers: list,
+    num_attack_facts: int,
+    llm_client,
+    embedding_provider,
+    chunk_size: int,
+    propagation_depth: int,
+    decay_per_hop: float,
+    max_queries: int | None,
+) -> dict:
+    """Gray-box 공격 실험 — BFS 전파 모드에서만 실행
+
+    White-box와 동일한 파이프라인이지만, 공격 fact 생성에
+    fact_registry 대신 common attribute 후보를 사용.
+    """
+    adapter = MemoryModuleAdapter(
+        graph_propagation=False,
+        semantic_filter=False,
+        attribute_aware=False,
+        propagation_depth=propagation_depth,
+        decay_per_hop=decay_per_hop,
+        llm_client=llm_client,
+        embedding_provider=embedding_provider,
+        db_path=":memory:",
+    )
+
+    # Phase 1: Baseline memorize
+    logger.info("  [GRAYBOX] Phase 1: Baseline memorize (propagation OFF)")
+    chunks = chunk_text(context, chunk_size)
+    for chunk in chunks:
+        await adapter.async_send_message(chunk, memorizing=True)
+
+    pre_attack_state = await snapshot_memory_state(adapter)
+    logger.info(
+        f"    Pre-attack: {pre_attack_state['valid']} valid, "
+        f"{pre_attack_state['invalid']} invalid memories"
+    )
+
+    # Hub entity 식별
+    hubs = identify_hub_entities(adapter._graph_store, top_k=5)
+    if not hubs:
+        logger.warning("  [GRAYBOX] Hub entity가 없음 — 스킵")
+        await adapter.reset()
+        return {"error": "no_hub_entities", "mode": "graybox"}
+
+    logger.info(f"    Top hub: '{hubs[0]['entity']}' (degree={hubs[0]['degree']})")
+
+    # Pre-attack 쿼리 평가
+    pre_attack_metrics = await evaluate_queries(
+        adapter, questions, answers, max_queries
+    )
+    logger.info(
+        f"    Pre-attack EM={pre_attack_metrics['exact_match']:.1f}%, "
+        f"F1={pre_attack_metrics['f1']:.1f}%"
+    )
+
+    # Phase 2: Gray-box 공격 — common attribute 후보로 fact 생성
+    adapter.graph_propagation = True
+    logger.info("  [GRAYBOX] Propagation 활성화 (BFS mode)")
+
+    max_serial = max(adapter._serial_registry.keys()) if adapter._serial_registry else 0
+    graybox_facts = generate_graybox_attack_facts(hubs, num_attack_facts, max_serial)
+
+    # fact_registry에서 실제 매칭 여부 확인 (hit rate 계산)
+    hits = 0
+    total_injected = 0
+    hit_details = []
+    for fact_line, guessed_key in graybox_facts:
+        # 실제 registry에 매칭되는 key가 있는지 확인
+        is_hit = guessed_key in adapter._fact_registry
+        if not is_hit:
+            # entity part만 매칭되는 key가 있는지도 확인 (부분 매칭)
+            entity_part = guessed_key.split(":")[0]
+            partial_matches = [
+                k for k in adapter._fact_registry
+                if entity_part in k.lower()
+            ]
+            is_hit = len(partial_matches) > 0
+
+        logger.info(
+            f"    Injecting: {fact_line} → "
+            f"{'HIT' if is_hit else 'MISS'} (guessed: {guessed_key})"
+        )
+        await adapter.async_send_message(fact_line, memorizing=True)
+        total_injected += 1
+        if is_hit:
+            hits += 1
+        hit_details.append({
+            "fact": fact_line,
+            "guessed_key": guessed_key,
+            "hit": is_hit,
+        })
+
+    hit_rate = hits / max(total_injected, 1) * 100
+    logger.info(f"    Hit rate: {hits}/{total_injected} ({hit_rate:.1f}%)")
+
+    # Phase 3: 피해 측정
+    logger.info("  [GRAYBOX] Phase 3: Measuring damage")
+    post_attack_state = await snapshot_memory_state(adapter)
+
+    newly_decayed = post_attack_state["decayed_below_1.0"] - pre_attack_state["decayed_below_1.0"]
+    newly_killed = post_attack_state["decayed_below_0.1"] - pre_attack_state["decayed_below_0.1"]
+    newly_invalidated = post_attack_state["invalid"] - pre_attack_state["invalid"]
+    pre_valid = pre_attack_state["valid"]
+    damage_ratio = newly_decayed / max(pre_valid, 1) * 100
+    kill_ratio = newly_killed / max(pre_valid, 1) * 100
+
+    # Post-attack 쿼리 평가
+    post_attack_metrics = await evaluate_queries(
+        adapter, questions, answers, max_queries
+    )
+    em_drop = pre_attack_metrics["exact_match"] - post_attack_metrics["exact_match"]
+    f1_drop = pre_attack_metrics["f1"] - post_attack_metrics["f1"]
+
+    logger.info(
+        f"    Damage: {newly_decayed} decayed ({damage_ratio:.1f}%), "
+        f"{newly_killed} killed ({kill_ratio:.1f}%)"
+    )
+    logger.info(
+        f"    Post-attack EM={post_attack_metrics['exact_match']:.1f}%, "
+        f"EM drop: {em_drop:+.1f}pp"
+    )
+
+    await adapter.reset()
+
+    return {
+        "mode": "graybox",
+        "num_attack_facts": num_attack_facts,
+        "hit_rate_pct": hit_rate,
+        "hits": hits,
+        "total_injected": total_injected,
+        "hit_details": hit_details,
+        "target_hubs": [
+            {"entity": h["entity"], "degree": h["degree"], "memory_count": h["memory_count"]}
+            for h in hubs
+        ],
+        "pre_attack_state": {k: v for k, v in pre_attack_state.items() if k != "weights"},
+        "post_attack_state": {k: v for k, v in post_attack_state.items() if k != "weights"},
+        "damage": {
+            "pre_valid": pre_valid,
+            "post_valid": post_attack_state["valid"],
+            "newly_invalidated": newly_invalidated,
+            "newly_decayed": newly_decayed,
+            "newly_killed": newly_killed,
+            "damage_ratio_pct": damage_ratio,
+            "kill_ratio_pct": kill_ratio,
+            "pre_avg_weight": pre_attack_state["avg_weight"],
+            "post_avg_weight": post_attack_state["avg_weight"],
+            "weight_drop": pre_attack_state["avg_weight"] - post_attack_state["avg_weight"],
+        },
+        "pre_attack_metrics": {k: v for k, v in pre_attack_metrics.items() if k != "per_query"},
+        "post_attack_metrics": {k: v for k, v in post_attack_metrics.items() if k != "per_query"},
+        "em_drop_pp": em_drop,
+        "f1_drop_pp": f1_drop,
+    }
+
+
+async def run_graybox_attack(args):
+    """Gray-box 공격 실험 전체 루프 — white/black-box 비교 포함"""
+    sub_dataset = f"factconsolidation_mh_{args.context_size}"
+    samples = load_data(sub_dataset, args.max_contexts)
+    if not samples:
+        logger.error(f"데이터가 비어있음: {sub_dataset}")
+        return
+
+    llm_url = args.llm_url or DOOGPU_LLM_BASE
+    embed_url = args.embed_url or DOOGPU_EMBED_BASE
+    llm_client = DooGPULLMClient(base_url=llm_url, model=DEFAULT_LLM_MODEL)
+    embedding_provider = DooGPUEmbeddingProvider(base_url=embed_url, model=DEFAULT_EMBED_MODEL)
+
+    all_results = []
+    for ctx_idx, sample in enumerate(samples):
+        context = sample["context"]
+        questions = sample["questions"]
+        answers_list = sample["answers"]
+
+        logger.info(f"\n{'='*70}")
+        logger.info(f"Context {ctx_idx + 1}/{len(samples)}: {len(context)} chars")
+        logger.info(f"{'='*70}")
+
+        for n_facts in args.num_attack_facts:
+            # Gray-box 실험
+            logger.info(f"\n--- Gray-box attack: {n_facts} facts ---")
+            result = await run_graybox_experiment(
+                context=context, questions=questions, answers=answers_list,
+                num_attack_facts=n_facts,
+                llm_client=llm_client, embedding_provider=embedding_provider,
+                chunk_size=args.chunk_size,
+                propagation_depth=args.propagation_depth,
+                decay_per_hop=args.decay_per_hop,
+                max_queries=args.max_queries,
+            )
+            result["context_idx"] = ctx_idx
+            all_results.append(result)
+
+            # White-box (BFS) 비교 실험
+            logger.info(f"\n--- White-box (BFS) attack: {n_facts} facts ---")
+            wb_result = await run_attack_experiment(
+                context=context, questions=questions, answers=answers_list,
+                num_attack_facts=n_facts, propagation_mode="bfs",
+                llm_client=llm_client, embedding_provider=embedding_provider,
+                chunk_size=args.chunk_size,
+                propagation_depth=args.propagation_depth,
+                decay_per_hop=args.decay_per_hop,
+                max_queries=args.max_queries,
+            )
+            wb_result["context_idx"] = ctx_idx
+            all_results.append(wb_result)
+
+    # --- 결과 저장 ---
+    output = {
+        "config": {
+            "mode": "graybox_comparison",
+            "sub_dataset": sub_dataset,
+            "context_size": args.context_size,
+            "num_attack_facts": args.num_attack_facts,
+            "timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
+        },
+        "experiments": [
+            {k: v for k, v in r.items() if k not in ("per_query_detail", "hit_details")}
+            for r in all_results
+        ],
+    }
+
+    results_dir = Path(__file__).parent / "results"
+    results_dir.mkdir(exist_ok=True)
+    output_path = results_dir / f"graybox_attack_{args.context_size}_{int(time.time())}.json"
+    with open(output_path, "w", encoding="utf-8") as f:
+        json.dump(output, f, indent=2, ensure_ascii=False)
+    logger.info(f"\n결과 저장: {output_path}")
+
+    # --- 콘솔 비교 리포트 ---
+    _print_graybox_report(all_results, args)
+
+    return output
+
+
+def _print_graybox_report(all_results: list[dict], args):
+    """Gray-box vs White-box 비교 리포트"""
+    print("\n" + "=" * 80)
+    print("GRAY-BOX vs WHITE-BOX ATTACK COMPARISON")
+    print(f"Context size: {args.context_size}")
+    print("=" * 80)
+
+    print(f"\n{'Attack':>8} | {'Mode':<12} | {'Hit%':>6} | {'Damage%':>8} | "
+          f"{'Kill%':>6} | {'EM Drop':>8}")
+    print("-" * 65)
+
+    for n_facts in args.num_attack_facts:
+        gb_results = [r for r in all_results
+                      if r.get("mode") == "graybox"
+                      and r.get("num_attack_facts") == n_facts
+                      and "error" not in r]
+        wb_results = [r for r in all_results
+                      if r.get("mode") == "bfs"
+                      and r.get("num_attack_facts") == n_facts
+                      and "error" not in r]
+
+        for label, results in [("gray-box", gb_results), ("white-box", wb_results)]:
+            if not results:
+                continue
+            avg_hit = sum(r.get("hit_rate_pct", 100.0) for r in results) / len(results)
+            avg_dmg = sum(r["damage"]["damage_ratio_pct"] for r in results) / len(results)
+            avg_kill = sum(r["damage"]["kill_ratio_pct"] for r in results) / len(results)
+            avg_em = sum(r["em_drop_pp"] for r in results) / len(results)
+            print(f"{n_facts:>8} | {label:<12} | {avg_hit:>5.1f}% | "
+                  f"{avg_dmg:>7.1f}% | {avg_kill:>5.1f}% | {avg_em:>+7.1f}pp")
+        print()
+
+    print("=" * 80)
 
 
 # --- 메모리 상태 스냅샷 ---
@@ -848,6 +1178,11 @@ def parse_args():
     )
 
     parser.add_argument(
+        "--mode", type=str, default="whitebox",
+        choices=["whitebox", "graybox"],
+        help="공격 모드: whitebox (기본, BFS vs Attr) 또는 graybox (gray vs white 비교)"
+    )
+    parser.add_argument(
         "--context_size", type=str, default="6k",
         help="FactConsolidation context size (6k/32k/64k/262k)"
     )
@@ -872,4 +1207,7 @@ def parse_args():
 
 if __name__ == "__main__":
     args = parse_args()
-    asyncio.run(run_adversarial_attack(args))
+    if args.mode == "graybox":
+        asyncio.run(run_graybox_attack(args))
+    else:
+        asyncio.run(run_adversarial_attack(args))

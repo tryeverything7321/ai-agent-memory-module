@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "analysis_date": "2026-04-10 16:39:09",
+    "analysis_date": "2026-04-15 12:29:59",
     "n_runs": 7,
     "n_total_experiments": 38,
     "attack_levels": [
@@ -352,5 +352,34 @@
         "holm_bonferroni_significant_0.05": false
       }
     }
+  },
+  "mixed_effects_model": {
+    "model_formula": "damage_diff ~ C(attack_strength) + (1|run)",
+    "n_observations": 19,
+    "n_groups": 7,
+    "fixed_effects": {
+      "Intercept": {
+        "coef": 1.6611,
+        "se": 5.0936,
+        "z": 0.3261,
+        "p": 0.744332
+      },
+      "C(attack_strength)[T.3]": {
+        "coef": 7.2679,
+        "se": 5.0029,
+        "z": 1.4528,
+        "p": 0.146292
+      },
+      "C(attack_strength)[T.5]": {
+        "coef": 11.6284,
+        "se": 5.0029,
+        "z": 2.3243,
+        "p": 0.020107
+      }
+    },
+    "random_effects_variance": 104.1748,
+    "intercept_significant": false,
+    "intercept_interpretation": "Effect not significant at p<0.05",
+    "summary": "              Mixed Linear Model Regression Results\n==================================================================\nModel:               MixedLM    Dependent Variable:    damage_diff\nNo. Observations:    19         Method:                REML       \nNo. Groups:          7          Scale:                 77.4367    \nMin. group size:     1          Log-Likelihood:        -64.7311   \nMax. group size:     3          Converged:             Yes        \nMean group size:     2.7                                          \n------------------------------------------------------------------\n                         Coef.  Std.Err.   z   P>|z| [0.025 0.975]\n------------------------------------------------------------------\nIntercept                 1.661    5.094 0.326 0.744 -8.322 11.644\nC(attack_strength)[T.3]   7.268    5.003 1.453 0.146 -2.537 17.073\nC(attack_strength)[T.5]  11.628    5.003 2.324 0.020  1.823 21.434\nGroup Var               104.175   10.616                          \n==================================================================\n"
   }
 }

@@ -421,6 +421,81 @@ def multiple_comparison_correction(wilcoxon_results: dict) -> dict:
     return {"n_tests": n_tests, "corrections": p_values}
 
 
+# --- 5. Mixed-effects Model ---
+def mixed_effects_analysis(experiments: list[dict]) -> dict:
+    """Mixed-effects model: damage_diff ~ attack_strength + (1|run)
+
+    풀링의 reviewer 우려를 해소하기 위한 robustness check:
+    - Fixed effect: attack_strength (1, 3, 5) — 공격 강도 간 차이
+    - Random effect: run (file_id) — 실행 간 변동 (context 차이)
+    """
+    import pandas as pd
+    import statsmodels.formula.api as smf
+
+    # paired data → DataFrame 변환
+    grouped = {}
+    for exp in experiments:
+        key = (exp["_file_id"], exp["num_attack_facts"])
+        if key not in grouped:
+            grouped[key] = {}
+        grouped[key][exp["mode"]] = exp["damage"]["damage_ratio_pct"]
+
+    rows = []
+    for (file_id, n_attack), modes in grouped.items():
+        if "bfs" in modes and "attribute_aware" in modes:
+            rows.append({
+                "run": file_id,
+                "attack_strength": n_attack,
+                "damage_diff": modes["bfs"] - modes["attribute_aware"],
+                "bfs_damage": modes["bfs"],
+                "attr_damage": modes["attribute_aware"],
+            })
+
+    if len(rows) < 5:
+        return {"error": f"Insufficient data (n={len(rows)})"}
+
+    df = pd.DataFrame(rows)
+
+    # Mixed-effects model: damage_diff ~ C(attack_strength) + (1|run)
+    try:
+        model = smf.mixedlm(
+            "damage_diff ~ C(attack_strength)",
+            df,
+            groups=df["run"],
+        )
+        result = model.fit(reml=True)
+
+        # fixed effects 추출
+        fe = {}
+        for param_name in result.fe_params.index:
+            fe[param_name] = {
+                "coef": round(float(result.fe_params[param_name]), 4),
+                "se": round(float(result.bse_fe[param_name]), 4),
+                "z": round(float(result.tvalues[param_name]), 4),
+                "p": round(float(result.pvalues[param_name]), 6),
+            }
+
+        # random effects variance
+        re_var = float(result.cov_re.iloc[0, 0]) if hasattr(result.cov_re, 'iloc') else 0.0
+
+        return {
+            "model_formula": "damage_diff ~ C(attack_strength) + (1|run)",
+            "n_observations": len(df),
+            "n_groups": df["run"].nunique(),
+            "fixed_effects": fe,
+            "random_effects_variance": round(re_var, 4),
+            "intercept_significant": float(result.pvalues["Intercept"]) < 0.05,
+            "intercept_interpretation": (
+                "BFS damage > Attr-aware damage (intercept > 0, significant)"
+                if float(result.fe_params["Intercept"]) > 0 and float(result.pvalues["Intercept"]) < 0.05
+                else "Effect not significant at p<0.05"
+            ),
+            "summary": str(result.summary()),
+        }
+    except Exception as e:
+        return {"error": str(e)}
+
+
 # --- 메인 실행 ---
 def main():
     base_dir = os.path.dirname(os.path.abspath(__file__))
@@ -508,6 +583,23 @@ def main():
             print(f"    Bonferroni p: {val['bonferroni_p']:.6f} (sig: {val['bonferroni_significant_0.05']})")
             print(f"    Holm-Bonferroni p: {val['holm_bonferroni_p']:.6f} (sig: {val['holm_bonferroni_significant_0.05']})")
 
+    # 5. Mixed-effects model
+    print("\n" + "-" * 60)
+    print("5. Mixed-effects Model (Robustness Check)")
+    print("-" * 60)
+    mixed_results = mixed_effects_analysis(experiments)
+    if "error" in mixed_results:
+        print(f"  Error: {mixed_results['error']}")
+    else:
+        print(f"  Formula: {mixed_results['model_formula']}")
+        print(f"  N observations: {mixed_results['n_observations']}, N groups: {mixed_results['n_groups']}")
+        print(f"  Random effects variance: {mixed_results['random_effects_variance']}")
+        print(f"\n  Fixed effects:")
+        for param, vals in mixed_results["fixed_effects"].items():
+            sig_marker = " ***" if vals["p"] < 0.001 else " **" if vals["p"] < 0.01 else " *" if vals["p"] < 0.05 else ""
+            print(f"    {param}: coef={vals['coef']:.4f}, SE={vals['se']:.4f}, z={vals['z']:.3f}, p={vals['p']:.6f}{sig_marker}")
+        print(f"\n  Interpretation: {mixed_results['intercept_interpretation']}")
+
     # 결과 저장
     output = {
         "metadata": {
@@ -521,6 +613,7 @@ def main():
         "stratified_analysis": stratified_results,
         "bootstrap_ci": bootstrap_results,
         "multiple_comparison_correction": correction_results,
+        "mixed_effects_model": mixed_results,
     }
 
     output_path = os.path.join(results_dir, "statistical_analysis.json")

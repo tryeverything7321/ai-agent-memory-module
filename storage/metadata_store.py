@@ -150,6 +150,22 @@ class MetadataStore:
         self._conn.commit()
         return cursor.rowcount
 
+    async def snapshot_weights(self) -> dict[str, tuple[float, bool]]:
+        """현재 모든 메모리의 (decay_weight, is_valid) 스냅샷 반환 — 복원용"""
+        rows = self._conn.execute(
+            "SELECT id, decay_weight, is_valid FROM memories"
+        ).fetchall()
+        return {row["id"]: (row["decay_weight"], bool(row["is_valid"])) for row in rows}
+
+    async def restore_weights(self, snapshot: dict[str, tuple[float, bool]]) -> None:
+        """스냅샷에서 decay_weight + is_valid 일괄 복원"""
+        for mem_id, (weight, valid) in snapshot.items():
+            self._conn.execute(
+                "UPDATE memories SET decay_weight = ?, is_valid = ? WHERE id = ?",
+                (weight, int(valid), mem_id),
+            )
+        self._conn.commit()
+
     async def get_all_memories_unfiltered(self) -> list[Memory]:
         """모든 메모리 반환 (valid + invalid) — 분석용"""
         rows = self._conn.execute("SELECT * FROM memories").fetchall()
