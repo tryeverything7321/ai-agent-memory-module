@@ -273,33 +273,44 @@ Decay Sweep → prune → re-classify orphans → mitosis → fusion
 
 AI 메모리 시스템의 graph-based invalidation propagation 취약성을 최초로 분석한 연구. 교통공학의 network failure propagation theory를 AI 메모리에 적용.
 
-- 📄 LaTeX 소스: [`paper/main.tex`](paper/main.tex) (12페이지, Figure 2, Table 13, Finding 11)
-- 🎯 타겟: ICML 2026 Workshop — [Agents in the Wild: Safety, Security, and Beyond](https://agentwild-workshop.github.io/icml2026/)
+- LaTeX 소스: [`paper/main.tex`](paper/main.tex) (18페이지, Table 10+, Finding 11)
+- 참고문헌: [`paper/references.bib`](paper/references.bib) (37개 entries)
+- 리뷰 현황: [`.review/2026-04-10-full-paper-review.md`](.review/2026-04-10-full-paper-review.md) (2차 텍스트 리뷰 완료)
+- 남은 실험 작업: [`.claude/todo-paper-experiments.md`](.claude/todo-paper-experiments.md) (7건)
+
+### 논문 진행 상태 (2026-04-15)
+
+| 단계 | 상태 |
+|------|------|
+| 1차 텍스트 리뷰 | 완료 (Intro/Background/Related Work 재작성, bib +16편) |
+| 2차 텍스트 리뷰 | 완료 (alpha값 수정, bib 저자 교체, 구조 개선 16건) |
+| 실험 보강 | **진행 중** (KS test, mixed-effects, TBD placeholder 등 7건) |
+| 최종 제출 | 미완료 |
 
 ### 핵심 발견 (4 Contributions)
 
 | # | Contribution | 핵심 수치 |
 |---|-------------|----------|
-| **C1** | Scale trend — BFS propagation의 collateral damage | 68.9–78.5% damage, hub degree 23→298 (superlinear) |
-| **C2** | Cross-task contamination — 무관한 task 오염 | EM −5.0pp, F1 −18.2pp |
+| **C1** | Scale trend — BFS propagation의 collateral damage | 68.9-79.0% damage, hub degree 23->298 (~13x vs ~7.5x fact growth) |
+| **C2** | Cross-task contamination — 무관한 task 오염 | EM -5.0pp, F1 -18.2pp |
 | **C3** | Adversarial hub exploitation — 5 fake facts 공격 | 57.3% valid memory 파괴 (32K) |
-| **C4** | Attribute-aware defense — 교통공학 방향성 전파 | 78–100% 방어율, BFS 대비 80× 효과 |
+| **C4** | Attribute-aware defense — 교통공학 방향성 전파 | 78-100% 방어율, BFS 대비 80x 효과 |
 
 ### Graph Topology Analysis
 
-Entity co-occurrence graph의 scale-free 특성 확인:
+Entity co-occurrence graph의 heavy-tailed degree distribution 확인 (scale-free 특성과 일치):
 
-| Scale | α (MLE) | κ (heterogeneity) | Max Hub Degree |
-|-------|---------|-------------------|---------------|
-| 6K | 2.48±0.09 | 4.6 | 23 |
-| 32K | 2.35±0.04 | 14.8 | 121 |
-| 64K | 2.30±0.03 | 32.3 | 298 |
+| Scale | alpha (MLE) | k_min | KS D | Max Hub Degree |
+|-------|------------|-------|------|---------------|
+| 6K | 2.87 +/- 0.47 | 6 | 0.075 | 23 |
+| 32K | 2.73 +/- 0.12 | 5 | 0.037 | 121 |
+| 64K | 2.96 +/- 0.05 | 3 | 0.033 | 298 |
 
 ### 통계적 유의성
 
 - **Wilcoxon signed-rank**: p=0.0022 (19 paired observations)
 - **Bootstrap 95% BCa CI**: [2.82, 15.67]pp (0 제외)
-- **Cohen's d**: 0.66–0.95 (medium–large effect)
+- **Cohen's d**: 0.66-0.95 (medium-large effect)
 
 ### 실험 인프라
 
@@ -310,42 +321,58 @@ Entity co-occurrence graph의 scale-free 특성 확인:
 | Benchmark | MemoryAgentBench (ICLR 2026) |
 | Context | 6K, 32K, 64K (FactConsolidation) + 65K (EventQA) |
 
-### 실험 코드 구조
+### 프로젝트 파일 가이드
 
 ```
-experiments/
-├── adversarial_attack.py       # C3: Hub exploitation (white/black-box)
-├── cross_task_experiment.py     # C2: Cross-task contamination
-├── deep_dive_analysis.py        # Topology: power-law, percolation, hub stats
-├── deep_dive_experiments.py     # Depth tracking, black-box, degree-cap
-├── statistical_analysis.py      # Wilcoxon, bootstrap, stratified analysis
-├── generate_figures.py          # Paper figure generation (matplotlib)
-└── results/                     # 46개 JSON 결과 파일
-    ├── adversarial_attack_*.json
-    ├── benchmark_factconsolidation_*.json
-    ├── deep_dive_*.json
-    └── statistical_analysis.json
-
-paper/
-├── main.tex                     # 12p LaTeX paper
-├── references.bib               # 17 BibTeX entries
-├── figures/
-│   ├── fig_degree_distribution.pdf  # CCDF log-log plot
-│   └── fig_propagation_damage.pdf   # Depth vs damage curve
-├── Makefile
-└── .gitignore
-
-docs/
-├── paper_draft_v2.md            # Markdown draft
-├── deep_dive_analysis.md        # Topology + deep-dive results
-└── statistical_analysis.md      # Statistical significance report
+memory_module/
+│
+│  ═══ 논문 ���══
+├── paper/
+│   ├── main.tex              <- 논문 본문 (정본)
+│   ├── references.bib        <- 참고문헌 (37편)
+│   ├── main.pdf              <- 컴파일된 PDF
+│   ├── figures/              <- 논문 그림
+│   └── literature_survey_2026.md  <- 문헌조사 결과
+│
+├── .review/                  <- 리뷰 리포트
+│   └── 2026-04-10-full-paper-review.md
+├── .claude/
+│   └── todo-paper-experiments.md  <- 남은 실험 작업 (7건)
+│
+│  ═══ 실험 코드 ═══
+├── experiments/
+│   ├── graph_forgetting.py        <- BFS propagation 실험 (C1)
+│   ├── adversarial_attack.py      <- 공격 실험 (C3)
+│   ├── benchmark_accurate_retrieval.py  <- Cross-task (C2)
+│   ├── statistical_analysis.py    <- Wilcoxon, bootstrap, Bonferroni
+│   ├── deep_dive_analysis.py      <- KS test, multi-run 통계
+│   ├── deep_dive_experiments.py   <- Depth, black-box, degree-cap (C4)
+│   ├── generate_figures.py        <- 논문 figure 생성
+│   └── results/                   <- 실험 결과 JSON (6K/32K/64K)
+│
+│  ═══ 메모리 모듈 코어 (MVP, 안정) ═══
+├── models.py                 <- Entity/Memory 데이터 모델
+├── extraction.py             <- Entity extraction
+├─��� decay.py                  <- Ebbinghaus 망각 곡선
+├── storage/                  <- Graph + Vector + Metadata 저장소
+├── taxonomy/                 <- Self-evolving taxonomy (v2)
+├── prediction/               <- Intent prediction
+├── tests/                    <- 146 tests
+│
+│  ═══ 참고 문서 ═══
+├── docs/
+│   ├── deep_dive_analysis.md      <- Topology 분석 결과
+│   ├── statistical_analysis.md    <- 통계 유의성 리포트
+│   ├── paper_draft_v1.md          <- 초기 드래프트 (historical)
+│   └── paper_draft_v2.md          <- 중간 드래프트 (historical)
+└── research_reference/            <- 외부 참고 자료
 ```
 
 ### 논문 빌드
 
 ```bash
 cd paper
-make          # pdflatex → bibtex → pdflatex × 2
+make          # pdflatex -> bibtex -> pdflatex x 2
 # 또는
 pdflatex main.tex && bibtex main && pdflatex main.tex && pdflatex main.tex
 ```
@@ -361,7 +388,7 @@ PYTHONPATH=. python experiments/adversarial_attack.py --context_size 6k
 PYTHONPATH=. python experiments/adversarial_attack.py --context_size 32k
 
 # Cross-task (C2)
-PYTHONPATH=. python experiments/cross_task_experiment.py
+PYTHONPATH=. python experiments/benchmark_accurate_retrieval.py
 
 # Deep-dive analysis (topology + depth + defense)
 PYTHONPATH=. python experiments/deep_dive_analysis.py
