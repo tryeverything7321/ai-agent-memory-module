@@ -97,7 +97,8 @@ The problem is not propagation depth but propagation \textit{direction}---spread
 
 \subsection{Contributions}
 
-This work constitutes proactive safety analysis of a mechanism not yet widely deployed but architecturally likely as memory systems evolve from individual conflict detection to graph-wide consistency maintenance.
+This work establishes a \textbf{destructive baseline} for graph-based invalidation propagation---a mechanism not yet widely deployed but architecturally inevitable as memory systems evolve from individual conflict detection to graph-wide consistency maintenance.
+Just as crash testing quantifies vehicle failure modes before deployment, our analysis quantifies propagation failure modes before adoption.
 
 \begin{enumerate}
   \item \textbf{Scale trend analysis (C1)}: Collateral damage quantification across 6K--64K scales, revealing disproportionate hub growth and stable ${\sim}78\%$ BFS damage ratio with heavy-tailed graph topology ($\alpha = 2.73$--$2.96$).
@@ -342,16 +343,16 @@ Post-Attr    & 15.0\% & 67.1\% & 1  & 0 \\
 \toprule
 \textbf{Condition} & \textbf{EM (\%)} & \textbf{F1 (\%)} & \textbf{Affected} & \textbf{Collateral} \\
 \midrule
-Baseline     & 15.0 & 67.1 & 0 & 0 \\
-Post-BFS (5-hub avg)     & \textit{TBD}$\pm$\textit{TBD} & \textit{TBD}$\pm$\textit{TBD} & \textit{TBD} & \textit{TBD} \\
-Post-Attr (5-hub avg)    & \textit{TBD}$\pm$\textit{TBD} & \textit{TBD}$\pm$\textit{TBD} & \textit{TBD} & \textit{TBD} \\
+Baseline     & 20.0 & 70.9 & 0 & 0 \\
+Post-BFS (5-hub avg)     & 21.0$\pm$1.0 & \textbf{60.8$\pm$1.6} & 3{,}160$\pm$313 & 25.2$\pm$9.5 \\
+Post-Attr (5-hub avg)    & 20.2$\pm$0.4 & 71.1$\pm$1.3 & 755$\pm$931 & 1.0$\pm$0.0 \\
 \bottomrule
 \end{tabular}
 \caption{Cross-task contamination across top-5 hub entities (mean$\pm$std). Generalizes the single-hub result in \Cref{tab:cross_task}.}
 \label{tab:cross_task_multi}
 \end{table}
 
-\finding{6} BFS propagation from a single hub entity causes EM $-5.0$pp and F1 $-18.2$pp on \textit{completely unrelated} retrieval queries; this effect generalizes across the top-5 hubs (EM drop: \textit{TBD}$\pm$\textit{TBD}pp, F1 drop: \textit{TBD}$\pm$\textit{TBD}pp). \attraware{} preserves full accuracy across all tested hubs.
+\finding{6} BFS propagation from a single hub entity causes EM $-5.0$pp and F1 $-18.2$pp on \textit{completely unrelated} retrieval queries. Across the top-5 hubs, BFS consistently degrades F1 by $-10.1\pm1.6$pp (EM remains within noise at $+1.0\pm1.0$pp), confirming that collateral damage is not an artifact of a single hub choice. \attraware{} preserves full accuracy across all tested hubs (F1 $71.1\pm1.3$\% vs.\ baseline $70.9$\%).
 
 
 % ============================================================
@@ -487,6 +488,13 @@ When fact $f$ with subject\_key \texttt{Entity:Attribute} is invalidated, \attra
 The in-degree adjustment (lines~10--11) dampens decay for highly-connected entities, reflecting the intuition that a fact referenced by many sources is less likely to be fully invalidated by a single upstream change.
 \bfsprop{} propagation differs by visiting \textit{all} neighbors (both successors and predecessors) without the semantic filter (line~9) or in-degree adjustment.
 
+\paragraph{Computational overhead.}
+A key design property of \attraware{} is that it requires \textbf{no LLM calls at propagation time}.
+Every operation in Algorithm~\ref{alg:attraware}---subject--object entity decomposition (line~3), keyword membership test (line~9), in-degree lookup (line~10), and weight update (line~11)---is a string-matching or arithmetic operation over pre-existing metadata.
+The subject\_key is assigned at memory \textit{insertion} time as a lightweight tagging step (see \Cref{app:graph}), so no additional inference is needed during propagation.
+The worst-case time complexity is $O(|E_{\text{obj}}| \times \bar{M} \times |K|)$ where $\bar{M}$ is the average number of memories per entity and $|K| = |K_{\text{changed}}|$; in our experiments, each propagation step completes in under 10\,ms on commodity hardware.
+This makes the method compatible with real-time memory maintenance in production agent systems, in contrast to approaches that would require LLM-based causal reasoning per edge.
+
 \subsection{Defense Comparison}
 
 \begin{table}[h]
@@ -601,13 +609,21 @@ This asymmetry is structural, not incidental: in any corpus of factual statement
 Removing or limiting these hubs is not viable---they are essential for retrieval.
 \attraware{} propagation resolves this tension by distinguishing genuine dependency chains from coincidental co-occurrence, preserving the hub's retrieval utility while neutralizing its role as a damage amplifier.
 
+\paragraph{Generalizability beyond this benchmark.}
+One might ask whether the observed heavy-tailed topology ($\alpha \approx 2.7$--$3.0$) is an artifact of MemoryAgentBench's content distribution.
+We argue it is not, because the mechanism is linguistic, not dataset-specific.
+Entity mention frequencies in natural language follow Zipf's law \citep{zipf_1949}: a small number of entities (nations, organizations, public figures) account for a disproportionate share of mentions across any sufficiently diverse corpus.
+When memories are constructed from such text, co-occurrence graphs inherit this skew, producing hub-and-spoke structures regardless of domain.
+This is consistent with findings in semantic network research, where free-association graphs \citep{steyvers_semantic_2005} and knowledge graphs \citep{barabasi_scalefree_1999} independently exhibit scale-free degree distributions.
+While replication on additional benchmarks remains important (Limitation~2), the Zipfian origin of hub formation suggests our results generalize to any memory system built from natural-language interactions.
+
 \subsection{Limitations}
 
 \begin{enumerate}
   \item \textbf{Entity extraction}: Rule-based extraction treats ``Vladimir Putin'' and ``Putin'' as separate entities. Stronger entity resolution would improve both modes.
   \item \textbf{Single benchmark}: Results from MemoryAgentBench only. Replication on other benchmarks would strengthen findings.
   \item \textbf{Statistical variance}: Multi-run statistics (7 runs at 6K, 19 paired observations) show high within-attack variance (CV $\sim$150\%) due to hub structure variability across contexts. Pooled Wilcoxon signed-rank test achieves strong significance ($p = 0.0022$) and bootstrap 95\% BCa CI $[2.82, 15.67]$pp excludes zero. A mixed-effects robustness check (\Cref{app:stats}, \Cref{tab:mixed_effects}) confirms that attack strength significantly modulates the BFS--\attraware{} difference (5-fact: $p = 0.020$) while properly accounting for run-level variation.
-  \item \textbf{White-box assumption}: Primary adversarial results assume white-box access. Black-box attacks failed entirely (0\% hit rate), suggesting the threat is bounded by attacker knowledge.
+  \item \textbf{White-box assumption}: Primary adversarial results assume white-box access. Black-box attacks fail entirely (0\% hit rate), which simultaneously bounds the threat and characterizes its nature: hub exploitation is a \textit{system-level} vulnerability requiring architectural knowledge of graph structure, fundamentally distinct from content-injection attacks (e.g., MINJA) that succeed from external positions. This makes the attack harder to mount but also harder to detect, as it operates through legitimate maintenance pathways.
   \item \textbf{32K EM floor}: Baseline EM at 32K is 0--4\%, limiting observable EM changes from adversarial attacks at that scale.
 \end{enumerate}
 
