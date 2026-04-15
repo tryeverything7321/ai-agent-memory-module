@@ -21,6 +21,7 @@ from collections import Counter
 import numpy as np
 from scipy import stats as scipy_stats
 from scipy.optimize import curve_fit
+import powerlaw
 
 RESULTS_DIR = Path(__file__).parent / "results"
 DOCS_DIR = Path(__file__).parent.parent / "docs"
@@ -54,57 +55,156 @@ def power_law_pdf(x, alpha, x_min):
     return (alpha - 1) / x_min * (x / x_min) ** (-alpha)
 
 
-def fit_power_law(degrees: list[int], k_min: int = 2) -> dict:
-    """Maximum Likelihood Estimation으로 power-law exponent 추정
+def _bootstrap_ks_pvalue(
+    data: np.ndarray, alpha: float, xmin: int, ks_D: float,
+    n_iter: int = 1000, discrete: bool = True,
+) -> float:
+    """Clauset et al. (2009) bootstrap KS p-value
 
-    Clauset et al. (2009) 방식:
-      alpha_hat = 1 + n * [sum(ln(k_i / k_min))]^(-1)
+    "power-law 가설 자체를 기각할 수 있는가"를 판단하는 핵심 검정.
+    절차:
+      1. 원본 데이터에서 xmin 이상인 tail과 미만인 body를 분리
+      2. 합성 데이터 생성: body는 원본에서 리샘플, tail은 fitted PL에서 생성
+      3. 합성 데이터에 대해 PL 재fit → KS_D* 계산
+      4. p = P(KS_D* >= KS_D_observed) (1000회 반복)
+
+    p >= 0.1이면 power-law 가설을 기각할 수 없음 (Clauset 권장 기준)
+    """
+    body = data[data < xmin]
+    n_total = len(data)
+    n_body = len(body)
+    n_tail = n_total - n_body
+
+    if n_tail < 5:
+        return float("nan")
+
+    rng = np.random.RandomState(42)
+    count_ge = 0
+
+    for _ in range(n_iter):
+        # body: 원본에서 복원 추출
+        if n_body > 0:
+            syn_body = rng.choice(body, size=n_body, replace=True)
+        else:
+            syn_body = np.array([], dtype=int)
+
+        # tail: fitted power-law에서 난수 생성 (discrete Pareto)
+        # P(k) ∝ k^(-alpha), k >= xmin
+        # Inverse CDF: k = xmin * (1 - U)^(-1/(alpha-1))
+        u = rng.uniform(0, 1, size=n_tail)
+        if discrete:
+            syn_tail = np.floor(xmin * (1 - u) ** (-1.0 / (alpha - 1))).astype(int)
+        else:
+            syn_tail = xmin * (1 - u) ** (-1.0 / (alpha - 1))
+
+        syn_data = np.concatenate([syn_body, syn_tail])
+        syn_data = syn_data[syn_data > 0]
+
+        if len(syn_data) < 30:
+            continue
+
+        try:
+            syn_fit = powerlaw.Fit(syn_data, discrete=discrete, xmin=xmin, verbose=False)
+            syn_ks = float(syn_fit.power_law.D) if hasattr(syn_fit.power_law, 'D') else float(syn_fit.D)
+            if syn_ks >= ks_D:
+                count_ge += 1
+        except Exception:
+            continue
+
+    return round(count_ge / n_iter, 4)
+
+
+def fit_power_law(degrees: list[int], k_min: int | None = None, bootstrap_n: int = 1000) -> dict:
+    """powerlaw 패키지로 power-law fitting + Goodness-of-Fit test
+
+    Clauset et al. (2009) 정식 방법론:
+      1. k_min 자동 추정 (KS distance 최소화) 또는 지정
+      2. Discrete MLE로 alpha 추정
+      3. Bootstrap KS p-value (power-law 가설 기각 검정)
+      4. Likelihood ratio test: power-law vs log-normal / exponential / stretched-exp
 
     Args:
         degrees: 전체 degree 리스트
-        k_min: 최소 degree cutoff (power-law가 적용되는 하한)
+        k_min: 최소 degree cutoff (None이면 자동 추정)
+        bootstrap_n: bootstrap 반복 횟수 (기본 1000)
 
     Returns:
-        dict: alpha, k_min, n_tail, ks_statistic, p_value_approx
+        dict: alpha, k_min, ks_statistic, ks_bootstrap_p, vs_lognormal, vs_exponential 등
     """
-    filtered = [k for k in degrees if k >= k_min]
-    n = len(filtered)
-    if n < 10:
-        return {"error": f"Not enough data points above k_min={k_min} (n={n})"}
+    data = np.array([d for d in degrees if d > 0])
+    if len(data) < 30:
+        return {"error": f"Insufficient data (n={len(data)})"}
 
-    # MLE for discrete power-law (Clauset 2009, eq. 3.1)
-    log_sum = sum(math.log(k / (k_min - 0.5)) for k in filtered)
-    alpha = 1 + n / log_sum
+    # discrete=True: degree는 정수 (discrete power-law)
+    # xmin=None이면 KS distance 최소화로 자동 추정
+    fit = powerlaw.Fit(data, discrete=True, xmin=k_min, verbose=False)
 
-    # Standard error
-    se = (alpha - 1) / math.sqrt(n)
+    # powerlaw.Fit에서 속성 접근 방식이 xmin 지정 여부에 따라 다름
+    # 안전하게 power_law 하위 분포 객체에서 접근
+    pl = fit.power_law
+    alpha = float(pl.alpha)
+    sigma = float(pl.sigma) if hasattr(pl, 'sigma') else float(fit.sigma)
+    xmin = int(pl.xmin) if hasattr(pl, 'xmin') else int(fit.xmin)
+    ks_D = float(pl.D) if hasattr(pl, 'D') else float(fit.D)
+    n_tail = int(pl.n) if hasattr(pl, 'n') else int(fit.n)
 
-    # KS test: 경험적 CDF vs power-law CDF 비교
-    filtered_sorted = sorted(filtered)
-    empirical_cdf = np.arange(1, n + 1) / n
-    theoretical_cdf = 1 - (np.array(filtered_sorted) / (k_min - 0.5)) ** (-(alpha - 1))
-    ks_stat = float(np.max(np.abs(empirical_cdf - theoretical_cdf)))
+    # Bootstrap KS p-value (Clauset et al. 2009 핵심 검정)
+    ks_p = _bootstrap_ks_pvalue(data, alpha, xmin, ks_D, n_iter=bootstrap_n)
 
-    # 근사 p-value (Kolmogorov-Smirnov)
-    # 정확한 p-value는 Monte Carlo가 필요하지만, 근사치 사용
-    ks_result = scipy_stats.kstest(
-        filtered_sorted,
-        lambda x: 1 - (x / (k_min - 0.5)) ** (-(alpha - 1)),
-    )
+    # Likelihood ratio tests vs 대안 분포
+    R_ln, p_ln = fit.distribution_compare('power_law', 'lognormal')
+    R_exp, p_exp = fit.distribution_compare('power_law', 'exponential')
+    R_se, p_se = fit.distribution_compare('power_law', 'stretched_exponential')
+
+    # 해석 (bootstrap p-value 반영)
+    interpretation = _interpret_power_law(alpha, R_ln, p_ln, ks_p)
 
     return {
         "alpha": round(alpha, 3),
-        "alpha_se": round(se, 3),
-        "k_min": k_min,
-        "n_tail": n,
+        "alpha_se": round(sigma, 3),
+        "k_min": xmin,
+        "k_min_auto": k_min is None,
+        "n_tail": n_tail,
         "n_total": len(degrees),
-        "ks_statistic": round(ks_stat, 4),
-        "ks_p_value": round(float(ks_result.pvalue), 4),
-        "interpretation": (
-            "scale-free" if 2.0 < alpha < 3.5
-            else "heavy-tailed but not classic scale-free"
-        ),
+        "ks_statistic": round(ks_D, 4),
+        "ks_bootstrap_p": ks_p,
+        "ks_bootstrap_n": bootstrap_n,
+        "vs_lognormal": {"R": round(float(R_ln), 3), "p": round(float(p_ln), 4)},
+        "vs_exponential": {"R": round(float(R_exp), 3), "p": round(float(p_exp), 4)},
+        "vs_stretched_exp": {"R": round(float(R_se), 3), "p": round(float(p_se), 4)},
+        "interpretation": interpretation,
     }
+
+
+def _interpret_power_law(
+    alpha: float, R_lognormal: float, p_lognormal: float,
+    ks_bootstrap_p: float = float("nan"),
+) -> str:
+    """Power-law fit 결과 해석
+
+    Clauset et al. (2009) 기준:
+      - Bootstrap KS p >= 0.1 → power-law 가설을 기각할 수 없음
+      - Bootstrap KS p < 0.1 → power-law 가설 기각
+      - R > 0: power-law가 대안보다 나음
+      - R < 0: 대안이 더 나음
+      - LR p < 0.1: 유의한 차이
+    """
+    if not (2.0 < alpha < 3.5):
+        return "heavy-tailed but not classic scale-free"
+
+    # bootstrap KS p-value가 있으면 우선 적용
+    if not math.isnan(ks_bootstrap_p) and ks_bootstrap_p < 0.1:
+        return "power-law hypothesis rejected (bootstrap KS p < 0.1)"
+
+    if p_lognormal < 0.1:
+        if R_lognormal > 0:
+            return "scale-free (power-law significantly better than log-normal)"
+        else:
+            return "heavy-tailed (log-normal significantly better than power-law)"
+    else:
+        if not math.isnan(ks_bootstrap_p):
+            return f"scale-free (power-law plausible, bootstrap p={ks_bootstrap_p:.3f})"
+        return "scale-free (power-law and log-normal statistically indistinguishable)"
 
 
 def estimate_percolation_threshold(degrees: list[int]) -> dict:
@@ -210,10 +310,12 @@ def analyze_topology(size: str, data: dict) -> dict:
         "kurtosis": round(float(scipy_stats.kurtosis(deg_arr)), 3),
     }
 
-    # Power-law fitting (k_min=2, 3 모두 시도)
+    # Power-law fitting — powerlaw 패키지 (Clauset 2009)
     pl_results = {}
-    for k_min in [2, 3, 5]:
-        pl_results[f"k_min_{k_min}"] = fit_power_law(degrees, k_min=k_min)
+    # 자동 k_min 추정 (KS distance 최소화)
+    pl_results["auto"] = fit_power_law(degrees, k_min=None)
+    # 고정 k_min=2 (역호환 + 비교용)
+    pl_results["k_min_2"] = fit_power_law(degrees, k_min=2)
 
     # Percolation threshold
     percolation = estimate_percolation_threshold(degrees)
@@ -289,9 +391,15 @@ def run_topology_analysis() -> dict:
             if "error" in pl:
                 print(f"  Power-law ({k_label}): {pl['error']}")
             else:
-                print(f"  Power-law ({k_label}): α={pl['alpha']}±{pl['alpha_se']}, "
-                      f"KS={pl['ks_statistic']}, p={pl['ks_p_value']}, "
+                auto_tag = " [AUTO]" if pl.get("k_min_auto") else ""
+                print(f"  Power-law ({k_label}{auto_tag}): α={pl['alpha']}±{pl['alpha_se']}, "
+                      f"k_min={pl['k_min']}, KS_D={pl['ks_statistic']}, "
                       f"→ {pl['interpretation']}")
+                if "vs_lognormal" in pl:
+                    ln = pl["vs_lognormal"]
+                    exp = pl["vs_exponential"]
+                    print(f"    vs log-normal: R={ln['R']:.3f}, p={ln['p']:.4f}")
+                    print(f"    vs exponential: R={exp['R']:.3f}, p={exp['p']:.4f}")
 
         # Percolation
         perc = topo["percolation"]
@@ -468,7 +576,7 @@ def run_cross_scale_analysis(topology: dict) -> dict:
         bs = t["basic_stats"]
         # 가장 좋은 power-law fit 선택
         best_pl = None
-        for k_label in ["k_min_2", "k_min_3", "k_min_5"]:
+        for k_label in ["auto", "k_min_2"]:
             pl = t["power_law"].get(k_label, {})
             if "error" not in pl:
                 best_pl = pl
@@ -535,26 +643,33 @@ def save_results(topology: dict, multirun: dict, cross_scale: dict):
 
     # Table: Topology Summary
     lines.append("## Table 5: Graph Topology Across Scales\n")
-    lines.append("| Scale | Nodes | Edges | <k> | k_max | Gini | α (MLE) | κ | f_c (random) |")
-    lines.append("|-------|-------|-------|-----|-------|------|---------|---|--------------|")
+    lines.append("| Scale | Nodes | <k> | k_max | Gini | α (MLE) | k_min | KS D | vs log-N (R, p) | κ |")
+    lines.append("|-------|-------|-----|-------|------|---------|-------|------|-----------------|---|")
     for s in ["6k", "32k", "64k"]:
         if s not in topology:
             continue
         t = topology[s]
         bs = t["basic_stats"]
         best_pl = None
-        for k_label in ["k_min_2", "k_min_3", "k_min_5"]:
+        for k_label in ["auto", "k_min_2"]:
             pl = t["power_law"].get(k_label, {})
             if "error" not in pl:
                 best_pl = pl
                 break
         perc = t["percolation"]
-        alpha_str = f"{best_pl['alpha']:.2f}±{best_pl['alpha_se']:.2f}" if best_pl else "N/A"
+        if best_pl:
+            alpha_str = f"{best_pl['alpha']:.2f}±{best_pl['alpha_se']:.2f}"
+            kmin_str = str(best_pl['k_min'])
+            ks_str = f"{best_pl['ks_statistic']:.4f}"
+            ln = best_pl.get("vs_lognormal", {})
+            lr_str = f"R={ln.get('R', 'N/A')}, p={ln.get('p', 'N/A')}"
+        else:
+            alpha_str = kmin_str = ks_str = lr_str = "N/A"
         lines.append(
-            f"| {s.upper()} | {bs['num_nodes']} | {bs['num_edges']} | "
+            f"| {s.upper()} | {bs['num_nodes']} | "
             f"{bs['mean_degree']:.2f} | {bs['max_degree']} | "
-            f"{t['gini_coefficient']:.3f} | {alpha_str} | "
-            f"{perc['kappa']:.2f} | {perc['fc_random_failure']:.4f} |"
+            f"{t['gini_coefficient']:.3f} | {alpha_str} | {kmin_str} | {ks_str} | "
+            f"{lr_str} | {perc['kappa']:.2f} |"
         )
 
     # Table: Hub Concentration

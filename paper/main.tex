@@ -283,16 +283,16 @@ We test whether the entity co-occurrence graph is consistent with scale-free pro
 \begin{table}[h]
 \centering
 \small
-\begin{tabular}{lrrrrrrrl}
+\begin{tabular}{lrrrrrrrrl}
 \toprule
-\textbf{Scale} & \textbf{Nodes} & \textbf{$\langle k \rangle$} & \textbf{$k_{\max}$} & \textbf{Gini} & \textbf{$\alpha$} & \textbf{$k_{\min}$} & \textbf{KS $D$} & \textbf{vs log-N} \\
+\textbf{Scale} & \textbf{Nodes} & \textbf{$\langle k \rangle$} & \textbf{$k_{\max}$} & \textbf{Gini} & \textbf{$\alpha$} & \textbf{$k_{\min}$} & \textbf{KS $D$} & \textbf{$p_{\text{KS}}$} & \textbf{vs log-N} \\
 \midrule
-6K  & 414   & 2.51 & 23  & 0.380 & $2.87 \pm 0.47$ & 6 & 0.075 & $R\!=\!-0.27$, $p\!=\!0.60$ \\
-32K & 1,732 & 3.00 & 121 & 0.487 & $2.73 \pm 0.12$ & 5 & 0.037 & $R\!=\!-8.58$, $p\!=\!0.16$ \\
-64K & 3,187 & 3.26 & 298 & 0.534 & $2.96 \pm 0.05$ & 3 & 0.033 & $R\!=\!-6.36$, $p\!=\!0.22$ \\
+6K  & 414   & 2.51 & 23  & 0.380 & $2.87 \pm 0.47$ & 6 & 0.075 & 0.921 & $R\!=\!-0.27$, $p\!=\!0.60$ \\
+32K & 1,732 & 3.00 & 121 & 0.487 & $2.73 \pm 0.12$ & 5 & 0.037 & 0.472 & $R\!=\!-8.58$, $p\!=\!0.16$ \\
+64K & 3,187 & 3.26 & 298 & 0.534 & $2.96 \pm 0.05$ & 3 & 0.033 & 0.009 & $R\!=\!-6.36$, $p\!=\!0.22$ \\
 \bottomrule
 \end{tabular}
-\caption{Graph topology across scales. $\alpha$: power-law exponent (MLE, discrete). $k_{\min}$: auto-estimated via KS distance minimization \citep{clauset_powerlaw_2009}. KS $D$: Kolmogorov--Smirnov distance. ``vs log-N'': likelihood ratio $R$ and two-sided $p$-value; $R < 0$ favors log-normal, $p > 0.1$ indicates indistinguishability.}
+\caption{Graph topology across scales. $\alpha$: power-law exponent (MLE, discrete). $k_{\min}$: auto-estimated via KS distance minimization \citep{clauset_powerlaw_2009}. KS $D$: Kolmogorov--Smirnov distance. $p_{\text{KS}}$: bootstrap goodness-of-fit $p$-value (1000 iterations); $p \geq 0.1$ means the power-law hypothesis cannot be rejected. ``vs log-N'': likelihood ratio $R$ and two-sided $p$-value.}
 \label{tab:topology}
 \end{table}
 
@@ -303,7 +303,7 @@ We test whether the entity co-occurrence graph is consistent with scale-free pro
 \label{fig:degree_dist}
 \end{figure}
 
-\finding{4} Following the methodology of \citet{clauset_powerlaw_2009} with discrete MLE and automatic $k_{\min}$ selection, all three scales yield $\alpha \in [2.73, 2.96]$, consistent with the scale-free regime $2 < \alpha < 3$ \citep{barabasi_scalefree_1999}. Likelihood ratio tests show that the power-law fit is \textit{statistically indistinguishable} from log-normal ($p > 0.1$ at all scales) but \textit{significantly better} than exponential ($p < 0.001$ at 32K, 64K). This outcome---where power-law and log-normal cannot be distinguished---is common in empirical networks \citep{clauset_powerlaw_2009} and does not undermine our analysis: the key property driving vulnerability is the heavy-tailed degree distribution with high heterogeneity (degree heterogeneity $\kappa \equiv \langle k^2 \rangle / \langle k \rangle$ grows from $4.6$ to $32.3$), regardless of whether the exact generating process is power-law or log-normal.
+\finding{4} Following the full methodology of \citet{clauset_powerlaw_2009}---discrete MLE, automatic $k_{\min}$ selection, and bootstrap KS goodness-of-fit testing (1000 iterations)---all three scales yield $\alpha \in [2.73, 2.96]$, consistent with the scale-free regime $2 < \alpha < 3$ \citep{barabasi_scalefree_1999}. The bootstrap $p_{\text{KS}}$ confirms that the power-law hypothesis \textit{cannot be rejected} at 6K ($p=0.921$) and 32K ($p=0.472$), while it is rejected at 64K ($p=0.009$). This scale-dependent rejection is a well-documented phenomenon: as sample size grows, the bootstrap test becomes powerful enough to reject any simple parametric model \citep{clauset_powerlaw_2009}. Likelihood ratio tests confirm the tail is \textit{significantly heavier} than exponential ($p < 0.001$ at 32K, 64K) but \textit{statistically indistinguishable} from log-normal ($p > 0.1$). Crucially, the key property driving hub vulnerability is not the exact generating process but the heavy-tailed degree distribution with high heterogeneity ($\kappa \equiv \langle k^2 \rangle / \langle k \rangle$ grows from $4.6$ to $32.3$), which holds regardless of whether the tail follows a pure power-law or log-normal.
 
 \finding{5} Hub concentration intensifies with scale: the top 1\% of nodes control 7.3\% (6K), 15.5\% (32K), and 19.8\% (64K) of all edges.
 
@@ -413,7 +413,7 @@ Our primary experiments use white-box targeting (registry-based key lookup) to e
 \textbf{Attack Type} & \textbf{Facts} & \textbf{Hit Rate} & \textbf{BFS Damage} \\
 \midrule
 White-box (registry) & 5 & 100\% & 39.8\% \\
-Gray-box (hub names + common attrs) & 5 & \textit{TBD}\% & \textit{TBD}\% \\
+Gray-box (hub names + common attrs) & 5 & 100\% & 20.9\% \\
 Black-box (general knowledge) & 5 & 0\% & 0.0\% \\
 \bottomrule
 \end{tabular}
@@ -421,7 +421,7 @@ Black-box (general knowledge) & 5 & 0\% & 0.0\% \\
 \label{tab:blackbox}
 \end{table}
 
-\finding{9} The three-tier attack results confirm a monotonic relationship between attacker knowledge and damage: white-box (100\% hit, 39.8\% damage) $>$ gray-box (partial hit, reduced damage) $>$ black-box (0\% hit, 0\% damage). Gray-box attacks can trigger some propagation by guessing common attributes (e.g., ``capital'', ``president'') for high-degree entities, but produce substantially less damage than registry-informed white-box attacks. The subject-key matching mechanism thus provides graduated defense proportional to attacker uncertainty.
+\finding{9} The three-tier attack results confirm a monotonic relationship between attacker knowledge and damage: white-box (100\% hit, 39.8\% damage, 17.4\% kill) $>$ gray-box (100\% hit, 20.9\% damage, 0.6\% kill) $>$ black-box (0\% hit, 0\% damage). Gray-box achieves a surprisingly high hit rate (100\%) because the FactConsolidation dataset's entities (countries, cities) align with common-knowledge attributes (``capital'', ``president''). However, the \textit{damage gap} is substantial: gray-box produces only 52\% of white-box damage and $<$4\% of its kill rate. This is because gray-box's round-robin attribute guessing misses the \textit{highest-degree keys} that white-box targets via registry lookup. The kill rate---memories decayed below 0.1---is the strongest discriminator between knowledge levels, suggesting that subject-key specificity, not just entity identification, is the critical factor for catastrophic propagation.
 
 \subsection{Propagation Depth Analysis}
 
@@ -741,7 +741,10 @@ Intercept (1-fact baseline) & 1.66 & 5.09 & 0.33 & 0.744 \\
 \end{table}
 
 \paragraph{Negative damage values.}
-\attraware{} occasionally exhibits small negative damage values ($-0.1$\%), which might appear paradoxical. Code inspection confirms that the propagation weight update (\texttt{adjusted\_factor} $= 1 - (1 - \text{base\_factor}) / d_{\text{in}}$) is bounded in $[0, 1]$ and weights are floored at zero---memory weights cannot increase during propagation. The negative values arise from time-based decay applied between the pre- and post-attack weight snapshots: a small amount of natural decay occurs during propagation execution, producing a measurement artifact of $< 0.3$ percentage points.
+\attraware{} occasionally exhibits small negative damage values ($-0.1$ to $-1.5$\%), which might appear paradoxical. Code inspection reveals two sources: (1) \attraware{}'s conflict resolution mechanism \textit{replaces} outdated facts with attacker-injected facts via the \texttt{invalidate\_and\_replace} pathway, resetting the replacement memory's weight to 1.0. If the original fact had already decayed below 1.0, this replacement \textit{decreases} the count of memories below the threshold, producing a negative $\Delta$decayed. (2) A minor measurement artifact from natural time-based decay between pre- and post-attack snapshots ($<0.3$pp). Both effects are bounded and confirm that \attraware{} does not amplify attack damage---in the worst case, it inadvertently ``refreshes'' a small number of decayed memories.
+
+\paragraph{3-fact condition significance.}
+We note that the 3-fact attack condition does not reach statistical significance individually (permutation $p = 0.125$), consistent with its position between the barely-powered 1-fact ($p = 0.031$) and the significant 5-fact mixed-effects result ($p = 0.020$). With $n=6$ paired observations, this condition is underpowered---a recognized limitation of our pilot-scale experimental design. The consistent direction of effect (BFS damage $> 0$ in 4/6 runs) and medium effect size (Cohen's $d = 0.93$) suggest the effect is real but would require additional runs to confirm at conventional significance levels.
 
 
 \section{Graph Construction Details}

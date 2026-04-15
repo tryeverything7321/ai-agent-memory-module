@@ -13,35 +13,53 @@
         "kurtosis": 34.149
       },
       "power_law": {
+        "auto": {
+          "alpha": 2.871,
+          "alpha_se": 0.468,
+          "k_min": 6,
+          "k_min_auto": true,
+          "n_tail": 16,
+          "n_total": 414,
+          "ks_statistic": 0.0752,
+          "ks_bootstrap_p": 0.921,
+          "ks_bootstrap_n": 1000,
+          "vs_lognormal": {
+            "R": -0.27,
+            "p": 0.5956
+          },
+          "vs_exponential": {
+            "R": -0.054,
+            "p": 0.9631
+          },
+          "vs_stretched_exp": {
+            "R": -0.332,
+            "p": 0.5806
+          },
+          "interpretation": "scale-free (power-law plausible, bootstrap p=0.921)"
+        },
         "k_min_2": {
-          "alpha": 2.481,
-          "alpha_se": 0.088,
+          "alpha": 2.641,
+          "alpha_se": 0.097,
           "k_min": 2,
+          "k_min_auto": false,
           "n_tail": 284,
           "n_total": 414,
-          "ks_statistic": 0.3434,
-          "ks_p_value": 0.0,
-          "interpretation": "scale-free"
-        },
-        "k_min_3": {
-          "alpha": 3.487,
-          "alpha_se": 0.187,
-          "k_min": 3,
-          "n_tail": 176,
-          "n_total": 414,
-          "ks_statistic": 0.3589,
-          "ks_p_value": 0.0,
-          "interpretation": "scale-free"
-        },
-        "k_min_5": {
-          "alpha": 3.306,
-          "alpha_se": 0.414,
-          "k_min": 5,
-          "n_tail": 31,
-          "n_total": 414,
-          "ks_statistic": 0.2682,
-          "ks_p_value": 0.0185,
-          "interpretation": "scale-free"
+          "ks_statistic": 0.1686,
+          "ks_bootstrap_p": 0.0,
+          "ks_bootstrap_n": 1000,
+          "vs_lognormal": {
+            "R": -22.605,
+            "p": 0.0065
+          },
+          "vs_exponential": {
+            "R": -12.814,
+            "p": 0.2126
+          },
+          "vs_stretched_exp": {
+            "R": -15.853,
+            "p": 0.0083
+          },
+          "interpretation": "power-law hypothesis rejected (bootstrap KS p < 0.1)"
         }
       },
       "percolation": {
@@ -193,35 +211,53 @@
         "kurtosis": 218.867
       },
       "power_law": {
-        "k_min_2": {
-          "alpha": 2.346,
-          "alpha_se": 0.039,
-          "k_min": 2,
-          "n_tail": 1167,
-          "n_total": 1732,
-          "ks_statistic": 0.3202,
-          "ks_p_value": 0.0,
-          "interpretation": "scale-free"
-        },
-        "k_min_3": {
-          "alpha": 2.923,
-          "alpha_se": 0.072,
-          "k_min": 3,
-          "n_tail": 715,
-          "n_total": 1732,
-          "ks_statistic": 0.2944,
-          "ks_p_value": 0.0,
-          "interpretation": "scale-free"
-        },
-        "k_min_5": {
-          "alpha": 2.704,
-          "alpha_se": 0.122,
+        "auto": {
+          "alpha": 2.73,
+          "alpha_se": 0.124,
           "k_min": 5,
+          "k_min_auto": true,
           "n_tail": 196,
           "n_total": 1732,
-          "ks_statistic": 0.1622,
-          "ks_p_value": 0.0,
-          "interpretation": "scale-free"
+          "ks_statistic": 0.0369,
+          "ks_bootstrap_p": 0.472,
+          "ks_bootstrap_n": 1000,
+          "vs_lognormal": {
+            "R": -8.581,
+            "p": 0.1584
+          },
+          "vs_exponential": {
+            "R": 62.879,
+            "p": 0.0002
+          },
+          "vs_stretched_exp": {
+            "R": 2.008,
+            "p": 0.0695
+          },
+          "interpretation": "scale-free (power-law plausible, bootstrap p=0.472)"
+        },
+        "k_min_2": {
+          "alpha": 2.467,
+          "alpha_se": 0.043,
+          "k_min": 2,
+          "k_min_auto": false,
+          "n_tail": 1167,
+          "n_total": 1732,
+          "ks_statistic": 0.1227,
+          "ks_bootstrap_p": 0.0,
+          "ks_bootstrap_n": 1000,
+          "vs_lognormal": {
+            "R": -23.413,
+            "p": 0.0147
+          },
+          "vs_exponential": {
+            "R": 175.874,
+            "p": 0.0082
+          },
+          "vs_stretched_exp": {
+            "R": -15.2,
+            "p": 0.0287
+          },
+          "interpretation": "power-law hypothesis rejected (bootstrap KS p < 0.1)"
         }
       },
       "percolation": {
@@ -468,35 +504,53 @@
         "kurtosis": 577.52
       },
       "power_law": {
-        "k_min_2": {
-          "alpha": 2.304,
-          "alpha_se": 0.028,
-          "k_min": 2,
-          "n_tail": 2161,
-          "n_total": 3187,
-          "ks_statistic": 0.3123,
-          "ks_p_value": 0.0,
-          "interpretation": "scale-free"
-        },
-        "k_min_3": {
-          "alpha": 2.853,
-          "alpha_se": 0.05,
+        "auto": {
+          "alpha": 2.962,
+          "alpha_se": 0.053,
           "k_min": 3,
+          "k_min_auto": true,
           "n_tail": 1358,
           "n_total": 3187,
-          "ks_statistic": 0.286,
-          "ks_p_value": 0.0,
-          "interpretation": "scale-free"
+          "ks_statistic": 0.0326,
+          "ks_bootstrap_p": 0.009,
+          "ks_bootstrap_n": 1000,
+          "vs_lognormal": {
+            "R": -6.357,
+            "p": 0.2157
+          },
+          "vs_exponential": {
+            "R": 592.617,
+            "p": 0.0
+          },
+          "vs_stretched_exp": {
+            "R": 16.586,
+            "p": 0.0
+          },
+          "interpretation": "power-law hypothesis rejected (bootstrap KS p < 0.1)"
         },
-        "k_min_5": {
-          "alpha": 2.617,
-          "alpha_se": 0.081,
-          "k_min": 5,
-          "n_tail": 395,
+        "k_min_2": {
+          "alpha": 2.414,
+          "alpha_se": 0.03,
+          "k_min": 2,
+          "k_min_auto": false,
+          "n_tail": 2161,
           "n_total": 3187,
-          "ks_statistic": 0.1541,
-          "ks_p_value": 0.0,
-          "interpretation": "scale-free"
+          "ks_statistic": 0.126,
+          "ks_bootstrap_p": 0.0,
+          "ks_bootstrap_n": 1000,
+          "vs_lognormal": {
+            "R": -33.709,
+            "p": 0.0073
+          },
+          "vs_exponential": {
+            "R": 512.56,
+            "p": 0.0006
+          },
+          "vs_stretched_exp": {
+            "R": -20.347,
+            "p": 0.0245
+          },
+          "interpretation": "power-law hypothesis rejected (bootstrap KS p < 0.1)"
         }
       },
       "percolation": {
@@ -1228,7 +1282,7 @@
         "mean_k": 2.512,
         "max_k": 23,
         "gini": 0.3795,
-        "alpha": 2.481,
+        "alpha": 2.871,
         "kappa": 4.615,
         "fc_random": 0.7234
       },
@@ -1239,7 +1293,7 @@
         "mean_k": 3.002,
         "max_k": 121,
         "gini": 0.4874,
-        "alpha": 2.346,
+        "alpha": 2.73,
         "kappa": 14.812,
         "fc_random": 0.9276
       },
@@ -1250,7 +1304,7 @@
         "mean_k": 3.263,
         "max_k": 298,
         "gini": 0.5338,
-        "alpha": 2.304,
+        "alpha": 2.962,
         "kappa": 32.268,
         "fc_random": 0.968
       }
