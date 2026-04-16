@@ -9,3 +9,5 @@ dist/
 build/
 .ruff_cache/
 research_reference/
+texput.log
+.review/
