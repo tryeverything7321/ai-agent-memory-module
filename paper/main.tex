@@ -64,8 +64,11 @@ As deployments scale from thousands to tens of thousands of persistent facts, ma
 
 The consistency gap has a clear shape.
 Current memory systems handle invalidation \textit{individually}: when a conflict is detected, only the directly contradicted fact is updated, and dependent facts remain silently stale \citep{mem0_2024, amem_2025}.
-Graph-based propagation is the natural extension---the graph infrastructure already exists for retrieval, conflict detection already operates on individual facts, and the missing piece is traversing entity connections to cascade updates, analogous to \texttt{CASCADE} operations in relational databases.
-Every component is in place; wiring them together is architecturally straightforward.
+Graph-based propagation is the natural extension---and multiple systems already implement its architectural prerequisites.
+Zep/Graphiti \citep{zep_2025} maintains bi-temporal validity windows on edges (\texttt{valid\_at}/\texttt{invalid\_at}) that are updated when its LLM-based contradiction detector identifies conflicting facts; the edge infrastructure supports neighborhood traversal, but invalidation remains per-edge.
+MAGMA \citep{magma_2026} constructs four orthogonal sub-graphs---semantic, temporal, causal, and entity---where the causal graph encodes directed logical-entailment edges for ``Why''-type queries, providing an explicit causal structure that could inform propagation scope.
+Mem0 \citep{mem0_2024} performs LLM-powered conflict detection on individual facts and maintains a directed labeled entity graph $G=(V,E,L)$ with relationship triples; while its graph backend natively supports neighborhood traversal, conflict detection currently operates independently of graph topology.
+In each case, graph infrastructure and conflict detection coexist but remain disconnected: the missing piece is traversing entity connections to cascade updates, analogous to \texttt{CASCADE} operations in relational databases.
 
 We implement this intuitive approach and show it is catastrophically flawed.
 The core insight is that \textbf{structural co-occurrence in entity graphs does not imply causal dependency}.
@@ -127,7 +130,7 @@ We organize existing systems along the dimension most relevant to propagation be
 For comprehensive taxonomies covering retrieval, storage, and reflection dimensions, see \citet{graph_agent_memory_survey_2026} and \citet{hu_memory_age_2025}; for an OS-level abstraction of memory management, see \citet{li_memos_2025}.
 \textbf{Knowledge graph approaches} represent entities as nodes and typed relations as edges.
 Mem0$^g$ \citep{mem0_2024} builds a directed labeled knowledge graph with LLM-powered conflict detection.
-Zep/Graphiti \citep{zep_2025} constructs a temporal knowledge graph where edges carry timestamps and contradiction metadata.
+Zep/Graphiti \citep{zep_2025} constructs a temporal knowledge graph where edges carry bi-temporal validity windows (\texttt{valid\_at}, \texttt{invalid\_at}, \texttt{expired\_at}) updated upon LLM-based contradiction detection.
 Both detect conflicts at the individual edge level.
 
 \textbf{Multi-graph approaches} maintain parallel graph structures for different relationship types.
@@ -141,10 +144,15 @@ A-Mem \citep{amem_2025} implements a Zettelkasten-style architecture where memor
 MemGPT/Letta \citep{memgpt_2023} manages memory through an OS-inspired hierarchical context window.
 Mnemosyne \citep{mnemosyne_2025} applies per-memory temporal decay via reverse sigmoid functions, where each memory fades independently of other memories.
 
-Across this taxonomy, one pattern is consistent: every graph-maintaining system uses its graph for \textit{retrieval}, but none use it for \textit{invalidation propagation}.
+Across this taxonomy, one pattern is consistent: every graph-maintaining system uses its graph for \textit{retrieval}, but none yet use it for \textit{invalidation propagation}.
 When a conflict is detected, only the directly contradicted fact is updated; dependent facts sharing the same entities remain untouched.
 As memory scales, this individual-invalidation approach leaves growing numbers of downstream facts silently stale.
+
+Crucially, this gap is shrinking.
+Zep's per-edge temporal invalidation, MAGMA's explicit causal sub-graph with logical-entailment edges, and Mem0's LLM-powered conflict resolution on a traversable entity graph each implement a \textit{prerequisite} for graph-based propagation; none has taken the final step of traversing entity connections to cascade updates.
+The progression from single-fact conflict detection to multi-hop consistency maintenance mirrors the relational database evolution from row-level locks to foreign-key cascades---a step that required no new storage, only new traversal logic.
 Since the graph infrastructure and conflict detection already exist, implementing propagation requires no new data structures---yet as we show, it produces catastrophic collateral damage.
+Understanding these failure modes \textit{before} adoption is the purpose of this work.
 
 \subsection{The Forgetting Problem at Scale}
 \label{sec:bg_forgetting}
