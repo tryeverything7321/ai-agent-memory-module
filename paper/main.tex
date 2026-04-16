@@ -47,10 +47,10 @@ Modern AI memory systems maintain entity graphs for retrieval and detect factual
 Graph-based propagation---cascading updates through entity connections---is the architecturally natural next step, yet remains unimplemented and unexamined.
 We implement this approach and reveal a fundamental flaw: \textbf{structural co-occurrence does not imply causal dependency}, causing \textbf{catastrophic collateral damage} that is both quantitatively severe and adversarially exploitable.
 On MemoryAgentBench, BFS-based propagation through entity co-occurrence graphs decays 68.9--79.0\% of valid memories across scales (6K--64K facts), with hub entity degrees growing faster than fact count ($23 \rightarrow 121 \rightarrow 298$; ${\sim}13\times$ vs ${\sim}10\times$ fact growth).
-More critically, we demonstrate that an attacker can \textbf{weaponize this mechanism}: injecting just 5 fake facts targeting hub entities destroys 57.3\% of valid memories at 32K context.
+More critically, we demonstrate that an attacker can \textbf{exploit this mechanism}: injecting just 5 fake facts targeting hub entities destroys 57.3\% of valid memories at 32K context.
 We further show that this collateral damage \textbf{crosses task boundaries}---BFS propagation triggered during fact consolidation degrades retrieval accuracy on an unrelated task (F1 $-10.1\pm1.6$pp across top-5 hub entities).
 We propose \textbf{Attribute-aware Selective Propagation}, inspired by directional link failure models in transportation engineering, which defends against both organic and adversarial damage with 78--100\% effectiveness across all experiments.
-Graph topology analysis shows the co-occurrence graph is consistent with scale-free properties ($\alpha = 2.73$--$2.96$), providing theoretical grounding from percolation theory for why hub-targeted attacks are structurally devastating.
+Graph topology analysis shows the co-occurrence graph exhibits heavy-tailed degree distributions ($\alpha = 2.73$--$2.96$), providing theoretical grounding from percolation theory for why hub-targeted attacks are structurally devastating.
 \end{abstract}
 
 % ============================================================
@@ -81,7 +81,7 @@ Three findings quantify the consequences:
 \begin{itemize}
   \item \textbf{Catastrophic collateral damage.} BFS propagation decays 78.5\% of valid memories at 64K context, amplified by hub entities whose degree grows disproportionately with scale (\cref{sec:c1}).
 
-  \item \textbf{Adversarial exploitability.} Just 5 injected facts targeting hub entities destroy 57.3\% of valid memories---a new attack vector in which the system's own maintenance mechanism becomes the weapon (\cref{sec:c3}).
+  \item \textbf{Adversarial exploitability.} Just 5 injected facts targeting hub entities destroy 57.3\% of valid memories---a new attack vector that leverages the system's own maintenance mechanism (\cref{sec:c3}).
 
   \item \textbf{Cross-task contamination.} Propagation triggered during fact consolidation degrades retrieval on an \textit{unrelated} task by $10.1\pm1.6$ F1 percentage points across top-5 hub entities (\cref{sec:c2}).
 \end{itemize}
@@ -98,15 +98,15 @@ The problem is not propagation depth but propagation \textit{direction}---spread
 
 \subsection{Contributions}
 
-This work establishes a \textbf{destructive baseline} for graph-based invalidation propagation---a mechanism not yet widely deployed but architecturally inevitable as memory systems evolve from individual conflict detection to graph-wide consistency maintenance.
+This work establishes a \textbf{destructive baseline} for graph-based invalidation propagation---a mechanism not yet widely deployed but architecturally plausible as memory systems evolve from individual conflict detection to graph-wide consistency maintenance.
 Just as crash testing quantifies vehicle failure modes before deployment, our analysis quantifies propagation failure modes before adoption.
 
 \begin{enumerate}
   \item \textbf{Scale trend analysis (C1)}: Collateral damage quantification across 6K--64K scales, revealing disproportionate hub growth and 69--79\% BFS damage ratio with heavy-tailed graph topology ($\alpha = 2.73$--$2.96$).
 
-  \item \textbf{Cross-task contamination (C2)}: First demonstration that graph-based forgetting in one task degrades retrieval on an unrelated task.
+  \item \textbf{Cross-task contamination (C2)}: Empirical demonstration that graph-based forgetting in one task degrades retrieval on an unrelated task.
 
-  \item \textbf{Adversarial hub exploitation (C3)}: A novel attack exploiting propagation mechanics, with scale amplifying single-fact damage $7.3\times$. Black-box attacks fail entirely, establishing gray-box knowledge as the minimum requirement.
+  \item \textbf{Adversarial hub exploitation (C3)}: Systematic characterization of an attack exploiting propagation mechanics, with scale amplifying single-fact damage $7.3\times$. Black-box attacks fail entirely, establishing gray-box knowledge as the minimum requirement.
 
   \item \textbf{\attraware{} defense (C4)}: 78--100\% defense effectiveness across all scenarios; degree-capped BFS baselines remain $80\times$ worse, confirming that causal filtering outperforms structural limiting.
 \end{enumerate}
@@ -204,16 +204,16 @@ The key insight from this literature is the distinction between \textit{directio
 Closing the Seoul$\rightarrow$Busan route affects only Busan-downstream traffic; it does not disrupt Seoul$\rightarrow$Incheon service.
 This directional constraint is what prevents localized failures from becoming network-wide collapses.
 
-Scale-free network theory provides the structural explanation.
+Network theory on heavy-tailed degree distributions provides the structural explanation.
 Networks whose degree distribution follows a power law $P(k) \sim k^{-\alpha}$ are robust to random node failure but catastrophically fragile to targeted removal of high-degree hubs \citep{albert_attack_2000, barabasi_scalefree_1999}.
-Percolation theory formalizes this asymmetry: when hub nodes are removed from a scale-free network, the giant connected component fragments at a much lower removal fraction than for random networks \citep{cohen_percolation_2000}.
+Percolation theory formalizes this asymmetry: when hub nodes are removed from a network with heavy-tailed degree distribution, the giant connected component fragments at a much lower removal fraction than for random networks \citep{cohen_percolation_2000}.
 
 The analogy to AI memory graphs is direct.
 Entity co-occurrence graphs link entities that appear together in stored facts.
 Common entities---``United States,'' ``Google,'' a user's name---accumulate connections to many facts, forming hubs.
 If invalidation propagates through these hubs without directional constraint, a single fact update can cascade to every fact sharing a hub entity.
 This is precisely the non-directional failure mode that transportation engineering has learned to prevent through directional flow models.
-We test whether AI memory co-occurrence graphs exhibit scale-free properties and whether hub-targeted operations produce the predicted catastrophic damage (\cref{sec:c1}).
+We test whether AI memory co-occurrence graphs exhibit heavy-tailed degree distributions and whether hub-targeted operations produce the predicted catastrophic damage (\cref{sec:c1}).
 
 \subsection{Evaluation Framework}
 \label{sec:bg_eval}
@@ -285,7 +285,7 @@ Baseline & Subject-key match & None \\
 
 \subsection{Graph Topology Analysis}
 
-We test whether the entity co-occurrence graph is consistent with scale-free properties using maximum likelihood estimation for power-law exponents following \citet{clauset_powerlaw_2009}.
+We test whether the entity co-occurrence graph exhibits heavy-tailed degree distributions using maximum likelihood estimation for power-law exponents following \citet{clauset_powerlaw_2009}.
 
 \begin{table}[htbp]
 \centering
@@ -306,11 +306,16 @@ We test whether the entity co-occurrence graph is consistent with scale-free pro
 \begin{figure}[ht]
 \centering
 \includegraphics[width=0.85\columnwidth]{figures/fig_degree_distribution.pdf}
-\caption{Complementary cumulative degree distribution (CCDF) on log-log axes across scales. Dashed lines show MLE power-law fits. The heavy tail extends with scale, consistent with scale-free properties.}
+\caption{Complementary cumulative degree distribution (CCDF) on log-log axes across scales. Dashed lines show MLE power-law fits. The heavy tail extends with scale.}
 \label{fig:degree_dist}
 \end{figure}
 
-\finding{4} Following the full methodology of \citet{clauset_powerlaw_2009}---discrete MLE, automatic $k_{\min}$ selection, and bootstrap KS goodness-of-fit testing (1000 iterations)---all three scales yield $\alpha \in [2.73, 2.96]$, consistent with the scale-free regime $2 < \alpha < 3$ \citep{barabasi_scalefree_1999}. The bootstrap $p_{\text{KS}}$ confirms that the power-law hypothesis \textit{cannot be rejected} at 6K ($p=0.921$) and 32K ($p=0.472$), while it is rejected at 64K ($p=0.009$). This scale-dependent rejection is a well-documented phenomenon: as sample size grows, the bootstrap test becomes powerful enough to reject any simple parametric model \citep{clauset_powerlaw_2009}. Likelihood ratio tests confirm the tail is \textit{significantly heavier} than exponential ($p < 0.001$ at 32K, 64K) but \textit{statistically indistinguishable} from log-normal ($p > 0.1$). Crucially, the key property driving hub vulnerability is not the exact generating process but the heavy-tailed degree distribution with high heterogeneity ($\kappa \equiv \langle k^2 \rangle / \langle k \rangle$ grows from $4.6$ to $32.3$), which holds regardless of whether the tail follows a pure power-law or log-normal.
+\finding{4} Following the full methodology of \citet{clauset_powerlaw_2009}---discrete MLE, automatic $k_{\min}$ selection, and bootstrap KS goodness-of-fit testing (1000 iterations)---all three scales yield $\alpha \in [2.73, 2.96]$.
+The bootstrap $p_{\text{KS}}$ confirms that the power-law hypothesis \textit{cannot be rejected} at 6K ($p=0.921$) and 32K ($p=0.472$), but \textit{is rejected} at 64K ($p=0.009$).
+Likelihood ratio tests further show the tail is \textit{significantly heavier} than exponential ($p < 0.001$ at 32K, 64K) but \textit{statistically indistinguishable} from log-normal ($p > 0.1$ at all scales).
+We therefore characterize the topology as \textbf{heavy-tailed} rather than strictly scale-free: the data are consistent with power-law at smaller scales but cannot exclude log-normal at any scale.
+Crucially, the property driving hub vulnerability is not the exact generating process but the \textit{degree heterogeneity}: $\kappa \equiv \langle k^2 \rangle / \langle k \rangle$ grows from $4.6$ to $32.3$ across scales.
+Percolation theory predicts catastrophic fragmentation under targeted hub removal whenever $\kappa$ diverges \citep{cohen_percolation_2000, molloy_reed_1995}---a condition satisfied by both power-law and log-normal tails with sufficient skew.
 
 \finding{5} Hub concentration intensifies with scale: the top 1\% of nodes control 7.3\% (6K), 15.5\% (32K), and 19.8\% (64K) of all edges.
 
@@ -366,7 +371,7 @@ Post-Attr (5-hub avg)    & 20.2$\pm$0.4 & 71.1$\pm$1.3 & 755$\pm$931 & 1.0$\pm$0
 \label{sec:c3}
 
 Sections~\ref{sec:c1}--\ref{sec:c2} establish that BFS propagation causes severe collateral damage under benign conditions.
-We now ask whether an adversary can \textit{deliberately} trigger this mechanism to weaponize the system's own maintenance infrastructure.
+We now ask whether an adversary can \textit{deliberately} trigger this mechanism to exploit the system's own maintenance infrastructure.
 
 \subsection{Threat Model}
 
@@ -408,7 +413,7 @@ Our primary experiments use white-box targeting (registry-based key lookup) to e
 
 \finding{7} A single fake fact destroys 5.2\% of valid memories at 6K and 38.1\% at 32K---a $7.3\times$ amplification from scale alone.
 
-\finding{8} Five fake facts at 32K destroy 57.3\% of valid memories and cause 19.3\% complete loss (weight $< 0.1$). The system's own forgetting mechanism becomes a weapon.
+\finding{8} Five fake facts at 32K destroy 57.3\% of valid memories and cause 19.3\% complete loss (weight $< 0.1$). The system's own forgetting mechanism becomes the primary damage vector.
 
 \subsection{Black-box Attack Results}
 
@@ -471,27 +476,30 @@ When fact $f$ with subject\_key \texttt{Entity:Attribute} is invalidated, \attra
 \caption{\attraware{} Selective Propagation}
 \label{alg:attraware}
 \begin{algorithmic}[1]
-\REQUIRE Invalidated fact $f$, entity graph $G$, max depth $D$, decay factor $\delta$
-\STATE \textbf{procedure} \textsc{Propagate}($f, G, D, \delta, h{=}0$) \COMMENT{$h$: current hop depth}
-\STATE $E_{\text{subj}} \leftarrow$ subject entities from $f$.\texttt{subject\_key}
-\STATE $E_{\text{obj}} \leftarrow$ entities in $f$ $\setminus$ $E_{\text{subj}}$ \COMMENT{object entities}
-\STATE $K_{\text{changed}} \leftarrow E_{\text{subj}}$ \COMMENT{changed keywords for semantic filter}
-\FOR{each entity $e \in E_{\text{obj}}$}
-  \STATE $M_e \leftarrow$ memories linked to $e$ in $G$
-  \FOR{each memory $m \in M_e$}
-    \IF{$m$ contains any keyword in $K_{\text{changed}}$}
-      \STATE $d_{\text{in}} \leftarrow \max(\text{in\_degree}(e), 1)$
+\REQUIRE Invalidated fact $f$ with \texttt{subject\_key} $= s{:}a$, entity graph $G$, fact registry $R$ (maps subject\_keys to memory IDs), max depth $D$, decay factor $\delta$
+\STATE \textbf{procedure} \textsc{Propagate}($f, G, R, D, \delta, h{=}0$)
+\STATE $s \leftarrow$ subject entity from $f$.\texttt{subject\_key}
+\STATE $E_{\text{obj}} \leftarrow$ entities linked to $f$ in $G$ with $e \neq s$ \COMMENT{object entities}
+\FOR{each object entity $e \in E_{\text{obj}}$}
+  \STATE $M_{\text{down}} \leftarrow \{R[k] \mid k \in R,\; k\text{.entity} = e\}$ \COMMENT{facts where $e$ is subject}
+  \FOR{each memory $m \in M_{\text{down}}$}
+    \IF{$m$ is valid}
+      \STATE $d_{\text{in}} \leftarrow \max(\text{in\_degree}(e, G), 1)$
       \STATE $m.w \leftarrow m.w \times \left(1 - \frac{1 - \delta}{~d_{\text{in}}~}\right)$
     \ENDIF
   \ENDFOR
   \IF{$h < D$}
-    \STATE \textsc{Propagate}($m, G, D, \delta, h{+}1$) for downstream successors of $e$
+    \FOR{each affected $m \in M_{\text{down}}$}
+      \STATE $k_m \leftarrow$ subject\_key of $m$ in $R$
+      \STATE \textsc{Propagate}($m, G, R, D, \delta, h{+}1$) \COMMENT{chain along causal path}
+    \ENDFOR
   \ENDIF
 \ENDFOR
 \end{algorithmic}
 \end{algorithm}
 
-The in-degree adjustment (lines~10--11) dampens decay for highly-connected entities, reflecting the intuition that a fact referenced by many sources is less likely to be fully invalidated by a single upstream change.
+The key filtering step is line~5: instead of propagating to all neighbors of the object entity, \attraware{} retrieves only those facts where the object entity appears as the \textit{subject} in the fact registry $R$---restricting propagation to genuine downstream dependencies.
+The in-degree adjustment (lines~9--10) dampens decay for highly-connected entities, reflecting the intuition that a fact referenced by many sources is less likely to be fully invalidated by a single upstream change.
 \bfsprop{} propagation differs by visiting \textit{all} neighbors (both successors and predecessors) without the semantic filter (line~9) or in-degree adjustment.
 
 \paragraph{Computational overhead.}
@@ -555,7 +563,7 @@ Adv 32K / 5f & 57.3\% & 1.0\% & 98.2\% \\
 \textbf{Memory systems and invalidation.}
 As described in \cref{sec:background}, modern AI memory systems maintain entity graphs for retrieval \citep{mem0_2024, magma_2026, amem_2025, zep_2025} and some detect factual conflicts at the individual-edge level \citep{mem0_2024, zep_2025}.
 A recent survey of graph-augmented agent memory \citep{graph_agent_memory_survey_2026} catalogs these architectures but does not address invalidation propagation.
-All graph-maintaining systems use graphs to \textit{retrieve} relevant memories; we study what happens when graphs are used to \textit{propagate invalidation}---a capability none currently implement, yet one that is architecturally inevitable as memory scales demand consistency beyond individual facts.
+All graph-maintaining systems use graphs to \textit{retrieve} relevant memories; we study what happens when graphs are used to \textit{propagate invalidation}---a capability none currently implement, yet one that becomes increasingly plausible as memory scales demand consistency beyond individual facts.
 
 \textbf{Knowledge editing and ripple effects.}
 Knowledge editing modifies LLM parameters to update specific facts without full retraining.
@@ -577,20 +585,33 @@ MINJA \citep{minja_2025} demonstrates query-only memory injection that achieves 
 AgentPoison \citep{agentpoison_2024} shows that poisoning less than 0.1\% of a long-term memory corpus yields 80\%+ attack success across autonomous agent benchmarks.
 ER-MIA \citep{ermia_2026} extends injection attacks to black-box persistent memory via similarity exploitation, and \citet{memory_poisoning_2026} formalize attack--defense frameworks for memory poisoning.
 MITRE ATLAS designates persistent memory manipulation as technique AML.T0080 \citep{mitre_atlas_2023}, reflecting its emergence as a recognized threat category.
-These attacks inject malicious \textit{content} into memory.
-Our hub exploitation attack is structurally distinct: the attacker does not inject harmful content but triggers the system's own legitimate forgetting mechanism to destroy valid memories, weaponizing \textit{infrastructure} rather than \textit{data}.
+Concurrent work on graph-level attacks extends this threat: KEPo \citep{kepo_2026} poisons GraphRAG by manipulating graph topology to redirect reasoning paths, and LogicPoison \citep{logicpoison_2026} exploits logical structure in graph retrieval-augmented generation.
+These attacks inject malicious \textit{content} into memory or manipulate \textit{retrieval paths}.
+Our hub exploitation attack is structurally distinct: the attacker does not inject harmful content but triggers the system's own legitimate forgetting mechanism to destroy valid memories, exploiting \textit{maintenance infrastructure} rather than \textit{data or retrieval}.
 
-\textbf{Temporal decay.}
-Mnemosyne \citep{mnemosyne_2025} applies per-memory temporal decay via reverse sigmoid functions inspired by Ebbinghaus forgetting curves \citep{ebbinghaus_1885}, where each memory fades independently of graph connections.
-Our work is complementary: temporal decay determines \textit{how fast} individual memories fade, while graph-based propagation determines \textit{which} memories are affected by a factual update.
-The two mechanisms could be composed, with temporal decay governing passive forgetting and attribute-aware propagation governing active invalidation.
+\textbf{Memory forgetting policies.}
+Agent memory forgetting has been studied along two axes.
+\textit{Budget-driven forgetting} manages capacity constraints: Mnemosyne \citep{mnemosyne_2025} applies per-memory temporal decay via reverse sigmoid functions inspired by Ebbinghaus forgetting curves \citep{ebbinghaus_1885}; MaRS \citep{mars_2025} systematically compares six policies (FIFO, LRU, priority decay, reflection-summary, random-drop, and a hybrid cascade) with provenance closure constraints that protect dependent nodes during eviction; and \citet{fofadiya_forgetting_2026} propose relevance-guided budgeted forgetting combining recency, frequency, and semantic alignment.
+\textit{Fact-level invalidation} manages correctness: Zep/Graphiti \citep{zep_2025} invalidates individual edges via temporal validity windows, and MemMachine \citep{memmachine_2026} preserves ground-truth through version management.
+Neither axis addresses \textit{graph-based invalidation propagation}---cascading updates through entity connections when a fact changes.
+MaRS's provenance closure is the closest prior work, but operates on the \textit{retention} side (protecting dependencies during deletion), whereas our study addresses the \textit{invalidation} side (propagating error through dependencies during correction).
+The two directions are complementary.
+
+\textbf{Belief revision.}
+The AGM framework defines rationality postulates for belief change, and Hansson's Relevance and Core-Retainment postulates ensure that contraction removes only beliefs contributing to the target's derivation.
+Kumiho \citep{kumiho_2026} maps these postulates to a property graph memory architecture with six typed dependency edges (e.g., \texttt{Depends\_On}, \texttt{Derived\_From}), providing formal guarantees that unrelated beliefs are preserved during revision.
+Under Relevance, only revisions explicitly containing the target belief are affected---a principled approach to preventing collateral damage.
+However, Kumiho's guarantees rest on assumptions that do not hold in deployed systems: typed edges must be available at graph construction time, and propagation beyond the directly targeted revision is unnecessary.
+In practice, Mem0, Zep, and MAGMA construct entity graphs via co-occurrence extraction without typed edges, and MemoryAgentBench shows that non-propagation leaves selective forgetting below 6\%.
+Our work addresses the complementary question: \textit{when propagation is attempted on untyped co-occurrence graphs}, what is the empirical damage profile?
+\attraware{} occupies a distinct design point from Kumiho---it operates post hoc on existing untyped graphs rather than requiring architectural redesign, and its effectiveness is validated empirically across 6K--64K scales rather than through axiomatic compliance on 49 scenarios.
 
 \textbf{Network resilience.}
-Scale-free networks exhibit robust-yet-fragile behavior: high tolerance to random node failures but extreme vulnerability to targeted hub removal \citep{albert_attack_2000, barabasi_scalefree_1999}.
+Networks with heavy-tailed degree distributions exhibit robust-yet-fragile behavior: high tolerance to random node failures but extreme vulnerability to targeted hub removal \citep{albert_attack_2000, barabasi_scalefree_1999}.
 Percolation theory formalizes this by predicting that heterogeneous degree distributions lower the critical fraction for network fragmentation \citep{cohen_percolation_2000, molloy_reed_1995}.
 Recent work on compounding vulnerability \citep{compounding_vulnerability_2026} shows that hub removal simultaneously degrades both percolation connectivity and cascade robustness, producing damage that exceeds the sum of individual effects.
 Transportation network resilience research \citep{chen_network_2007} adds the directional dimension that motivates our defense: link failures propagate along specific routes, not uniformly through the network.
-Our results empirically confirm these network science predictions in AI memory systems---the co-occurrence graph exhibits scale-free topology ($\alpha = 2.73$--$2.96$), and hub-targeted attacks produce the catastrophic fragmentation that theory predicts.
+Our results empirically confirm these network science predictions in AI memory systems---the co-occurrence graph exhibits heavy-tailed topology ($\alpha = 2.73$--$2.96$), and hub-targeted attacks produce the catastrophic fragmentation that theory predicts.
 
 
 % ============================================================
@@ -620,7 +641,7 @@ One might ask whether the observed heavy-tailed topology ($\alpha \approx 2.7$--
 We argue it is not, because the mechanism is linguistic, not dataset-specific.
 Entity mention frequencies in natural language follow Zipf's law \citep{zipf_1949}: a small number of entities (nations, organizations, public figures) account for a disproportionate share of mentions across any sufficiently diverse corpus.
 When memories are constructed from such text, co-occurrence graphs inherit this skew, producing hub-and-spoke structures regardless of domain.
-This is consistent with findings in semantic network research, where free-association graphs \citep{steyvers_semantic_2005} and knowledge graphs \citep{barabasi_scalefree_1999} independently exhibit scale-free degree distributions.
+This is consistent with findings in semantic network research, where free-association graphs \citep{steyvers_semantic_2005} and knowledge graphs \citep{barabasi_scalefree_1999} independently exhibit heavy-tailed degree distributions.
 While replication on additional benchmarks remains important (Limitation~2), the Zipfian origin of hub formation suggests our results generalize to any memory system built from natural-language interactions.
 
 \subsection{Limitations}
@@ -647,11 +668,11 @@ While replication on additional benchmarks remains important (Limitation~2), the
 \section{Conclusion}
 \label{sec:conclusion}
 
-As AI memory systems evolve from flat stores to graph-augmented architectures, graph-based invalidation propagation is the inevitable next step for maintaining fact consistency at scale.
-This work is, to our knowledge, the first to implement and systematically analyze graph-based invalidation propagation in external non-parametric memory stores, revealing that naive BFS propagation through entity co-occurrence graphs is \textbf{catastrophically destructive} (69--79\% damage), \textbf{cross-task toxic} (F1 $-10.1$pp on unrelated retrieval), and \textbf{adversarially weaponizable} (5 fake facts $\rightarrow$ 57.3\% memory destruction).
+As AI memory systems evolve from flat stores to graph-augmented architectures, graph-based invalidation propagation is a natural next step for maintaining fact consistency at scale.
+This work systematically analyzes graph-based invalidation propagation in external non-parametric memory stores, revealing that naive BFS propagation through entity co-occurrence graphs is \textbf{catastrophically destructive} (69--79\% damage), \textbf{cross-task toxic} (F1 $-10.1$pp on unrelated retrieval), and \textbf{adversarially exploitable} (5 fake facts $\rightarrow$ 57.3\% memory destruction).
 
 \attraware{} Selective Propagation, inspired by directional link failure models in transportation engineering, provides consistent defense across all threat vectors (78--100\% effectiveness) with negligible overhead.
-Graph topology analysis reveals the underlying mechanism: co-occurrence graphs exhibit heavy-tailed degree distributions consistent with scale-free properties ($\alpha \approx 2.7$--$3.0$), making them structurally robust to random failures but catastrophically vulnerable to targeted hub attacks---a prediction from percolation theory that our empirical results corroborate.
+Graph topology analysis reveals the underlying mechanism: co-occurrence graphs exhibit heavy-tailed degree distributions ($\alpha \approx 2.7$--$3.0$) with degree heterogeneity ($\kappa$) that grows an order of magnitude with scale, making them structurally robust to random failures but catastrophically vulnerable to targeted hub attacks---a prediction from percolation theory that our empirical results corroborate.
 
 The key insight: \textbf{propagation must follow causal dependency chains, not structural co-occurrence}---a principle well-established in transportation network resilience but previously unapplied to AI memory systems.
 

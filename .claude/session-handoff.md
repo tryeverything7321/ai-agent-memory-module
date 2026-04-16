@@ -1,40 +1,55 @@
-# Session Handoff — 2026-04-15 (Updated)
+# Session Handoff — 2026-04-16 (Updated)
 **작업 디렉토리**: `/home/mingyu1choi/PJT/memory_module`
+**브랜치**: `feat/deep-dive-analysis`
 
 ---
 
-## 완료된 작업 (이번 세션)
+## 완료된 작업
 
-### Stage 1: 진단 (이전 세션 완료)
+### 이전 세션 (2026-04-15)
 - 4개 전문 에이전트 리뷰 → `.review/2026-04-10-full-paper-review.md`
 - 문헌 수집 967편 → 55편 선별 → `paper/literature_survey_2026.md`
+- Introduction/Background/Related Work/Abstract 대폭 재작성
+- references.bib 정비 (오류 3건 수정, 16편 추가)
+- 실험 보강 7건 완료 → `.claude/todo-paper-experiments.md` (전부 ✅)
 
-### Stage 2-3: 보강/개선 (이번 세션 완료)
-1. **references.bib 정비** — 오류 3건 수정, 핵심 논문 16편 추가
-2. **Introduction 재작성** — macro context, nugget, GPS 리듬, steel-manning 추가
-3. **Background 확장** — 3→5 subsections (Forgetting Problem, Memory Security 신설)
-4. **Related Work 확장** — 4→7 categories (Knowledge Editing, Graph Unlearning, Memory Attacks 신설)
-5. **Abstract 수정** — 수치 오류 수정 (68.9--79.0%), nugget 삽입
-6. **Algorithm 1 기호 수정** — α→d_in (power-law α와 충돌 해소)
-7. **Scale-free 언어 완화** — "exhibits" → "consistent with" (4곳)
-8. **LaTeX 컴파일 확인** — 16페이지, 경고 없이 빌드 성공
+### 이번 세션 (2026-04-16)
+1. **Introduction/Background 팩트체크** — Zep/MAGMA/Mem0 기술 과장 수정 (dd6e9f6)
+   - 웹/논문 검증 후 "contradiction metadata" → "bi-temporal validity windows" 등 정확한 표현으로 교체
+2. **Adversarial Review 실행** — 4개 리뷰어 병렬 투입
+   - Technical Reviewer, Logic Reviewer, Research Analyst, Writing Reviewer
+   - 결과: `.review/2026-04-16-adversarial-review.md` (Critical 8건, Major 22건+)
+3. **대응 계획 수립** — 3개 연구 에이전트로 조사 후 계획 작성
+   - Kumiho 논문 분석 + 차별화 전략
+   - MaRS + forgetting 문헌 조사 + Related Work 초안
+   - Forgetting accuracy 실험 설계 (코드 구조 분석 완료)
+   - 결과: `.review/2026-04-16-response-plan.md`
+
+---
+
+## 남은 작업 (우선순위순)
+
+### 즉시 가능 (텍스트 작업)
+1. **Scale-free → heavy-tailed 전환** — 본문 5-6곳 수정 (반나절)
+2. **Algorithm 1 의사코드 수정** — 실제 코드와 일치시키기 (반나절)
+3. **문헌 보강** — Kumiho, MaRS, KEPo 등 인용 + Related Work 확장 (1일)
+4. **텍스트 수정** — "inevitable" 완화, 용어 통일, 중복 제거, 선정적 표현 완화 (1일)
+
+### 코드 작업 (별도 세션 권장)
+5. **[최우선] Forgetting Accuracy 3자 비교 실험** — C1 해소 (3-5일)
+   - `experiments/graph_forgetting.py`: forgetting_accuracy 메트릭 추가
+   - `experiments/benchmark_runner.py`: 3-way comparison 함수
+   - 실험 설계 완료됨 (`.review/2026-04-16-response-plan.md` Phase 1-1)
+6. **2번째 벤치마크 추가** — C4 부분 해소 (1-2주)
+7. **Subject-key matching precision/recall** — M3 해소
 
 ---
 
-## 남은 작업 (실험 재실행 필요)
-
-### 실험 보강 (Important, 코드 수정 필요)
-1. **Scale-free KS goodness-of-fit test** — Clauset et al. (2009) 절차 준수, log-normal 비교
-2. **통계 분석 보강** — 풀링 정당화 또는 mixed-effects model, 음수 damage 설명
-3. **Graph construction 상세 기술** — entity extraction, co-occurrence 정의를 Appendix에 추가
-
-### 선택적 추가 실험 (Minor)
-4. Gray-box 공격 실험 (현재 white/black만 있음)
-5. Cross-task 실험 확장 (n=1 → n=5+)
-
----
+## 핵심 참고 파일
+- `.review/2026-04-16-adversarial-review.md` — 전체 리뷰 결과
+- `.review/2026-04-16-response-plan.md` — 대응 계획 (Phase 1-4)
+- `.claude/todo-paper-experiments.md` — 이전 실험 TODO (전부 완료)
 
 ## ⚠️ 충돌 방지
-- **이 세션 범위**: `paper/` 디렉토리만
-- **건드리지 말 것**: `serving_research/`, memory_module 코드 파일 (`api/`, `storage/`, `models.py` 등)
-- 남은 실험 작업은 코드 파일 수정이 필요하므로 별도 세션에서 진행 권장
+- **이 세션 범위**: `paper/`, `.review/` 디렉토리
+- **건드리지 말 것**: `serving_research/`, memory_module 코드 파일
