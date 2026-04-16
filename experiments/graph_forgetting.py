@@ -437,9 +437,11 @@ def evaluate_search_results(
         total: 전체 결과 수
         stale_rate: stale / total
         valid_precision: valid / total
+        forgetting_accuracy: old_memory가 top-5에서 제외되었으면 1.0, 아니면 0.0
     """
     stale_count = 0
     valid_count = 0
+    old_fact_found = False
 
     for result in results:
         mem = result.memory if hasattr(result, "memory") else result
@@ -449,6 +451,7 @@ def evaluate_search_results(
         mem_id = mem.id if hasattr(mem, "id") else ""
         if mem_id == old_memory_id:
             stale_count += 1
+            old_fact_found = True
             continue
 
         # stale keyword 포함 여부
@@ -461,6 +464,11 @@ def evaluate_search_results(
     total = len(results) if results else 1
     stale_rate = stale_count / total
     valid_precision = valid_count / total
+
+    # Forgetting accuracy (broad): 모든 stale 콘텐츠가 검색에서 제거된 비율
+    # = 1 - stale_rate (원본 fact + 관련 stale fact 모두 포함)
+    # No-Propagation에서는 관련 stale fact가 남아있어 이 값이 낮음
+    forgetting_accuracy = 1.0 - stale_rate
 
     # F1: harmonic mean of (1-stale_rate) and valid_precision
     freshness = 1 - stale_rate
@@ -475,6 +483,7 @@ def evaluate_search_results(
         "total": total,
         "stale_rate": stale_rate,
         "valid_precision": valid_precision,
+        "forgetting_accuracy": forgetting_accuracy,
         "f1": f1,
     }
 
@@ -552,16 +561,50 @@ async def run_single_scenario(
 
         # weight 변화 기록
         weight_changes = {}
-        for mem in memories:
+        collateral_weight_loss = 0.0
+        collateral_count = 0
+        total_unrelated = 0
+
+        for idx, mem in enumerate(memories):
             updated = await metadata_store.get_memory(mem.id)
+            is_changed_fact = (idx == scenario["old_fact_idx"])
+
             if updated and abs(updated.decay_weight - mem.decay_weight) > 0.001:
                 weight_changes[mem.id] = {
                     "content": mem.content[:40],
                     "before": round(mem.decay_weight, 4),
                     "after": round(updated.decay_weight, 4),
+                    "is_target": is_changed_fact,
                 }
+
+            # collateral damage: 변경 대상이 아닌 메모리의 weight 손실
+            if not is_changed_fact:
+                total_unrelated += 1
+                if updated:
+                    loss = mem.decay_weight - updated.decay_weight
+                    if loss > 0.001:
+                        collateral_weight_loss += loss
+                        collateral_count += 1
+
+        # Collateral Damage Rate: 피해를 입은 무관 메모리 비율
+        collateral_damage_rate = collateral_count / max(total_unrelated, 1)
+
+        # Avg weight loss among damaged memories
+        avg_collateral_loss = (
+            collateral_weight_loss / collateral_count if collateral_count > 0 else 0.0
+        )
+
+        # Benefit-Damage Ratio
+        forgetting_acc = metrics["forgetting_accuracy"]
+        bdr = forgetting_acc / (1 + collateral_damage_rate)
+
         metrics["weight_changes"] = weight_changes
         metrics["pruned_count"] = pruned
+        metrics["collateral_damage_rate"] = round(collateral_damage_rate, 4)
+        metrics["collateral_count"] = collateral_count
+        metrics["total_unrelated"] = total_unrelated
+        metrics["avg_collateral_loss"] = round(avg_collateral_loss, 4)
+        metrics["benefit_damage_ratio"] = round(bdr, 4)
 
         return metrics
 
@@ -619,34 +662,57 @@ async def run_experiment(
             "avg_stale_rate": sum(r["stale_rate"] for r in results) / n,
             "avg_valid_precision": sum(r["valid_precision"] for r in results) / n,
             "avg_f1": sum(r["f1"] for r in results) / n,
+            "avg_forgetting_accuracy": sum(r["forgetting_accuracy"] for r in results) / n,
+            "avg_collateral_damage_rate": sum(r["collateral_damage_rate"] for r in results) / n,
+            "avg_collateral_count": sum(r["collateral_count"] for r in results) / n,
+            "avg_benefit_damage_ratio": sum(r["benefit_damage_ratio"] for r in results) / n,
         }
 
     baseline_agg = aggregate(baseline_results)
     naive_agg = aggregate(naive_results)
     semantic_agg = aggregate(semantic_results)
 
-    # 요약 출력
-    print(f"\n{'Metric':<25} {'Baseline':>10} {'Naive':>10} {'Semantic':>10} {'Δ(S-B)':>10}")
-    print("-" * 65)
-    for metric_name in ["avg_stale_rate", "avg_valid_precision", "avg_f1"]:
+    # --- 핵심 지표 요약 (Phase 1-1 포맷) ---
+    print(f"\n{'='*75}")
+    print(f"  3-Arm Comparison: No-Propagation vs BFS vs Attr-Aware")
+    print(f"{'='*75}")
+
+    metrics_display = [
+        ("Forgetting Accuracy", "avg_forgetting_accuracy", True),
+        ("Collateral Damage Rate", "avg_collateral_damage_rate", False),
+        ("Benefit-Damage Ratio", "avg_benefit_damage_ratio", True),
+        ("Stale Rate", "avg_stale_rate", False),
+        ("Valid Precision", "avg_valid_precision", True),
+        ("F1", "avg_f1", True),
+    ]
+
+    print(f"\n{'Metric':<28} {'No-Prop':>10} {'BFS':>10} {'Attr-Aware':>12} {'Δ(A-N)':>10}")
+    print("-" * 75)
+    for display_name, metric_name, higher_better in metrics_display:
         b = baseline_agg[metric_name]
         n = naive_agg[metric_name]
         s = semantic_agg[metric_name]
-        delta = s - b
-        if metric_name == "avg_stale_rate":
-            good = "✓" if delta < 0 else ""
+        delta = s - n
+        if higher_better:
+            good = "✓" if delta > 0 else ("=" if abs(delta) < 0.001 else "")
         else:
-            good = "✓" if delta > 0 else ""
-        print(f"{metric_name:<25} {b:>10.4f} {n:>10.4f} {s:>10.4f} {delta:>+10.4f} {good}")
+            good = "✓" if delta < 0 else ("=" if abs(delta) < 0.001 else "")
+        print(f"  {display_name:<26} {b:>10.4f} {n:>10.4f} {s:>12.4f} {delta:>+10.4f} {good}")
 
-    # 시나리오별
-    print(f"\n{'ID':<6} {'B-F1':>6} {'N-F1':>6} {'S-F1':>6} {'Δ(S-B)':>8} {'Δ(S-N)':>8}")
-    print("-" * 50)
+    # 시나리오별 상세
+    print(f"\n{'ID':<6} {'B-Forg':>7} {'N-Forg':>7} {'S-Forg':>7} {'B-CDR':>7} {'N-CDR':>7} {'S-CDR':>7} {'S-BDR':>7}")
+    print("-" * 70)
     for b, n, s in zip(baseline_results, naive_results, semantic_results):
-        dsb = s["f1"] - b["f1"]
-        dsn = s["f1"] - n["f1"]
-        marker = "▲" if dsb > 0 else "▼" if dsb < 0 else " "
-        print(f"{b['scenario_id']:<6} {b['f1']:>6.3f} {n['f1']:>6.3f} {s['f1']:>6.3f} {dsb:>+8.3f}{marker} {dsn:>+8.3f}")
+        print(
+            f"{b['scenario_id']:<6} "
+            f"{b['forgetting_accuracy']:>7.1%} "
+            f"{n['forgetting_accuracy']:>7.1%} "
+            f"{s['forgetting_accuracy']:>7.1%} "
+            f"{b['collateral_damage_rate']:>7.1%} "
+            f"{n['collateral_damage_rate']:>7.1%} "
+            f"{s['collateral_damage_rate']:>7.1%} "
+            f"{s['benefit_damage_ratio']:>7.3f}"
+        )
 
     return {
         "config": {
@@ -687,10 +753,10 @@ async def run_ablation():
     print("\n" + "=" * 70)
     print("ABLATION SUMMARY (3-Arm: Baseline / Naive / Semantic)")
     print("=" * 70)
-    print(f"\n{'depth':>5} {'dph':>5} {'B-F1':>6} {'N-F1':>6} {'S-F1':>6} {'Δ(S-B)':>8} {'Δ(S-N)':>8} {'Best':>5}")
-    print("-" * 60)
+    print(f"\n{'depth':>5} {'dph':>5} {'B-Forg':>7} {'N-Forg':>7} {'S-Forg':>7} {'N-CDR':>6} {'S-CDR':>6} {'S-BDR':>7} {'S-F1':>6} {'Best':>5}")
+    print("-" * 75)
 
-    best_delta = -999
+    best_bdr = -999
     best_config = None
 
     for r in all_results:
@@ -698,36 +764,36 @@ async def run_ablation():
         ba = r["baseline"]["aggregate"]
         na = r["naive"]["aggregate"]
         sa = r["semantic"]["aggregate"]
-        delta_sb = sa["avg_f1"] - ba["avg_f1"]
-        delta_sn = sa["avg_f1"] - na["avg_f1"]
         is_best = ""
 
-        if delta_sb > best_delta:
-            best_delta = delta_sb
+        if sa["avg_benefit_damage_ratio"] > best_bdr:
+            best_bdr = sa["avg_benefit_damage_ratio"]
             best_config = cfg
             is_best = "★"
 
         print(
             f"{cfg['propagation_depth']:>5} "
             f"{cfg['decay_per_hop']:>5.1f} "
-            f"{ba['avg_f1']:>6.4f} "
-            f"{na['avg_f1']:>6.4f} "
+            f"{ba['avg_forgetting_accuracy']:>7.1%} "
+            f"{na['avg_forgetting_accuracy']:>7.1%} "
+            f"{sa['avg_forgetting_accuracy']:>7.1%} "
+            f"{na['avg_collateral_damage_rate']:>6.1%} "
+            f"{sa['avg_collateral_damage_rate']:>6.1%} "
+            f"{sa['avg_benefit_damage_ratio']:>7.3f} "
             f"{sa['avg_f1']:>6.4f} "
-            f"{delta_sb:>+8.4f} "
-            f"{delta_sn:>+8.4f} "
             f"{is_best:>5}"
         )
 
     print(f"\n최적 설정: depth={best_config['propagation_depth']}, "
           f"decay_per_hop={best_config['decay_per_hop']}, "
-          f"Δ(Semantic-Baseline) F1={best_delta:+.4f}")
+          f"Best BDR={best_bdr:.3f}")
 
     # 결과 저장
     output = {
         "timestamp": datetime.now().isoformat(),
         "ablation_results": all_results,
         "best_config": best_config,
-        "best_delta_f1": best_delta,
+        "best_bdr": best_bdr,
     }
 
     output_dir = Path(__file__).parent / "results"
