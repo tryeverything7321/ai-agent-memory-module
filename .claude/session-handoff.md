@@ -1,10 +1,18 @@
-# Session Handoff — 2026-04-16 (Updated)
+# Session Handoff — 2026-04-20 (Updated)
 **작업 디렉토리**: `/home/mingyu1choi/PJT/memory_module`
 **브랜치**: `feat/deep-dive-analysis`
+**타겟**: ICML 2026 워크샵 페이퍼
 
 ---
 
 ## 완료된 작업
+
+### 세션 2026-04-20 (ICML 워크샵 준비)
+1. **Forgetting Accuracy 3-arm 결과를 본문에 통합** — Table 7 (forgetting_accuracy) + Finding 12 추가
+   - Abstract에 "16% stale" 동기 추가, Introduction "Four findings"로 확장, Conclusion에 Attr-Aware 94% 수치 반영
+2. **선정적 용어 정리** — catastrophic 10→2회, destroy 9→3회, blast radius/devastating/toxic 제거
+3. **누락 인용 추가** — AGM framework (1985), Hansson Relevance postulate (1999) bib + citation 추가
+4. **LaTeX 컴파일 확인** — 21페이지, undefined refs 0, bibtex warning 2 (기존 minor)
 
 ### 이전 세션 (2026-04-15)
 - 4개 전문 에이전트 리뷰 → `.review/2026-04-10-full-paper-review.md`
@@ -27,21 +35,25 @@
 
 ---
 
-## 남은 작업 (우선순위순)
+## 남은 작업 (ICML 워크샵 기준)
 
-### 즉시 가능 (텍스트 작업)
-1. **Scale-free → heavy-tailed 전환** — 본문 5-6곳 수정 (반나절)
-2. **Algorithm 1 의사코드 수정** — 실제 코드와 일치시키기 (반나절)
-3. **문헌 보강** — Kumiho, MaRS, KEPo 등 인용 + Related Work 확장 (1일)
-4. **텍스트 수정** — "inevitable" 완화, 용어 통일, 중복 제거, 선정적 표현 완화 (1일)
+### 완료됨 ✅
+- ~~Scale-free → heavy-tailed 전환~~ (이전 세션에서 완료)
+- ~~Algorithm 1 의사코드 수정~~ (이전 세션에서 완료)
+- ~~문헌 보강 — Kumiho, MaRS, KEPo~~ (이전 세션에서 완료)
+- ~~선정적 표현 완화~~ (2026-04-20 완료)
+- ~~Forgetting Accuracy 본문 통합~~ (2026-04-20 완료)
+- ~~AGM/Hansson 인용 추가~~ (2026-04-20 완료)
 
-### 코드 작업 (별도 세션 권장)
-5. **[최우선] Forgetting Accuracy 3자 비교 실험** — C1 해소 (3-5일)
-   - `experiments/graph_forgetting.py`: forgetting_accuracy 메트릭 추가
-   - `experiments/benchmark_runner.py`: 3-way comparison 함수
-   - 실험 설계 완료됨 (`.review/2026-04-16-response-plan.md` Phase 1-1)
-6. **2번째 벤치마크 추가** — C4 부분 해소 (1-2주)
-7. **Subject-key matching precision/recall** — M3 해소
+### 워크샵 제출 전 (선택)
+1. **ICML 워크샵 템플릿 적용** — 워크샵별 상이, CFP 확인 필요
+2. **Abstract 축소** — 현재 ~200단어 → 150단어 권장
+3. **2번째 LLM 실험 (Llama)** — 일반화 강화 (nice-to-have)
+
+### Full paper 승격 시
+4. **2번째 벤치마크 추가** — MemoryArena 또는 LongMemEval
+5. **Subject-key matching precision/recall** — M3 해소
+6. **Learned propagation policy** — GNN 기반 (ICML main fit 강화)
 
 ---
 
