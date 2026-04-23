@@ -66,4 +66,4 @@ BFS propagation의 collateral damage가 conflict resolution뿐 아니라 retriev
 | EM | **-5.0pp** | +0.0pp | **+5.0pp** |
 | F1 | **-18.2pp** | +0.0pp | **+18.2pp** |
 
-**Key finding**: A single BFS propagation from a hub entity (degree=715) affects 3,381 memories, destroys 32 retrievable memories, and drops F1 by 18.2pp. Attribute-aware propagation preserves full retrieval accuracy.
+**Key finding**: A single BFS propagation from a hub entity (degree=715) affects 3,381 memories, degrades 32 retrievable memories below threshold, and drops F1 by 18.2pp. Attribute-aware propagation preserves full retrieval accuracy.

@@ -13,8 +13,8 @@
 
 \newcommand{\theHalgorithm}{\arabic{algorithm}}
 
-% Blind review version
-\usepackage{icml2026}
+% Non-blind workshop submission (preprint shows authors without camera-ready formatting)
+\usepackage[preprint]{icml2026}
 
 \usepackage{amsmath,amssymb}
 \usepackage[capitalize,noabbrev]{cleveref}
@@ -36,13 +36,13 @@
   \icmltitle{Collateral Damage in Graph-based Memory Forgetting:\\
   Quantification, Exploitation, and Defense}
 
-  \icmlaffiliation{anon}{Anonymous Institution}
-
   \begin{icmlauthorlist}
-    \icmlauthor{Anonymous}{anon}
+    \icmlauthor{Mingyu Choi}{doosan}
   \end{icmlauthorlist}
 
-  \icmlcorrespondingauthor{Anonymous}{anonymous@example.com}
+  \icmlaffiliation{doosan}{Doosan Corporation, Seoul, South Korea}
+
+  \icmlcorrespondingauthor{Mingyu Choi}{mingyu1.choi@doosan.com}
 
   \icmlkeywords{AI Agent Memory, Graph Propagation, Selective Forgetting, Adversarial Attacks}
 
@@ -95,7 +95,7 @@ We contribute:
   \item \textbf{Lightweight mitigation}: \attraware{} propagation, an attribute-keyed directional filter, reduces collateral damage by 78--100\% without LLM calls during propagation (\cref{sec:c4}).
 \end{enumerate}
 
-\noindent These results suggest that graph-based memory systems should incorporate dependency-aware propagation \textit{before} deployment.
+\noindent As a proactive safety study, we characterize failure modes of a plausible design choice \textit{before} it reaches production---providing quantified evidence that graph-based memory systems should incorporate dependency-aware propagation from the outset.
 
 
 % ============================================================
@@ -114,13 +114,13 @@ In their published descriptions, graphs serve \textit{retrieval} and consolidati
 \toprule
 \textbf{System} & \textbf{Graph} & \textbf{Edges} & \textbf{Invalidation} \\
 \midrule
-Mem0$^g$\textsuperscript{*} & KG & Typed & Per-fact \\
+Mem0$^g$ & KG & Typed & Per-fact \\
 Zep & Temporal KG & Bi-temporal & Per-edge \\
 MAGMA & 4 sub-graphs & Causal+Entity & Per-graph \\
-A-Mem~\citep{amem_2025} & Linked notes & Associative & Per-note \\
+A-Mem & Linked notes & Associative & Per-note \\
 \bottomrule
 \end{tabular}
-\caption{Graph-augmented memory systems. $^g$graph-enabled mode. We found no explicit invalidation propagation in their published descriptions.}
+\caption{Graph-augmented memory systems~\citep{mem0_2024, zep_2025, magma_2026, amem_2025}. $^g$graph-enabled mode. We found no explicit invalidation propagation in their published descriptions.}
 \label{tab:systems}
 \end{table}
 
@@ -169,10 +169,10 @@ No-Propagation & 84.0\% & 0.0\% & 40\% \\
 \attraware{} & 94.0\% & 25.0\% & 8\% \\
 \bottomrule
 \end{tabular}
-\caption{Forgetting benefit vs.\ collateral cost (controlled 10-scenario evaluation).
-No-Propagation leaves 16\% of results stale (worst case 40\%).
-BFS achieves highest forgetting accuracy but damages 47.5\% of unrelated memories.
-\attraware{} reduces collateral damage, though 25\% residual indicates room for improvement.}
+\caption{Forgetting benefit vs.\ collateral cost (10 controlled scenarios).
+No-Propagation leaves 16\% stale (worst 40\%).
+BFS achieves highest accuracy but damages 47.5\% of unrelated memories.
+\attraware{} reduces collateral, though 25\% residual indicates room for improvement.}
 \label{tab:forgetting}
 \end{table}
 
@@ -204,7 +204,7 @@ We define four metrics:
 
 \begin{table}[htbp]
 \centering
-\footnotesize
+\scriptsize
 \begin{tabular}{lrrrrr}
 \toprule
 \textbf{Scale} & \textbf{Valid} & \textbf{BFS Dam.} & \textbf{Attr Dam.} & \textbf{Def.} & \textbf{Hub$_{\max}$} \\
@@ -214,7 +214,7 @@ We define four metrics:
 64K  & 3,414 & 78.5\% & 15.0\% & 80.9\% & 298 \\
 \bottomrule
 \end{tabular}
-\caption{Collateral damage across scales (full MemoryAgentBench FactConsolidation). BFS damage increases from 6K to 32K then stabilizes; \attraware{} remains stable at ${\sim}$15\%. Hub$_{\max}$: maximum entity degree. Defense rate = $1 - \text{Attr}/\text{BFS}$.}
+\caption{Collateral damage across scales (MemoryAgentBench FactConsolidation). BFS damage increases then stabilizes; \attraware{} stays at ${\sim}$15\%. Hub$_{\max}$: max entity degree. Def.\ = $1 - \text{Attr}/\text{BFS}$.}
 \label{tab:scale}
 \end{table}
 
@@ -420,6 +420,7 @@ It produces severe collateral damage (69--79\%), enables low-cost adversarial am
 
 Our results support a design principle: \textbf{propagation should follow attribute-level dependency, not structural co-occurrence}.
 This insight is well-established in transportation network resilience; we demonstrate its relevance to AI memory systems.
+By characterizing these failure modes before any production system adopts graph-based propagation, this work serves as proactive safety research---identifying risks while mitigation is still a design choice rather than a retrofit.
 
 \paragraph{Implications for memory system design.}
 Systems adopting unfiltered propagation over untyped co-occurrence graphs may be vulnerable to hub-amplified damage unless propagation is dependency-constrained.

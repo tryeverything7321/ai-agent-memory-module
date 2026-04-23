@@ -7,7 +7,7 @@
 
 ## 한 줄 요약
 
-> AI 메모리의 그래프 기반 무효화 전파를 최초로 구현·분석하여, "co-occurrence ≠ causality" 문제로 인한 catastrophic collateral damage를 발견하고, 교통공학의 방향성 전파 모델에서 영감을 받은 방어책을 제시한 연구.
+> AI 메모리의 그래프 기반 무효화 전파를 구현·분석하여, "co-occurrence ≠ dependency" 문제로 인한 심각한 collateral damage를 발견하고, 교통공학의 방향성 장애 전파 모델에서 영감을 받은 방어책을 제시한 연구.
 
 ---
 
@@ -21,7 +21,7 @@
 
 ## 4가지 Contribution
 
-### C1. Scale Trend Analysis — "BFS 전파는 78%를 파괴한다"
+### C1. Scale Trend Analysis — "BFS 전파는 69-79%를 손상시킨다"
 
 | 내용 | 수치 |
 |------|------|
@@ -71,7 +71,7 @@
 |------|------|
 | 방어 효과 | 78-100% (전 실험) |
 | Degree-capped BFS 대비 | 80x 더 효과적 |
-| 핵심 원리 | 인과적 의존 체인만 따라감 (co-occurrence 무시) |
+| 핵심 원리 | attribute-keyed 방향성 필터로 plausible dependency path만 따라감 |
 
 **왜 다른 논문은 안 했나:**
 - 교통공학의 directional link failure model은 AI 분야에서 거의 인용되지 않음
@@ -125,7 +125,7 @@
 3. **메모리 보안이 새로운 위협 범주로 부상**
    - MITRE ATLAS에 LLM memory manipulation이 AML.T0080으로 등재
    - MINJA, AgentPoison 등 메모리 공격 연구가 2024-2025에 급증
-   - 그러나 기존 공격은 "콘텐츠 주입" → 우리가 발견한 "인프라 무기화"는 새로운 공격 표면
+   - 그러나 기존 공격은 "콘텐츠 주입" → 우리가 분석한 "maintenance mechanism을 통한 amplification"은 구조적으로 다른 공격 표면
 
 4. **선행 벤치마크가 문제를 확인**
    - MemoryAgentBench (ICLR 2026): selective forgetting ≤6%
@@ -149,7 +149,7 @@
 >
 > 더 심각한 건, 이게 공격 벡터가 된다는 겁니다. 허브 엔티티를 노려 가짜 사실 5개만 넣으면 57%를 파괴할 수 있습니다. 시스템의 유지보수 메커니즘 자체가 무기가 되는 거죠.
 >
-> 저희는 교통공학의 방향성 장애 전파 모델에서 영감을 받아 Attribute-aware Selective Propagation을 제안합니다. 모든 이웃이 아니라 인과적 의존 체인만 따라가는 방식으로, 모든 실험에서 78-100% 방어를 달성했습니다.
+> 저희는 교통공학의 방향성 장애 전파 모델에서 영감을 받아 Attribute-aware Selective Propagation을 제안합니다. 모든 이웃이 아니라 attribute-keyed 방향성 필터로 plausible dependency path만 따라가는 방식으로, 모든 실험에서 78-100% 방어를 달성했습니다.
 
 ### 논문의 핵심 스토리라인
 
@@ -163,10 +163,10 @@
 [자연스러운 해법] 그래프를 따라 연쇄 업데이트 (DB CASCADE 비유)
    │
    ▼
-[핵심 발견] 해봤더니 재앙
-   ├─ C1: 78% 멀쩡한 메모리 파괴 (co-occurrence ≠ causality)
-   ├─ C2: 무관한 다른 작업까지 F1 -18.2pp 오염
-   └─ C3: 공격자가 가짜 5개로 57% 파괴 (인프라 무기화)
+[핵심 발견] stress-test 결과, 심각한 failure mode 확인
+   ├─ C1: 69-79% 유효 메모리 손상 (co-occurrence ≠ dependency)
+   ├─ C2: 무관한 다른 작업까지 F1 -10.1pp 오염
+   └─ C3: hub-targeted injection 5개로 57.3% 손상 (maintenance mechanism amplification)
    │
    ▼
 [이론적 설명] 네트워크 과학
@@ -177,7 +177,7 @@
 [방어] Attr-Aware Selective Propagation → 78-100% 방어
    │
    ▼
-[결론] 배포 전에 인과적 전파가 필요하다 (사후 패치 아님)
+[결론] 배포 전에 dependency-aware 전파가 필요하다 (사후 패치 아님)
 ```
 
 ---
