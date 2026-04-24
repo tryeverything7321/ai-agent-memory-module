@@ -2,6 +2,25 @@
 % References for "Collateral Damage in Graph-based Memory Forgetting"
 % ============================================================
 
+% --- Truth Maintenance / GraphRAG ---
+
+@article{doyle_tms_1979,
+  title={A Truth Maintenance System},
+  author={Doyle, Jon},
+  journal={Artificial Intelligence},
+  volume={12},
+  number={3},
+  pages={231--272},
+  year={1979},
+}
+
+@article{edge_graphrag_2024,
+  title={From Local to Global: A Graph {RAG} Approach to Query-Focused Summarization},
+  author={Edge, Darren and Trinh, Ha and Cheng, Newman and Bradley, Joshua and Chao, Alex and Mody, Apurva and Truitt, Steven and Larson, Jonathan},
+  journal={arXiv preprint arXiv:2404.16130},
+  year={2024},
+}
+
 % --- Memory Systems ---
 
 @inproceedings{mem0_2024,
@@ -10,13 +29,6 @@
   booktitle={Proceedings of ECAI 2025},
   pages={2993--3000},
   year={2025},
-}
-
-@article{memgpt_2023,
-  title={{MemGPT}: Towards {LLMs} as Operating Systems},
-  author={Packer, Charles and Fang, Vivian and Patil, Shishir G. and Lin, Kevin and Wooders, Sarah and Gonzalez, Joseph E.},
-  journal={arXiv preprint arXiv:2310.08560},
-  year={2023},
 }
 
 @article{amem_2025,
@@ -35,22 +47,6 @@
 
 % --- Temporal Decay ---
 
-@article{mnemosyne_2025,
-  title={Mnemosyne: An Unsupervised, Human-Inspired Long-Term Memory Architecture for Edge-Based {LLMs}},
-  author={Johnston, Calum and others},
-  journal={arXiv preprint arXiv:2510.08601},
-  year={2025},
-}
-
-@article{ebbinghaus_1885,
-  title={{\"U}ber das {G}ed{\"a}chtnis: {U}ntersuchungen zur experimentellen {P}sychologie},
-  author={Ebbinghaus, Hermann},
-  year={1885},
-  publisher={Duncker \& Humblot},
-}
-
-% --- Benchmarks ---
-
 @inproceedings{memoryagentbench_2026,
   title={Evaluating Memory in {LLM} Agents via Incremental Multi-Turn Interactions},
   author={Hu, Yuanzhe and Wang, Yu and McAuley, Julian},
@@ -59,17 +55,6 @@
 }
 
 % --- Adversarial Attacks ---
-
-@article{greshake_prompt_injection_2023,
-  title={Not What You've Signed Up For: Compromising Real-World {LLM}-Integrated Applications with Indirect Prompt Injection},
-  author={Greshake, Kai and Abdelnabi, Sahar and Mishra, Shailesh and Endres, Christoph and Holz, Thorsten and Fritz, Mario},
-  booktitle={Proceedings of the 16th ACM Workshop on Artificial Intelligence and Security (AISec@CCS)},
-  year={2023},
-}
-
-
-
-% --- Temporal Knowledge Graph ---
 
 @article{zep_2025,
   title={Zep: A Temporal Knowledge Graph Architecture for Agent Memory},
@@ -143,30 +128,12 @@
 
 % --- M+ Co-trained Retriever ---
 
-@inproceedings{mplus_2025,
-  title={{M+}: Extending {MemoryAgentBench} with Co-trained Retrieval for Latent Memory},
-  author={Park, Jinhyuk and Lee, Sangwoo},
-  booktitle={Proceedings of ICML},
-  year={2025},
-}
-
-% --- AI Safety ---
-
 @misc{mitre_atlas_2023,
   title={{MITRE ATLAS}: Adversarial Threat Landscape for {AI} Systems},
   author={{MITRE Corporation}},
   year={2023},
   howpublished={\url{https://atlas.mitre.org}},
 }
-
-@article{guardrails_survey_2024,
-  title={A Survey on {LLM} Guardrails: Taxonomy, Current Approaches, and Future Directions},
-  author={Dong, Yi and Mu, Ronghui and Jin, Gaojie and Qi, Yi and Hu, Jie and Zhao, Xinghong and Meng, Jing and Xie, Xin and Gao, Qiang},
-  journal={arXiv preprint arXiv:2411.18279},
-  year={2024},
-}
-
-% --- Memory-Specific Adversarial Attacks (NEW) ---
 
 @inproceedings{minja_2025,
   title={{MINJA}: Memory {INJ}ection Attack against {LLM} Agents via Query-Only Interaction},
@@ -189,62 +156,7 @@
   year={2026},
 }
 
-@article{memory_poisoning_2026,
-  title={Memory Poisoning Attack and Defense on Memory Based {LLM}-Agents},
-  author={Sunil, Balachandra Devarangadi and Sinha, Isheeta and Maheshwari, Piyush and Todmal, Shantanu and Mallik, Shreyan and Mishra, Shuchi},
-  journal={arXiv preprint arXiv:2601.05504},
-  year={2026},
-}
-
 % --- Knowledge Editing Ripple Effects (NEW) ---
-
-@inproceedings{chainedit_2025,
-  title={{ChainEdit}: Propagating Ripple Effects in {LLM} Knowledge Editing through Logical Rule-Guided Chains},
-  author={Dong, Zilu and Shen, Xiangqing and Yang, Zinong and Xia, Rui},
-  booktitle={Proceedings of the Association for Computational Linguistics (ACL)},
-  year={2025},
-}
-
-@article{rippleedits_2024,
-  title={Evaluating the Ripple Effects of Knowledge Editing in Language Models},
-  author={Cohen, Roi and others},
-  journal={Transactions of the Association for Computational Linguistics (TACL)},
-  volume={12},
-  pages={283--298},
-  year={2024},
-}
-
-@inproceedings{ripple_messy_2024,
-  title={Why Does New Knowledge Create Messy Ripple Effects in {LLMs}?},
-  author={Qin, Jiaxin and Zhang, Zixuan and Han, Chi and Yu, Pengfei and Li, Manling and Ji, Heng},
-  booktitle={Proceedings of EMNLP},
-  year={2024},
-}
-
-% --- Graph Unlearning (NEW) ---
-
-@article{graph_unlearning_balance_2024,
-  title={Forgetting and Remembering Are Both You Need: Balanced Graph Structure Unlearning},
-  author={Zhang, Chenhan and Wang, Weiqi and Tian, Zhiyi and Yu, Shui},
-  journal={IEEE Transactions on Information Forensics and Security},
-  year={2024},
-}
-
-@article{graph_unlearning_memorization_2026,
-  title={Re-understanding Graph Unlearning through Memorization},
-  author={Ding, Pengfei and others},
-  journal={arXiv preprint arXiv:2601.14694},
-  year={2026},
-}
-
-@article{unlearning_survey_2025,
-  title={A Comprehensive Survey of Machine Unlearning Techniques for Large Language Models},
-  author={Geng, Jiahui and Li, Qing and Woisetschlaeger, Herbert and Chen, Zongxiong and Cai, Fengyu and Wang, Yuxia and Nakov, Preslav and Jacobsen, Hans-Arno and Karray, Fakhri},
-  journal={arXiv preprint arXiv:2503.01854},
-  year={2025},
-}
-
-% --- Memory Surveys and Benchmarks (NEW) ---
 
 @article{graph_agent_memory_survey_2026,
   title={Graph-based Agent Memory: Taxonomy, Techniques, and Applications},
@@ -259,59 +171,6 @@
   journal={arXiv preprint arXiv:2602.16313},
   year={2026},
 }
-
-@article{longmemeval_2024,
-  title={{LongMemEval}: Benchmarking Chat Assistants on Long-Term Interactive Memory},
-  author={Wu, Di and others},
-  journal={arXiv preprint arXiv:2410.10813},
-  year={2024},
-}
-
-% --- Network Resilience (NEW) ---
-
-@article{compounding_vulnerability_2026,
-  title={Compounding Vulnerability: Simultaneous Degradation of Percolation and Cascade Robustness Under Targeted Hub Removal},
-  author={Rosas-Casals, Mart{\'\i} and others},
-  journal={arXiv preprint arXiv:2603.04838},
-  year={2026},
-}
-
-% --- Belief Revision (NEW) ---
-
-@article{belief_revision_editing_2024,
-  title={Fundamental Problems With Model Editing: How Should Rational Belief Revision Work in {LLMs}?},
-  author={Hase, Peter and Hofweber, Thomas and Zhou, Xiang and Stengel-Eskin, Elias and Bansal, Mohit},
-  journal={arXiv preprint arXiv:2406.19354},
-  year={2024},
-}
-
-% --- Additional Citations (2nd review round) ---
-
-@article{hu_memory_age_2025,
-  title={Memory in the Age of {AI} Agents},
-  author={Hu, Yuyang and Liu, Shichun and Yue, Yanwei and others},
-  journal={arXiv preprint arXiv:2512.13564},
-  year={2025},
-}
-
-@article{li_memos_2025,
-  title={{MemOS}: A Memory {OS} for {AI} System},
-  author={Li, Zhiyu and Xi, Chenyang and Li, Chunyu and others},
-  journal={arXiv preprint arXiv:2507.03724},
-  year={2025},
-}
-
-@article{chen_lane_resilience_2024,
-  title={Assessing movement-specific resilience of a signalized road network under lane-level cascading failure},
-  author={Chen, Guizhen and Van Woensel, Tom and Xu, Jinhua and Luo, Yikai and Li, Yan},
-  journal={Physica A: Statistical Mechanics and its Applications},
-  volume={654},
-  pages={130154},
-  year={2024},
-  doi={10.1016/j.physa.2024.130154},
-}
-
-% --- Scale-free Generalizability (3rd review round) ---
 
 @book{zipf_1949,
   title={Human Behavior and the Principle of Least Effort},
@@ -349,22 +208,6 @@
   year={2025},
 }
 
-@article{fofadiya_forgetting_2026,
-  title={Novel Memory Forgetting Techniques for {LLM} Agents: Relevance-Guided Budgeted Forgetting},
-  author={Fofadiya, Dharmik and Tiwari, Priyanka},
-  journal={arXiv preprint arXiv:2604.02280},
-  year={2026},
-}
-
-@article{memmachine_2026,
-  title={{MemMachine}: Ground-Truth Preservation Architecture for Agent Memory},
-  author={{MemMachine Team}},
-  journal={arXiv preprint arXiv:2604.04853},
-  year={2026},
-}
-
-% --- Graph Attacks (adversarial review round) ---
-
 @inproceedings{kepo_2026,
   title={{KEPo}: Knowledge Evolution Poison on {GraphRAG}},
   author={Chen, Qizhi and Qi, Chao and Huang, Yihong and Li, Muquan and Wang, Rongzheng and Zhang, Dongyang and Qin, Ke and Liang, Shuang},
@@ -392,12 +235,23 @@
   doi={10.2307/2274239},
 }
 
-@article{hansson_1999,
-  title={A Survey of Non-Prioritized Belief Revision},
-  author={Hansson, Sven Ove},
-  journal={Erkenntnis},
-  volume={50},
-  pages={413--427},
-  year={1999},
-  doi={10.1023/A:1005588420564},
+@article{xiong_memory_mgmt_2025,
+  title={How Memory Management Impacts {LLM} Agents: An Empirical Study of Experience-Following Behavior},
+  author={Xiong, Zidi and Lin, Yuping and Xie, Wenya and He, Pengfei and Liu, Zirui and Tang, Jiliang and Lakkaraju, Himabindu and Xiang, Zhen},
+  journal={arXiv preprint arXiv:2505.16067},
+  year={2025},
+}
+
+@article{xu_mcfa_2026,
+  title={From Storage to Steering: Memory Control Flow Attacks on {LLM} Agents},
+  author={Xu, Zhenlin and Zhu, Xiaogang and Yao, Yu and Xue, Minhui and Song, Yiliao},
+  journal={arXiv preprint arXiv:2603.15125},
+  year={2026},
+}
+
+@article{devarangadi_poisoning_2026,
+  title={Memory Poisoning Attack and Defense on Memory Based {LLM}-Agents},
+  author={Devarangadi Sunil, Balachandra and Sinha, Isheeta and Maheshwari, Piyush and Todmal, Shantanu and Mallik, Shreyan and Mishra, Shuchi},
+  journal={arXiv preprint arXiv:2601.05504},
+  year={2026},
 }
