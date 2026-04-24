@@ -1,0 +1,109 @@
+{
+  "config": {
+    "context_size": "6k",
+    "sub_dataset": "factconsolidation_mh_6k",
+    "experiments": [
+      "ablation"
+    ],
+    "timestamp": "2026-04-24 19:19:56"
+  },
+  "ablation": {
+    "experiment": "ablation",
+    "results": {
+      "bfs_with_dampening": {
+        "strategy": "bfs_with_dampening",
+        "use_in_degree_dampening": true,
+        "direction_filter": false,
+        "pre_valid": 344,
+        "newly_decayed": 137,
+        "newly_killed": 60,
+        "damage_ratio_pct": 39.83,
+        "kill_ratio_pct": 17.44,
+        "post_em": 10.0,
+        "post_f1": 13.33,
+        "top_hub_degree": 23
+      },
+      "bfs_no_dampening": {
+        "strategy": "bfs_no_dampening",
+        "use_in_degree_dampening": false,
+        "direction_filter": false,
+        "pre_valid": 344,
+        "newly_decayed": 137,
+        "newly_killed": 116,
+        "damage_ratio_pct": 39.83,
+        "kill_ratio_pct": 33.72,
+        "post_em": 10.0,
+        "post_f1": 13.33,
+        "top_hub_degree": 23
+      },
+      "attr_with_dampening": {
+        "strategy": "attr_with_dampening",
+        "use_in_degree_dampening": true,
+        "direction_filter": true,
+        "pre_valid": 344,
+        "newly_decayed": 1,
+        "newly_killed": 0,
+        "damage_ratio_pct": 0.29,
+        "kill_ratio_pct": 0.0,
+        "post_em": 20.0,
+        "post_f1": 23.33,
+        "top_hub_degree": 23
+      },
+      "attr_no_dampening": {
+        "strategy": "attr_no_dampening",
+        "use_in_degree_dampening": false,
+        "direction_filter": true,
+        "pre_valid": 344,
+        "newly_decayed": 1,
+        "newly_killed": 0,
+        "damage_ratio_pct": 0.29,
+        "kill_ratio_pct": 0.0,
+        "post_em": 20.0,
+        "post_f1": 23.33,
+        "top_hub_degree": 23
+      },
+      "attr_downstream": {
+        "strategy": "attr_downstream",
+        "propagation_direction": "downstream",
+        "use_in_degree_dampening": true,
+        "direction_filter": true,
+        "pre_valid": 344,
+        "newly_decayed": 1,
+        "newly_killed": 0,
+        "damage_ratio_pct": 0.29,
+        "kill_ratio_pct": 0.0,
+        "post_em": 20.0,
+        "post_f1": 23.33,
+        "top_hub_degree": 23
+      },
+      "attr_upstream": {
+        "strategy": "attr_upstream",
+        "propagation_direction": "upstream",
+        "use_in_degree_dampening": true,
+        "direction_filter": true,
+        "pre_valid": 344,
+        "newly_decayed": 4,
+        "newly_killed": 0,
+        "damage_ratio_pct": 1.16,
+        "kill_ratio_pct": 0.0,
+        "post_em": 20.0,
+        "post_f1": 23.33,
+        "top_hub_degree": 23
+      },
+      "attr_bidirectional": {
+        "strategy": "attr_bidirectional",
+        "propagation_direction": "bidirectional",
+        "use_in_degree_dampening": true,
+        "direction_filter": true,
+        "pre_valid": 344,
+        "newly_decayed": 5,
+        "newly_killed": 0,
+        "damage_ratio_pct": 1.45,
+        "kill_ratio_pct": 0.0,
+        "post_em": 20.0,
+        "post_f1": 23.33,
+        "top_hub_degree": 23
+      }
+    }
+  }
+}

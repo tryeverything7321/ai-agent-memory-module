@@ -403,7 +403,9 @@ To isolate their contributions, we run four variants at 6K (5-fact white-box att
 Removing dampening from BFS leaves damage unchanged (39.8\%) but doubles kill rate (17.4\%$\rightarrow$33.7\%);
 removing dampening from \attraware{} has no effect (0.3\% damage, 0\% kill in both cases).
 \textbf{The entire 39.5pp damage reduction is attributable to directional filtering; dampening affects only the severity distribution, not the reach of propagation.}
-We test only the object$\rightarrow$subject direction; reverse (subject$\rightarrow$object) and bidirectional filtered variants remain unexplored, and the optimal directionality strategy is an open question.
+To test whether object$\rightarrow$subject is the right direction, we compare three filtered variants: \textit{downstream} (object$\rightarrow$subject, the default), \textit{upstream} (subject$\rightarrow$object), and \textit{bidirectional}.
+Downstream achieves the lowest damage (0.3\%, 1 memory); upstream damages 1.2\% (4 memories) by propagating to other attributes of the same subject entity; bidirectional damages 1.5\% (5 memories).
+All three reduce damage by $\geq$96\% relative to BFS---confirming that \textit{any} directional filter dramatically outperforms undirected traversal---but downstream is strictly optimal, consistent with the dependency-follows-object intuition.
 
 \subsection{Cross-experiment Consistency}
 
@@ -504,7 +506,7 @@ Entity mention frequencies follow Zipf's law~\citep{zipf_1949}, producing hub-an
 (2)~\attraware{}'s accuracy at 6K: manual inspection found 88.2\% legitimate cascade, 11.8\% borderline, zero false positives among 51 organic-damaged memories; the false negative rate (missed dependencies) remains unmeasured.
 The 69--79\% BFS damage is an upper bound on collateral---some fraction may reflect genuine dependencies.
 (3)~Propagation depth fixed at 2; clique construction modestly inflates hub degree (1.4pp effect at 6K); both warrant multi-scale analysis.
-(4)~We test only the object$\rightarrow$subject direction; alternative filters (reverse, bidirectional, embedding-based) and validation on production systems (Mem0$^g$, Zep) once they adopt propagation are important next steps.
+(4)~Our direction ablation confirms object$\rightarrow$subject is optimal among the three structural variants tested; embedding-similarity-based filters and validation on production systems (Mem0$^g$, Zep) once they adopt propagation are important next steps.
 
 % ============================================================
 \section*{LLM/Agent Usage Disclosure}
