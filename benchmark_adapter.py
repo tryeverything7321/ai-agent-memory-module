@@ -96,12 +96,14 @@ class MemoryModuleAdapter:
         llm_client: DooGPULLMClient = None,
         embedding_provider=None,
         db_path: str = ":memory:",
+        graph_mode: str = "cooccurrence",  # "cooccurrence" | "typed_relation"
     ):
         self.graph_propagation = graph_propagation
         self.semantic_filter = semantic_filter
         self.attribute_aware = attribute_aware
         self.propagation_depth = propagation_depth
         self.decay_per_hop = decay_per_hop
+        self.graph_mode = graph_mode
 
         # 내부 컴포넌트
         self._llm = llm_client or DooGPULLMClient()
@@ -212,13 +214,32 @@ class MemoryModuleAdapter:
                     entity_name, entity_type=entity_type, memory_id=mem.id
                 )
 
-            # 3. entity 간 relation 추가 (co-occurrence 기반)
+            # 3. entity 간 relation 추가
             entity_names = [e[0] for e in entities]
-            for i in range(len(entity_names)):
-                for j in range(i + 1, len(entity_names)):
-                    self._graph_store.add_relation(
-                        entity_names[i], entity_names[j], "co_occurs"
-                    )
+            if self.graph_mode == "typed_relation":
+                # typed-relation 모드: subject → object 방향 edge만 생성
+                sk = self._get_subject_key(fact_text, entities)
+                if sk and ":" in sk:
+                    subj_entity = sk.split(":", 1)[0]
+                    for ename in entity_names:
+                        if ename.lower() != subj_entity.lower() and ename != subj_entity:
+                            self._graph_store.add_relation(
+                                subj_entity, ename, "typed_relation"
+                            )
+                else:
+                    # fallback: 첫 entity → 나머지 (방향 있는 star)
+                    if len(entity_names) >= 2:
+                        for ename in entity_names[1:]:
+                            self._graph_store.add_relation(
+                                entity_names[0], ename, "typed_relation"
+                            )
+            else:
+                # co-occurrence 모드 (기존): 모든 entity 쌍 간 양방향 edge
+                for i in range(len(entity_names)):
+                    for j in range(i + 1, len(entity_names)):
+                        self._graph_store.add_relation(
+                            entity_names[i], entity_names[j], "co_occurs"
+                        )
 
             # 4. 충돌 감지 — 동일 subject entity에 대한 이전 fact 무효화
             subject_key = self._get_subject_key(fact_text, entities)
