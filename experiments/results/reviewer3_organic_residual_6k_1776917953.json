@@ -1,0 +1,1550 @@
+{
+  "config": {
+    "context_size": "6k",
+    "experiments": [
+      "organic_residual"
+    ],
+    "timestamp": "2026-04-23 13:18:32"
+  },
+  "organic_residual": {
+    "experiment": "organic_residual_classification",
+    "config": {
+      "context_size": "6k",
+      "propagation_mode": "attr_aware",
+      "propagation_depth": 2,
+      "decay_per_hop": 0.5,
+      "timestamp": "2026-04-23 13:19:13"
+    },
+    "summary": {
+      "total_valid_memories": 344,
+      "total_damaged": 51,
+      "damage_ratio_pct": 14.83,
+      "total_conflict_events": 112,
+      "legitimate_cascade": 45,
+      "legitimate_cascade_pct": 88.2,
+      "borderline": 6,
+      "borderline_pct": 11.8,
+      "false_positive": 0,
+      "false_positive_pct": 0.0,
+      "weight_distribution": {
+        "w<0.1": 0,
+        "0.1≤w<0.3": 1,
+        "0.3≤w<0.5": 0,
+        "0.5≤w<0.7": 14,
+        "0.7≤w<0.9": 29,
+        "0.9≤w<1.0": 7
+      },
+      "avg_damaged_weight": 0.7206,
+      "min_damaged_weight": 0.25
+    },
+    "classified_damages": [
+      {
+        "memory_id": "85dc25be-c0fa-4039-bf41-e4cf9a96c1e5",
+        "memory_content": "Amy Winehouse died in the city of Camden Town.",
+        "memory_subject_key": "Amy Winehouse:death_place",
+        "memory_entities": [
+          "Amy Winehouse",
+          "Camden Town"
+        ],
+        "current_weight": 0.75,
+        "weight_drop": 0.25,
+        "triggering_conflict": {
+          "subject_key": "Back:77970",
+          "old_content": "Back to Black was performed by Amy Winehouse.",
+          "object_entities": [
+            "Black",
+            "Amy Winehouse"
+          ]
+        },
+        "propagation_path": [
+          "Black",
+          "Amy Winehouse"
+        ],
+        "classification": "legitimate_cascade",
+        "classification_reason": "damaged memory의 subject 'Amy Winehouse:death_place' 가 attack fact의 object entity와 일치 — 실제 의존 관계",
+        "classification_details": {
+          "subject_matches_object": true,
+          "content_mentions_object": true,
+          "same_entity_different_attr": false
+        }
+      },
+      {
+        "memory_id": "28baf7e0-fc2a-4e1b-b16a-715ef8d2ce51",
+        "memory_content": "The univeristy where Galileo Galilei was educated is University of Pisa.",
+        "memory_subject_key": "Galileo Galilei:27039",
+        "memory_entities": [
+          "University",
+          "Galileo Galilei",
+          "Pisa"
+        ],
+        "current_weight": 0.928571,
+        "weight_drop": 0.071429,
+        "triggering_conflict": {
+          "subject_key": "Sidereus Nuncius:author",
+          "old_content": "The author of Sidereus Nuncius is Galileo Galilei.",
+          "object_entities": [
+            "Galileo Galilei"
+          ]
+        },
+        "propagation_path": [
+          "Galileo Galilei",
+          "University"
+        ],
+        "classification": "legitimate_cascade",
+        "classification_reason": "damaged memory의 subject 'Galileo Galilei:27039' 가 attack fact의 object entity와 일치 — 실제 의존 관계",
+        "classification_details": {
+          "subject_matches_object": true,
+          "content_mentions_object": true,
+          "same_entity_different_attr": false
+        }
+      },
+      {
+        "memory_id": "a5719662-afc3-44c9-8945-234ea46baf88",
+        "memory_content": "Robert A. Heinlein is a citizen of United States of America.",
+        "memory_subject_key": "Robert:type",
+        "memory_entities": [
+          "Robert",
+          "Heinlein",
+          "United States",
+          "America"
+        ],
+        "current_weight": 0.5,
+        "weight_drop": 0.5,
+        "triggering_conflict": {
+          "subject_key": "Starship Troopers:author",
+          "old_content": "The author of Starship Troopers is Robert A. Heinlein.",
+          "object_entities": [
+            "Heinlein",
+            "Robert"
+          ]
+        },
+        "propagation_path": [
+          "Heinlein",
+          "United States"
+        ],
+        "classification": "legitimate_cascade",
+        "classification_reason": "damaged memory의 subject 'Robert:type' 가 attack fact의 object entity와 일치 — 실제 의존 관계",
+        "classification_details": {
+          "subject_matches_object": true,
+          "content_mentions_object": true,
+          "same_entity_different_attr": false
+        }
+      },
+      {
+        "memory_id": "777d9e7c-43e5-4c19-ad97-3810c877cbeb",
+        "memory_content": "The capital of Germany is Berlin.",
+        "memory_subject_key": "Germany:capital",
+        "memory_entities": [
+          "Germany",
+          "Berlin"
+        ],
+        "current_weight": 0.729167,
+        "weight_drop": 0.270833,
+        "triggering_conflict": {
+          "subject_key": "Ernst Heinkel:type",
+          "old_content": "Ernst Heinkel is a citizen of Germany.",
+          "object_entities": [
+            "Germany"
+          ]
+        },
+        "propagation_path": [
+          "Germany",
+          "Berlin"
+        ],
+        "classification": "legitimate_cascade",
+        "classification_reason": "damaged memory의 subject 'Germany:capital' 가 attack fact의 object entity와 일치 — 실제 의존 관계",
+        "classification_details": {
+          "subject_matches_object": true,
+          "content_mentions_object": true,
+          "same_entity_different_attr": false
+        }
+      },
+      {
+        "memory_id": "fa409e19-c1d3-46de-996e-32481224375f",
+        "memory_content": "Satya Nadella was born in the city of Hyderabad.",
+        "memory_subject_key": "Satya Nadella:birthplace",
+        "memory_entities": [
+          "Satya Nadella",
+          "Hyderabad"
+        ],
+        "current_weight": 0.5,
+        "weight_drop": 0.5,
+        "triggering_conflict": {
+          "subject_key": "Microsoft:32731",
+          "old_content": "The chief executive officer of Microsoft is Satya Nadella.",
+          "object_entities": [
+            "Satya Nadella"
+          ]
+        },
+        "propagation_path": [
+          "Satya Nadella",
+          "Hyderabad"
+        ],
+        "classification": "legitimate_cascade",
+        "classification_reason": "damaged memory의 subject 'Satya Nadella:birthplace' 가 attack fact의 object entity와 일치 — 실제 의존 관계",
+        "classification_details": {
+          "subject_matches_object": true,
+          "content_mentions_object": true,
+          "same_entity_different_attr": false
+        }
+      },
+      {
+        "memory_id": "b8a34c49-e783-4805-ad15-1c851749d961",
+        "memory_content": "Kūkai speaks the language of Japanese.",
+        "memory_subject_key": "Japanese:44114",
+        "memory_entities": [
+          "Japanese"
+        ],
+        "current_weight": 0.5,
+        "weight_drop": 0.5,
+        "triggering_conflict": {
+          "subject_key": "Japan:49024",
+          "old_content": "The official language of Japan is Japanese.",
+          "object_entities": [
+            "Japanese"
+          ]
+        },
+        "propagation_path": [],
+        "classification": "legitimate_cascade",
+        "classification_reason": "damaged memory의 subject 'Japanese:44114' 가 attack fact의 object entity와 일치 — 실제 의존 관계",
+        "classification_details": {
+          "subject_matches_object": true,
+          "content_mentions_object": true,
+          "same_entity_different_attr": false
+        }
+      },
+      {
+        "memory_id": "d4b11a6d-9273-41a5-bf36-39c45cb57e7e",
+        "memory_content": "Friedrich Nietzsche is famous for Thus Spoke Zarathustra.",
+        "memory_subject_key": "Friedrich Nietzsche:47655",
+        "memory_entities": [
+          "Friedrich Nietzsche",
+          "Thus Spoke Zarathustra"
+        ],
+        "current_weight": 0.75,
+        "weight_drop": 0.25,
+        "triggering_conflict": {
+          "subject_key": "the birth of tragedy:author",
+          "old_content": "The author of The Birth of Tragedy is Friedrich Nietzsche.",
+          "object_entities": [
+            "The Birth",
+            "Tragedy",
+            "Friedrich Nietzsche"
+          ]
+        },
+        "propagation_path": [
+          "The Birth",
+          "Friedrich Nietzsche"
+        ],
+        "classification": "legitimate_cascade",
+        "classification_reason": "damaged memory의 subject 'Friedrich Nietzsche:47655' 가 attack fact의 object entity와 일치 — 실제 의존 관계",
+        "classification_details": {
+          "subject_matches_object": true,
+          "content_mentions_object": true,
+          "same_entity_different_attr": false
+        }
+      },
+      {
+        "memory_id": "08883c3e-b7c6-45d6-8283-e6ee93c677b5",
+        "memory_content": "Ursula K. Le Guin died in the city of Portland.",
+        "memory_subject_key": "Ursula:death_place",
+        "memory_entities": [
+          "Ursula",
+          "Le Guin",
+          "Portland"
+        ],
+        "current_weight": 0.75,
+        "weight_drop": 0.25,
+        "triggering_conflict": {
+          "subject_key": "a wizard of earthsea:author",
+          "old_content": "The author of A Wizard of Earthsea is Ursula K. Le Guin.",
+          "object_entities": [
+            "Earthsea",
+            "Le Guin",
+            "Wizard",
+            "Ursula"
+          ]
+        },
+        "propagation_path": [
+          "Earthsea",
+          "Ursula"
+        ],
+        "classification": "legitimate_cascade",
+        "classification_reason": "damaged memory의 subject 'Ursula:death_place' 가 attack fact의 object entity와 일치 — 실제 의존 관계",
+        "classification_details": {
+          "subject_matches_object": true,
+          "content_mentions_object": true,
+          "same_entity_different_attr": false
+        }
+      },
+      {
+        "memory_id": "3fd9b3bb-8591-4455-bcd5-173548fbee7f",
+        "memory_content": "Catherine Dickens is a citizen of United Kingdom.",
+        "memory_subject_key": "Catherine Dickens:type",
+        "memory_entities": [
+          "United Kingdom",
+          "Catherine Dickens"
+        ],
+        "current_weight": 0.696429,
+        "weight_drop": 0.303571,
+        "triggering_conflict": {
+          "subject_key": "Our Mutual Friend:author",
+          "old_content": "The author of Our Mutual Friend is Charles Dickens.",
+          "object_entities": [
+            "Charles Dickens"
+          ]
+        },
+        "propagation_path": [
+          "Charles Dickens",
+          "Catherine Dickens"
+        ],
+        "classification": "borderline",
+        "classification_reason": "entity graph 경로로 연결되지만 직접적 의존성 불확실: Charles Dickens → Catherine Dickens",
+        "classification_details": {
+          "subject_matches_object": false,
+          "content_mentions_object": false,
+          "same_entity_different_attr": false
+        }
+      },
+      {
+        "memory_id": "9248c011-6807-41f5-ad37-22a9bf24bf3e",
+        "memory_content": "Andrzej Sapkowski speaks the language of Polish.",
+        "memory_subject_key": "Andrzej Sapkowski:42149",
+        "memory_entities": [
+          "Andrzej Sapkowski",
+          "Polish"
+        ],
+        "current_weight": 0.5,
+        "weight_drop": 0.5,
+        "triggering_conflict": {
+          "subject_key": "The Witcher:author",
+          "old_content": "The author of The Witcher is Andrzej Sapkowski.",
+          "object_entities": [
+            "Andrzej Sapkowski"
+          ]
+        },
+        "propagation_path": [
+          "Andrzej Sapkowski",
+          "Polish"
+        ],
+        "classification": "legitimate_cascade",
+        "classification_reason": "damaged memory의 subject 'Andrzej Sapkowski:42149' 가 attack fact의 object entity와 일치 — 실제 의존 관계",
+        "classification_details": {
+          "subject_matches_object": true,
+          "content_mentions_object": true,
+          "same_entity_different_attr": false
+        }
+      },
+      {
+        "memory_id": "d6855822-4452-4ab2-949c-68f8e8c73cd0",
+        "memory_content": "United Kingdom is located in the continent of Europe.",
+        "memory_subject_key": "United Kingdom:location",
+        "memory_entities": [
+          "Europe",
+          "United Kingdom"
+        ],
+        "current_weight": 0.70875,
+        "weight_drop": 0.29125,
+        "triggering_conflict": {
+          "subject_key": "the current head of state in united kingdom:name",
+          "old_content": "The name of the current head of state in United Kingdom is Elizabeth II.",
+          "object_entities": [
+            "United Kingdom",
+            "Elizabeth"
+          ]
+        },
+        "propagation_path": [
+          "United Kingdom",
+          "Europe"
+        ],
+        "classification": "legitimate_cascade",
+        "classification_reason": "damaged memory의 subject 'United Kingdom:location' 가 attack fact의 object entity와 일치 — 실제 의존 관계",
+        "classification_details": {
+          "subject_matches_object": true,
+          "content_mentions_object": true,
+          "same_entity_different_attr": false
+        }
+      },
+      {
+        "memory_id": "1a377bce-1b5d-40f2-bcfd-23a5ba007754",
+        "memory_content": "Mario Puzo is famous for The Godfather.",
+        "memory_subject_key": "Mario Puzo:47655",
+        "memory_entities": [
+          "Mario Puzo",
+          "The Godfather"
+        ],
+        "current_weight": 0.5,
+        "weight_drop": 0.5,
+        "triggering_conflict": {
+          "subject_key": "Vito Corleone:47884",
+          "old_content": "Vito Corleone was created by Mario Puzo.",
+          "object_entities": [
+            "Mario Puzo"
+          ]
+        },
+        "propagation_path": [
+          "Mario Puzo",
+          "The Godfather"
+        ],
+        "classification": "legitimate_cascade",
+        "classification_reason": "damaged memory의 subject 'Mario Puzo:47655' 가 attack fact의 object entity와 일치 — 실제 의존 관계",
+        "classification_details": {
+          "subject_matches_object": true,
+          "content_mentions_object": true,
+          "same_entity_different_attr": false
+        }
+      },
+      {
+        "memory_id": "3b958b80-b5b6-43ea-92a0-d66855f2aea2",
+        "memory_content": "London is located in the continent of Europe.",
+        "memory_subject_key": "London:location",
+        "memory_entities": [
+          "London",
+          "Europe"
+        ],
+        "current_weight": 0.668403,
+        "weight_drop": 0.331597,
+        "triggering_conflict": {
+          "subject_key": "Thomas Kyd:birthplace",
+          "old_content": "Thomas Kyd was born in the city of London.",
+          "object_entities": [
+            "London"
+          ]
+        },
+        "propagation_path": [
+          "London",
+          "Europe"
+        ],
+        "classification": "legitimate_cascade",
+        "classification_reason": "damaged memory의 subject 'London:location' 가 attack fact의 object entity와 일치 — 실제 의존 관계",
+        "classification_details": {
+          "subject_matches_object": true,
+          "content_mentions_object": true,
+          "same_entity_different_attr": false
+        }
+      },
+      {
+        "memory_id": "050d2eb0-594f-4506-90bb-81c79360ac47",
+        "memory_content": "The headquarters of University of California, Berkeley is located in the city of Botevgrad.",
+        "memory_subject_key": "University:location",
+        "memory_entities": [
+          "University",
+          "California",
+          "Berkeley",
+          "Botevgrad"
+        ],
+        "current_weight": 0.700574,
+        "weight_drop": 0.299426,
+        "triggering_conflict": {
+          "subject_key": "Blood:1232",
+          "old_content": "Blood on the Tracks was performed by Bob Dylan.",
+          "object_entities": [
+            "Tracks",
+            "Bob Dylan"
+          ]
+        },
+        "propagation_path": [
+          "Tracks",
+          "Bob Dylan",
+          "University"
+        ],
+        "classification": "borderline",
+        "classification_reason": "entity graph 경로로 연결되지만 직접적 의존성 불확실: Tracks → Bob Dylan → University",
+        "classification_details": {
+          "subject_matches_object": false,
+          "content_mentions_object": false,
+          "same_entity_different_attr": false
+        }
+      },
+      {
+        "memory_id": "d2ae01c4-597f-4997-ad26-38e814c53203",
+        "memory_content": "Jack Dorsey is a citizen of United States of America.",
+        "memory_subject_key": "Jack Dorsey:type",
+        "memory_entities": [
+          "United States",
+          "America",
+          "Jack Dorsey"
+        ],
+        "current_weight": 0.95,
+        "weight_drop": 0.05,
+        "triggering_conflict": {
+          "subject_key": "Twitter:32731",
+          "old_content": "The chief executive officer of Twitter is Jack Dorsey.",
+          "object_entities": [
+            "Jack Dorsey"
+          ]
+        },
+        "propagation_path": [
+          "Jack Dorsey",
+          "United States"
+        ],
+        "classification": "legitimate_cascade",
+        "classification_reason": "damaged memory의 subject 'Jack Dorsey:type' 가 attack fact의 object entity와 일치 — 실제 의존 관계",
+        "classification_details": {
+          "subject_matches_object": true,
+          "content_mentions_object": true,
+          "same_entity_different_attr": false
+        }
+      },
+      {
+        "memory_id": "a8285ef6-f2fe-4f23-a35d-b17048805c83",
+        "memory_content": "Charles Dickens is married to Catherine Dickens.",
+        "memory_subject_key": "Charles Dickens:spouse",
+        "memory_entities": [
+          "Catherine Dickens",
+          "Charles Dickens"
+        ],
+        "current_weight": 0.25,
+        "weight_drop": 0.75,
+        "triggering_conflict": {
+          "subject_key": "Our Mutual Friend:author",
+          "old_content": "The author of Our Mutual Friend is Charles Dickens.",
+          "object_entities": [
+            "Charles Dickens"
+          ]
+        },
+        "propagation_path": [
+          "Charles Dickens",
+          "Catherine Dickens"
+        ],
+        "classification": "legitimate_cascade",
+        "classification_reason": "damaged memory의 subject 'Charles Dickens:spouse' 가 attack fact의 object entity와 일치 — 실제 의존 관계",
+        "classification_details": {
+          "subject_matches_object": true,
+          "content_mentions_object": true,
+          "same_entity_different_attr": false
+        }
+      },
+      {
+        "memory_id": "0d77413d-edc0-4854-b2b0-87e9faf65479",
+        "memory_content": "David Bowie is married to Iman.",
+        "memory_subject_key": "David Bowie:spouse",
+        "memory_entities": [
+          "David Bowie",
+          "Iman"
+        ],
+        "current_weight": 0.5,
+        "weight_drop": 0.5,
+        "triggering_conflict": {
+          "subject_key": "Aladdin Sane:69346",
+          "old_content": "Aladdin Sane was performed by David Bowie.",
+          "object_entities": [
+            "David Bowie"
+          ]
+        },
+        "propagation_path": [
+          "David Bowie",
+          "Iman"
+        ],
+        "classification": "legitimate_cascade",
+        "classification_reason": "damaged memory의 subject 'David Bowie:spouse' 가 attack fact의 object entity와 일치 — 실제 의존 관계",
+        "classification_details": {
+          "subject_matches_object": true,
+          "content_mentions_object": true,
+          "same_entity_different_attr": false
+        }
+      },
+      {
+        "memory_id": "852848ef-b6c4-4b91-916b-8ea2fbb5d69f",
+        "memory_content": "The univeristy where Bob Dylan was educated is University of Minnesota.",
+        "memory_subject_key": "Bob Dylan:27039",
+        "memory_entities": [
+          "University",
+          "Minnesota",
+          "Bob Dylan"
+        ],
+        "current_weight": 0.875,
+        "weight_drop": 0.125,
+        "triggering_conflict": {
+          "subject_key": "Blood:1232",
+          "old_content": "Blood on the Tracks was performed by Bob Dylan.",
+          "object_entities": [
+            "Tracks",
+            "Bob Dylan"
+          ]
+        },
+        "propagation_path": [
+          "Tracks",
+          "Bob Dylan"
+        ],
+        "classification": "legitimate_cascade",
+        "classification_reason": "damaged memory의 subject 'Bob Dylan:27039' 가 attack fact의 object entity와 일치 — 실제 의존 관계",
+        "classification_details": {
+          "subject_matches_object": true,
+          "content_mentions_object": true,
+          "same_entity_different_attr": false
+        }
+      },
+      {
+        "memory_id": "801116dc-0e76-43a7-9852-d00da032d6f8",
+        "memory_content": "cricket was created in the country of Australia.",
+        "memory_subject_key": "Australia:88617",
+        "memory_entities": [
+          "Australia"
+        ],
+        "current_weight": 0.75,
+        "weight_drop": 0.25,
+        "triggering_conflict": {
+          "subject_key": "Joe Hockey:type",
+          "old_content": "Joe Hockey is a citizen of Australia.",
+          "object_entities": [
+            "Australia"
+          ]
+        },
+        "propagation_path": [],
+        "classification": "legitimate_cascade",
+        "classification_reason": "damaged memory의 subject 'Australia:88617' 가 attack fact의 object entity와 일치 — 실제 의존 관계",
+        "classification_details": {
+          "subject_matches_object": true,
+          "content_mentions_object": true,
+          "same_entity_different_attr": false
+        }
+      },
+      {
+        "memory_id": "c361bb71-2c59-4313-9385-cf00a2ec7bd7",
+        "memory_content": "The official language of Australia is Arabic.",
+        "memory_subject_key": "Australia:49024",
+        "memory_entities": [
+          "Australia",
+          "Arabic"
+        ],
+        "current_weight": 0.75,
+        "weight_drop": 0.25,
+        "triggering_conflict": {
+          "subject_key": "Joe Hockey:type",
+          "old_content": "Joe Hockey is a citizen of Australia.",
+          "object_entities": [
+            "Australia"
+          ]
+        },
+        "propagation_path": [
+          "Australia",
+          "Arabic"
+        ],
+        "classification": "legitimate_cascade",
+        "classification_reason": "damaged memory의 subject 'Australia:49024' 가 attack fact의 object entity와 일치 — 실제 의존 관계",
+        "classification_details": {
+          "subject_matches_object": true,
+          "content_mentions_object": true,
+          "same_entity_different_attr": false
+        }
+      },
+      {
+        "memory_id": "014fb073-5fc1-401b-bba9-f7b26e694f0f",
+        "memory_content": "baseball was created in the country of United States of America.",
+        "memory_subject_key": "United States:17078",
+        "memory_entities": [
+          "United States",
+          "America"
+        ],
+        "current_weight": 0.723244,
+        "weight_drop": 0.276756,
+        "triggering_conflict": {
+          "subject_key": "Country Joe:type",
+          "old_content": "Country Joe McDonald is a citizen of United States of America.",
+          "object_entities": [
+            "America",
+            "United States"
+          ]
+        },
+        "propagation_path": [
+          "America",
+          "United States"
+        ],
+        "classification": "legitimate_cascade",
+        "classification_reason": "damaged memory의 subject 'United States:17078' 가 attack fact의 object entity와 일치 — 실제 의존 관계",
+        "classification_details": {
+          "subject_matches_object": true,
+          "content_mentions_object": true,
+          "same_entity_different_attr": false
+        }
+      },
+      {
+        "memory_id": "8763a02c-6449-44e4-8ed5-5c01c660b4f5",
+        "memory_content": "post-punk was created in the country of United Kingdom.",
+        "memory_subject_key": "United Kingdom:61096",
+        "memory_entities": [
+          "United Kingdom"
+        ],
+        "current_weight": 0.77602,
+        "weight_drop": 0.22398,
+        "triggering_conflict": {
+          "subject_key": "the current head of state in united kingdom:name",
+          "old_content": "The name of the current head of state in United Kingdom is Elizabeth II.",
+          "object_entities": [
+            "United Kingdom",
+            "Elizabeth"
+          ]
+        },
+        "propagation_path": [
+          "Elizabeth",
+          "United Kingdom"
+        ],
+        "classification": "legitimate_cascade",
+        "classification_reason": "damaged memory의 subject 'United Kingdom:61096' 가 attack fact의 object entity와 일치 — 실제 의존 관계",
+        "classification_details": {
+          "subject_matches_object": true,
+          "content_mentions_object": true,
+          "same_entity_different_attr": false
+        }
+      },
+      {
+        "memory_id": "ce888430-33fb-4f4f-8184-12ac0f912a7e",
+        "memory_content": "country music was created in the country of United States of America.",
+        "memory_subject_key": "United States:27575",
+        "memory_entities": [
+          "United States",
+          "America"
+        ],
+        "current_weight": 0.723244,
+        "weight_drop": 0.276756,
+        "triggering_conflict": {
+          "subject_key": "Country Joe:type",
+          "old_content": "Country Joe McDonald is a citizen of United States of America.",
+          "object_entities": [
+            "America",
+            "United States"
+          ]
+        },
+        "propagation_path": [
+          "America",
+          "United States"
+        ],
+        "classification": "legitimate_cascade",
+        "classification_reason": "damaged memory의 subject 'United States:27575' 가 attack fact의 object entity와 일치 — 실제 의존 관계",
+        "classification_details": {
+          "subject_matches_object": true,
+          "content_mentions_object": true,
+          "same_entity_different_attr": false
+        }
+      },
+      {
+        "memory_id": "eb5903b0-68aa-4c42-93ce-709d6ac340c6",
+        "memory_content": "The capital of France is Harare.",
+        "memory_subject_key": "France:capital",
+        "memory_entities": [
+          "France",
+          "Harare"
+        ],
+        "current_weight": 0.701599,
+        "weight_drop": 0.298401,
+        "triggering_conflict": {
+          "subject_key": "Henri:type",
+          "old_content": "Henri Grégoire is a citizen of France.",
+          "object_entities": [
+            "France"
+          ]
+        },
+        "propagation_path": [
+          "France",
+          "Harare"
+        ],
+        "classification": "legitimate_cascade",
+        "classification_reason": "damaged memory의 subject 'France:capital' 가 attack fact의 object entity와 일치 — 실제 의존 관계",
+        "classification_details": {
+          "subject_matches_object": true,
+          "content_mentions_object": true,
+          "same_entity_different_attr": false
+        }
+      },
+      {
+        "memory_id": "1ead1c6e-835a-4c5b-98b3-51b9e56c3f59",
+        "memory_content": "The capital of Soviet Union is Russellville.",
+        "memory_subject_key": "Soviet Union:capital",
+        "memory_entities": [
+          "Soviet Union",
+          "Russellville"
+        ],
+        "current_weight": 0.5,
+        "weight_drop": 0.5,
+        "triggering_conflict": {
+          "subject_key": "the current head of state in soviet union:name",
+          "old_content": "The name of the current head of state in Soviet Union is Mikhail Gorbachev.",
+          "object_entities": [
+            "Soviet Union",
+            "Mikhail Gorbachev"
+          ]
+        },
+        "propagation_path": [
+          "Soviet Union",
+          "Russellville"
+        ],
+        "classification": "legitimate_cascade",
+        "classification_reason": "damaged memory의 subject 'Soviet Union:capital' 가 attack fact의 object entity와 일치 — 실제 의존 관계",
+        "classification_details": {
+          "subject_matches_object": true,
+          "content_mentions_object": true,
+          "same_entity_different_attr": false
+        }
+      },
+      {
+        "memory_id": "aafeb522-2016-4f8d-a940-32f160a5fea3",
+        "memory_content": "The official language of United Kingdom is English.",
+        "memory_subject_key": "United Kingdom:49024",
+        "memory_entities": [
+          "United Kingdom",
+          "English"
+        ],
+        "current_weight": 0.77602,
+        "weight_drop": 0.22398,
+        "triggering_conflict": {
+          "subject_key": "the current head of state in united kingdom:name",
+          "old_content": "The name of the current head of state in United Kingdom is Elizabeth II.",
+          "object_entities": [
+            "United Kingdom",
+            "Elizabeth"
+          ]
+        },
+        "propagation_path": [
+          "United Kingdom",
+          "English"
+        ],
+        "classification": "legitimate_cascade",
+        "classification_reason": "damaged memory의 subject 'United Kingdom:49024' 가 attack fact의 object entity와 일치 — 실제 의존 관계",
+        "classification_details": {
+          "subject_matches_object": true,
+          "content_mentions_object": true,
+          "same_entity_different_attr": false
+        }
+      },
+      {
+        "memory_id": "d9ce60d4-30b3-4ea6-b3ff-c676f8a2b030",
+        "memory_content": "rugby union was created in the country of India.",
+        "memory_subject_key": "India:13041",
+        "memory_entities": [
+          "India"
+        ],
+        "current_weight": 0.574219,
+        "weight_drop": 0.425781,
+        "triggering_conflict": {
+          "subject_key": "Narendra Modi:type",
+          "old_content": "Narendra Modi is a citizen of India.",
+          "object_entities": [
+            "India"
+          ]
+        },
+        "propagation_path": [],
+        "classification": "legitimate_cascade",
+        "classification_reason": "damaged memory의 subject 'India:13041' 가 attack fact의 object entity와 일치 — 실제 의존 관계",
+        "classification_details": {
+          "subject_matches_object": true,
+          "content_mentions_object": true,
+          "same_entity_different_attr": false
+        }
+      },
+      {
+        "memory_id": "9966d526-41f2-45ee-8bba-cc3f00ac71d5",
+        "memory_content": "Hyderabad is located in the continent of Asia.",
+        "memory_subject_key": "Hyderabad:location",
+        "memory_entities": [
+          "Asia",
+          "Hyderabad"
+        ],
+        "current_weight": 0.833333,
+        "weight_drop": 0.166667,
+        "triggering_conflict": {
+          "subject_key": "Microsoft:32731",
+          "old_content": "The chief executive officer of Microsoft is Satya Nadella.",
+          "object_entities": [
+            "Satya Nadella"
+          ]
+        },
+        "propagation_path": [
+          "Satya Nadella",
+          "Hyderabad"
+        ],
+        "classification": "borderline",
+        "classification_reason": "entity graph 경로로 연결되지만 직접적 의존성 불확실: Satya Nadella → Hyderabad",
+        "classification_details": {
+          "subject_matches_object": false,
+          "content_mentions_object": false,
+          "same_entity_different_attr": false
+        }
+      },
+      {
+        "memory_id": "4ab92bc9-7880-4d3f-9760-8479d8ddb4c0",
+        "memory_content": "Catholic Church was founded by Jesus Christ.",
+        "memory_subject_key": "Catholic Church:founded",
+        "memory_entities": [
+          "Catholic Church",
+          "Jesus Christ"
+        ],
+        "current_weight": 0.802083,
+        "weight_drop": 0.197917,
+        "triggering_conflict": {
+          "subject_key": "Kingdom:64408",
+          "old_content": "Kingdom of Ireland is affiliated with the religion of Catholic Church.",
+          "object_entities": [
+            "Ireland",
+            "Catholic Church"
+          ]
+        },
+        "propagation_path": [
+          "Ireland",
+          "Catholic Church"
+        ],
+        "classification": "legitimate_cascade",
+        "classification_reason": "damaged memory의 subject 'Catholic Church:founded' 가 attack fact의 object entity와 일치 — 실제 의존 관계",
+        "classification_details": {
+          "subject_matches_object": true,
+          "content_mentions_object": true,
+          "same_entity_different_attr": false
+        }
+      },
+      {
+        "memory_id": "c147ab9d-9d96-4376-b18b-d502fded045c",
+        "memory_content": "The Wheel of Time was written in the language of English.",
+        "memory_subject_key": "Time:wheel",
+        "memory_entities": [
+          "English",
+          "The Wheel",
+          "Time"
+        ],
+        "current_weight": 0.95,
+        "weight_drop": 0.05,
+        "triggering_conflict": {
+          "subject_key": "Rand:11142",
+          "old_content": "Rand al'Thor was created by Robert Jordan.",
+          "object_entities": [
+            "Robert Jordan",
+            "Thor"
+          ]
+        },
+        "propagation_path": [
+          "Robert Jordan",
+          "The Wheel"
+        ],
+        "classification": "borderline",
+        "classification_reason": "entity graph 경로로 연결되지만 직접적 의존성 불확실: Robert Jordan → The Wheel",
+        "classification_details": {
+          "subject_matches_object": false,
+          "content_mentions_object": false,
+          "same_entity_different_attr": false
+        }
+      },
+      {
+        "memory_id": "8e5a1930-fe63-4cdd-9581-8a7cada9cff6",
+        "memory_content": "jazz was created in the country of United States of America.",
+        "memory_subject_key": "United States:43051",
+        "memory_entities": [
+          "United States",
+          "America"
+        ],
+        "current_weight": 0.723244,
+        "weight_drop": 0.276756,
+        "triggering_conflict": {
+          "subject_key": "Country Joe:type",
+          "old_content": "Country Joe McDonald is a citizen of United States of America.",
+          "object_entities": [
+            "America",
+            "United States"
+          ]
+        },
+        "propagation_path": [
+          "America",
+          "United States"
+        ],
+        "classification": "legitimate_cascade",
+        "classification_reason": "damaged memory의 subject 'United States:43051' 가 attack fact의 object entity와 일치 — 실제 의존 관계",
+        "classification_details": {
+          "subject_matches_object": true,
+          "content_mentions_object": true,
+          "same_entity_different_attr": false
+        }
+      },
+      {
+        "memory_id": "80ebfb8f-6fc4-4ae6-b544-9da066636c96",
+        "memory_content": "basketball was created in the country of United States of America.",
+        "memory_subject_key": "United States:96707",
+        "memory_entities": [
+          "United States",
+          "America"
+        ],
+        "current_weight": 0.723244,
+        "weight_drop": 0.276756,
+        "triggering_conflict": {
+          "subject_key": "Country Joe:type",
+          "old_content": "Country Joe McDonald is a citizen of United States of America.",
+          "object_entities": [
+            "America",
+            "United States"
+          ]
+        },
+        "propagation_path": [
+          "America",
+          "United States"
+        ],
+        "classification": "legitimate_cascade",
+        "classification_reason": "damaged memory의 subject 'United States:96707' 가 attack fact의 object entity와 일치 — 실제 의존 관계",
+        "classification_details": {
+          "subject_matches_object": true,
+          "content_mentions_object": true,
+          "same_entity_different_attr": false
+        }
+      },
+      {
+        "memory_id": "eddab8e2-3767-4f94-90c1-a9048e1bd195",
+        "memory_content": "Australia is located in the continent of South America.",
+        "memory_subject_key": "Australia:location",
+        "memory_entities": [
+          "Australia",
+          "South America"
+        ],
+        "current_weight": 0.75,
+        "weight_drop": 0.25,
+        "triggering_conflict": {
+          "subject_key": "Joe Hockey:type",
+          "old_content": "Joe Hockey is a citizen of Australia.",
+          "object_entities": [
+            "Australia"
+          ]
+        },
+        "propagation_path": [
+          "Australia",
+          "South America"
+        ],
+        "classification": "legitimate_cascade",
+        "classification_reason": "damaged memory의 subject 'Australia:location' 가 attack fact의 object entity와 일치 — 실제 의존 관계",
+        "classification_details": {
+          "subject_matches_object": true,
+          "content_mentions_object": true,
+          "same_entity_different_attr": false
+        }
+      },
+      {
+        "memory_id": "27edd560-e4d8-48b6-810e-8d6d72cd361e",
+        "memory_content": "Brian Epstein is a citizen of United Kingdom.",
+        "memory_subject_key": "Brian Epstein:type",
+        "memory_entities": [
+          "United Kingdom",
+          "Brian Epstein"
+        ],
+        "current_weight": 0.835714,
+        "weight_drop": 0.164286,
+        "triggering_conflict": {
+          "subject_key": "Past Masters:69346",
+          "old_content": "Past Masters was performed by The Beatles.",
+          "object_entities": [
+            "The Beatles"
+          ]
+        },
+        "propagation_path": [
+          "The Beatles",
+          "Brian Epstein"
+        ],
+        "classification": "borderline",
+        "classification_reason": "entity graph 경로로 연결되지만 직접적 의존성 불확실: The Beatles → Brian Epstein",
+        "classification_details": {
+          "subject_matches_object": false,
+          "content_mentions_object": false,
+          "same_entity_different_attr": false
+        }
+      },
+      {
+        "memory_id": "7949e4c8-5884-4626-9cf1-3c1273674561",
+        "memory_content": "Robert Jordan is famous for The Wheel of Time.",
+        "memory_subject_key": "Robert Jordan:33562",
+        "memory_entities": [
+          "Robert Jordan",
+          "The Wheel",
+          "Time"
+        ],
+        "current_weight": 0.75,
+        "weight_drop": 0.25,
+        "triggering_conflict": {
+          "subject_key": "Rand:11142",
+          "old_content": "Rand al'Thor was created by Robert Jordan.",
+          "object_entities": [
+            "Robert Jordan",
+            "Thor"
+          ]
+        },
+        "propagation_path": [
+          "Robert Jordan",
+          "The Wheel"
+        ],
+        "classification": "legitimate_cascade",
+        "classification_reason": "damaged memory의 subject 'Robert Jordan:33562' 가 attack fact의 object entity와 일치 — 실제 의존 관계",
+        "classification_details": {
+          "subject_matches_object": true,
+          "content_mentions_object": true,
+          "same_entity_different_attr": false
+        }
+      },
+      {
+        "memory_id": "815e2156-fd67-441a-9dcd-6c041e37d877",
+        "memory_content": "India is located in the continent of Africa.",
+        "memory_subject_key": "India:location",
+        "memory_entities": [
+          "India",
+          "Africa"
+        ],
+        "current_weight": 0.765625,
+        "weight_drop": 0.234375,
+        "triggering_conflict": {
+          "subject_key": "Amala Paul:type",
+          "old_content": "Amala Paul is a citizen of India.",
+          "object_entities": [
+            "India"
+          ]
+        },
+        "propagation_path": [
+          "India",
+          "Africa"
+        ],
+        "classification": "legitimate_cascade",
+        "classification_reason": "damaged memory의 subject 'India:location' 가 attack fact의 object entity와 일치 — 실제 의존 관계",
+        "classification_details": {
+          "subject_matches_object": true,
+          "content_mentions_object": true,
+          "same_entity_different_attr": false
+        }
+      },
+      {
+        "memory_id": "cdc10127-c3dc-4163-a7a7-8b84632c592c",
+        "memory_content": "The official language of United States of America is German.",
+        "memory_subject_key": "United States:50021",
+        "memory_entities": [
+          "United States",
+          "America",
+          "German"
+        ],
+        "current_weight": 0.812064,
+        "weight_drop": 0.187936,
+        "triggering_conflict": {
+          "subject_key": "Sable:type",
+          "old_content": "Sable is a citizen of United States of America.",
+          "object_entities": [
+            "America",
+            "United States"
+          ]
+        },
+        "propagation_path": [
+          "America",
+          "German"
+        ],
+        "classification": "legitimate_cascade",
+        "classification_reason": "damaged memory의 subject 'United States:50021' 가 attack fact의 object entity와 일치 — 실제 의존 관계",
+        "classification_details": {
+          "subject_matches_object": true,
+          "content_mentions_object": true,
+          "same_entity_different_attr": false
+        }
+      },
+      {
+        "memory_id": "5bf440e1-1cb3-4aab-a765-5f11368a44dd",
+        "memory_content": "Jesus Christ worked in the city of Galilee.",
+        "memory_subject_key": "Jesus Christ:98717",
+        "memory_entities": [
+          "Jesus Christ",
+          "Galilee"
+        ],
+        "current_weight": 0.5,
+        "weight_drop": 0.5,
+        "triggering_conflict": {
+          "subject_key": "John Walsh:30517",
+          "old_content": "John Walsh is affiliated with the religion of Catholic Church.",
+          "object_entities": [
+            "Catholic Church"
+          ]
+        },
+        "propagation_path": [
+          "Catholic Church",
+          "Jesus Christ"
+        ],
+        "classification": "borderline",
+        "classification_reason": "entity graph 경로로 연결되지만 직접적 의존성 불확실: Catholic Church → Jesus Christ",
+        "classification_details": {
+          "subject_matches_object": false,
+          "content_mentions_object": false,
+          "same_entity_different_attr": false
+        }
+      },
+      {
+        "memory_id": "ec3dca02-161e-47dc-9302-4a2a8a250e17",
+        "memory_content": "Bob Iger is a citizen of United States of America.",
+        "memory_subject_key": "Bob Iger:type",
+        "memory_entities": [
+          "United States",
+          "America",
+          "Bob Iger"
+        ],
+        "current_weight": 0.961538,
+        "weight_drop": 0.038462,
+        "triggering_conflict": {
+          "subject_key": "American Broadcasting Company:director",
+          "old_content": "The director of American Broadcasting Company is Bob Iger.",
+          "object_entities": [
+            "Bob Iger"
+          ]
+        },
+        "propagation_path": [
+          "Bob Iger",
+          "United States"
+        ],
+        "classification": "legitimate_cascade",
+        "classification_reason": "damaged memory의 subject 'Bob Iger:type' 가 attack fact의 object entity와 일치 — 실제 의존 관계",
+        "classification_details": {
+          "subject_matches_object": true,
+          "content_mentions_object": true,
+          "same_entity_different_attr": false
+        }
+      },
+      {
+        "memory_id": "fc9f9af4-b578-4624-a870-4c4670658787",
+        "memory_content": "Pierre Beaumarchais was born in the city of Paris.",
+        "memory_subject_key": "Pierre Beaumarchais:birthplace",
+        "memory_entities": [
+          "Paris",
+          "Pierre Beaumarchais"
+        ],
+        "current_weight": 0.875,
+        "weight_drop": 0.125,
+        "triggering_conflict": {
+          "subject_key": "the marriage of figaro:author",
+          "old_content": "The author of The Marriage of Figaro is Pierre Beaumarchais.",
+          "object_entities": [
+            "Figaro",
+            "The Marriage",
+            "Pierre Beaumarchais"
+          ]
+        },
+        "propagation_path": [
+          "Figaro",
+          "Pierre Beaumarchais"
+        ],
+        "classification": "legitimate_cascade",
+        "classification_reason": "damaged memory의 subject 'Pierre Beaumarchais:birthplace' 가 attack fact의 object entity와 일치 — 실제 의존 관계",
+        "classification_details": {
+          "subject_matches_object": true,
+          "content_mentions_object": true,
+          "same_entity_different_attr": false
+        }
+      },
+      {
+        "memory_id": "dc6df4ce-4e47-4f24-a2ae-99c18d758c5d",
+        "memory_content": "Maharishi Mahesh Yogi is affiliated with the religion of Hinduism.",
+        "memory_subject_key": "Maharishi Mahesh Yogi:30517",
+        "memory_entities": [
+          "Maharishi Mahesh Yogi",
+          "Hinduism"
+        ],
+        "current_weight": 0.5,
+        "weight_drop": 0.5,
+        "triggering_conflict": {
+          "subject_key": "Transcendental Meditation:founded",
+          "old_content": "Transcendental Meditation movement was founded by Maharishi Mahesh Yogi.",
+          "object_entities": [
+            "Maharishi Mahesh Yogi"
+          ]
+        },
+        "propagation_path": [
+          "Maharishi Mahesh Yogi",
+          "Hinduism"
+        ],
+        "classification": "legitimate_cascade",
+        "classification_reason": "damaged memory의 subject 'Maharishi Mahesh Yogi:30517' 가 attack fact의 object entity와 일치 — 실제 의존 관계",
+        "classification_details": {
+          "subject_matches_object": true,
+          "content_mentions_object": true,
+          "same_entity_different_attr": false
+        }
+      },
+      {
+        "memory_id": "0d107364-6c5b-45f6-9bb6-568bff8a3213",
+        "memory_content": "The univeristy where Elena Ceaușescu was educated is University of Bucharest.",
+        "memory_subject_key": "Elena:26453",
+        "memory_entities": [
+          "University",
+          "Elena",
+          "Bucharest"
+        ],
+        "current_weight": 0.928571,
+        "weight_drop": 0.071429,
+        "triggering_conflict": {
+          "subject_key": "Nicolae:spouse",
+          "old_content": "Nicolae Ceaușescu is married to Elena Ceaușescu.",
+          "object_entities": [
+            "Elena"
+          ]
+        },
+        "propagation_path": [
+          "Elena",
+          "University"
+        ],
+        "classification": "legitimate_cascade",
+        "classification_reason": "damaged memory의 subject 'Elena:26453' 가 attack fact의 object entity와 일치 — 실제 의존 관계",
+        "classification_details": {
+          "subject_matches_object": true,
+          "content_mentions_object": true,
+          "same_entity_different_attr": false
+        }
+      },
+      {
+        "memory_id": "d205c384-7341-48f1-8261-cfc2d5bade99",
+        "memory_content": "basketball was created in the country of Soviet Union.",
+        "memory_subject_key": "Soviet Union:3612",
+        "memory_entities": [
+          "Soviet Union"
+        ],
+        "current_weight": 0.5,
+        "weight_drop": 0.5,
+        "triggering_conflict": {
+          "subject_key": "the current head of state in soviet union:name",
+          "old_content": "The name of the current head of state in Soviet Union is Mikhail Gorbachev.",
+          "object_entities": [
+            "Soviet Union",
+            "Mikhail Gorbachev"
+          ]
+        },
+        "propagation_path": [
+          "Mikhail Gorbachev",
+          "Soviet Union"
+        ],
+        "classification": "legitimate_cascade",
+        "classification_reason": "damaged memory의 subject 'Soviet Union:3612' 가 attack fact의 object entity와 일치 — 실제 의존 관계",
+        "classification_details": {
+          "subject_matches_object": true,
+          "content_mentions_object": true,
+          "same_entity_different_attr": false
+        }
+      },
+      {
+        "memory_id": "6809a5d2-15f3-4212-aef8-0714cdf22b6e",
+        "memory_content": "rap rock was created in the country of United States of America.",
+        "memory_subject_key": "United States:29717",
+        "memory_entities": [
+          "United States",
+          "America"
+        ],
+        "current_weight": 0.888996,
+        "weight_drop": 0.111004,
+        "triggering_conflict": {
+          "subject_key": "Andrew Carnegie:type",
+          "old_content": "Andrew Carnegie is a citizen of United States of America.",
+          "object_entities": [
+            "America",
+            "United States"
+          ]
+        },
+        "propagation_path": [
+          "America",
+          "United States"
+        ],
+        "classification": "legitimate_cascade",
+        "classification_reason": "damaged memory의 subject 'United States:29717' 가 attack fact의 object entity와 일치 — 실제 의존 관계",
+        "classification_details": {
+          "subject_matches_object": true,
+          "content_mentions_object": true,
+          "same_entity_different_attr": false
+        }
+      },
+      {
+        "memory_id": "1b04d6b8-cdec-472c-8c12-7484652090cc",
+        "memory_content": "The capital of United Kingdom is London.",
+        "memory_subject_key": "United Kingdom:capital",
+        "memory_entities": [
+          "London",
+          "United Kingdom"
+        ],
+        "current_weight": 0.840278,
+        "weight_drop": 0.159722,
+        "triggering_conflict": {
+          "subject_key": "Colin Irwin:type",
+          "old_content": "Colin Irwin is a citizen of United Kingdom.",
+          "object_entities": [
+            "United Kingdom"
+          ]
+        },
+        "propagation_path": [
+          "United Kingdom",
+          "London"
+        ],
+        "classification": "legitimate_cascade",
+        "classification_reason": "damaged memory의 subject 'United Kingdom:capital' 가 attack fact의 object entity와 일치 — 실제 의존 관계",
+        "classification_details": {
+          "subject_matches_object": true,
+          "content_mentions_object": true,
+          "same_entity_different_attr": false
+        }
+      },
+      {
+        "memory_id": "70d81b1a-a48a-4736-9a3c-ecb0176e60a6",
+        "memory_content": "The chief executive officer of Lockheed Martin is Marillyn Hewson.",
+        "memory_subject_key": "Lockheed Martin:32731",
+        "memory_entities": [
+          "Lockheed Martin",
+          "Marillyn Hewson"
+        ],
+        "current_weight": 0.5,
+        "weight_drop": 0.5,
+        "triggering_conflict": {
+          "subject_key": "Raptor:58458",
+          "old_content": "F-22 Raptor was developed by Lockheed Martin.",
+          "object_entities": [
+            "Lockheed Martin"
+          ]
+        },
+        "propagation_path": [
+          "Lockheed Martin",
+          "Marillyn Hewson"
+        ],
+        "classification": "legitimate_cascade",
+        "classification_reason": "damaged memory의 subject 'Lockheed Martin:32731' 가 attack fact의 object entity와 일치 — 실제 의존 관계",
+        "classification_details": {
+          "subject_matches_object": true,
+          "content_mentions_object": true,
+          "same_entity_different_attr": false
+        }
+      },
+      {
+        "memory_id": "3bdae421-ecf7-4ba2-b70b-f2e03736d032",
+        "memory_content": "The official language of Moscow is German.",
+        "memory_subject_key": "Moscow:49024",
+        "memory_entities": [
+          "Moscow",
+          "German"
+        ],
+        "current_weight": 0.875,
+        "weight_drop": 0.125,
+        "triggering_conflict": {
+          "subject_key": "Gennady Rozhdestvensky:death_place",
+          "old_content": "Gennady Rozhdestvensky died in the city of Moscow.",
+          "object_entities": [
+            "Moscow"
+          ]
+        },
+        "propagation_path": [
+          "Moscow",
+          "German"
+        ],
+        "classification": "legitimate_cascade",
+        "classification_reason": "damaged memory의 subject 'Moscow:49024' 가 attack fact의 object entity와 일치 — 실제 의존 관계",
+        "classification_details": {
+          "subject_matches_object": true,
+          "content_mentions_object": true,
+          "same_entity_different_attr": false
+        }
+      },
+      {
+        "memory_id": "f54d43b0-1a56-42d7-bd1d-7f5320081349",
+        "memory_content": "The capital of Australia is Oderzo.",
+        "memory_subject_key": "Australia:capital",
+        "memory_entities": [
+          "Australia",
+          "Oderzo"
+        ],
+        "current_weight": 0.75,
+        "weight_drop": 0.25,
+        "triggering_conflict": {
+          "subject_key": "Joe Hockey:type",
+          "old_content": "Joe Hockey is a citizen of Australia.",
+          "object_entities": [
+            "Australia"
+          ]
+        },
+        "propagation_path": [
+          "Australia",
+          "Oderzo"
+        ],
+        "classification": "legitimate_cascade",
+        "classification_reason": "damaged memory의 subject 'Australia:capital' 가 attack fact의 object entity와 일치 — 실제 의존 관계",
+        "classification_details": {
+          "subject_matches_object": true,
+          "content_mentions_object": true,
+          "same_entity_different_attr": false
+        }
+      },
+      {
+        "memory_id": "c6530dd0-6c04-488d-b269-ba9ac52225f2",
+        "memory_content": "Emma Watson speaks the language of English.",
+        "memory_subject_key": "Emma Watson:42149",
+        "memory_entities": [
+          "English",
+          "Emma Watson"
+        ],
+        "current_weight": 0.954545,
+        "weight_drop": 0.045455,
+        "triggering_conflict": {
+          "subject_key": "Hermione Granger:69346",
+          "old_content": "Hermione Granger was performed by Emma Watson.",
+          "object_entities": [
+            "Emma Watson"
+          ]
+        },
+        "propagation_path": [
+          "Emma Watson",
+          "English"
+        ],
+        "classification": "legitimate_cascade",
+        "classification_reason": "damaged memory의 subject 'Emma Watson:42149' 가 attack fact의 object entity와 일치 — 실제 의존 관계",
+        "classification_details": {
+          "subject_matches_object": true,
+          "content_mentions_object": true,
+          "same_entity_different_attr": false
+        }
+      },
+      {
+        "memory_id": "d0b5e2ee-1b91-4a45-a412-83bae2c71277",
+        "memory_content": "Denis Sassou-Nguesso works in the field of politician.",
+        "memory_subject_key": "Denis Sassou:48232",
+        "memory_entities": [
+          "Denis Sassou",
+          "Nguesso"
+        ],
+        "current_weight": 0.75,
+        "weight_drop": 0.25,
+        "triggering_conflict": {
+          "subject_key": "congolese party of labour:chairperson",
+          "old_content": "The chairperson of Congolese Party of Labour is Denis Sassou-Nguesso.",
+          "object_entities": [
+            "Labour",
+            "Denis Sassou",
+            "Nguesso",
+            "Congolese Party"
+          ]
+        },
+        "propagation_path": [
+          "Labour",
+          "Denis Sassou"
+        ],
+        "classification": "legitimate_cascade",
+        "classification_reason": "damaged memory의 subject 'Denis Sassou:48232' 가 attack fact의 object entity와 일치 — 실제 의존 관계",
+        "classification_details": {
+          "subject_matches_object": true,
+          "content_mentions_object": true,
+          "same_entity_different_attr": false
+        }
+      },
+      {
+        "memory_id": "9dbd2708-b6e6-4810-a047-23624d5fc143",
+        "memory_content": "France is located in the continent of Europe.",
+        "memory_subject_key": "France:location",
+        "memory_entities": [
+          "France",
+          "Europe"
+        ],
+        "current_weight": 0.95,
+        "weight_drop": 0.05,
+        "triggering_conflict": {
+          "subject_key": "Le Petit Parisien:74915",
+          "old_content": "Le Petit Parisien was created in the country of France.",
+          "object_entities": [
+            "France"
+          ]
+        },
+        "propagation_path": [
+          "France",
+          "Europe"
+        ],
+        "classification": "legitimate_cascade",
+        "classification_reason": "damaged memory의 subject 'France:location' 가 attack fact의 object entity와 일치 — 실제 의존 관계",
+        "classification_details": {
+          "subject_matches_object": true,
+          "content_mentions_object": true,
+          "same_entity_different_attr": false
+        }
+      }
+    ]
+  }
+}

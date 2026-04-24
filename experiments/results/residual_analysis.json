@@ -1,0 +1,308 @@
+{
+  "config": {
+    "context_size": "6k",
+    "num_attack_facts": 5,
+    "propagation_mode": "attr_aware",
+    "propagation_depth": 2,
+    "decay_per_hop": 0.5,
+    "timestamp": "2026-04-23 10:32:48"
+  },
+  "pre_attack_state": {
+    "total": 456,
+    "valid": 344,
+    "invalid": 112,
+    "decayed_below_1.0": 0,
+    "decayed_below_0.5": 0,
+    "decayed_below_0.3": 0,
+    "decayed_below_0.1": 0,
+    "avg_weight": 1.0,
+    "min_weight": 1.0
+  },
+  "attack_details": [
+    {
+      "fact_line": "554. The location of University is Mickey Mouse.",
+      "target_key": "University:location",
+      "old_memory_id": "4d2a16ed-0a91-4cc7-aece-d7156a99d661",
+      "old_memory_content": "The headquarters of University of California, Berkeley is located in the city of Botevgrad.",
+      "object_entities": [
+        "California",
+        "Berkeley",
+        "Botevgrad"
+      ]
+    },
+    {
+      "fact_line": "555. The capital of France is Klingon.",
+      "target_key": "France:capital",
+      "old_memory_id": "8b317632-3e17-4b49-95d9-62b02b1b3a3a",
+      "old_memory_content": "The capital of France is Harare.",
+      "object_entities": [
+        "Harare"
+      ]
+    },
+    {
+      "fact_line": "556. The location of France is Los Angeles.",
+      "target_key": "France:location",
+      "old_memory_id": "2a424fe3-af59-4f32-8fca-f8b3e6455334",
+      "old_memory_content": "France is located in the continent of Europe.",
+      "object_entities": [
+        "Europe"
+      ]
+    },
+    {
+      "fact_line": "557. The location of United Kingdom is zero.",
+      "target_key": "United Kingdom:location",
+      "old_memory_id": "c373f5e5-a54b-41e7-a7de-b21b271a6a6b",
+      "old_memory_content": "United Kingdom is located in the continent of Europe.",
+      "object_entities": [
+        "Europe"
+      ]
+    },
+    {
+      "fact_line": "558. The capital of United Kingdom is Donald Duck.",
+      "target_key": "United Kingdom:capital",
+      "old_memory_id": "50ad39fb-d8d3-42fc-bd15-4d873954b52d",
+      "old_memory_content": "The capital of United Kingdom is London.",
+      "object_entities": [
+        "London"
+      ]
+    }
+  ],
+  "hub_entities": [
+    {
+      "entity": "United States",
+      "degree": 23,
+      "memory_count": 27
+    },
+    {
+      "entity": "America",
+      "degree": 23,
+      "memory_count": 27
+    },
+    {
+      "entity": "University",
+      "degree": 17,
+      "memory_count": 12
+    },
+    {
+      "entity": "France",
+      "degree": 13,
+      "memory_count": 11
+    },
+    {
+      "entity": "United Kingdom",
+      "degree": 12,
+      "memory_count": 12
+    }
+  ],
+  "fact_registry_size": 330,
+  "damage_summary": {
+    "total_memories": 344,
+    "total_damaged": 6,
+    "directly_invalidated": 5,
+    "propagation_damaged": 1,
+    "damage_ratio_pct": 1.74,
+    "propagation_damage_ratio_pct": 0.29
+  },
+  "classification_summary": {
+    "total_propagation_damaged": 1,
+    "legitimate_cascade": 1,
+    "legitimate_cascade_pct": 100.0,
+    "borderline": 0,
+    "borderline_pct": 0.0,
+    "false_positive": 0,
+    "false_positive_pct": 0.0
+  },
+  "post_attack_metrics": {
+    "exact_match": 20.0,
+    "f1": 23.33
+  },
+  "classified_damages": [
+    {
+      "memory_id": "c373f5e5-a54b-41e7-a7de-b21b271a6a6b",
+      "memory_content": "United Kingdom is located in the continent of Europe.",
+      "memory_subject_key": "United Kingdom:location",
+      "memory_entities": [
+        "Europe",
+        "United Kingdom"
+      ],
+      "original_weight": 1.0,
+      "current_weight": 1.0,
+      "weight_drop": 0.0,
+      "was_invalidated": true,
+      "is_killed": false,
+      "triggering_attack": {
+        "fact_line": "557. The location of United Kingdom is zero.",
+        "target_key": "United Kingdom:location",
+        "old_memory_content": "United Kingdom is located in the continent of Europe.",
+        "object_entities": [
+          "Europe"
+        ]
+      },
+      "propagation_path": [],
+      "classification": "legitimate_cascade",
+      "classification_reason": "damaged memory 내용에 attack fact의 object entity가 직접 언급됨 — 의미적 의존 관계",
+      "classification_details": {
+        "subject_matches_object": false,
+        "content_mentions_object": true,
+        "same_entity_different_attr": false
+      }
+    },
+    {
+      "memory_id": "bda949af-9493-4d2d-9d3e-1b4a67547f65",
+      "memory_content": "London is located in the continent of Europe.",
+      "memory_subject_key": "London:location",
+      "memory_entities": [
+        "London",
+        "Europe"
+      ],
+      "original_weight": 1.0,
+      "current_weight": 0.9166666666666666,
+      "weight_drop": 0.08333333333333337,
+      "was_invalidated": false,
+      "is_killed": false,
+      "triggering_attack": {
+        "fact_line": "558. The capital of United Kingdom is Donald Duck.",
+        "target_key": "United Kingdom:capital",
+        "old_memory_content": "The capital of United Kingdom is London.",
+        "object_entities": [
+          "London"
+        ]
+      },
+      "propagation_path": [
+        "London",
+        "Europe"
+      ],
+      "classification": "legitimate_cascade",
+      "classification_reason": "damaged memory의 subject 'London:location' 가 attack fact의 object entity와 일치 — 실제 의존 관계",
+      "classification_details": {
+        "subject_matches_object": true,
+        "content_mentions_object": true,
+        "same_entity_different_attr": false
+      }
+    },
+    {
+      "memory_id": "4d2a16ed-0a91-4cc7-aece-d7156a99d661",
+      "memory_content": "The headquarters of University of California, Berkeley is located in the city of Botevgrad.",
+      "memory_subject_key": "University:location",
+      "memory_entities": [
+        "University",
+        "California",
+        "Berkeley",
+        "Botevgrad"
+      ],
+      "original_weight": 1.0,
+      "current_weight": 1.0,
+      "weight_drop": 0.0,
+      "was_invalidated": true,
+      "is_killed": false,
+      "triggering_attack": {
+        "fact_line": "554. The location of University is Mickey Mouse.",
+        "target_key": "University:location",
+        "old_memory_content": "The headquarters of University of California, Berkeley is located in the city of Botevgrad.",
+        "object_entities": [
+          "California",
+          "Berkeley",
+          "Botevgrad"
+        ]
+      },
+      "propagation_path": [],
+      "classification": "legitimate_cascade",
+      "classification_reason": "damaged memory 내용에 attack fact의 object entity가 직접 언급됨 — 의미적 의존 관계",
+      "classification_details": {
+        "subject_matches_object": false,
+        "content_mentions_object": true,
+        "same_entity_different_attr": false
+      }
+    },
+    {
+      "memory_id": "8b317632-3e17-4b49-95d9-62b02b1b3a3a",
+      "memory_content": "The capital of France is Harare.",
+      "memory_subject_key": "France:capital",
+      "memory_entities": [
+        "France",
+        "Harare"
+      ],
+      "original_weight": 1.0,
+      "current_weight": 1.0,
+      "weight_drop": 0.0,
+      "was_invalidated": true,
+      "is_killed": false,
+      "triggering_attack": {
+        "fact_line": "555. The capital of France is Klingon.",
+        "target_key": "France:capital",
+        "old_memory_content": "The capital of France is Harare.",
+        "object_entities": [
+          "Harare"
+        ]
+      },
+      "propagation_path": [],
+      "classification": "legitimate_cascade",
+      "classification_reason": "damaged memory 내용에 attack fact의 object entity가 직접 언급됨 — 의미적 의존 관계",
+      "classification_details": {
+        "subject_matches_object": false,
+        "content_mentions_object": true,
+        "same_entity_different_attr": false
+      }
+    },
+    {
+      "memory_id": "50ad39fb-d8d3-42fc-bd15-4d873954b52d",
+      "memory_content": "The capital of United Kingdom is London.",
+      "memory_subject_key": "United Kingdom:capital",
+      "memory_entities": [
+        "London",
+        "United Kingdom"
+      ],
+      "original_weight": 1.0,
+      "current_weight": 1.0,
+      "weight_drop": 0.0,
+      "was_invalidated": true,
+      "is_killed": false,
+      "triggering_attack": {
+        "fact_line": "558. The capital of United Kingdom is Donald Duck.",
+        "target_key": "United Kingdom:capital",
+        "old_memory_content": "The capital of United Kingdom is London.",
+        "object_entities": [
+          "London"
+        ]
+      },
+      "propagation_path": [],
+      "classification": "legitimate_cascade",
+      "classification_reason": "damaged memory 내용에 attack fact의 object entity가 직접 언급됨 — 의미적 의존 관계",
+      "classification_details": {
+        "subject_matches_object": false,
+        "content_mentions_object": true,
+        "same_entity_different_attr": false
+      }
+    },
+    {
+      "memory_id": "2a424fe3-af59-4f32-8fca-f8b3e6455334",
+      "memory_content": "France is located in the continent of Europe.",
+      "memory_subject_key": "France:location",
+      "memory_entities": [
+        "France",
+        "Europe"
+      ],
+      "original_weight": 1.0,
+      "current_weight": 1.0,
+      "weight_drop": 0.0,
+      "was_invalidated": true,
+      "is_killed": false,
+      "triggering_attack": {
+        "fact_line": "556. The location of France is Los Angeles.",
+        "target_key": "France:location",
+        "old_memory_content": "France is located in the continent of Europe.",
+        "object_entities": [
+          "Europe"
+        ]
+      },
+      "propagation_path": [],
+      "classification": "legitimate_cascade",
+      "classification_reason": "damaged memory 내용에 attack fact의 object entity가 직접 언급됨 — 의미적 의존 관계",
+      "classification_details": {
+        "subject_matches_object": false,
+        "content_mentions_object": true,
+        "same_entity_different_attr": false
+      }
+    }
+  ]
+}

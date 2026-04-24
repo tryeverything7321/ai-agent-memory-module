@@ -1,0 +1,35 @@
+{
+  "config": {
+    "context_size": "6k",
+    "sub_dataset": "factconsolidation_mh_6k",
+    "experiments": [
+      "wallclock"
+    ],
+    "timestamp": "2026-04-23 10:45:24"
+  },
+  "wallclock_timing": {
+    "experiment": "wallclock_timing",
+    "results": {
+      "bfs_standard": {
+        "n_runs": 3,
+        "propagation_ms_mean": 12.78,
+        "propagation_ms_std": 1.23,
+        "total_attack_ms_mean": 284.07,
+        "total_attack_ms_std": 5.77,
+        "propagation_per_fact_ms": 2.56,
+        "graph_nodes": 417,
+        "graph_edges": 524
+      },
+      "attr_aware": {
+        "n_runs": 3,
+        "propagation_ms_mean": 2.34,
+        "propagation_ms_std": 0.19,
+        "total_attack_ms_mean": 261.14,
+        "total_attack_ms_std": 15.76,
+        "propagation_per_fact_ms": 0.47,
+        "graph_nodes": 417,
+        "graph_edges": 524
+      }
+    }
+  }
+}
