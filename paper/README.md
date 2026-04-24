@@ -7,20 +7,19 @@ ICML 2026 SCALE Workshop 논문
 | 파일 | 용도 |
 |------|------|
 | `workshop.pdf` | **blind 제출용** (저자 정보 제거) |
-| `workshop_v2_reframed_final.pdf` | 저자 표기 버전 (내부 검토용) |
+| `workshop_v3_final.pdf` | 저자 표기 버전 (내부 검토용) |
 | `references.bib` | 참고문헌 |
 
 ## 버전 히스토리
 
-| 버전 | 파일 | 날짜 | 설명 |
-|------|------|------|------|
-| v0 | `workshop_v0_original.tex` | 04/23 | 최초 제출본 |
-| v1 | `workshop_v1_reviewer3_response.tex` | 04/24 | Reviewer 3 대응 (ablation, 인용 추가) |
-| v2-pre | `workshop_v2_pre_reframe.tex` | 04/24 | n=100 업데이트 + 4-agent audit 반영 |
-| **v2-final** | **`workshop_v2_reframed_final.tex`** | **04/24** | **현재 최신 (톤 리프레이밍 + direction ablation)** |
-| v3-backup | `workshop_v3_reframed_final.tex` | 04/24 | v2-final의 안전 복사본 |
+| 버전 | 파일 | 설명 |
+|------|------|------|
+| v0 | `workshop_v0_original.tex` | 최초 제출본 |
+| v1 | `workshop_v1_reviewer3_response.tex` | Reviewer 3 대응 (ablation, 인용 추가) |
+| v2 | `workshop_v2_pre_reframe.tex` | n=100 업데이트 + 4-agent audit 반영 |
+| **v3** | **`workshop_v3_final.tex`** | **현재 최신 (톤 리프레이밍 + direction ablation)** |
 
-`workshop.tex`는 blind 버전으로, body는 `workshop_v2_reframed_final.tex`와 동일.
+`workshop.tex`는 blind 버전으로, body는 `workshop_v3_final.tex`와 동일.
 
 ## 변경 이력 (04/23 ~ 04/24)
 
@@ -109,16 +108,16 @@ ICML 2026 SCALE Workshop 논문
 
 ```bash
 cd paper/
-pdflatex workshop_v2_reframed_final.tex
-bibtex workshop_v2_reframed_final
-pdflatex workshop_v2_reframed_final.tex
-pdflatex workshop_v2_reframed_final.tex
+pdflatex workshop_v3_final.tex
+bibtex workshop_v3_final
+pdflatex workshop_v3_final.tex
+pdflatex workshop_v3_final.tex
 ```
 
 Blind 버전 동기화:
 ```bash
 head -51 workshop.tex > /tmp/header.tex
-sed -n '53,$p' workshop_v2_reframed_final.tex > /tmp/body.tex
+sed -n '53,$p' workshop_v3_final.tex > /tmp/body.tex
 cat /tmp/header.tex /tmp/body.tex > workshop.tex
 # 이후 동일하게 pdflatex 3회
 ```
