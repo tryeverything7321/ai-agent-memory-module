@@ -223,6 +223,7 @@ We define five metrics:
 
 \finding{2} BFS applies nonzero weight decay to 69--79\% of valid memories across scales (\cref{tab:scale}).
 Hub degree grows ${\sim}13\times$ across scales versus ${\sim}10\times$ fact growth, amplifying vulnerability.
+As an entity-extraction sanity check, the top hubs in these FactConsolidation runs are content entities rather than function-word artifacts: United States/America/University at 6K--32K and America/United States/University at 64K.
 
 \finding{3} On the MemoryAgentBench scales tested here, \attraware{} damage remains near ${\sim}$15\%.
 Full classification of all 51 organically damaged memories at 6K found 88.2\% legitimate cascade, 11.8\% borderline, and no clear false positives (see Limitations), suggesting that much of this residual reflects conservative dependency-following rather than obvious error.
