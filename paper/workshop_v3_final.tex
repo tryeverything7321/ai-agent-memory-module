@@ -346,9 +346,10 @@ Facts \textit{about Acme} that merely co-occur with Alice---e.g., ``Acme was fou
   \STATE $M_{\text{down}} \leftarrow \{R[k] \mid k.\text{entity} = e\}$ \COMMENT{facts where $e$ is subject}
   \FOR{each $m \in M_{\text{down}}$ if $m$ is valid}
     \STATE $d_{\text{in}} \leftarrow \max(\text{in\_degree}(e, G), 1)$
-    \STATE $m.w \leftarrow m.w \times (1 - \frac{1-\delta^{h+1}}{d_{\text{in}}})$
-    \IF{$h < D$}
-      \STATE \textbf{Propagate}($m, G, R, D, \delta, h{+}1$)
+    \STATE $h_{\text{next}} \leftarrow h + 1$
+    \STATE $m.w \leftarrow m.w \times (1 - \frac{1-\delta^{h_{\text{next}}}}{d_{\text{in}}})$
+    \IF{$h_{\text{next}} < D$}
+      \STATE \textbf{Propagate}($m, G, R, D, \delta, h_{\text{next}}$)
     \ENDIF
   \ENDFOR
 \ENDFOR
@@ -358,7 +359,7 @@ Facts \textit{about Acme} that merely co-occur with Alice---e.g., ``Acme was fou
 The key filtering step is line~4: instead of visiting all graph neighbors, \attraware{} retrieves only facts where the object entity appears as \textit{subject}---restricting propagation to downstream attribute-directed chains.
 \attraware{} does not infer causality directly; it uses attribute-keyed directionality as a conservative proxy for dependency.
 The in-degree adjustment (line~6) dampens decay for highly-connected entities.
-\bfsprop{} differs by visiting all graph neighbors without semantic filtering; both methods apply in-degree dampening ($1 - (1-\delta^{h+1})/d_{\text{in}}$) to reduce penalty for highly-connected entities at the next propagation hop.
+\bfsprop{} differs by visiting all graph neighbors without semantic filtering; both methods apply in-degree dampening ($1 - (1-\delta^{h_{\text{next}}})/d_{\text{in}}$) to reduce penalty for highly-connected entities at the next propagation hop, where $h_{\text{next}}=h+1$.
 All operations are string-matching or arithmetic over pre-existing metadata---\textbf{no LLM calls} at propagation time.
 At 6K scale (417 nodes, 524 edges), a 5-fact attack completes propagation in $2.3\pm0.2$\,ms for \attraware{} versus $12.8\pm1.2$\,ms for BFS---a $5.5\times$ speedup from reduced traversal scope.
 Propagation constitutes $<$5\% of total processing time (dominated by LLM conflict detection), and the full pipeline processes 64K-scale graphs in $<$1\,s without GPU.\footnote{The 64K timing is based on end-to-end pipeline observation; controlled wallclock measurements at 32K/64K scale remain for future work.  The 6K micro-benchmark provides the only formally measured propagation latency.}
@@ -408,7 +409,7 @@ The robust downstream signal is cross-task contamination (\cref{app:cross_task})
 To isolate their contributions, we run four variants at 6K (5-fact white-box attack).
 Removing dampening from BFS leaves damage unchanged (39.8\%) but doubles kill rate (17.4\%$\rightarrow$33.7\%);
 removing dampening from \attraware{} has no effect (0.3\% damage, 0\% kill in both cases).
-\textbf{The entire 39.5pp damage reduction is attributable to directional filtering; dampening affects only the severity distribution, not the reach of propagation.}
+\textbf{In this ablation, the 39.5pp damage reduction is attributable to directional filtering; dampening affects only the severity distribution, not the reach of propagation.}
 To test whether object$\rightarrow$subject is the right direction, we compare three filtered variants: \textit{downstream} (object$\rightarrow$subject, the default), \textit{upstream} (subject$\rightarrow$object), and \textit{bidirectional}.
 Downstream achieves the lowest damage (0.3\%, 1 memory); upstream damages 1.2\% (4 memories) by propagating to other attributes of the same subject entity; bidirectional damages 1.5\% (5 memories).
 All three tested directional filters reduce damage by $\geq$96\% relative to BFS, but downstream has the lowest damage in this ablation, consistent with the dependency-follows-object intuition.
@@ -515,7 +516,8 @@ This study is intended as an initial structural risk characterization; broader v
 (2)~\attraware{}'s accuracy at 6K: manual inspection found 88.2\% legitimate cascade, 11.8\% borderline, and no clear false positives among 51 organic-damaged memories; the false negative rate (missed dependencies) remains unmeasured.
 The 69--79\% BFS damage is an upper bound on collateral---some fraction may reflect genuine dependencies.
 (3)~Propagation depth fixed at 2; clique construction modestly inflates hub degree (1.4pp effect at 6K); both warrant multi-scale analysis.
-(4)~Our direction ablation confirms object$\rightarrow$subject is optimal among the three structural variants tested; embedding-similarity-based filters and validation on production systems (Mem0 graph mode, Zep) once they adopt propagation are important next steps.
+(4)~Our experiments are text-memory only; extending the same propagation analysis to multimodal memory graphs with visual, spatial, or embodied entities is an important next step.
+(5)~Our direction ablation confirms object$\rightarrow$subject is optimal among the three structural variants tested; embedding-similarity-based filters and validation on production systems (Mem0 graph mode, Zep) once they adopt propagation are important next steps.
 
 % ============================================================
 \section*{LLM/Agent Usage Disclosure}
@@ -540,9 +542,9 @@ The core experimental pipeline (entity extraction, subject-key matching, propaga
 \label{app:cross_task}
 
 We memorize 64K EventQA turns, then trigger propagation from high-degree hubs in isolation (snapshot-restore between hubs) and evaluate Accurate\_Retrieval queries ($n{=}100$) that are \textit{unrelated} to the propagation trigger.
-The raw degree ranking surfaces three sentence-initial function-word or pronoun artifacts due to conservative rule-based extraction.
-We therefore separate the named-entity hub analysis below, which still shows substantial cross-task contamination.
-This artifact affects hub-ranking diagnostics rather than the propagation mechanism itself; full stopword/pronoun-filtered multi-scale replication is left for future work.
+In this diagnostic, the degree ranking surfaces three sentence-initial function-word or pronoun artifacts due to conservative rule-based extraction.
+We therefore report an artifact-aware named-entity subset below, which still shows substantial cross-task contamination.
+This sanity check is not a substitute for full stopword/pronoun-filtered multi-scale replication; it indicates that cross-task contamination is not solely driven by function-word hubs.
 All main conclusions rely on reachability and propagation comparisons, not on the identity of any single raw hub.
 Baseline F1 = 70.9\%.
 
