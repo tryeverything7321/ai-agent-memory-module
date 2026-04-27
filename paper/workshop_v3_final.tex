@@ -54,7 +54,7 @@
 % ============================================================
 \begin{abstract}
 Agent memory systems increasingly adopt entity graphs, and graph-based invalidation propagation---cascading updates through entity connections---is a plausible extension for consistency maintenance.
-We show that this step is dangerous without safeguards: \textbf{structural co-occurrence does not imply dependency}, and naive BFS propagation over co-occurrence graphs applies nonzero weight decay to 69--79\% of valid memories across 6K--64K turns while degrading cross-task retrieval F1 by $10.2\pm1.6$pp.
+We show that this step is dangerous without safeguards: \textbf{structural co-occurrence does not imply dependency}, and naive BFS propagation over co-occurrence graphs applies nonzero weight decay to 69--79\% of valid memories across 6K--64K turns, while the two highest named-entity cross-task hubs cause $-10.0$pp and $-11.9$pp F1 drops on unrelated retrieval.
 Under adversarial hub-targeting, five injected facts degrade 57.3\% of valid memories---weaponizing the system's own maintenance mechanism.
 We propose \textbf{\attraware{} Selective Propagation}, an attribute-keyed directional filter that restricts cascades to plausible dependency paths without LLM calls, achieving 78--100\% damage reduction.
 Ablation confirms that directional filtering accounts for the entire damage reduction; in-degree dampening affects only severity.
@@ -89,7 +89,7 @@ This distinction is well-understood in transportation network resilience~\citep{
 We contribute:
 
 \begin{enumerate}
-  \item \textbf{Quantified risk}: BFS propagation over co-occurrence graphs applies nonzero weight decay to 69--79\% of valid memories across 6K--64K scales and degrades cross-task retrieval F1 by $10.2\pm1.6$pp---turning a maintenance operation into a corruption vector (\cref{sec:c1}).
+  \item \textbf{Quantified risk}: BFS propagation over co-occurrence graphs applies nonzero weight decay to 69--79\% of valid memories across 6K--64K scales; named-entity hub triggers cause $-10.0$pp and $-11.9$pp F1 drops on unrelated retrieval (\cref{sec:c1}).
 
   \item \textbf{Adversarial amplification}: Five injected facts exploit hub topology to degrade 57.3\% of valid memories; the attack requires gray-box access (hub entity names) and weaponizes the system's own forgetting mechanism (\cref{sec:c3}).
 
@@ -249,8 +249,8 @@ Extension to 32K/64K remains for future work (see Limitations).
 
 \subsection{Cross-task Contamination}
 
-BFS propagation during FactConsolidation degrades Accurate\_Retrieval F1 by $10.2\pm1.6$pp across the raw top-5 hub triggers.
-Because three raw top hubs are function-word or pronoun artifacts, \cref{app:cross_task} reports the named-entity subset separately; the strongest named hub (Debbie, degree~715) cascades through 3{,}381 memories and causes $-11.9$pp F1 on completely unrelated queries.
+BFS propagation from high-degree named-entity hubs degrades Accurate\_Retrieval F1 on unrelated queries.
+The two highest named-entity hubs in our EventQA cross-task analysis cause $-10.0$pp and $-11.9$pp F1 drops; the strongest named hub (Debbie, degree~715) cascades through 3{,}381 memories.
 \attraware{} preserves accuracy within measurement noise, confirming that directional filtering prevents cross-task interference in this evaluation.
 This is the most direct evidence that structural damage translates to retrieval degradation, and motivates a follow-up question: could hub-concentrated damage be deliberately triggered?
 
@@ -399,10 +399,10 @@ Threshold methods require per-deployment tuning and exhibit cliff effects (k-hop
 At 32K/64K scale, Weighted BFS $\theta{=}0.3$ maintains 0.2\%/0.1\% damage---comparable to \attraware{}'s 1.0\%/0.9\%---while BFS standard damage escalates to 57.3\%/61.6\% (from 39.8\% at 6K).
 Both filtered strategies remain effective even as hub degrees grow to 298; the practical advantage of \attraware{} lies in hyperparameter-free operation, avoiding the cliff effects and per-deployment $\theta$-tuning that threshold methods require.
 EM/F1 scores ($n{=}100$) converge to 17--21\% across all strategies---the adversarial query set (5 injected facts, 100 questions) lacks sensitivity to discriminate what damage metrics clearly separate.
-The robust downstream signal is cross-task contamination (\cref{app:cross_task}): BFS degrades F1 by $10.2\pm1.6$pp on \textit{unrelated} queries; \attraware{} preserves accuracy within measurement noise.
+The robust downstream signal is cross-task contamination (\cref{app:cross_task}): named-entity hub triggers cause $-10.0$pp and $-11.9$pp F1 drops on \textit{unrelated} queries; \attraware{} preserves accuracy within measurement noise.
 
 \paragraph{Ablation: direction vs.\ dampening.}
-\attraware{} combines two mechanisms: (i)~directional filtering (object$\rightarrow$subject chains) and (ii)~in-degree dampening ($1 - (1-\delta^h)/d_{\text{in}}$).
+\attraware{} combines two mechanisms: (i)~directional filtering (object$\rightarrow$subject chains) and (ii)~in-degree dampening ($1 - (1-\delta^{h+1})/d_{\text{in}}$), where $h$ is the current propagation depth and $h{+}1$ denotes the next hop.
 To isolate their contributions, we run four variants at 6K (5-fact white-box attack).
 Removing dampening from BFS leaves damage unchanged (39.8\%) but doubles kill rate (17.4\%$\rightarrow$33.7\%);
 removing dampening from \attraware{} has no effect (0.3\% damage, 0\% kill in both cases).
@@ -421,18 +421,18 @@ All three reduce damage by $\geq$96\% relative to BFS---confirming that \textit{
 \textbf{Experiment} & \textbf{BFS} & \textbf{WBFS} & \textbf{Attr} & \textbf{Def.} \\
 \midrule
 Scale 6K--64K & 69--79\% & --- & 15\% & 78--81\% \\
-Cross-task (F1) & $-$10.2pp & --- & +0.0pp & 100\% \\
+Cross-task (F1) & $-10.0/-11.9$pp & --- & +0.0pp & 100\% \\
 Adv 6K / 5f & 39.8\% & 1.5\% & 0.3\% & 99.3\% \\
 Adv 32K / 5f & 57.3\% & 0.2\% & 1.0\% & 98.2\% \\
 Adv 64K / 5f & 61.6\% & 0.1\% & 0.9\% & 98.5\% \\
 \bottomrule
 \end{tabular}
-\caption{Defense effectiveness across all experiments. \textbf{Def.} = $1 - \text{Attr}/\text{BFS}$. WBFS = Weighted BFS $\theta{=}0.3$ (best per-scale). At 32K/64K, WBFS achieves lower absolute damage than \attraware{}, but requires per-deployment $\theta$-tuning. Cross-task: BFS degrades F1 by $10.2\pm1.6$pp; \attraware{} preserves accuracy.}
+\caption{Defense effectiveness across all experiments. \textbf{Def.} = $1 - \text{Attr}/\text{BFS}$. WBFS = Weighted BFS $\theta{=}0.3$ (best per-scale). At 32K/64K, WBFS achieves lower absolute damage than \attraware{}, but requires per-deployment $\theta$-tuning. Cross-task: the two highest named-entity hubs cause $-10.0$pp and $-11.9$pp F1 drops; \attraware{} preserves accuracy.}
 \label{tab:defense_all}
 \end{table}
 
 \finding{7} \attraware{} achieves 78--100\% defense effectiveness across all conditions (\cref{tab:defense_all}).
-The strongest signal is cross-task: \attraware{} fully preserves retrieval accuracy ($\Delta$F1 = 0.0pp) where BFS degrades it by $10.2\pm1.6$pp.
+The strongest signal is cross-task: \attraware{} preserves retrieval accuracy within measurement noise where BFS causes double-digit F1 drops under named-entity hub triggers.
 
 \subsection{Robustness to BFS Variants}
 
@@ -495,7 +495,7 @@ Our results are consistent with this pattern in AI memory graphs ($\alpha \appro
 
 \paragraph{Key message.}
 Unfiltered co-occurrence propagation is a latent risk in graph-based memory systems.
-It applies nonzero weight decay to 69--79\% of valid memories, enables low-cost adversarial amplification under gray- or white-box hub knowledge (5 facts $\rightarrow$ 57.3\% degradation), and contaminates unrelated tasks (F1 $-10.2$pp).
+It applies nonzero weight decay to 69--79\% of valid memories, enables low-cost adversarial amplification under gray- or white-box hub knowledge (5 facts $\rightarrow$ 57.3\% degradation), and contaminates unrelated tasks under named-entity hub triggers (F1 $-10.0/-11.9$pp).
 \attraware{} and Weighted BFS $\theta{=}0.3$ each reduce these risks by $\geq$98\%---the former without hyperparameters, the latter with lower absolute damage at scale but requiring per-deployment tuning.
 Ablation confirms that directional filtering drives the entire damage reduction.
 The design principle is clear: \textbf{systems considering invalidation propagation over co-occurrence memory graphs should include dependency-aware filtering or equivalent safeguards from the outset}.
@@ -512,7 +512,7 @@ This study is intended as an initial structural risk characterization; broader v
 (2)~\attraware{}'s accuracy at 6K: manual inspection found 88.2\% legitimate cascade, 11.8\% borderline, and no clear false positives among 51 organic-damaged memories; the false negative rate (missed dependencies) remains unmeasured.
 The 69--79\% BFS damage is an upper bound on collateral---some fraction may reflect genuine dependencies.
 (3)~Propagation depth fixed at 2; clique construction modestly inflates hub degree (1.4pp effect at 6K); both warrant multi-scale analysis.
-(4)~Our direction ablation confirms object$\rightarrow$subject is optimal among the three structural variants tested; embedding-similarity-based filters and validation on production systems (Mem0$^g$, Zep) once they adopt propagation are important next steps.
+(4)~Our direction ablation confirms object$\rightarrow$subject is optimal among the three structural variants tested; embedding-similarity-based filters and validation on production systems (Mem0 graph mode, Zep) once they adopt propagation are important next steps.
 
 % ============================================================
 \section*{LLM/Agent Usage Disclosure}
@@ -537,7 +537,10 @@ The core experimental pipeline (entity extraction, subject-key matching, propaga
 \label{app:cross_task}
 
 We memorize 64K EventQA turns, then trigger propagation from high-degree hubs in isolation (snapshot-restore between hubs) and evaluate Accurate\_Retrieval queries ($n{=}100$) that are \textit{unrelated} to the propagation trigger.
-The raw top-5 hub set included three function-word or pronoun artifacts (``And'', ``She'', ``But''), so the table below reports only the named-entity hubs from that set; this is a conservative presentation of the same cross-task contamination analysis.
+The raw degree ranking surfaces three sentence-initial function-word or pronoun artifacts due to conservative rule-based extraction.
+We therefore separate the named-entity hub analysis below, which still shows substantial cross-task contamination.
+This artifact affects hub-ranking diagnostics rather than the propagation mechanism itself; full stopword/pronoun-filtered multi-scale replication is left for future work.
+All main conclusions rely on reachability and propagation comparisons, not on the identity of any single raw hub.
 Baseline F1 = 70.9\%.
 
 \begin{table}[htbp]
@@ -558,8 +561,7 @@ Marianne & 589 & 3{,}064 & 61.0\% & $-$10.0pp & 73.0\% \\
 \label{tab:cross_task}
 \end{table}
 
-Across these two named hubs, BFS causes $-11.0\pm1.3$pp F1 degradation on unrelated queries, with the worst hub (Debbie, degree 715) cascading to 3,381 memories and causing $-11.9$pp F1 degradation.
-The omitted function-word/pronoun hubs indicate that stronger entity normalization is needed for future hub analyses, but they do not change the central point that high-degree co-occurrence triggers can contaminate unrelated retrieval.
+Across these two named hubs, BFS causes $-10.0$pp and $-11.9$pp F1 degradation on unrelated queries, with the worst hub (Debbie, degree 715) cascading to 3,381 memories.
 \attraware{} preserves accuracy within measurement noise: F1 remains close to the 70.9\% baseline.
 
 \section{Multi-run Statistics}
