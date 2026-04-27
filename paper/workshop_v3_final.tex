@@ -55,9 +55,9 @@
 \begin{abstract}
 Agent memory systems increasingly adopt entity graphs, and graph-based invalidation propagation---cascading updates through entity connections---is a plausible extension for consistency maintenance.
 We show that this step is dangerous without safeguards: \textbf{structural co-occurrence does not imply dependency}, and naive BFS propagation over co-occurrence graphs applies nonzero weight decay to 69--79\% of valid memories across 6K--64K turns, while the two highest named-entity cross-task hubs cause $-10.0$pp and $-11.9$pp F1 drops on unrelated retrieval.
-Under adversarial hub-targeting, five injected facts degrade 57.3\% of valid memories---weaponizing the system's own maintenance mechanism.
+Under adversarial hub-targeting, five injected facts apply nonzero weight decay to 57.3\% of valid memories---weaponizing the system's own maintenance mechanism.
 We propose \textbf{\attraware{} Selective Propagation}, an attribute-keyed directional filter that restricts cascades to plausible dependency paths without LLM calls, achieving 78--100\% damage reduction.
-Ablation confirms that directional filtering accounts for the entire damage reduction; in-degree dampening affects only severity.
+Ablation indicates that directional filtering accounts for the damage reduction in our controlled attack setting; in-degree dampening affects only severity.
 Our initial findings on MemoryAgentBench suggest that systems exploring graph-based forgetting over co-occurrence structures should strongly consider dependency-aware propagation mechanisms from the outset to mitigate collateral damage.
 \end{abstract}
 
@@ -72,7 +72,7 @@ These systems increasingly maintain entity graphs to organize stored facts~\cite
 As memory scales to tens of thousands of facts, maintaining consistency becomes critical---yet multi-hop conflict resolution accuracy remains below 6\% on standard benchmarks~\citep{memoryagentbench_2026}.
 The gap is structural: current systems handle invalidation \textit{individually}, leaving dependent facts silently stale.
 This creates concrete pressure toward propagation-style maintenance.
-Anecdotal reports from production deployments suggest that per-fact-only invalidation leads to accumulating inconsistencies over time.\footnote{Mem0 GitHub Issues \#4573, \#4863, \#3841 (2025) describe stale entity links and contradictory facts as recurring community complaints.}
+Community issue reports suggest that per-fact-only invalidation can lead to accumulating inconsistencies over time.\footnote{Mem0 GitHub Issues \#4573, \#4863, \#3841 (2025) describe stale entity links and contradictory facts as recurring community complaints.}
 Graph-based propagation---cascading updates through entity connections---is a plausible extension of current graph-augmented memory systems.
 Zep~\citep{zep_2025} maintains temporal validity windows on graph edges; MAGMA~\citep{magma_2026} constructs explicit causal sub-graphs; Mem0~\citep{mem0_2024} already traverses entity graphs during conflict detection.
 Existing traversal infrastructure may lower the implementation barrier for propagation-style invalidation.
@@ -84,17 +84,17 @@ This is not an artifact of naive graph construction: even typed-relation graphs 
 BFS propagation treats all such connections identically, cascading invalidation through semantically meaningless edges.
 
 Because graph-augmented memory systems already maintain the prerequisites for traversal-based maintenance, unfiltered propagation is a plausible next design step rather than a deployed standard.
-Our study evaluates this step before deployment: on MemoryAgentBench-derived co-occurrence graphs, it exposes 69--79\% collateral damage and motivates dependency-aware safeguards.
+Our study evaluates this step before deployment: on MemoryAgentBench-derived co-occurrence graphs, it applies nonzero weight decay to 69--79\% of valid memories and motivates dependency-aware safeguards.
 This distinction is well-understood in transportation network resilience~\citep{chen_network_2007} but has not been applied to AI memory systems.
 We contribute:
 
 \begin{enumerate}
   \item \textbf{Quantified risk}: BFS propagation over co-occurrence graphs applies nonzero weight decay to 69--79\% of valid memories across 6K--64K scales; named-entity hub triggers cause $-10.0$pp and $-11.9$pp F1 drops on unrelated retrieval (\cref{sec:c1}).
 
-  \item \textbf{Adversarial amplification}: Five injected facts exploit hub topology to degrade 57.3\% of valid memories; the attack requires gray-box access (hub entity names) and weaponizes the system's own forgetting mechanism (\cref{sec:c3}).
+  \item \textbf{Adversarial amplification}: Five injected facts exploit hub topology to apply nonzero weight decay to 57.3\% of valid memories; the attack requires gray-box access (hub entity names) and weaponizes the system's own forgetting mechanism (\cref{sec:c3}).
 
   \item \textbf{Practical defense}: \attraware{} propagation, a hyperparameter-free attribute-keyed directional filter, reduces collateral damage by 78--100\% without LLM calls.
-  Ablation shows directional filtering alone accounts for the entire damage reduction (\cref{sec:c4}).
+  Ablation shows that directional filtering accounts for the damage reduction in our controlled attack setting (\cref{sec:c4}).
 \end{enumerate}
 
 \noindent We characterize these failure modes \textit{before} unfiltered graph propagation becomes a common maintenance strategy---providing initial quantified evidence and a working defense for systems that explore propagation beyond per-fact invalidation.
@@ -116,13 +116,13 @@ In their published descriptions, graphs serve \textit{retrieval} and consolidati
 \toprule
 \textbf{System} & \textbf{Graph} & \textbf{Edges} & \textbf{Invalidation} \\
 \midrule
-Mem0$^g$ & KG & Typed & Per-fact \\
+Mem0 & KG & Typed & Per-fact \\
 Zep & Temporal KG & Bi-temporal & Per-edge \\
 MAGMA & 4 sub-graphs & Causal+Entity & Per-graph \\
 A-Mem & Linked notes & Associative & Per-note \\
 \bottomrule
 \end{tabular}
-\caption{Graph-augmented memory systems~\citep{mem0_2024, zep_2025, magma_2026, amem_2025}. $^g$graph-enabled mode. We found no explicit invalidation propagation in their published descriptions.}
+\caption{Graph-augmented memory systems~\citep{mem0_2024, zep_2025, magma_2026, amem_2025}. We found no explicit invalidation propagation in their published descriptions.}
 \label{tab:systems}
 \end{table}
 
@@ -134,7 +134,7 @@ The failure mode is consistent: systems cannot reason about \textit{dependencies
 
 \paragraph{Belief revision perspective.}
 Kumiho~\citep{kumiho_2026} formalizes this problem through AGM belief revision~\citep{agm_1985}: typed dependency edges (e.g., \texttt{Depends\_On}, \texttt{Derived\_From}) ensure that only causally related beliefs are affected during revision.
-This provides axiomatic guarantees---but requires typed edges at graph construction time, which Mem0, Zep, and MAGMA do not currently provide.
+This provides axiomatic guarantees---but requires typed dependency edges at graph construction time, which Mem0, Zep, and MAGMA do not currently provide.
 Our work addresses the complementary question: \textit{what happens when propagation is attempted on existing untyped co-occurrence graphs?}
 
 \paragraph{Memory as an attack surface.}
@@ -162,6 +162,7 @@ For instance, updating ``the CEO of Acme is Alice'' to ``the CEO of Acme is Bob'
 \begin{table}[htbp]
 \centering
 \footnotesize
+\setlength{\tabcolsep}{3pt}
 \begin{tabular}{lrrr}
 \toprule
 \textbf{Mode} & \textbf{Forget Acc.} & \textbf{Collateral} & \textbf{Stale@worst} \\
@@ -209,6 +210,7 @@ We define five metrics:
 \begin{table}[htbp]
 \centering
 \footnotesize
+\setlength{\tabcolsep}{3pt}
 \begin{tabular}{lrrrrr}
 \toprule
 \textbf{Scale} & \textbf{Valid} & \textbf{BFS Dam.} & \textbf{Attr Dam.} & \textbf{Def.} & \textbf{Hub$_{\max}$} \\
@@ -243,7 +245,7 @@ The key driver of propagation damage is degree heterogeneity $\kappa \equiv \lan
 
 \paragraph{Graph construction control.}
 A natural concern is whether co-occurrence clique construction inflates hub degrees.
-We compare against a \textit{typed-relation} graph at 6K that retains only subject$\rightarrow$object edges (no cliques): edge count decreases by 10.4\%, but BFS damage drops only 1.4pp (38.4\% vs 39.8\%).
+In the 6K five-fact attack setting, we compare against a \textit{typed-relation} graph that retains only subject$\rightarrow$object edges (no cliques): edge count decreases by 10.4\%, but BFS damage drops only 1.4pp (38.4\% vs 39.8\%).
 This suggests that hub degrees are driven primarily by Zipfian entity frequency, not clique construction artifacts.
 Extension to 32K/64K remains for future work (see Limitations).
 
@@ -289,8 +291,8 @@ We analyze this vector to inform defensive design; responsible evaluation of adv
 \label{tab:adversarial}
 \end{table}
 
-\finding{4} A single fake fact damages 5.2\% (6K) to 38.1\% (32K) of valid memories (\cref{tab:adversarial})---$7.3\times$ amplification from scale and hub-degree growth.
-Five facts at 32K degrade 57.3\%, with 19.3\% killed (weight $< 0.1$).
+\finding{4} A single fake fact applies nonzero weight decay to 5.2\% (6K) to 38.1\% (32K) of valid memories (\cref{tab:adversarial})---$7.3\times$ amplification from scale and hub-degree growth.
+Five facts at 32K affect 57.3\% of valid memories, with 19.3\% killed (weight $< 0.1$).
 
 \begin{table}[htbp]
 \centering
@@ -409,29 +411,30 @@ removing dampening from \attraware{} has no effect (0.3\% damage, 0\% kill in bo
 \textbf{The entire 39.5pp damage reduction is attributable to directional filtering; dampening affects only the severity distribution, not the reach of propagation.}
 To test whether object$\rightarrow$subject is the right direction, we compare three filtered variants: \textit{downstream} (object$\rightarrow$subject, the default), \textit{upstream} (subject$\rightarrow$object), and \textit{bidirectional}.
 Downstream achieves the lowest damage (0.3\%, 1 memory); upstream damages 1.2\% (4 memories) by propagating to other attributes of the same subject entity; bidirectional damages 1.5\% (5 memories).
-All three reduce damage by $\geq$96\% relative to BFS---confirming that \textit{any} directional filter dramatically outperforms undirected traversal---but downstream is strictly optimal, consistent with the dependency-follows-object intuition.
+All three tested directional filters reduce damage by $\geq$96\% relative to BFS, but downstream has the lowest damage in this ablation, consistent with the dependency-follows-object intuition.
 
 \subsection{Cross-experiment Consistency}
 
 \begin{table}[htbp]
 \centering
-\footnotesize
+\scriptsize
+\setlength{\tabcolsep}{2pt}
 \begin{tabular}{lrrrr}
 \toprule
 \textbf{Experiment} & \textbf{BFS} & \textbf{WBFS} & \textbf{Attr} & \textbf{Def.} \\
 \midrule
-Scale 6K--64K & 69--79\% & --- & 15\% & 78--81\% \\
-Cross-task (F1) & $-10.0/-11.9$pp & --- & +0.0pp & 100\% \\
-Adv 6K / 5f & 39.8\% & 1.5\% & 0.3\% & 99.3\% \\
-Adv 32K / 5f & 57.3\% & 0.2\% & 1.0\% & 98.2\% \\
-Adv 64K / 5f & 61.6\% & 0.1\% & 0.9\% & 98.5\% \\
+Scale & 69--79\% & --- & 15\% & 78--81\% \\
+X-task F1 & $-10/-11.9$pp & --- & +0.0pp & 100\% \\
+Adv 6K & 39.8\% & 1.5\% & 0.3\% & 99.3\% \\
+Adv 32K & 57.3\% & 0.2\% & 1.0\% & 98.2\% \\
+Adv 64K & 61.6\% & 0.1\% & 0.9\% & 98.5\% \\
 \bottomrule
 \end{tabular}
-\caption{Defense effectiveness across all experiments. \textbf{Def.} = $1 - \text{Attr}/\text{BFS}$. WBFS = Weighted BFS $\theta{=}0.3$ (best per-scale). At 32K/64K, WBFS achieves lower absolute damage than \attraware{}, but requires per-deployment $\theta$-tuning. Cross-task: the two highest named-entity hubs cause $-10.0$pp and $-11.9$pp F1 drops; \attraware{} preserves accuracy.}
+\caption{Defense effectiveness summary. \textbf{Def.} = $1 - \text{Attr}/\text{BFS}$. Scale summarizes 6K--64K FactConsolidation. Adv rows use 5 injected facts. WBFS = Weighted BFS $\theta{=}0.3$ (best per-scale). Cross-task: two named-entity hubs cause $-10.0$pp and $-11.9$pp F1 drops; \attraware{} preserves accuracy.}
 \label{tab:defense_all}
 \end{table}
 
-\finding{7} \attraware{} achieves 78--100\% defense effectiveness across all conditions (\cref{tab:defense_all}).
+\finding{7} \attraware{} achieves 78--100\% defense effectiveness across the reported conditions (\cref{tab:defense_all}).
 The strongest signal is cross-task: \attraware{} preserves retrieval accuracy within measurement noise where BFS causes double-digit F1 drops under named-entity hub triggers.
 
 \subsection{Robustness to BFS Variants}
@@ -495,13 +498,13 @@ Our results are consistent with this pattern in AI memory graphs ($\alpha \appro
 
 \paragraph{Key message.}
 Unfiltered co-occurrence propagation is a latent risk in graph-based memory systems.
-It applies nonzero weight decay to 69--79\% of valid memories, enables low-cost adversarial amplification under gray- or white-box hub knowledge (5 facts $\rightarrow$ 57.3\% degradation), and contaminates unrelated tasks under named-entity hub triggers (F1 $-10.0/-11.9$pp).
-\attraware{} and Weighted BFS $\theta{=}0.3$ each reduce these risks by $\geq$98\%---the former without hyperparameters, the latter with lower absolute damage at scale but requiring per-deployment tuning.
+It applies nonzero weight decay to 69--79\% of valid memories, enables low-cost adversarial amplification under gray- or white-box hub knowledge (5 facts $\rightarrow$ 57.3\% affected), and contaminates unrelated tasks under named-entity hub triggers (F1 $-10.0/-11.9$pp).
+\attraware{} reduces scale damage by 78--81\%, while both \attraware{} and tuned Weighted BFS reduce adversarial damage by $\geq$98\%; \attraware{} is hyperparameter-free, whereas Weighted BFS requires per-deployment tuning.
 Ablation confirms that directional filtering drives the entire damage reduction.
 The design principle is clear: \textbf{systems considering invalidation propagation over co-occurrence memory graphs should include dependency-aware filtering or equivalent safeguards from the outset}.
 
 \paragraph{Implications.}
-Hub entities are essential for retrieval and cannot be removed, making them permanent structural vulnerabilities under unfiltered propagation.
+Hub entities are often essential for retrieval and cannot simply be removed, making them persistent structural vulnerabilities under unfiltered propagation.
 \attraware{} functions as a safety guardrail that constrains propagation---including future learned policies~\citep{mars_2025}---to plausible dependency chains.
 Entity mention frequencies often follow heavy-tailed patterns~\citep{zipf_1949}, producing hub-and-spoke structures wherever entities are referenced with natural frequency~\citep{steyvers_semantic_2005, barabasi_scalefree_1999}.
 This makes the mechanism plausibly broader than this benchmark, but validation on additional benchmarks and production systems remains necessary.
