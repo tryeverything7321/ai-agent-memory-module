@@ -54,7 +54,7 @@
 \begin{abstract}
 Agent memory systems increasingly adopt entity graphs, and graph-based invalidation propagation---cascading updates through entity connections---is a plausible extension for consistency maintenance.
 We show that this step is dangerous without safeguards: \textbf{structural co-occurrence does not imply dependency}, and naive BFS propagation over co-occurrence graphs applies nonzero weight decay to 69--79\% of valid memories across 6K--64K turns, while the two highest named-entity cross-task hubs cause $-10.0$pp and $-11.9$pp F1 drops on unrelated retrieval.
-Under adversarial hub-targeting, five injected facts apply nonzero weight decay to 57.3\% of valid memories---weaponizing the system's own maintenance mechanism.
+Under adversarial hub-targeting, five injected facts apply nonzero weight decay to 57.3\% of valid memories, revealing how maintenance can become a structural amplification path.
 We propose \textbf{\attraware{} Selective Propagation}, an attribute-keyed directional filter that restricts cascades to plausible dependency paths without LLM calls, achieving 78--100\% damage reduction.
 Ablation indicates that directional filtering accounts for the damage reduction in our controlled attack setting; in-degree dampening affects only severity.
 Our initial findings on MemoryAgentBench suggest that systems exploring graph-based forgetting over co-occurrence structures should strongly consider dependency-aware propagation mechanisms from the outset to mitigate collateral damage.
@@ -76,6 +76,7 @@ Graph-based propagation---cascading updates through entity connections---is a pl
 Zep~\citep{zep_2025} maintains temporal validity windows on graph edges; MAGMA~\citep{magma_2026} constructs explicit causal sub-graphs; Mem0~\citep{mem0_2024} already traverses entity graphs during conflict detection.
 Existing traversal infrastructure may lower the implementation barrier for propagation-style invalidation.
 Each system implements prerequisites for propagation without taking the final step.
+We do not claim that current systems deploy naive BFS invalidation; we use it as a stress test for propagation-style maintenance over existing co-occurrence graph infrastructure.
 
 We implement this step and reveal a fundamental tension: \textbf{co-occurrence graphs conflate correlation with causation}.
 Facts sharing an entity are linked identically regardless of dependency---``the president of Russia'' connects diplomatic and economic facts through the same edges.
@@ -90,7 +91,7 @@ We contribute:
 \begin{enumerate}
   \item \textbf{Quantified risk}: BFS propagation over co-occurrence graphs applies nonzero weight decay to 69--79\% of valid memories across 6K--64K scales; named-entity hub triggers cause $-10.0$pp and $-11.9$pp F1 drops on unrelated retrieval (\cref{sec:c1}).
 
-  \item \textbf{Adversarial amplification}: Five injected facts exploit hub topology to apply nonzero weight decay to 57.3\% of valid memories; the attack requires gray-box access (hub entity names) and weaponizes the system's own forgetting mechanism (\cref{sec:c3}).
+  \item \textbf{Adversarial amplification}: Five injected facts exploit hub topology to apply nonzero weight decay to 57.3\% of valid memories; the attack requires gray-box access (hub entity names) and exposes structural amplification through the system's own forgetting mechanism (\cref{sec:c3}).
 
   \item \textbf{Practical defense}: \attraware{} propagation, a hyperparameter-free attribute-keyed directional filter, reduces collateral damage by 78--100\% without LLM calls.
   Ablation shows that directional filtering accounts for the damage reduction in our controlled attack setting (\cref{sec:c4}).
@@ -141,7 +142,7 @@ MINJA~\citep{minja_2025} achieves 98\% injection success via query-only interact
 \citet{xu_mcfa_2026} show that memory retrieval can steer agent control flow, while \citet{devarangadi_poisoning_2026} evaluate poisoning defenses under realistic conditions with pre-existing legitimate memories.
 \citet{xiong_memory_mgmt_2025} empirically demonstrate that memory addition/deletion policies significantly impact long-term agent performance.
 MITRE ATLAS designates memory manipulation as technique AML.T0080~\citep{mitre_atlas_2023}.
-These attacks inject malicious \textit{content}; our work reveals a structurally distinct threat where the system's own \textit{maintenance mechanism} becomes the attack vector.
+These attacks inject malicious \textit{content}; our work reveals a structurally distinct threat where the system's own \textit{maintenance mechanism} becomes an amplification path.
 
 \paragraph{Structural vulnerability from graph topology.}
 The content-injection attacks above exploit \textit{what} is stored; a complementary question is whether the graph \textit{structure itself} creates vulnerability.
@@ -251,6 +252,7 @@ Extension to 32K/64K remains for future work (see Limitations).
 \subsection{Cross-task Contamination}
 
 BFS propagation from high-degree named-entity hubs degrades Accurate\_Retrieval F1 on unrelated queries.
+Because raw degree rankings can surface extraction artifacts, we report artifact-aware named-entity hubs here and separately verify that the main FactConsolidation hubs are content entities.
 The two highest named-entity hubs in our EventQA cross-task analysis cause $-10.0$pp and $-11.9$pp F1 drops; the strongest named hub (Debbie, degree~715) cascades through 3{,}381 memories.
 \attraware{} preserves accuracy within measurement noise, confirming that directional filtering prevents cross-task interference in this evaluation.
 This is the most direct evidence that structural damage translates to retrieval degradation, and motivates a follow-up question: could hub-concentrated damage be deliberately triggered?
@@ -310,7 +312,7 @@ Black-box & 5 & 0\% & 0.0\% \\
 \end{table}
 
 \finding{5} \Cref{tab:blackbox} shows that under our random-entity black-box baseline, attacks fail to hit hub entities (0\% hit rate).
-At minimum, gray-box knowledge of graph structure is needed for the attack vector studied here.
+At minimum, gray-box knowledge of graph structure is needed for the amplification setting studied here.
 \Cref{fig:depth} shows that damage grows sublinearly with propagation depth while kill rate accelerates due to cumulative decay.
 
 \begin{figure}[ht]
@@ -392,7 +394,7 @@ Weighted BFS $\theta{=}0.3$ & 1.5\% & 0.0\% & 18.0\% & 18.3\% \\
 \attraware{} & \textbf{0.3\%} & \textbf{0.0\%} & 17.0\% & 17.3\% \\
 \bottomrule
 \end{tabular}
-\caption{Propagation strategy comparison (6K, 5-fact white-box attack). EM/F1 evaluated on $n{=}100$ adversarial queries; differences are not statistically significant (all strategies fall within 17--21\%). Damage and kill metrics are deterministic.}
+\caption{Propagation strategy comparison (6K, 5-fact white-box attack). EM/F1 evaluated on $n{=}100$ adversarial queries; differences are not statistically significant (all strategies fall within 17--21\%). Damage and kill separate structural propagation effects; downstream retrieval sensitivity is evaluated in the cross-task contamination experiment.}
 \label{tab:defense}
 \end{table}
 
@@ -485,7 +487,7 @@ MaRS~\citep{mars_2025} compares six forgetting policies with provenance closure 
 MINJA~\citep{minja_2025}, AgentPoison~\citep{agentpoison_2024}, and ER-MIA~\citep{ermia_2026} inject malicious content.
 KEPo~\citep{kepo_2026} and LogicPoison~\citep{logicpoison_2026} manipulate graph topology.
 GraphRAG~\citep{edge_graphrag_2024} uses community-structured graphs for retrieval; its invalidation under entity updates has not been studied.
-Our attack is structurally distinct: it triggers the system's own forgetting mechanism rather than injecting content or manipulating retrieval paths.
+The failure mode is structurally distinct: it triggers the system's own forgetting mechanism rather than injecting content or manipulating retrieval paths.
 
 \paragraph{Network resilience.}
 Heavy-tailed networks exhibit robust-yet-fragile behavior under targeted hub removal~\citep{albert_attack_2000, cohen_percolation_2000}.
