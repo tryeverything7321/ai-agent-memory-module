@@ -1,0 +1,47 @@
+{
+  "experiment": "organic_wbfs_6k",
+  "results": {
+    "bfs_standard": {
+      "strategy": "bfs_standard",
+      "context_size": "6k",
+      "valid": 344,
+      "total_memories": 581,
+      "decayed": 237,
+      "killed": 143,
+      "damage_pct": 40.8,
+      "kill_pct": 24.6,
+      "post_em": 12.0,
+      "post_f1": 12.0,
+      "top_hub_degree": 23,
+      "memorize_time_s": 61.3
+    },
+    "weighted_bfs_0.3": {
+      "strategy": "weighted_bfs_0.3",
+      "context_size": "6k",
+      "valid": 344,
+      "total_memories": 505,
+      "decayed": 161,
+      "killed": 29,
+      "damage_pct": 31.9,
+      "kill_pct": 5.7,
+      "post_em": 9.0,
+      "post_f1": 9.33,
+      "top_hub_degree": 23,
+      "memorize_time_s": 30.2
+    },
+    "attr_aware": {
+      "strategy": "attr_aware",
+      "context_size": "6k",
+      "valid": 344,
+      "total_memories": 395,
+      "decayed": 51,
+      "killed": 0,
+      "damage_pct": 12.9,
+      "kill_pct": 0.0,
+      "post_em": 20.0,
+      "post_f1": 20.33,
+      "top_hub_degree": 23,
+      "memorize_time_s": 28.6
+    }
+  }
+}

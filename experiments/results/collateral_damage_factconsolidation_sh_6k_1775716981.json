@@ -1,0 +1,376 @@
+{
+  "config": {
+    "sub_dataset": "factconsolidation_sh_6k",
+    "chunk_size": 4096,
+    "propagation_depth": 2,
+    "decay_per_hop": 0.5
+  },
+  "aggregate": {
+    "total_contexts": 1,
+    "bfs_total_decayed": 237,
+    "attr_total_decayed": 51,
+    "total_valid_memories": 344,
+    "total_reduction": 186,
+    "total_reduction_pct": 78.48101265822784,
+    "bfs_collateral_ratio": 68.8953488372093,
+    "attr_collateral_ratio": 14.825581395348838,
+    "bfs_weight_distribution": {
+      "<0.1": 143,
+      "<0.3": 32,
+      "<0.5": 13,
+      "<0.7": 40,
+      "<0.9": 8,
+      "<1.0": 1,
+      "=1.0": 107
+    },
+    "attr_weight_distribution": {
+      "<0.1": 0,
+      "<0.3": 1,
+      "<0.5": 0,
+      "<0.7": 14,
+      "<0.9": 29,
+      "<1.0": 7,
+      "=1.0": 293
+    },
+    "top_global_hubs": [
+      {
+        "entity": "United States",
+        "degree": 23,
+        "memory_count": 27
+      },
+      {
+        "entity": "America",
+        "degree": 23,
+        "memory_count": 27
+      },
+      {
+        "entity": "University",
+        "degree": 17,
+        "memory_count": 12
+      },
+      {
+        "entity": "France",
+        "degree": 13,
+        "memory_count": 11
+      },
+      {
+        "entity": "United Kingdom",
+        "degree": 12,
+        "memory_count": 12
+      },
+      {
+        "entity": "English",
+        "degree": 11,
+        "memory_count": 10
+      },
+      {
+        "entity": "Germany",
+        "degree": 8,
+        "memory_count": 7
+      },
+      {
+        "entity": "India",
+        "degree": 8,
+        "memory_count": 9
+      },
+      {
+        "entity": "Israel",
+        "degree": 8,
+        "memory_count": 6
+      },
+      {
+        "entity": "Australia",
+        "degree": 8,
+        "memory_count": 9
+      }
+    ]
+  },
+  "per_context": [
+    {
+      "context_idx": 0,
+      "context_chars": 26157,
+      "num_chunks": 2,
+      "modes": {
+        "baseline": {
+          "weight_distribution": {
+            "total": 456,
+            "valid": 344,
+            "invalid": 112,
+            "decayed_below_1": 0,
+            "decayed_below_0.5": 0,
+            "decayed_below_0.3": 0,
+            "decayed_below_0.1": 0
+          },
+          "graph_stats": {
+            "num_nodes": 414,
+            "num_edges": 520,
+            "avg_degree": 2.5120772946859904,
+            "max_degree": 23,
+            "degree_distribution": {
+              "0": 29,
+              "4": 44,
+              "7": 2,
+              "2": 108,
+              "1": 101,
+              "3": 101,
+              "6": 4,
+              "5": 15,
+              "17": 1,
+              "23": 2,
+              "8": 4,
+              "13": 1,
+              "12": 1,
+              "11": 1
+            },
+            "top_hubs": [
+              {
+                "entity": "United States",
+                "degree": 23,
+                "memory_count": 27
+              },
+              {
+                "entity": "America",
+                "degree": 23,
+                "memory_count": 27
+              },
+              {
+                "entity": "University",
+                "degree": 17,
+                "memory_count": 12
+              },
+              {
+                "entity": "France",
+                "degree": 13,
+                "memory_count": 11
+              },
+              {
+                "entity": "United Kingdom",
+                "degree": 12,
+                "memory_count": 12
+              },
+              {
+                "entity": "English",
+                "degree": 11,
+                "memory_count": 10
+              },
+              {
+                "entity": "Germany",
+                "degree": 8,
+                "memory_count": 7
+              },
+              {
+                "entity": "India",
+                "degree": 8,
+                "memory_count": 9
+              },
+              {
+                "entity": "Israel",
+                "degree": 8,
+                "memory_count": 6
+              },
+              {
+                "entity": "Australia",
+                "degree": 8,
+                "memory_count": 9
+              }
+            ]
+          },
+          "conflict_stats": {
+            "total_subject_keys": 330,
+            "unique_entities": 264,
+            "unique_attributes": 123
+          }
+        },
+        "bfs": {
+          "weight_distribution": {
+            "total": 456,
+            "valid": 344,
+            "invalid": 112,
+            "decayed_below_1": 237,
+            "decayed_below_0.5": 188,
+            "decayed_below_0.3": 175,
+            "decayed_below_0.1": 143
+          },
+          "graph_stats": {
+            "num_nodes": 414,
+            "num_edges": 520,
+            "avg_degree": 2.5120772946859904,
+            "max_degree": 23,
+            "degree_distribution": {
+              "0": 29,
+              "4": 44,
+              "7": 2,
+              "2": 108,
+              "1": 101,
+              "3": 101,
+              "6": 4,
+              "5": 15,
+              "17": 1,
+              "23": 2,
+              "8": 4,
+              "13": 1,
+              "12": 1,
+              "11": 1
+            },
+            "top_hubs": [
+              {
+                "entity": "United States",
+                "degree": 23,
+                "memory_count": 27
+              },
+              {
+                "entity": "America",
+                "degree": 23,
+                "memory_count": 27
+              },
+              {
+                "entity": "University",
+                "degree": 17,
+                "memory_count": 12
+              },
+              {
+                "entity": "France",
+                "degree": 13,
+                "memory_count": 11
+              },
+              {
+                "entity": "United Kingdom",
+                "degree": 12,
+                "memory_count": 12
+              },
+              {
+                "entity": "English",
+                "degree": 11,
+                "memory_count": 10
+              },
+              {
+                "entity": "Germany",
+                "degree": 8,
+                "memory_count": 7
+              },
+              {
+                "entity": "India",
+                "degree": 8,
+                "memory_count": 9
+              },
+              {
+                "entity": "Israel",
+                "degree": 8,
+                "memory_count": 6
+              },
+              {
+                "entity": "Australia",
+                "degree": 8,
+                "memory_count": 9
+              }
+            ]
+          },
+          "conflict_stats": {
+            "total_subject_keys": 330,
+            "unique_entities": 264,
+            "unique_attributes": 123
+          }
+        },
+        "attribute_aware": {
+          "weight_distribution": {
+            "total": 456,
+            "valid": 344,
+            "invalid": 112,
+            "decayed_below_1": 51,
+            "decayed_below_0.5": 1,
+            "decayed_below_0.3": 1,
+            "decayed_below_0.1": 0
+          },
+          "graph_stats": {
+            "num_nodes": 414,
+            "num_edges": 520,
+            "avg_degree": 2.5120772946859904,
+            "max_degree": 23,
+            "degree_distribution": {
+              "0": 29,
+              "4": 44,
+              "7": 2,
+              "2": 108,
+              "1": 101,
+              "3": 101,
+              "6": 4,
+              "5": 15,
+              "17": 1,
+              "23": 2,
+              "8": 4,
+              "13": 1,
+              "12": 1,
+              "11": 1
+            },
+            "top_hubs": [
+              {
+                "entity": "United States",
+                "degree": 23,
+                "memory_count": 27
+              },
+              {
+                "entity": "America",
+                "degree": 23,
+                "memory_count": 27
+              },
+              {
+                "entity": "University",
+                "degree": 17,
+                "memory_count": 12
+              },
+              {
+                "entity": "France",
+                "degree": 13,
+                "memory_count": 11
+              },
+              {
+                "entity": "United Kingdom",
+                "degree": 12,
+                "memory_count": 12
+              },
+              {
+                "entity": "English",
+                "degree": 11,
+                "memory_count": 10
+              },
+              {
+                "entity": "Germany",
+                "degree": 8,
+                "memory_count": 7
+              },
+              {
+                "entity": "India",
+                "degree": 8,
+                "memory_count": 9
+              },
+              {
+                "entity": "Israel",
+                "degree": 8,
+                "memory_count": 6
+              },
+              {
+                "entity": "Australia",
+                "degree": 8,
+                "memory_count": 9
+              }
+            ]
+          },
+          "conflict_stats": {
+            "total_subject_keys": 330,
+            "unique_entities": 264,
+            "unique_attributes": 123
+          }
+        }
+      },
+      "comparison": {
+        "baseline_valid_memories": 344,
+        "bfs_decayed_count": 237,
+        "attr_aware_decayed_count": 51,
+        "reduction": 186,
+        "reduction_pct": 78.48101265822784,
+        "bfs_collateral_ratio": 68.8953488372093,
+        "attr_collateral_ratio": 14.825581395348838
+      }
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "config": {
+    "context_size": "6k",
+    "experiments": [
+      "wbfs_at_scale"
+    ],
+    "timestamp": "2026-04-23 13:36:56"
+  },
+  "wbfs_at_scale_64k": {
+    "experiment": "wbfs_at_scale_64k",
+    "results": {
+      "bfs_standard": {
+        "strategy": "bfs_standard",
+        "context_size": "64k",
+        "pre_valid": 3414,
+        "graph_nodes": 3187,
+        "graph_edges": 5199,
+        "newly_decayed": 2103,
+        "newly_killed": 1097,
+        "damage_ratio_pct": 61.6,
+        "kill_ratio_pct": 32.13,
+        "post_em": 0.0,
+        "post_f1": 0.0,
+        "top_hub_degree": 298
+      },
+      "weighted_bfs_0.3": {
+        "strategy": "weighted_bfs_0.3",
+        "context_size": "64k",
+        "pre_valid": 3414,
+        "graph_nodes": 3187,
+        "graph_edges": 5199,
+        "newly_decayed": 4,
+        "newly_killed": 0,
+        "damage_ratio_pct": 0.12,
+        "kill_ratio_pct": 0.0,
+        "post_em": 0.0,
+        "post_f1": 0.0,
+        "top_hub_degree": 298
+      },
+      "attr_aware": {
+        "strategy": "attr_aware",
+        "context_size": "64k",
+        "pre_valid": 3414,
+        "graph_nodes": 3187,
+        "graph_edges": 5199,
+        "newly_decayed": 31,
+        "newly_killed": 0,
+        "damage_ratio_pct": 0.91,
+        "kill_ratio_pct": 0.0,
+        "post_em": 0.0,
+        "post_f1": 0.0,
+        "top_hub_degree": 298
+      }
+    }
+  }
+}

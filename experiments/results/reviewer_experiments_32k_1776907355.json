@@ -1,0 +1,42 @@
+{
+  "config": {
+    "context_size": "32k",
+    "sub_dataset": "factconsolidation_mh_32k",
+    "experiments": [
+      "visited"
+    ],
+    "timestamp": "2026-04-23 10:17:37"
+  },
+  "visited_set": {
+    "experiment": "visited_set_bfs",
+    "results": {
+      "bfs_standard": {
+        "use_visited_set": false,
+        "pre_valid": 1744,
+        "newly_decayed": 999,
+        "newly_killed": 337,
+        "damage_ratio_pct": 57.28,
+        "kill_ratio_pct": 19.32,
+        "post_em": 0.0,
+        "post_f1": 0.0,
+        "top_hub_degree": 121
+      },
+      "bfs_visited_set": {
+        "use_visited_set": true,
+        "pre_valid": 1744,
+        "newly_decayed": 999,
+        "newly_killed": 136,
+        "damage_ratio_pct": 57.28,
+        "kill_ratio_pct": 7.8,
+        "post_em": 0.0,
+        "post_f1": 0.0,
+        "top_hub_degree": 121
+      },
+      "comparison": {
+        "damage_reduction_pp": 0.0,
+        "kill_reduction_pp": 11.52,
+        "visited_set_still_damages": true
+      }
+    }
+  }
+}

@@ -1,0 +1,503 @@
+{
+  "config": {
+    "context_size": "6k",
+    "sub_dataset": "factconsolidation_mh_6k",
+    "experiments": [
+      "depth",
+      "blackbox",
+      "degreecap"
+    ],
+    "timestamp": "2026-04-10 15:23:49"
+  },
+  "depth_tracking": {
+    "experiment": "depth_tracking",
+    "results": {
+      "1": {
+        "propagation_depth": 1,
+        "pre_valid": 344,
+        "newly_decayed": 64,
+        "newly_killed": 1,
+        "damage_ratio_pct": 18.6,
+        "kill_ratio_pct": 0.29,
+        "hop_stats": {
+          "1": {
+            "memories_affected": 232,
+            "killed": 4,
+            "total_weight_loss": 49.0823,
+            "avg_weight_drop": 0.2116,
+            "max_weight_drop": 0.5
+          }
+        },
+        "entities_per_hop": {
+          "1": 77
+        }
+      },
+      "2": {
+        "propagation_depth": 2,
+        "pre_valid": 344,
+        "newly_decayed": 137,
+        "newly_killed": 60,
+        "damage_ratio_pct": 39.83,
+        "kill_ratio_pct": 17.44,
+        "hop_stats": {
+          "1": {
+            "memories_affected": 232,
+            "killed": 48,
+            "total_weight_loss": 32.797,
+            "avg_weight_drop": 0.1414,
+            "max_weight_drop": 0.5
+          },
+          "2": {
+            "memories_affected": 490,
+            "killed": 125,
+            "total_weight_loss": 108.2721,
+            "avg_weight_drop": 0.221,
+            "max_weight_drop": 0.75
+          }
+        },
+        "entities_per_hop": {
+          "1": 77,
+          "2": 126
+        }
+      },
+      "3": {
+        "propagation_depth": 3,
+        "pre_valid": 344,
+        "newly_decayed": 166,
+        "newly_killed": 113,
+        "damage_ratio_pct": 48.26,
+        "kill_ratio_pct": 32.85,
+        "hop_stats": {
+          "1": {
+            "memories_affected": 232,
+            "killed": 78,
+            "total_weight_loss": 28.9725,
+            "avg_weight_drop": 0.1249,
+            "max_weight_drop": 0.5
+          },
+          "2": {
+            "memories_affected": 490,
+            "killed": 253,
+            "total_weight_loss": 52.8086,
+            "avg_weight_drop": 0.1078,
+            "max_weight_drop": 0.75
+          },
+          "3": {
+            "memories_affected": 605,
+            "killed": 320,
+            "total_weight_loss": 132.2602,
+            "avg_weight_drop": 0.2186,
+            "max_weight_drop": 0.875
+          }
+        },
+        "entities_per_hop": {
+          "1": 77,
+          "2": 126,
+          "3": 256
+        }
+      },
+      "4": {
+        "propagation_depth": 4,
+        "pre_valid": 344,
+        "newly_decayed": 192,
+        "newly_killed": 154,
+        "damage_ratio_pct": 55.81,
+        "kill_ratio_pct": 44.77,
+        "hop_stats": {
+          "1": {
+            "memories_affected": 232,
+            "killed": 84,
+            "total_weight_loss": 28.7667,
+            "avg_weight_drop": 0.124,
+            "max_weight_drop": 0.5
+          },
+          "2": {
+            "memories_affected": 490,
+            "killed": 303,
+            "total_weight_loss": 43.4308,
+            "avg_weight_drop": 0.0886,
+            "max_weight_drop": 0.75
+          },
+          "3": {
+            "memories_affected": 605,
+            "killed": 413,
+            "total_weight_loss": 70.1014,
+            "avg_weight_drop": 0.1159,
+            "max_weight_drop": 0.875
+          },
+          "4": {
+            "memories_affected": 526,
+            "killed": 363,
+            "total_weight_loss": 113.7283,
+            "avg_weight_drop": 0.2162,
+            "max_weight_drop": 0.9375
+          }
+        },
+        "entities_per_hop": {
+          "1": 77,
+          "2": 126,
+          "3": 256,
+          "4": 191
+        }
+      }
+    }
+  },
+  "blackbox_attack": [
+    {
+      "experiment": "blackbox_attack",
+      "mode": "bfs",
+      "num_attack_facts": 3,
+      "attack_type": "blackbox",
+      "conflicts_hit": 0,
+      "conflicts_total": 3,
+      "hit_rate": 0.0,
+      "target_hub": {
+        "entity": "United States",
+        "degree": 23
+      },
+      "damage": {
+        "pre_valid": 344,
+        "newly_decayed": 0,
+        "newly_killed": 0,
+        "damage_ratio_pct": 0.0,
+        "kill_ratio_pct": 0.0
+      },
+      "metrics": {
+        "pre_em": 20.0,
+        "post_em": 20.0,
+        "em_drop_pp": 0.0,
+        "pre_f1": 23.33,
+        "post_f1": 23.33,
+        "f1_drop_pp": 0.0
+      },
+      "attack_details": [
+        {
+          "fact": "The capital of United States is Los Angeles.",
+          "guessed_subject_key": "United States:capital",
+          "conflict_detected": false,
+          "entities_found": [
+            "United States",
+            "Los Angeles"
+          ]
+        },
+        {
+          "fact": "The president of United States is Mickey Mouse.",
+          "guessed_subject_key": "United States:president",
+          "conflict_detected": false,
+          "entities_found": [
+            "United States",
+            "Mickey Mouse"
+          ]
+        },
+        {
+          "fact": "The currency of United States is Bitcoin.",
+          "guessed_subject_key": "United States:currency",
+          "conflict_detected": false,
+          "entities_found": [
+            "United States",
+            "Bitcoin"
+          ]
+        }
+      ],
+      "attack_facts": [
+        "654. The capital of United States is Los Angeles.",
+        "655. The president of United States is Mickey Mouse.",
+        "656. The currency of United States is Bitcoin."
+      ]
+    },
+    {
+      "experiment": "blackbox_attack",
+      "mode": "attribute_aware",
+      "num_attack_facts": 3,
+      "attack_type": "blackbox",
+      "conflicts_hit": 0,
+      "conflicts_total": 3,
+      "hit_rate": 0.0,
+      "target_hub": {
+        "entity": "United States",
+        "degree": 23
+      },
+      "damage": {
+        "pre_valid": 344,
+        "newly_decayed": 0,
+        "newly_killed": 0,
+        "damage_ratio_pct": 0.0,
+        "kill_ratio_pct": 0.0
+      },
+      "metrics": {
+        "pre_em": 20.0,
+        "post_em": 20.0,
+        "em_drop_pp": 0.0,
+        "pre_f1": 23.33,
+        "post_f1": 23.33,
+        "f1_drop_pp": 0.0
+      },
+      "attack_details": [
+        {
+          "fact": "The capital of United States is Los Angeles.",
+          "guessed_subject_key": "United States:capital",
+          "conflict_detected": false,
+          "entities_found": [
+            "United States",
+            "Los Angeles"
+          ]
+        },
+        {
+          "fact": "The president of United States is Mickey Mouse.",
+          "guessed_subject_key": "United States:president",
+          "conflict_detected": false,
+          "entities_found": [
+            "United States",
+            "Mickey Mouse"
+          ]
+        },
+        {
+          "fact": "The currency of United States is Bitcoin.",
+          "guessed_subject_key": "United States:currency",
+          "conflict_detected": false,
+          "entities_found": [
+            "United States",
+            "Bitcoin"
+          ]
+        }
+      ],
+      "attack_facts": [
+        "654. The capital of United States is Los Angeles.",
+        "655. The president of United States is Mickey Mouse.",
+        "656. The currency of United States is Bitcoin."
+      ]
+    },
+    {
+      "experiment": "blackbox_attack",
+      "mode": "bfs",
+      "num_attack_facts": 5,
+      "attack_type": "blackbox",
+      "conflicts_hit": 0,
+      "conflicts_total": 5,
+      "hit_rate": 0.0,
+      "target_hub": {
+        "entity": "United States",
+        "degree": 23
+      },
+      "damage": {
+        "pre_valid": 344,
+        "newly_decayed": 0,
+        "newly_killed": 0,
+        "damage_ratio_pct": 0.0,
+        "kill_ratio_pct": 0.0
+      },
+      "metrics": {
+        "pre_em": 20.0,
+        "post_em": 20.0,
+        "em_drop_pp": 0.0,
+        "pre_f1": 23.33,
+        "post_f1": 23.33,
+        "f1_drop_pp": 0.0
+      },
+      "attack_details": [
+        {
+          "fact": "The capital of United States is Los Angeles.",
+          "guessed_subject_key": "United States:capital",
+          "conflict_detected": false,
+          "entities_found": [
+            "United States",
+            "Los Angeles"
+          ]
+        },
+        {
+          "fact": "The president of United States is Mickey Mouse.",
+          "guessed_subject_key": "United States:president",
+          "conflict_detected": false,
+          "entities_found": [
+            "United States",
+            "Mickey Mouse"
+          ]
+        },
+        {
+          "fact": "The currency of United States is Bitcoin.",
+          "guessed_subject_key": "United States:currency",
+          "conflict_detected": false,
+          "entities_found": [
+            "United States",
+            "Bitcoin"
+          ]
+        },
+        {
+          "fact": "The population of United States is zero.",
+          "guessed_subject_key": "United States:population",
+          "conflict_detected": false,
+          "entities_found": [
+            "United States"
+          ]
+        },
+        {
+          "fact": "The language of United States is Klingon.",
+          "guessed_subject_key": "United States:language",
+          "conflict_detected": false,
+          "entities_found": [
+            "United States",
+            "Klingon"
+          ]
+        }
+      ],
+      "attack_facts": [
+        "654. The capital of United States is Los Angeles.",
+        "655. The president of United States is Mickey Mouse.",
+        "656. The currency of United States is Bitcoin.",
+        "657. The population of United States is zero.",
+        "658. The language of United States is Klingon."
+      ]
+    },
+    {
+      "experiment": "blackbox_attack",
+      "mode": "attribute_aware",
+      "num_attack_facts": 5,
+      "attack_type": "blackbox",
+      "conflicts_hit": 0,
+      "conflicts_total": 5,
+      "hit_rate": 0.0,
+      "target_hub": {
+        "entity": "United States",
+        "degree": 23
+      },
+      "damage": {
+        "pre_valid": 344,
+        "newly_decayed": 0,
+        "newly_killed": 0,
+        "damage_ratio_pct": 0.0,
+        "kill_ratio_pct": 0.0
+      },
+      "metrics": {
+        "pre_em": 20.0,
+        "post_em": 20.0,
+        "em_drop_pp": 0.0,
+        "pre_f1": 23.33,
+        "post_f1": 23.33,
+        "f1_drop_pp": 0.0
+      },
+      "attack_details": [
+        {
+          "fact": "The capital of United States is Los Angeles.",
+          "guessed_subject_key": "United States:capital",
+          "conflict_detected": false,
+          "entities_found": [
+            "United States",
+            "Los Angeles"
+          ]
+        },
+        {
+          "fact": "The president of United States is Mickey Mouse.",
+          "guessed_subject_key": "United States:president",
+          "conflict_detected": false,
+          "entities_found": [
+            "United States",
+            "Mickey Mouse"
+          ]
+        },
+        {
+          "fact": "The currency of United States is Bitcoin.",
+          "guessed_subject_key": "United States:currency",
+          "conflict_detected": false,
+          "entities_found": [
+            "United States",
+            "Bitcoin"
+          ]
+        },
+        {
+          "fact": "The population of United States is zero.",
+          "guessed_subject_key": "United States:population",
+          "conflict_detected": false,
+          "entities_found": [
+            "United States"
+          ]
+        },
+        {
+          "fact": "The language of United States is Klingon.",
+          "guessed_subject_key": "United States:language",
+          "conflict_detected": false,
+          "entities_found": [
+            "United States",
+            "Klingon"
+          ]
+        }
+      ],
+      "attack_facts": [
+        "654. The capital of United States is Los Angeles.",
+        "655. The president of United States is Mickey Mouse.",
+        "656. The currency of United States is Bitcoin.",
+        "657. The population of United States is zero.",
+        "658. The language of United States is Klingon."
+      ]
+    }
+  ],
+  "degree_capped": {
+    "experiment": "degree_capped_bfs",
+    "results": {
+      "unlimited": {
+        "degree_cap": null,
+        "pre_valid": 344,
+        "newly_decayed": 137,
+        "newly_killed": 60,
+        "damage_ratio_pct": 39.83,
+        "kill_ratio_pct": 17.44,
+        "post_em": 10.0,
+        "post_f1": 13.33,
+        "top_hub_degree": 23
+      },
+      "5": {
+        "degree_cap": 5,
+        "pre_valid": 344,
+        "newly_decayed": 83,
+        "newly_killed": 28,
+        "damage_ratio_pct": 24.13,
+        "kill_ratio_pct": 8.14,
+        "post_em": 10.0,
+        "post_f1": 13.33,
+        "top_hub_degree": 23
+      },
+      "10": {
+        "degree_cap": 10,
+        "pre_valid": 344,
+        "newly_decayed": 97,
+        "newly_killed": 37,
+        "damage_ratio_pct": 28.2,
+        "kill_ratio_pct": 10.76,
+        "post_em": 10.0,
+        "post_f1": 13.33,
+        "top_hub_degree": 23
+      },
+      "20": {
+        "degree_cap": 20,
+        "pre_valid": 344,
+        "newly_decayed": 116,
+        "newly_killed": 60,
+        "damage_ratio_pct": 33.72,
+        "kill_ratio_pct": 17.44,
+        "post_em": 10.0,
+        "post_f1": 13.33,
+        "top_hub_degree": 23
+      },
+      "50": {
+        "degree_cap": 50,
+        "pre_valid": 344,
+        "newly_decayed": 137,
+        "newly_killed": 60,
+        "damage_ratio_pct": 39.83,
+        "kill_ratio_pct": 17.44,
+        "post_em": 10.0,
+        "post_f1": 13.33,
+        "top_hub_degree": 23
+      },
+      "attribute_aware": {
+        "degree_cap": "attribute_aware",
+        "pre_valid": 344,
+        "newly_decayed": 1,
+        "newly_killed": 0,
+        "damage_ratio_pct": 0.29,
+        "kill_ratio_pct": 0.0,
+        "post_em": 20.0,
+        "post_f1": 23.33
+      }
+    }
+  }
+}

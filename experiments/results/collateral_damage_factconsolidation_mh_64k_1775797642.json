@@ -1,0 +1,481 @@
+{
+  "config": {
+    "sub_dataset": "factconsolidation_mh_64k",
+    "chunk_size": 4096,
+    "propagation_depth": 2,
+    "decay_per_hop": 0.5
+  },
+  "aggregate": {
+    "total_contexts": 1,
+    "bfs_total_decayed": 2680,
+    "attr_total_decayed": 513,
+    "total_valid_memories": 3414,
+    "total_reduction": 2167,
+    "total_reduction_pct": 80.85820895522387,
+    "bfs_collateral_ratio": 78.50029291154071,
+    "attr_collateral_ratio": 15.026362038664324,
+    "bfs_weight_distribution": {
+      "<0.1": 2465,
+      "<0.3": 87,
+      "<0.5": 26,
+      "<0.7": 87,
+      "<0.9": 14,
+      "<1.0": 1,
+      "=1.0": 734
+    },
+    "attr_weight_distribution": {
+      "<0.1": 1,
+      "<0.3": 15,
+      "<0.5": 22,
+      "<0.7": 99,
+      "<0.9": 164,
+      "<1.0": 212,
+      "=1.0": 2901
+    },
+    "top_global_hubs": [
+      {
+        "entity": "America",
+        "degree": 298,
+        "memory_count": 297
+      },
+      {
+        "entity": "United States",
+        "degree": 296,
+        "memory_count": 295
+      },
+      {
+        "entity": "University",
+        "degree": 174,
+        "memory_count": 154
+      },
+      {
+        "entity": "Catholic Church",
+        "degree": 138,
+        "memory_count": 109
+      },
+      {
+        "entity": "United Kingdom",
+        "degree": 127,
+        "memory_count": 117
+      },
+      {
+        "entity": "English",
+        "degree": 124,
+        "memory_count": 110
+      },
+      {
+        "entity": "London",
+        "degree": 59,
+        "memory_count": 55
+      },
+      {
+        "entity": "France",
+        "degree": 59,
+        "memory_count": 58
+      },
+      {
+        "entity": "Ireland",
+        "degree": 53,
+        "memory_count": 44
+      },
+      {
+        "entity": "Methodism",
+        "degree": 48,
+        "memory_count": 39
+      }
+    ]
+  },
+  "per_context": [
+    {
+      "context_idx": 0,
+      "context_chars": 273473,
+      "num_chunks": 17,
+      "modes": {
+        "baseline": {
+          "weight_distribution": {
+            "total": 4581,
+            "valid": 3414,
+            "invalid": 1167,
+            "decayed_below_1": 0,
+            "decayed_below_0.5": 0,
+            "decayed_below_0.3": 0,
+            "decayed_below_0.1": 0
+          },
+          "graph_stats": {
+            "num_nodes": 3187,
+            "num_edges": 5199,
+            "avg_degree": 3.2626294320677753,
+            "max_degree": 298,
+            "degree_distribution": {
+              "0": 342,
+              "5": 118,
+              "11": 13,
+              "4": 281,
+              "59": 2,
+              "6": 76,
+              "1": 684,
+              "8": 26,
+              "10": 7,
+              "2": 803,
+              "37": 1,
+              "3": 682,
+              "296": 1,
+              "298": 1,
+              "127": 1,
+              "27": 4,
+              "7": 54,
+              "47": 1,
+              "53": 1,
+              "29": 2,
+              "124": 1,
+              "33": 2,
+              "32": 1,
+              "15": 9,
+              "22": 2,
+              "18": 8,
+              "138": 1,
+              "174": 1,
+              "9": 11,
+              "17": 4,
+              "12": 14,
+              "16": 3,
+              "41": 1,
+              "21": 2,
+              "38": 1,
+              "14": 4,
+              "30": 1,
+              "44": 1,
+              "48": 1,
+              "19": 3,
+              "43": 1,
+              "13": 5,
+              "20": 2,
+              "26": 2,
+              "31": 1,
+              "28": 1,
+              "25": 1,
+              "24": 2,
+              "23": 1
+            },
+            "top_hubs": [
+              {
+                "entity": "America",
+                "degree": 298,
+                "memory_count": 297
+              },
+              {
+                "entity": "United States",
+                "degree": 296,
+                "memory_count": 295
+              },
+              {
+                "entity": "University",
+                "degree": 174,
+                "memory_count": 154
+              },
+              {
+                "entity": "Catholic Church",
+                "degree": 138,
+                "memory_count": 109
+              },
+              {
+                "entity": "United Kingdom",
+                "degree": 127,
+                "memory_count": 117
+              },
+              {
+                "entity": "English",
+                "degree": 124,
+                "memory_count": 110
+              },
+              {
+                "entity": "London",
+                "degree": 59,
+                "memory_count": 55
+              },
+              {
+                "entity": "France",
+                "degree": 59,
+                "memory_count": 58
+              },
+              {
+                "entity": "Ireland",
+                "degree": 53,
+                "memory_count": 44
+              },
+              {
+                "entity": "Methodism",
+                "degree": 48,
+                "memory_count": 39
+              }
+            ]
+          },
+          "conflict_stats": {
+            "total_subject_keys": 3344,
+            "unique_entities": 2461,
+            "unique_attributes": 815
+          }
+        },
+        "bfs": {
+          "weight_distribution": {
+            "total": 4581,
+            "valid": 3414,
+            "invalid": 1167,
+            "decayed_below_1": 2680,
+            "decayed_below_0.5": 2578,
+            "decayed_below_0.3": 2552,
+            "decayed_below_0.1": 2465
+          },
+          "graph_stats": {
+            "num_nodes": 3187,
+            "num_edges": 5199,
+            "avg_degree": 3.2626294320677753,
+            "max_degree": 298,
+            "degree_distribution": {
+              "0": 342,
+              "5": 118,
+              "11": 13,
+              "4": 281,
+              "59": 2,
+              "6": 76,
+              "1": 684,
+              "8": 26,
+              "10": 7,
+              "2": 803,
+              "37": 1,
+              "3": 682,
+              "296": 1,
+              "298": 1,
+              "127": 1,
+              "27": 4,
+              "7": 54,
+              "47": 1,
+              "53": 1,
+              "29": 2,
+              "124": 1,
+              "33": 2,
+              "32": 1,
+              "15": 9,
+              "22": 2,
+              "18": 8,
+              "138": 1,
+              "174": 1,
+              "9": 11,
+              "17": 4,
+              "12": 14,
+              "16": 3,
+              "41": 1,
+              "21": 2,
+              "38": 1,
+              "14": 4,
+              "30": 1,
+              "44": 1,
+              "48": 1,
+              "19": 3,
+              "43": 1,
+              "13": 5,
+              "20": 2,
+              "26": 2,
+              "31": 1,
+              "28": 1,
+              "25": 1,
+              "24": 2,
+              "23": 1
+            },
+            "top_hubs": [
+              {
+                "entity": "America",
+                "degree": 298,
+                "memory_count": 297
+              },
+              {
+                "entity": "United States",
+                "degree": 296,
+                "memory_count": 295
+              },
+              {
+                "entity": "University",
+                "degree": 174,
+                "memory_count": 154
+              },
+              {
+                "entity": "Catholic Church",
+                "degree": 138,
+                "memory_count": 109
+              },
+              {
+                "entity": "United Kingdom",
+                "degree": 127,
+                "memory_count": 117
+              },
+              {
+                "entity": "English",
+                "degree": 124,
+                "memory_count": 110
+              },
+              {
+                "entity": "London",
+                "degree": 59,
+                "memory_count": 55
+              },
+              {
+                "entity": "France",
+                "degree": 59,
+                "memory_count": 58
+              },
+              {
+                "entity": "Ireland",
+                "degree": 53,
+                "memory_count": 44
+              },
+              {
+                "entity": "Methodism",
+                "degree": 48,
+                "memory_count": 39
+              }
+            ]
+          },
+          "conflict_stats": {
+            "total_subject_keys": 3344,
+            "unique_entities": 2461,
+            "unique_attributes": 815
+          }
+        },
+        "attribute_aware": {
+          "weight_distribution": {
+            "total": 4581,
+            "valid": 3414,
+            "invalid": 1167,
+            "decayed_below_1": 513,
+            "decayed_below_0.5": 38,
+            "decayed_below_0.3": 16,
+            "decayed_below_0.1": 1
+          },
+          "graph_stats": {
+            "num_nodes": 3187,
+            "num_edges": 5199,
+            "avg_degree": 3.2626294320677753,
+            "max_degree": 298,
+            "degree_distribution": {
+              "0": 342,
+              "5": 118,
+              "11": 13,
+              "4": 281,
+              "59": 2,
+              "6": 76,
+              "1": 684,
+              "8": 26,
+              "10": 7,
+              "2": 803,
+              "37": 1,
+              "3": 682,
+              "296": 1,
+              "298": 1,
+              "127": 1,
+              "27": 4,
+              "7": 54,
+              "47": 1,
+              "53": 1,
+              "29": 2,
+              "124": 1,
+              "33": 2,
+              "32": 1,
+              "15": 9,
+              "22": 2,
+              "18": 8,
+              "138": 1,
+              "174": 1,
+              "9": 11,
+              "17": 4,
+              "12": 14,
+              "16": 3,
+              "41": 1,
+              "21": 2,
+              "38": 1,
+              "14": 4,
+              "30": 1,
+              "44": 1,
+              "48": 1,
+              "19": 3,
+              "43": 1,
+              "13": 5,
+              "20": 2,
+              "26": 2,
+              "31": 1,
+              "28": 1,
+              "25": 1,
+              "24": 2,
+              "23": 1
+            },
+            "top_hubs": [
+              {
+                "entity": "America",
+                "degree": 298,
+                "memory_count": 297
+              },
+              {
+                "entity": "United States",
+                "degree": 296,
+                "memory_count": 295
+              },
+              {
+                "entity": "University",
+                "degree": 174,
+                "memory_count": 154
+              },
+              {
+                "entity": "Catholic Church",
+                "degree": 138,
+                "memory_count": 109
+              },
+              {
+                "entity": "United Kingdom",
+                "degree": 127,
+                "memory_count": 117
+              },
+              {
+                "entity": "English",
+                "degree": 124,
+                "memory_count": 110
+              },
+              {
+                "entity": "London",
+                "degree": 59,
+                "memory_count": 55
+              },
+              {
+                "entity": "France",
+                "degree": 59,
+                "memory_count": 58
+              },
+              {
+                "entity": "Ireland",
+                "degree": 53,
+                "memory_count": 44
+              },
+              {
+                "entity": "Methodism",
+                "degree": 48,
+                "memory_count": 39
+              }
+            ]
+          },
+          "conflict_stats": {
+            "total_subject_keys": 3344,
+            "unique_entities": 2461,
+            "unique_attributes": 815
+          }
+        }
+      },
+      "comparison": {
+        "baseline_valid_memories": 3414,
+        "bfs_decayed_count": 2680,
+        "attr_aware_decayed_count": 513,
+        "reduction": 2167,
+        "reduction_pct": 80.85820895522387,
+        "bfs_collateral_ratio": 78.50029291154071,
+        "attr_collateral_ratio": 15.026362038664324
+      }
+    }
+  ]
+}

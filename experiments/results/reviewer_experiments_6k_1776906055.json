@@ -1,0 +1,88 @@
+{
+  "config": {
+    "context_size": "6k",
+    "sub_dataset": "factconsolidation_mh_6k",
+    "experiments": [
+      "visited",
+      "decay"
+    ],
+    "timestamp": "2026-04-23 09:57:42"
+  },
+  "visited_set": {
+    "experiment": "visited_set_bfs",
+    "results": {
+      "bfs_standard": {
+        "use_visited_set": false,
+        "pre_valid": 344,
+        "newly_decayed": 137,
+        "newly_killed": 60,
+        "damage_ratio_pct": 39.83,
+        "kill_ratio_pct": 17.44,
+        "post_em": 10.0,
+        "post_f1": 13.33,
+        "top_hub_degree": 23
+      },
+      "bfs_visited_set": {
+        "use_visited_set": true,
+        "pre_valid": 344,
+        "newly_decayed": 137,
+        "newly_killed": 36,
+        "damage_ratio_pct": 39.83,
+        "kill_ratio_pct": 10.47,
+        "post_em": 10.0,
+        "post_f1": 13.33,
+        "top_hub_degree": 23
+      },
+      "comparison": {
+        "damage_reduction_pp": 0.0,
+        "kill_reduction_pp": 6.97,
+        "visited_set_still_damages": true
+      }
+    }
+  },
+  "decay_sensitivity": {
+    "experiment": "decay_sensitivity",
+    "results": {
+      "decay_0.3": {
+        "decay_per_hop": 0.3,
+        "pre_valid": 344,
+        "newly_decayed": 137,
+        "newly_killed": 69,
+        "damage_ratio_pct": 39.83,
+        "kill_ratio_pct": 20.06,
+        "post_em": 10.0,
+        "post_f1": 13.33
+      },
+      "decay_0.5": {
+        "decay_per_hop": 0.5,
+        "pre_valid": 344,
+        "newly_decayed": 137,
+        "newly_killed": 60,
+        "damage_ratio_pct": 39.83,
+        "kill_ratio_pct": 17.44,
+        "post_em": 10.0,
+        "post_f1": 13.33
+      },
+      "decay_0.7": {
+        "decay_per_hop": 0.7,
+        "pre_valid": 344,
+        "newly_decayed": 137,
+        "newly_killed": 7,
+        "damage_ratio_pct": 39.83,
+        "kill_ratio_pct": 2.03,
+        "post_em": 10.0,
+        "post_f1": 13.33
+      },
+      "decay_0.9": {
+        "decay_per_hop": 0.9,
+        "pre_valid": 344,
+        "newly_decayed": 137,
+        "newly_killed": 0,
+        "damage_ratio_pct": 39.83,
+        "kill_ratio_pct": 0.0,
+        "post_em": 10.0,
+        "post_f1": 13.33
+      }
+    }
+  }
+}

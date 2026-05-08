@@ -1,0 +1,578 @@
+{
+  "config": {
+    "sub_dataset": "factconsolidation_mh_64k",
+    "chunk_size": 4096,
+    "max_queries": 20,
+    "propagation_depth": 2,
+    "decay_per_hop": 0.5,
+    "llm_url": "https://doogpu.doosan.com/standard/workspace/ws-94c8469a-43a7-4573-a455-2926fa446865/workload/wl-9ffd545a-87ed-47ce-92d4-8171856ca014/reserved3/v1",
+    "llm_model": null,
+    "embed_url": "https://doogpu.doosan.com/standard/workspace/ws-94c8469a-43a7-4573-a455-2926fa446865/workload/wl-9ffd545a-87ed-47ce-92d4-8171856ca014/reserved9/v1",
+    "embed_model": null
+  },
+  "comparison": {
+    "exact_match": {
+      "baseline": 5.0,
+      "experiment": 5.0,
+      "delta": 0.0
+    },
+    "substring_exact_match": {
+      "baseline": 5.0,
+      "experiment": 5.0,
+      "delta": 0.0
+    },
+    "f1": {
+      "baseline": 5.0,
+      "experiment": 5.0,
+      "delta": 0.0
+    }
+  },
+  "baseline": {
+    "arm": "Baseline",
+    "metrics": {
+      "exact_match": 5.0,
+      "substring_exact_match": 5.0,
+      "f1": 5.0,
+      "total_queries": 20,
+      "avg_query_time": 0.4898193717002869,
+      "total_memorize_time": 346.51171040534973,
+      "total_query_time": 9.796387434005737
+    },
+    "results": [
+      {
+        "context_id": 0,
+        "query_id": 0,
+        "question": "In which language are the official documents written in the country of citizenship of Nate \"Tiny\" Archibald?",
+        "ground_truth": [
+          "German"
+        ],
+        "prediction": "Insufficient information.",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.40419673919677734
+      },
+      {
+        "context_id": 0,
+        "query_id": 1,
+        "question": "Which sport was Dennis Erickson associated with due to his position on a team?",
+        "ground_truth": [
+          "Muay Thai"
+        ],
+        "prediction": "I do not have information about Dennis Erickson in the",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.49710774421691895
+      },
+      {
+        "context_id": 0,
+        "query_id": 2,
+        "question": "From which continent does the country of citizenship of the director / manager who worked with the performer of Anthology 1 belong to?",
+        "ground_truth": [
+          "South America"
+        ],
+        "prediction": "Africa",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.34244561195373535
+      },
+      {
+        "context_id": 0,
+        "query_id": 3,
+        "question": "What genre of music is associated with the spouse of Blake Shelton?",
+        "ground_truth": [
+          "hip hop music"
+        ],
+        "prediction": "Insufficient information.",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.6232020854949951
+      },
+      {
+        "context_id": 0,
+        "query_id": 4,
+        "question": "What is the name of the current chairperson of the institution where Harry Markowitz received his education?",
+        "ground_truth": [
+          "Zeki Öztürk"
+        ],
+        "prediction": "Peter Diamandis",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.44152212142944336
+      },
+      {
+        "context_id": 0,
+        "query_id": 5,
+        "question": "In which location did the person who established the religion that Henri Grégoire followed work?",
+        "ground_truth": [
+          "London"
+        ],
+        "prediction": "Insufficient information.",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.45673584938049316
+      },
+      {
+        "context_id": 0,
+        "query_id": 6,
+        "question": "From which continent does the country of citizenship of the creator of Ju 87 come from?",
+        "ground_truth": [
+          "South America"
+        ],
+        "prediction": "Europe",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.44145774841308594
+      },
+      {
+        "context_id": 0,
+        "query_id": 7,
+        "question": "In which sport does Giovani dos Santos play the position he is known for?",
+        "ground_truth": [
+          "pesäpallo"
+        ],
+        "prediction": "I do not have information about Giovani dos Santos",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.5843298435211182
+      },
+      {
+        "context_id": 0,
+        "query_id": 8,
+        "question": "What is the country of citizenship of the performer of the song \"God Bless the Child\"?",
+        "ground_truth": [
+          "United Kingdom"
+        ],
+        "prediction": "I do not have that information.",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.44056248664855957
+      },
+      {
+        "context_id": 0,
+        "query_id": 9,
+        "question": "What is the capital of the country where the sport played by the Washington Wizards was first developed?",
+        "ground_truth": [
+          "Russellville"
+        ],
+        "prediction": "Moscow",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.4147520065307617
+      },
+      {
+        "context_id": 0,
+        "query_id": 10,
+        "question": "Which city is the capital of the country that Dino Meneghin holds citizenship in?",
+        "ground_truth": [
+          "Duluth"
+        ],
+        "prediction": "Duluth",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.3554821014404297
+      },
+      {
+        "context_id": 0,
+        "query_id": 11,
+        "question": "What is the religious affiliation of the author of The Divine Comedy?",
+        "ground_truth": [
+          "Catholic Church"
+        ],
+        "prediction": "Unknown",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 1.3690965175628662
+      },
+      {
+        "context_id": 0,
+        "query_id": 12,
+        "question": "What country did the sport associated with FNB Stadium originate in?",
+        "ground_truth": [
+          "Japan"
+        ],
+        "prediction": "Insufficient information.",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.45507073402404785
+      },
+      {
+        "context_id": 0,
+        "query_id": 13,
+        "question": "In which continent is the country whose citizenship was held by Erich Koch situated?",
+        "ground_truth": [
+          "Asia"
+        ],
+        "prediction": "North America",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.40276575088500977
+      },
+      {
+        "context_id": 0,
+        "query_id": 14,
+        "question": "What language did the author of \"A Passage to India\" speak, write or sign in?",
+        "ground_truth": [
+          "Spanish"
+        ],
+        "prediction": "I do not have that information in my knowledge pool",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.4218580722808838
+      },
+      {
+        "context_id": 0,
+        "query_id": 15,
+        "question": "What is the name of the significant creation associated with the creator of Vito Corleone?",
+        "ground_truth": [
+          "The Fairly OddParents"
+        ],
+        "prediction": "Malvolio",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.32347774505615234
+      },
+      {
+        "context_id": 0,
+        "query_id": 16,
+        "question": "Which city is the capital of the country where the sport associated with the founder of Pakistan Tehreek-e-Insaf originates from?",
+        "ground_truth": [
+          "Duluth"
+        ],
+        "prediction": "Not provided in knowledge pool.",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.48320794105529785
+      },
+      {
+        "context_id": 0,
+        "query_id": 17,
+        "question": "What is the capital city of the home country of the director/manager who worked with the performer of \"Tomorrow Never Knows\"?",
+        "ground_truth": [
+          "Oderzo"
+        ],
+        "prediction": "London",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.3695387840270996
+      },
+      {
+        "context_id": 0,
+        "query_id": 18,
+        "question": "What is the sport that Rich Harden was associated with based on the position he played on a team?",
+        "ground_truth": [
+          "field hockey"
+        ],
+        "prediction": "I do not have information about Rich Harden in the",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.5198445320129395
+      },
+      {
+        "context_id": 0,
+        "query_id": 19,
+        "question": "In which country does the head of government that governs Paddy Keenan's nationality reside?",
+        "ground_truth": [
+          "Ole Johan Vierdal"
+        ],
+        "prediction": "Insufficient information",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.44973301887512207
+      }
+    ]
+  },
+  "experiment": {
+    "arm": "Experiment",
+    "metrics": {
+      "exact_match": 5.0,
+      "substring_exact_match": 5.0,
+      "f1": 5.0,
+      "total_queries": 20,
+      "avg_query_time": 0.35134081840515136,
+      "total_memorize_time": 342.1114664077759,
+      "total_query_time": 7.026816368103027
+    },
+    "results": [
+      {
+        "context_id": 0,
+        "query_id": 0,
+        "question": "In which language are the official documents written in the country of citizenship of Nate \"Tiny\" Archibald?",
+        "ground_truth": [
+          "German"
+        ],
+        "prediction": "Insufficient information.",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.42586374282836914
+      },
+      {
+        "context_id": 0,
+        "query_id": 1,
+        "question": "Which sport was Dennis Erickson associated with due to his position on a team?",
+        "ground_truth": [
+          "Muay Thai"
+        ],
+        "prediction": "I do not have information about Dennis Erickson in the",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.3826253414154053
+      },
+      {
+        "context_id": 0,
+        "query_id": 2,
+        "question": "From which continent does the country of citizenship of the director / manager who worked with the performer of Anthology 1 belong to?",
+        "ground_truth": [
+          "South America"
+        ],
+        "prediction": "Africa",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.3076934814453125
+      },
+      {
+        "context_id": 0,
+        "query_id": 3,
+        "question": "What genre of music is associated with the spouse of Blake Shelton?",
+        "ground_truth": [
+          "hip hop music"
+        ],
+        "prediction": "Insufficient information.",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.30567264556884766
+      },
+      {
+        "context_id": 0,
+        "query_id": 4,
+        "question": "What is the name of the current chairperson of the institution where Harry Markowitz received his education?",
+        "ground_truth": [
+          "Zeki Öztürk"
+        ],
+        "prediction": "Peter Diamandis",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.31725382804870605
+      },
+      {
+        "context_id": 0,
+        "query_id": 5,
+        "question": "In which location did the person who established the religion that Henri Grégoire followed work?",
+        "ground_truth": [
+          "London"
+        ],
+        "prediction": "Insufficient information.",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.3165881633758545
+      },
+      {
+        "context_id": 0,
+        "query_id": 6,
+        "question": "From which continent does the country of citizenship of the creator of Ju 87 come from?",
+        "ground_truth": [
+          "South America"
+        ],
+        "prediction": "Europe",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.4031996726989746
+      },
+      {
+        "context_id": 0,
+        "query_id": 7,
+        "question": "In which sport does Giovani dos Santos play the position he is known for?",
+        "ground_truth": [
+          "pesäpallo"
+        ],
+        "prediction": "I do not have information about Giovani dos Santos",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.36559057235717773
+      },
+      {
+        "context_id": 0,
+        "query_id": 8,
+        "question": "What is the country of citizenship of the performer of the song \"God Bless the Child\"?",
+        "ground_truth": [
+          "United Kingdom"
+        ],
+        "prediction": "I do not have that information.",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.3386416435241699
+      },
+      {
+        "context_id": 0,
+        "query_id": 9,
+        "question": "What is the capital of the country where the sport played by the Washington Wizards was first developed?",
+        "ground_truth": [
+          "Russellville"
+        ],
+        "prediction": "Moscow",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.26625728607177734
+      },
+      {
+        "context_id": 0,
+        "query_id": 10,
+        "question": "Which city is the capital of the country that Dino Meneghin holds citizenship in?",
+        "ground_truth": [
+          "Duluth"
+        ],
+        "prediction": "Duluth",
+        "exact_match": 1.0,
+        "substring_exact_match": 1.0,
+        "f1": 1.0,
+        "query_time": 0.2812967300415039
+      },
+      {
+        "context_id": 0,
+        "query_id": 11,
+        "question": "What is the religious affiliation of the author of The Divine Comedy?",
+        "ground_truth": [
+          "Catholic Church"
+        ],
+        "prediction": "Unknown",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.3702867031097412
+      },
+      {
+        "context_id": 0,
+        "query_id": 12,
+        "question": "What country did the sport associated with FNB Stadium originate in?",
+        "ground_truth": [
+          "Japan"
+        ],
+        "prediction": "Insufficient information.",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.3046095371246338
+      },
+      {
+        "context_id": 0,
+        "query_id": 13,
+        "question": "In which continent is the country whose citizenship was held by Erich Koch situated?",
+        "ground_truth": [
+          "Asia"
+        ],
+        "prediction": "North America",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.29158496856689453
+      },
+      {
+        "context_id": 0,
+        "query_id": 14,
+        "question": "What language did the author of \"A Passage to India\" speak, write or sign in?",
+        "ground_truth": [
+          "Spanish"
+        ],
+        "prediction": "I do not have that information in my knowledge pool",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.39710164070129395
+      },
+      {
+        "context_id": 0,
+        "query_id": 15,
+        "question": "What is the name of the significant creation associated with the creator of Vito Corleone?",
+        "ground_truth": [
+          "The Fairly OddParents"
+        ],
+        "prediction": "Malvolio",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.38707685470581055
+      },
+      {
+        "context_id": 0,
+        "query_id": 16,
+        "question": "Which city is the capital of the country where the sport associated with the founder of Pakistan Tehreek-e-Insaf originates from?",
+        "ground_truth": [
+          "Duluth"
+        ],
+        "prediction": "Not provided in knowledge pool.",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.45093226432800293
+      },
+      {
+        "context_id": 0,
+        "query_id": 17,
+        "question": "What is the capital city of the home country of the director/manager who worked with the performer of \"Tomorrow Never Knows\"?",
+        "ground_truth": [
+          "Oderzo"
+        ],
+        "prediction": "London",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.43046069145202637
+      },
+      {
+        "context_id": 0,
+        "query_id": 18,
+        "question": "What is the sport that Rich Harden was associated with based on the position he played on a team?",
+        "ground_truth": [
+          "field hockey"
+        ],
+        "prediction": "I do not have information about Rich Harden in the",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.37798118591308594
+      },
+      {
+        "context_id": 0,
+        "query_id": 19,
+        "question": "In which country does the head of government that governs Paddy Keenan's nationality reside?",
+        "ground_truth": [
+          "Ole Johan Vierdal"
+        ],
+        "prediction": "Insufficient information",
+        "exact_match": 0.0,
+        "substring_exact_match": 0.0,
+        "f1": 0.0,
+        "query_time": 0.30609941482543945
+      }
+    ]
+  }
+}

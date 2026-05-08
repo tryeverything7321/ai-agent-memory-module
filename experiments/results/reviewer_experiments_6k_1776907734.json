@@ -1,0 +1,136 @@
+{
+  "config": {
+    "context_size": "6k",
+    "sub_dataset": "factconsolidation_mh_6k",
+    "experiments": [
+      "baselines"
+    ],
+    "timestamp": "2026-04-23 10:24:21"
+  },
+  "baseline_comparison": {
+    "experiment": "baseline_comparison",
+    "results": {
+      "bfs_standard": {
+        "strategy": "bfs_standard",
+        "params": {},
+        "pre_valid": 344,
+        "newly_decayed": 137,
+        "newly_killed": 60,
+        "damage_ratio_pct": 39.83,
+        "kill_ratio_pct": 17.44,
+        "post_em": 10.0,
+        "post_f1": 13.33,
+        "top_hub_degree": 23
+      },
+      "weighted_bfs_0.1": {
+        "strategy": "weighted_bfs_0.1",
+        "params": {
+          "edge_weight_threshold": 0.1
+        },
+        "pre_valid": 344,
+        "newly_decayed": 39,
+        "newly_killed": 11,
+        "damage_ratio_pct": 11.34,
+        "kill_ratio_pct": 3.2,
+        "post_em": 20.0,
+        "post_f1": 23.33,
+        "top_hub_degree": 23
+      },
+      "weighted_bfs_0.3": {
+        "strategy": "weighted_bfs_0.3",
+        "params": {
+          "edge_weight_threshold": 0.3
+        },
+        "pre_valid": 344,
+        "newly_decayed": 5,
+        "newly_killed": 0,
+        "damage_ratio_pct": 1.45,
+        "kill_ratio_pct": 0.0,
+        "post_em": 20.0,
+        "post_f1": 23.33,
+        "top_hub_degree": 23
+      },
+      "khop_threshold_0.3": {
+        "strategy": "khop_threshold_0.3",
+        "params": {
+          "decay_threshold": 0.3
+        },
+        "pre_valid": 344,
+        "newly_decayed": 64,
+        "newly_killed": 1,
+        "damage_ratio_pct": 18.6,
+        "kill_ratio_pct": 0.29,
+        "post_em": 20.0,
+        "post_f1": 20.0,
+        "top_hub_degree": 23
+      },
+      "khop_threshold_0.5": {
+        "strategy": "khop_threshold_0.5",
+        "params": {
+          "decay_threshold": 0.5
+        },
+        "pre_valid": 344,
+        "newly_decayed": 64,
+        "newly_killed": 1,
+        "damage_ratio_pct": 18.6,
+        "kill_ratio_pct": 0.29,
+        "post_em": 20.0,
+        "post_f1": 20.0,
+        "top_hub_degree": 23
+      },
+      "degree_cap_5": {
+        "strategy": "degree_cap_5",
+        "params": {
+          "degree_cap": 5
+        },
+        "pre_valid": 344,
+        "newly_decayed": 83,
+        "newly_killed": 28,
+        "damage_ratio_pct": 24.13,
+        "kill_ratio_pct": 8.14,
+        "post_em": 10.0,
+        "post_f1": 13.33,
+        "top_hub_degree": 23
+      },
+      "degree_cap_10": {
+        "strategy": "degree_cap_10",
+        "params": {
+          "degree_cap": 10
+        },
+        "pre_valid": 344,
+        "newly_decayed": 97,
+        "newly_killed": 37,
+        "damage_ratio_pct": 28.2,
+        "kill_ratio_pct": 10.76,
+        "post_em": 10.0,
+        "post_f1": 13.33,
+        "top_hub_degree": 23
+      },
+      "visited_set": {
+        "strategy": "visited_set",
+        "params": {
+          "visited_memory_set": true
+        },
+        "pre_valid": 344,
+        "newly_decayed": 137,
+        "newly_killed": 35,
+        "damage_ratio_pct": 39.83,
+        "kill_ratio_pct": 10.17,
+        "post_em": 10.0,
+        "post_f1": 13.33,
+        "top_hub_degree": 23
+      },
+      "attr_aware": {
+        "strategy": "attr_aware",
+        "params": {},
+        "pre_valid": 344,
+        "newly_decayed": 1,
+        "newly_killed": 0,
+        "damage_ratio_pct": 0.29,
+        "kill_ratio_pct": 0.0,
+        "post_em": 20.0,
+        "post_f1": 23.33
+      }
+    }
+  }
+}

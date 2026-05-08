@@ -1,0 +1,385 @@
+{
+  "metadata": {
+    "analysis_date": "2026-04-15 12:29:59",
+    "n_runs": 7,
+    "n_total_experiments": 38,
+    "attack_levels": [
+      1,
+      3,
+      5
+    ],
+    "description": "BFS vs Attribute-aware propagation의 adversarial damage 비교 통계 분석"
+  },
+  "wilcoxon_test": {
+    "attack_1_facts": {
+      "n_pairs": 7,
+      "bfs_mean": 1.6196013289036546,
+      "bfs_std": 2.4715408665060647,
+      "attr_mean": -0.04152823920265781,
+      "attr_std": 0.10987339331663584,
+      "diff_mean": 1.6611295681063125,
+      "diff_median": 0.29069767441860467,
+      "n_nonzero_diffs": 5,
+      "note": "non-zero diff 수(5)가 Wilcoxon 최소 요건(6) 미달",
+      "permutation_p_value": 0.03125,
+      "permutation_significant_at_0.05": true,
+      "permutation_significant_at_0.10": true
+    },
+    "attack_3_facts": {
+      "n_pairs": 6,
+      "bfs_mean": 8.914728682170542,
+      "bfs_std": 13.811862003338971,
+      "attr_mean": -0.14534883720930233,
+      "attr_std": 0.356030485869648,
+      "diff_mean": 9.060077519379844,
+      "diff_median": 0.5813953488372093,
+      "n_nonzero_diffs": 4,
+      "note": "non-zero diff 수(4)가 Wilcoxon 최소 요건(6) 미달",
+      "permutation_p_value": 0.125,
+      "permutation_significant_at_0.05": false,
+      "permutation_significant_at_0.10": false
+    },
+    "attack_5_facts": {
+      "n_pairs": 6,
+      "bfs_mean": 13.275193798449612,
+      "bfs_std": 20.566663584123532,
+      "attr_mean": -0.14534883720930228,
+      "attr_std": 0.6564877785253612,
+      "diff_mean": 13.420542635658913,
+      "diff_median": 0.872093023255814,
+      "n_nonzero_diffs": 4,
+      "note": "non-zero diff 수(4)가 Wilcoxon 최소 요건(6) 미달",
+      "permutation_p_value": 0.125,
+      "permutation_significant_at_0.05": false,
+      "permutation_significant_at_0.10": false
+    },
+    "combined_all_attacks": {
+      "n_pairs": 19,
+      "bfs_mean": 7.6040391676866586,
+      "bfs_std": 14.062165324922272,
+      "attr_mean": -0.10709914320685435,
+      "attr_std": 0.4019919706025817,
+      "diff_mean": 7.711138310893513,
+      "diff_median": 0.29069767441860467,
+      "n_nonzero_diffs": 13,
+      "wilcoxon_statistic": 86.0,
+      "p_value_one_sided": 0.002243910108980661,
+      "significant_at_0.05": true,
+      "significant_at_0.10": true,
+      "welch_t_statistic": 2.3892726558280897,
+      "welch_t_p_value": 0.014008743086988934,
+      "paired_t_statistic": 2.4150827986011185,
+      "paired_t_p_value": 0.013294993489166476
+    }
+  },
+  "stratified_analysis": {
+    "attack_1_facts": {
+      "n_total_pairs": 7,
+      "n_with_damage": 5,
+      "n_without_damage": 2,
+      "bfs_damage_values": [
+        0.0,
+        0.0,
+        0.29069767441860467,
+        0.29069767441860467,
+        0.29069767441860467,
+        5.232558139534884,
+        5.232558139534884
+      ],
+      "attr_damage_values": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -0.29069767441860467,
+        0.0,
+        0.0
+      ],
+      "diff_values": [
+        0.0,
+        0.0,
+        0.29069767441860467,
+        0.29069767441860467,
+        0.5813953488372093,
+        5.232558139534884,
+        5.232558139534884
+      ],
+      "bfs_nonzero_count": 5,
+      "attr_nonzero_count": 1,
+      "bfs_positive_damage_mean": 2.2674418604651168,
+      "attr_positive_damage_mean": null,
+      "cliffs_delta": 0.7551020408163265,
+      "cliffs_delta_interpretation": "large",
+      "cohens_d_paired": 0.6786162419495033,
+      "cohens_d_interpretation": "medium"
+    },
+    "attack_3_facts": {
+      "n_total_pairs": 6,
+      "n_with_damage": 4,
+      "n_without_damage": 2,
+      "bfs_damage_values": [
+        0.0,
+        0.0,
+        -0.29069767441860467,
+        0.29069767441860467,
+        26.744186046511626,
+        26.744186046511626
+      ],
+      "attr_damage_values": [
+        0.0,
+        0.0,
+        0.0,
+        -0.872093023255814,
+        0.0,
+        0.0
+      ],
+      "diff_values": [
+        0.0,
+        0.0,
+        -0.29069767441860467,
+        1.1627906976744187,
+        26.744186046511626,
+        26.744186046511626
+      ],
+      "bfs_nonzero_count": 4,
+      "attr_nonzero_count": 1,
+      "bfs_positive_damage_mean": 17.926356589147286,
+      "attr_positive_damage_mean": null,
+      "cliffs_delta": 0.4444444444444444,
+      "cliffs_delta_interpretation": "medium",
+      "cohens_d_paired": 0.660974661341861,
+      "cohens_d_interpretation": "medium"
+    },
+    "attack_5_facts": {
+      "n_total_pairs": 6,
+      "n_with_damage": 4,
+      "n_without_damage": 2,
+      "bfs_damage_values": [
+        0.0,
+        0.0,
+        -0.29069767441860467,
+        0.29069767441860467,
+        39.825581395348834,
+        39.825581395348834
+      ],
+      "attr_damage_values": [
+        0.0,
+        0.0,
+        0.0,
+        -1.4534883720930232,
+        0.29069767441860467,
+        0.29069767441860467
+      ],
+      "diff_values": [
+        0.0,
+        0.0,
+        -0.29069767441860467,
+        1.744186046511628,
+        39.53488372093023,
+        39.53488372093023
+      ],
+      "bfs_nonzero_count": 4,
+      "attr_nonzero_count": 3,
+      "bfs_positive_damage_mean": 26.64728682170542,
+      "attr_positive_damage_mean": 0.29069767441860467,
+      "cliffs_delta": 0.2777777777777778,
+      "cliffs_delta_interpretation": "small",
+      "cohens_d_paired": 0.6630400284791446,
+      "cohens_d_interpretation": "medium"
+    }
+  },
+  "bootstrap_ci": {
+    "attack_1_facts": {
+      "n_samples": 7,
+      "observed_mean_diff": 1.6611295681063125,
+      "observed_median_diff": 0.29069767441860467,
+      "bootstrap_mean_se": 0.8632919755384022,
+      "ci_level": 0.95,
+      "percentile_ci_mean": [
+        0.16611295681063123,
+        3.737541528239203
+      ],
+      "percentile_ci_median": [
+        0.0,
+        5.232558139534884
+      ],
+      "bca_ci_mean": [
+        0.24916943521594684,
+        3.862126245847176
+      ],
+      "ci_excludes_zero_percentile": true,
+      "ci_excludes_zero_bca": true,
+      "bfs_values": [
+        0.0,
+        0.0,
+        0.29069767441860467,
+        0.29069767441860467,
+        0.29069767441860467,
+        5.232558139534884,
+        5.232558139534884
+      ],
+      "attr_values": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -0.29069767441860467,
+        0.0,
+        0.0
+      ]
+    },
+    "attack_3_facts": {
+      "n_samples": 6,
+      "observed_mean_diff": 9.060077519379844,
+      "observed_median_diff": 0.5813953488372093,
+      "bootstrap_mean_se": 5.137081678653193,
+      "ci_level": 0.95,
+      "percentile_ci_mean": [
+        0.09689922480620154,
+        18.023255813953487
+      ],
+      "percentile_ci_median": [
+        -0.14534883720930233,
+        26.744186046511626
+      ],
+      "bca_ci_mean": [
+        0.09689922480620156,
+        18.217054263565892
+      ],
+      "ci_excludes_zero_percentile": true,
+      "ci_excludes_zero_bca": true,
+      "bfs_values": [
+        0.0,
+        0.0,
+        -0.29069767441860467,
+        0.29069767441860467,
+        26.744186046511626,
+        26.744186046511626
+      ],
+      "attr_values": [
+        0.0,
+        0.0,
+        0.0,
+        -0.872093023255814,
+        0.0,
+        0.0
+      ]
+    },
+    "attack_5_facts": {
+      "n_samples": 6,
+      "observed_mean_diff": 13.420542635658913,
+      "observed_median_diff": 0.872093023255814,
+      "bootstrap_mean_se": 7.515671251456919,
+      "ci_level": 0.95,
+      "percentile_ci_mean": [
+        0.19379844961240308,
+        26.647286821705425
+      ],
+      "percentile_ci_median": [
+        -0.14534883720930233,
+        39.53488372093023
+      ],
+      "bca_ci_mean": [
+        0.19379844961240308,
+        26.93798449612403
+      ],
+      "ci_excludes_zero_percentile": true,
+      "ci_excludes_zero_bca": true,
+      "bfs_values": [
+        0.0,
+        0.0,
+        -0.29069767441860467,
+        0.29069767441860467,
+        39.825581395348834,
+        39.825581395348834
+      ],
+      "attr_values": [
+        0.0,
+        0.0,
+        0.0,
+        -1.4534883720930232,
+        0.29069767441860467,
+        0.29069767441860467
+      ]
+    },
+    "combined_all_attacks": {
+      "n_samples": 19,
+      "observed_mean_diff": 7.711138310893513,
+      "observed_median_diff": 0.29069767441860467,
+      "bootstrap_mean_se": 3.07739024034863,
+      "ci_level": 0.95,
+      "percentile_ci_mean": [
+        2.24869951040392,
+        14.305768053855562
+      ],
+      "percentile_ci_median": [
+        0.0,
+        5.232558139534884
+      ],
+      "bca_ci_mean": [
+        2.8151774785801718,
+        15.667074663402694
+      ],
+      "ci_excludes_zero_percentile": true,
+      "ci_excludes_zero_bca": true
+    }
+  },
+  "multiple_comparison_correction": {
+    "n_tests": 3,
+    "corrections": {
+      "attack_1_facts": {
+        "test_type": "permutation",
+        "raw_p": 0.03125,
+        "bonferroni_p": 0.09375,
+        "bonferroni_significant_0.05": false,
+        "holm_bonferroni_p": 0.09375,
+        "holm_bonferroni_significant_0.05": false
+      },
+      "attack_3_facts": {
+        "test_type": "permutation",
+        "raw_p": 0.125,
+        "bonferroni_p": 0.375,
+        "bonferroni_significant_0.05": false,
+        "holm_bonferroni_p": 0.25,
+        "holm_bonferroni_significant_0.05": false
+      },
+      "attack_5_facts": {
+        "test_type": "permutation",
+        "raw_p": 0.125,
+        "bonferroni_p": 0.375,
+        "bonferroni_significant_0.05": false,
+        "holm_bonferroni_p": 0.125,
+        "holm_bonferroni_significant_0.05": false
+      }
+    }
+  },
+  "mixed_effects_model": {
+    "model_formula": "damage_diff ~ C(attack_strength) + (1|run)",
+    "n_observations": 19,
+    "n_groups": 7,
+    "fixed_effects": {
+      "Intercept": {
+        "coef": 1.6611,
+        "se": 5.0936,
+        "z": 0.3261,
+        "p": 0.744332
+      },
+      "C(attack_strength)[T.3]": {
+        "coef": 7.2679,
+        "se": 5.0029,
+        "z": 1.4528,
+        "p": 0.146292
+      },
+      "C(attack_strength)[T.5]": {
+        "coef": 11.6284,
+        "se": 5.0029,
+        "z": 2.3243,
+        "p": 0.020107
+      }
+    },
+    "random_effects_variance": 104.1748,
+    "intercept_significant": false,
+    "intercept_interpretation": "Effect not significant at p<0.05",
+    "summary": "              Mixed Linear Model Regression Results\n==================================================================\nModel:               MixedLM    Dependent Variable:    damage_diff\nNo. Observations:    19         Method:                REML       \nNo. Groups:          7          Scale:                 77.4367    \nMin. group size:     1          Log-Likelihood:        -64.7311   \nMax. group size:     3          Converged:             Yes        \nMean group size:     2.7                                          \n------------------------------------------------------------------\n                         Coef.  Std.Err.   z   P>|z| [0.025 0.975]\n------------------------------------------------------------------\nIntercept                 1.661    5.094 0.326 0.744 -8.322 11.644\nC(attack_strength)[T.3]   7.268    5.003 1.453 0.146 -2.537 17.073\nC(attack_strength)[T.5]  11.628    5.003 2.324 0.020  1.823 21.434\nGroup Var               104.175   10.616                          \n==================================================================\n"
+  }
+}
