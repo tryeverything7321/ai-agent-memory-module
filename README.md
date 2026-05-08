@@ -1,5 +1,7 @@
 # AI Agent Memory Module
 
+> **ICML 2026 SCALE Workshop** 제출 논문의 구현체입니다.
+
 사내 Chat 시스템용 **선제적 AI 메모리 모듈** — 단순 대화 기록이 아니라 사용자의 업무 패턴을 학습하고 다음 행동을 예측하는 "Anticipatory Memory Chains" 구현.
 
 ## Architecture
