@@ -296,14 +296,18 @@ AI 메모리 시스템의 graph-based invalidation propagation 취약성을 최�
 - 리뷰 현황: [`.review/2026-04-10-full-paper-review.md`](.review/2026-04-10-full-paper-review.md) (2차 텍스트 리뷰 완료)
 - 남은 실험 작업: [`.claude/todo-paper-experiments.md`](.claude/todo-paper-experiments.md) (7건)
 
-### 논문 진행 상태 (2026-04-15)
+### 논문 진행 상태
+
+아래 표는 2026-04-15 시점의 초기 full-paper draft 상태를 기록한 것입니다. 이후 SCALE workshop 제출용으로 논문이 재정리되었고, 최종 제출본은 [`paper/workshop_20260427.pdf`](paper/workshop_20260427.pdf)입니다. 현재 제출 논문의 핵심 논리와 실험별 역할은 [`paper/submission_logic_summary.md`](paper/submission_logic_summary.md)를 참고하세요.
+
+#### Historical status snapshot (2026-04-15)
 
 | 단계 | 상태 |
 |------|------|
 | 1차 텍스트 리뷰 | 완료 (Intro/Background/Related Work 재작성, bib +16편) |
 | 2차 텍스트 리뷰 | 완료 (alpha값 수정, bib 저자 교체, 구조 개선 16건) |
 | 실험 보강 | **진행 중** (KS test, mixed-effects, TBD placeholder 등 7건) |
-| 최종 제출 | 미완료 |
+| 최종 제출 | 당시 미완료. SCALE workshop 제출본은 이후 `paper/workshop_20260427.pdf`로 정리됨 |
 
 ### 핵심 발견 (4 Contributions)
 

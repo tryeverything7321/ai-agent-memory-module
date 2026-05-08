@@ -41,14 +41,13 @@ ICML 2026 SCALE Workshop 논문.
 
 | 파일 | 용도 |
 |------|------|
-| `workshop_20260428.pdf` | 최종 제출본 후보. 현재 작업트리에 존재하는 최신 PDF |
-| `workshop_20260427_real.pdf` | 2026-04-27 빌드 산출물 백업 |
+| `workshop_20260427.pdf` | **최종 제출본** (SCALE workshop blind PDF) |
 | `workshop.tex` | blind 제출용 LaTeX source |
 | `workshop_20260427.tex` | dated source snapshot |
 | `workshop_v3_final.tex` | 내부 검토/동기화용 source |
 | `references.bib` | 참고문헌 |
 
-과거 파일인 `workshop.pdf`, `workshop_v3_final.pdf`는 이전 버전 또는 내부 검토용 산출물일 수 있습니다. 제출/공유 시에는 최신 dated PDF를 우선 확인하세요.
+과거 파일인 `workshop.pdf`, `workshop_v3_final.pdf`, `workshop_20260428.pdf`는 이전 버전 또는 내부 검토용 산출물일 수 있습니다. 제출/공유 시에는 `workshop_20260427.pdf`를 기준으로 확인하세요.
 
 ## 버전 히스토리
 
