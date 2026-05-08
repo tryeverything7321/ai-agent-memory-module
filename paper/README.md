@@ -1,14 +1,54 @@
 # Collateral Damage in Graph-based Memory Forgetting
 
-ICML 2026 SCALE Workshop 논문
+ICML 2026 SCALE Workshop 논문.
+
+이 디렉토리는 root README의 "AI Agent Memory Module / Anticipatory Memory Chains" 구현 설명과 구분되는 연구 논문 작업 공간입니다. 원래 main 브랜치의 목표는 사내 Chat 시스템용 장기 메모리 모듈 구현이었고, 이 논문은 그 구현 방향에서 한 단계 더 나아가 **graph-based memory systems가 forgetting/invalidation propagation을 도입할 때 생길 수 있는 구조적 collateral damage**를 분석합니다.
+
+## Main Project vs. Workshop Paper
+
+| 구분 | main / MVP 프로젝트 | SCALE workshop paper |
+|------|----------------------|----------------------|
+| 목표 | 사용자 업무 패턴을 기억하고 다음 컨텍스트를 선제적으로 주입하는 memory module 구현 | graph-based agent memory에서 unfiltered invalidation propagation의 구조적 위험 분석 |
+| 핵심 기능/질문 | hybrid retrieval, decay, intent prediction, taxonomy evolution | co-occurrence graph에서 BFS-style propagation이 unrelated memories를 손상시키는가 |
+| 그래프 사용 | retrieval, relation storage, intent transition | forgetting propagation의 failure mode와 hub-mediated blast radius 분석 |
+| 주요 주장 | agent memory can be proactive and adaptive | co-occurrence is not dependency; dependency-aware propagation is needed |
+| 산출물 | FastAPI service, storage/indexing modules, demo runners, tests | workshop paper, scale experiments, attack/defense analysis, ATTR-AWARE filter |
+
+## 논문의 핵심
+
+논문은 현재 시스템들이 naive BFS invalidation을 이미 배포했다고 주장하지 않습니다. 대신, graph-augmented memory systems가 consistency maintenance를 위해 propagation-style invalidation을 탐색할 경우, existing co-occurrence graph infrastructure 위에서 unfiltered traversal이 구조적 실패 모드를 만들 수 있음을 proactive stress test로 분석합니다.
+
+핵심 메커니즘:
+
+1. Agent memory systems increasingly organize facts in entity graphs.
+2. Consistency maintenance makes propagation tempting when a fact changes.
+3. Co-occurrence edges do not encode dependency.
+4. Naive BFS propagation follows hub entities and applies nonzero decay to many unrelated valid memories.
+5. ATTR-AWARE uses object-to-subject directional filtering as a lightweight dependency-aware guardrail.
+
+실험의 큰 흐름:
+
+- **Propagation trade-off**: no propagation은 stale memory를 남기고, BFS는 collateral damage를 만들며, ATTR-AWARE는 둘 사이의 practical compromise를 보임.
+- **Scale trend**: 6K--64K MemoryAgentBench FactConsolidation에서 BFS가 valid memories의 69--79%에 nonzero decay를 적용.
+- **Topology analysis**: heavy-tailed entity degree와 hub reachability가 damage를 구조적으로 설명.
+- **Cross-task contamination**: named-entity hubs가 unrelated Accurate Retrieval F1을 -10.0pp / -11.9pp 낮춤.
+- **Structural amplification**: hub-targeted facts가 propagation damage를 증폭할 수 있음.
+- **Defense/ablation**: ATTR-AWARE와 weighted/threshold baselines를 비교하고, directional filtering이 핵심임을 보임.
+
+더 자세한 실험별 역할과 reviewer-facing interpretation은 [`submission_logic_summary.md`](submission_logic_summary.md)를 참고하세요.
 
 ## 제출 파일
 
 | 파일 | 용도 |
 |------|------|
-| `workshop.pdf` | **blind 제출용** (저자 정보 제거) |
-| `workshop_v3_final.pdf` | 저자 표기 버전 (내부 검토용) |
+| `workshop_20260428.pdf` | 최종 제출본 후보. 현재 작업트리에 존재하는 최신 PDF |
+| `workshop_20260427_real.pdf` | 2026-04-27 빌드 산출물 백업 |
+| `workshop.tex` | blind 제출용 LaTeX source |
+| `workshop_20260427.tex` | dated source snapshot |
+| `workshop_v3_final.tex` | 내부 검토/동기화용 source |
 | `references.bib` | 참고문헌 |
+
+과거 파일인 `workshop.pdf`, `workshop_v3_final.pdf`는 이전 버전 또는 내부 검토용 산출물일 수 있습니다. 제출/공유 시에는 최신 dated PDF를 우선 확인하세요.
 
 ## 버전 히스토리
 

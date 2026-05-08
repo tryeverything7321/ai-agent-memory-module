@@ -1,5 +1,23 @@
 # AI Agent Memory Module
 
+## Repository Context
+
+이 저장소는 두 단계의 작업이 함께 들어 있습니다.
+
+1. **원래 main 브랜치 / MVP 프로젝트**
+   - 목적: 사내 Chat 시스템을 위한 선제적 AI 메모리 모듈 구현.
+   - 핵심 아이디어: 사용자의 업무 패턴을 장기 기억으로 저장하고, intent transition을 이용해 다음에 필요할 가능성이 높은 컨텍스트를 미리 검색/주입하는 "Anticipatory Memory Chains".
+   - 구현 범위: FastAPI 서비스, hybrid retrieval(Vector + Graph + Metadata), Ebbinghaus-style decay, intent-transition prediction, self-evolving taxonomy 실험.
+   - 이 README의 기존 내용은 주로 이 MVP 시스템 구현을 설명합니다.
+
+2. **SCALE @ ICML 2026 workshop paper (`feat/deep-dive-analysis` / `paper/`)**
+   - 목적: 위 MVP를 직접 홍보하는 것이 아니라, graph-based agent memory가 scale될 때 생길 수 있는 **forgetting propagation failure mode**를 분석.
+   - 핵심 질문: graph memory system이 consistency를 위해 invalidation propagation을 도입하면, co-occurrence graph 위의 naive BFS propagation이 unrelated memories까지 손상시키는가?
+   - 핵심 결론: co-occurrence is not dependency. Unfiltered propagation over entity co-occurrence graphs can create collateral forgetting through hub entities; dependency-aware propagation, such as the proposed ATTR-AWARE object-to-subject filter, substantially reduces this damage without LLM calls at propagation time.
+   - 논문 파일과 실험 요약은 [`paper/`](paper/)에 있습니다. 특히 [`paper/submission_logic_summary.md`](paper/submission_logic_summary.md)는 논문의 주장, 실험 목적, reviewer-facing takeaway를 정리합니다.
+
+따라서 root README의 architecture 설명은 원래 product/MVP 방향이고, workshop paper는 그와 별도로 **graph-based memory forgetting의 구조적 위험**을 분석한 연구 결과입니다.
+
 사내 Chat 시스템용 **선제적 AI 메모리 모듈** — 단순 대화 기록이 아니라 사용자의 업무 패턴을 학습하고 다음 행동을 예측하는 "Anticipatory Memory Chains" 구현.
 
 ## Architecture
