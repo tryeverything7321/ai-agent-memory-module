@@ -2,7 +2,7 @@
 
 **날짜:** 2026-04-09
 **데이터셋:** FactConsolidation (ai-hyz/MemoryAgentBench, Conflict_Resolution split)
-**인프라:** DooGPU Gemma-4-31B-it (LLM) + BAAI/bge-m3 (Embedding)
+**인프라:** Gemma-4-31B-it served through an OpenAI-compatible local endpoint + BAAI/bge-m3 (Embedding)
 
 ## 실험 목적
 

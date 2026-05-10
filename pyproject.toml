@@ -3,5 +3,5 @@ asyncio_mode = "auto"
 testpaths = ["tests"]
 pythonpath = ["."]
 markers = [
-    "integration: 실제 LLM API 연동 테스트 (DooGPU)",
+    "integration: tests that call a real OpenAI-compatible LLM endpoint",
 ]
