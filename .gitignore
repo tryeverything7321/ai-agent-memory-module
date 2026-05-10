@@ -11,3 +11,4 @@ build/
 research_reference/
 texput.log
 .review/
+.DS_Store

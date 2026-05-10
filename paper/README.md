@@ -2,7 +2,7 @@
 
 ICML 2026 SCALE Workshop 논문.
 
-이 디렉토리는 root README의 "AI Agent Memory Module / Anticipatory Memory Chains" 구현 설명과 구분되는 연구 논문 작업 공간입니다. 원래 main 브랜치의 목표는 사내 Chat 시스템용 장기 메모리 모듈 구현이었고, 이 논문은 그 구현 방향에서 한 단계 더 나아가 **graph-based memory systems가 forgetting/invalidation propagation을 도입할 때 생길 수 있는 구조적 collateral damage**를 분석합니다.
+이 디렉토리는 root README의 "AI Agent Memory Module / Anticipatory Memory Chains" 구현 설명과 구분되는 연구 논문 작업 공간입니다. 원래 main 브랜치의 목표는 enterprise assistant용 장기 메모리 모듈 구현이었고, 이 논문은 그 구현 방향에서 한 단계 더 나아가 **graph-based memory systems가 forgetting/invalidation propagation을 도입할 때 생길 수 있는 구조적 collateral damage**를 분석합니다.
 
 ## Main Project vs. Workshop Paper
 
@@ -138,7 +138,7 @@ ICML 2026 SCALE Workshop 논문.
 
 ## 실험 인프라
 
-- LLM: Gemma-4-31B-it (DooGPU vLLM)
+- LLM: Gemma-4-31B-it served through an OpenAI-compatible local endpoint
 - Embedding: BAAI/bge-m3 (1024-dim)
 - Benchmark: MemoryAgentBench (ICLR 2026) — FactConsolidation, EventQA
 - Scales: 6K / 32K / 64K turns
