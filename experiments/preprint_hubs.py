@@ -42,6 +42,7 @@ STOPWORDS_AND_PRONOUNS = {
     "there",
     "these",
     "they",
+    "then",
     "this",
     "to",
     "we",

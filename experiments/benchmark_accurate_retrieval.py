@@ -176,6 +176,14 @@ def chunk_text_simple(text: str, chunk_size: int = 4096) -> list[str]:
 
     for line in lines:
         line_chars = len(line)
+        if line_chars > char_limit:
+            if current_chunk:
+                chunks.append("\n".join(current_chunk))
+                current_chunk = []
+                current_chars = 0
+            for start in range(0, line_chars, char_limit):
+                chunks.append(line[start:start + char_limit])
+            continue
         if current_chars + line_chars > char_limit and current_chunk:
             chunks.append("\n".join(current_chunk))
             current_chunk = [line]

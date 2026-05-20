@@ -19,6 +19,7 @@ class PreprintHubTests(unittest.TestCase):
             {"entity": "One", "degree": 49, "memory_count": 6},
             {"entity": "When", "degree": 48, "memory_count": 6},
             {"entity": "These", "degree": 47, "memory_count": 6},
+            {"entity": "Then", "degree": 46, "memory_count": 6},
         ]
 
         filtered = filter_named_entity_hubs(raw_hubs, top_k=2)
