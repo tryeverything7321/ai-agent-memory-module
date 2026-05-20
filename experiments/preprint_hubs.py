@@ -6,6 +6,7 @@ from typing import Any
 
 STOPWORDS_AND_PRONOUNS = {
     "a",
+    "all",
     "an",
     "and",
     "are",
@@ -23,8 +24,14 @@ STOPWORDS_AND_PRONOUNS = {
     "in",
     "it",
     "its",
+    "miss",
+    "monsieur",
+    "mr",
+    "mrs",
+    "ms",
     "of",
     "on",
+    "one",
     "or",
     "our",
     "she",
@@ -33,13 +40,20 @@ STOPWORDS_AND_PRONOUNS = {
     "their",
     "them",
     "there",
+    "these",
     "they",
     "this",
     "to",
     "we",
+    "what",
+    "when",
+    "where",
+    "which",
     "who",
+    "why",
     "with",
     "you",
+    "how",
 }
 
 

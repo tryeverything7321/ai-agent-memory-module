@@ -413,6 +413,7 @@ async def run_sample(
     decay_per_hop: float,
     num_hubs: int = 1,
     named_entity_hubs: bool = False,
+    list_hubs_only: bool = False,
 ) -> dict:
     """하나의 sample에 대해 3개 arm(Baseline, BFS, Attribute-aware) 실행
 
@@ -515,6 +516,17 @@ async def run_sample(
         logger.warning(f"[Sample {sample_idx}] hub entity가 없어 전파 실험 스킵")
         results["bfs"] = {"error": "no_hub_entity", "metrics": {}, "per_query": []}
         results["attribute_aware"] = {"error": "no_hub_entity", "metrics": {}, "per_query": []}
+        return results
+
+    if list_hubs_only:
+        logger.info(f"[Sample {sample_idx}] list_hubs_only=True, 전파 실험 스킵")
+        results["bfs"] = {"skipped": "list_hubs_only", "metrics": {}, "per_query": []}
+        results["attribute_aware"] = {
+            "skipped": "list_hubs_only",
+            "metrics": {},
+            "per_query": [],
+        }
+        await baseline_adapter.reset()
         return results
 
     # ================================================================
@@ -713,6 +725,7 @@ async def run_benchmark(args):
             decay_per_hop=args.decay_per_hop,
             num_hubs=args.num_hubs,
             named_entity_hubs=args.named_entity_hubs,
+            list_hubs_only=args.list_hubs_only,
         )
         all_results.append(sample_result)
 
@@ -754,6 +767,7 @@ async def run_benchmark(args):
             "decay_per_hop": args.decay_per_hop,
             "num_hubs": args.num_hubs,
             "named_entity_hubs": args.named_entity_hubs,
+            "list_hubs_only": args.list_hubs_only,
             "llm_url": llm_url,
             "llm_model": llm_model,
             "embed_url": embed_url,
@@ -897,6 +911,10 @@ def parse_args():
     parser.add_argument(
         "--disable_graph_persist", action="store_true",
         help="benchmark smoke run에서 background graph persistence를 비활성화한다."
+    )
+    parser.add_argument(
+        "--list_hubs_only", action="store_true",
+        help="hub selection만 확인하고 propagation/query arm은 실행하지 않는다."
     )
 
     return parser.parse_args()
