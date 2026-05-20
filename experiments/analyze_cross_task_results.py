@@ -49,6 +49,26 @@ def compute_arm_deltas(sample_summaries: list[dict[str, Any]]) -> dict[str, Any]
     }
 
 
+def query_level_deltas(sample: dict[str, Any]) -> list[dict[str, Any]]:
+    baseline_queries = sample["baseline"].get("per_query", [])
+    bfs_queries = sample["bfs"].get("per_query", [])
+    rows = []
+    for baseline, bfs in zip(baseline_queries, bfs_queries):
+        baseline_f1 = float(baseline.get("f1", 0.0))
+        bfs_f1 = float(bfs.get("f1", 0.0))
+        rows.append({
+            "query_id": baseline.get("query_id", ""),
+            "question": baseline.get("question", ""),
+            "ground_truth": baseline.get("ground_truth", ""),
+            "baseline_prediction": baseline.get("prediction", ""),
+            "bfs_prediction": bfs.get("prediction", ""),
+            "baseline_f1": baseline_f1,
+            "bfs_f1": bfs_f1,
+            "delta": round(bfs_f1 - baseline_f1, 3),
+        })
+    return rows
+
+
 def analyze(path: Path) -> dict[str, Any]:
     data = json.loads(path.read_text())
     samples = [summarize_sample(sample) for sample in data["per_sample"]]
@@ -64,8 +84,28 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("result_json", type=Path)
     parser.add_argument("--output", type=Path)
+    parser.add_argument("--sample-idx", type=int)
+    parser.add_argument("--query-deltas", action="store_true")
     args = parser.parse_args()
-    result = analyze(args.result_json)
+    data = json.loads(args.result_json.read_text())
+    if args.query_deltas:
+        if args.sample_idx is None:
+            raise SystemExit("--query-deltas requires --sample-idx")
+        matching = [
+            sample for sample in data["per_sample"]
+            if int(sample["sample_idx"]) == args.sample_idx
+        ]
+        if not matching:
+            raise SystemExit(f"sample_idx not found: {args.sample_idx}")
+        result = query_level_deltas(matching[0])
+    else:
+        samples = [summarize_sample(sample) for sample in data["per_sample"]]
+        result = {
+            "source_file": str(args.result_json),
+            "aggregate": data["aggregate"],
+            "per_sample": samples,
+            "deltas": compute_arm_deltas(samples),
+        }
     text = json.dumps(result, indent=2, sort_keys=True)
     if args.output:
         args.output.write_text(text + "\n")

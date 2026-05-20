@@ -2,6 +2,7 @@ import unittest
 
 from experiments.analyze_cross_task_results import (
     compute_arm_deltas,
+    query_level_deltas,
     summarize_sample,
 )
 
@@ -47,6 +48,38 @@ class CrossTaskAnalysisTests(unittest.TestCase):
         self.assertEqual(deltas["bfs_retrieval_drop_count"], 1)
         self.assertEqual(deltas["bfs_retrieval_gain_count"], 1)
         self.assertAlmostEqual(deltas["mean_bfs_f1_delta"], 1.1)
+
+    def test_query_level_deltas_compare_baseline_and_bfs(self):
+        sample = {
+            "baseline": {
+                "per_query": [
+                    {
+                        "query_id": 7,
+                        "question": "Which event happens next?",
+                        "ground_truth": ["A"],
+                        "prediction": "B",
+                        "f1": 0.0,
+                    }
+                ]
+            },
+            "bfs": {
+                "per_query": [
+                    {
+                        "query_id": 7,
+                        "prediction": "A",
+                        "f1": 1.0,
+                    }
+                ]
+            },
+        }
+
+        rows = query_level_deltas(sample)
+
+        self.assertEqual(rows[0]["query_id"], 7)
+        self.assertEqual(rows[0]["ground_truth"], ["A"])
+        self.assertEqual(rows[0]["baseline_prediction"], "B")
+        self.assertEqual(rows[0]["bfs_prediction"], "A")
+        self.assertEqual(rows[0]["delta"], 1.0)
 
 
 if __name__ == "__main__":
