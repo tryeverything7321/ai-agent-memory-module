@@ -26,7 +26,7 @@
     "kill_rate"
   ],
   "models": {
-    "llm_model": "google/gemma-4-26B-it",
+    "llm_model": "google/gemma-4-26B-A4B-it",
     "embedding_model": "BAAI/bge-m3"
   },
   "output_dir": "experiments/results/preprint"
