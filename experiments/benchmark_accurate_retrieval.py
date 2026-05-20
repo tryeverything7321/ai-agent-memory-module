@@ -48,7 +48,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from benchmark_adapter import MemoryModuleAdapter, DooGPULLMClient
 from config import settings
-from experiments.preprint_hubs import filter_named_entity_hubs
+from experiments.preprint_hubs import select_actionable_hubs
 from storage.vector_store import DooGPUEmbeddingProvider, MockEmbeddingProvider
 
 logger = logging.getLogger(__name__)
@@ -72,6 +72,8 @@ logging.basicConfig(
     datefmt="%m/%d/%Y %H:%M:%S",
     level=logging.INFO,
 )
+logging.getLogger("httpx").setLevel(logging.WARNING)
+logging.getLogger("huggingface_hub").setLevel(logging.WARNING)
 
 
 # --- 평가 유틸 (benchmark_runner.py와 동일) ---
@@ -464,14 +466,20 @@ async def run_sample(
                 f"retrievable={baseline_stats['retrievable']}")
 
     # Hub entity 식별 (BFS/Attr-aware에서 사용)
-    raw_hub_limit = num_hubs * 5 if named_entity_hubs else num_hubs
+    raw_hub_limit = num_hubs * 10 if named_entity_hubs else num_hubs
     all_hubs = find_high_degree_entities(baseline_adapter, top_k=raw_hub_limit)
     if named_entity_hubs:
         hub_dicts = [
             {"entity": entity, "degree": degree}
             for entity, degree in all_hubs
         ]
-        filtered_hubs = filter_named_entity_hubs(hub_dicts, top_k=num_hubs)
+        filtered_hubs = select_actionable_hubs(
+            hub_dicts,
+            top_k=num_hubs,
+            has_trigger_fact=lambda entity: (
+                find_fact_for_entity(baseline_adapter, entity) is not None
+            ),
+        )
         all_hubs = [
             (str(hub["entity"]), int(hub["degree"]))
             for hub in filtered_hubs

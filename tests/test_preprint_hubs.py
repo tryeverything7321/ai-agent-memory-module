@@ -1,6 +1,6 @@
 import unittest
 
-from experiments.preprint_hubs import filter_named_entity_hubs
+from experiments.preprint_hubs import filter_named_entity_hubs, select_actionable_hubs
 
 
 class PreprintHubTests(unittest.TestCase):
@@ -11,6 +11,7 @@ class PreprintHubTests(unittest.TestCase):
             {"entity": "Debbie", "degree": 64, "memory_count": 7},
             {"entity": "Marianne", "degree": 58, "memory_count": 6},
             {"entity": "But", "degree": 55, "memory_count": 6},
+            {"entity": "There", "degree": 54, "memory_count": 6},
         ]
 
         filtered = filter_named_entity_hubs(raw_hubs, top_k=2)
@@ -30,6 +31,25 @@ class PreprintHubTests(unittest.TestCase):
         self.assertEqual(
             [hub["entity"] for hub in filtered],
             ["United States", "Project Alpha"],
+        )
+
+    def test_selects_named_entities_with_triggerable_facts(self):
+        raw_hubs = [
+            {"entity": "Debbie", "degree": 715},
+            {"entity": "Marianne", "degree": 589},
+            {"entity": "Kerry", "degree": 394},
+            {"entity": "Nadia", "degree": 380},
+        ]
+
+        selected = select_actionable_hubs(
+            raw_hubs,
+            top_k=3,
+            has_trigger_fact=lambda entity: entity != "Kerry",
+        )
+
+        self.assertEqual(
+            [hub["entity"] for hub in selected],
+            ["Debbie", "Marianne", "Nadia"],
         )
 
 

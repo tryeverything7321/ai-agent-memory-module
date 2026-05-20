@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from collections.abc import Callable
 from typing import Any
 
 
@@ -31,6 +32,7 @@ STOPWORDS_AND_PRONOUNS = {
     "the",
     "their",
     "them",
+    "there",
     "they",
     "this",
     "to",
@@ -61,3 +63,21 @@ def filter_named_entity_hubs(
         if is_named_entity_like(str(hub.get("entity", "")))
     ]
     return filtered[:top_k]
+
+
+def select_actionable_hubs(
+    hubs: list[dict[str, Any]],
+    top_k: int,
+    has_trigger_fact: Callable[[str], bool],
+) -> list[dict[str, Any]]:
+    selected = []
+    for hub in hubs:
+        entity = str(hub.get("entity", ""))
+        if not is_named_entity_like(entity):
+            continue
+        if not has_trigger_fact(entity):
+            continue
+        selected.append(hub)
+        if len(selected) >= top_k:
+            break
+    return selected
