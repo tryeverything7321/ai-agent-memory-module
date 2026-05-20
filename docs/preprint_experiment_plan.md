@@ -2,6 +2,13 @@
 
 This tracker turns the SCALE reviews into executable experiment work. The goal is to make the next version defensible as a study of safe propagation policies for graph-based agent memory, not only a critique of naive BFS.
 
+## Current Thesis
+
+The current invariant is structural blast radius, not retrieval degradation.
+Future experiments should test whether the blast-radius gap between BFS and
+guarded propagation survives across dataset families and graph construction
+variants.
+
 ## Required Before Preprint
 
 - [x] Initial expanded cross-task contamination over named-entity hubs: 5 samples, 5 hubs/sample, 100 queries/sample.
