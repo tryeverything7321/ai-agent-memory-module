@@ -4,7 +4,8 @@ This tracker turns the SCALE reviews into executable experiment work. The goal i
 
 ## Required Before Preprint
 
-- [ ] Expanded cross-task contamination over named-entity hubs.
+- [x] Initial expanded cross-task contamination over named-entity hubs: 5 samples, 5 hubs/sample, 100 queries/sample.
+- [ ] Larger cross-task contamination run with more samples or graph families.
 - [ ] ATTR-AWARE false-negative audit.
 - [ ] Graph construction variants: raw, stopword/pronoun filtered, typed relation, and NER-normalized if available.
 - [ ] Practical-harm summary table separating blast radius from severe decay, kill-level decay, and retrieval F1 drop.
@@ -105,4 +106,3 @@ The paper no longer relies on "any nonzero decay" as the practical-harm headline
 7. Label the audit set.
 8. Add graph construction variants.
 9. Rewrite the paper around the new evidence.
-
