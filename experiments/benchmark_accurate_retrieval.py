@@ -47,8 +47,9 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from benchmark_adapter import MemoryModuleAdapter, DooGPULLMClient
+from config import settings
 from experiments.preprint_hubs import filter_named_entity_hubs
-from storage.vector_store import DooGPUEmbeddingProvider
+from storage.vector_store import DooGPUEmbeddingProvider, MockEmbeddingProvider
 
 logger = logging.getLogger(__name__)
 
@@ -348,7 +349,7 @@ async def evaluate_queries(
         dict: metrics + per_query_results
     """
     n_queries = len(questions)
-    if max_queries and max_queries < n_queries:
+    if max_queries is not None and max_queries < n_queries:
         n_queries = max_queries
 
     total_em = 0.0
@@ -646,6 +647,8 @@ async def run_sample(
 
 async def run_benchmark(args):
     """Cross-task 벤치마크 실행: Accurate_Retrieval에서 collateral damage 영향 측정"""
+    if args.disable_graph_persist:
+        settings.graph_serialize_interval = 10**12
 
     # --- 데이터 로드 ---
     samples = load_accurate_retrieval_data(args.sub_dataset, args.max_samples)
@@ -663,13 +666,26 @@ async def run_benchmark(args):
     llm_url = args.llm_url or DOOGPU_LLM_BASE
     embed_url = args.embed_url or DOOGPU_EMBED_BASE
 
-    logger.info(f"LLM: {llm_url} / {DEFAULT_LLM_MODEL}")
-    logger.info(f"Embedding: {embed_url} / {DEFAULT_EMBED_MODEL}")
+    llm_model = args.llm_model or DEFAULT_LLM_MODEL
+    embed_model = args.embed_model or DEFAULT_EMBED_MODEL
 
-    llm_client = DooGPULLMClient(base_url=llm_url, model=DEFAULT_LLM_MODEL)
-    embedding_provider = DooGPUEmbeddingProvider(
-        base_url=embed_url, model=DEFAULT_EMBED_MODEL
+    logger.info(f"LLM: {llm_url} / {llm_model}")
+    logger.info(
+        "Embedding: "
+        + (
+            "MockEmbeddingProvider (smoke only, not paper-valid)"
+            if args.mock_embedding
+            else f"{embed_url} / {embed_model}"
+        )
     )
+
+    llm_client = DooGPULLMClient(base_url=llm_url, model=llm_model)
+    if args.mock_embedding:
+        embedding_provider = MockEmbeddingProvider(dim=1024)
+    else:
+        embedding_provider = DooGPUEmbeddingProvider(
+            base_url=embed_url, model=embed_model
+        )
 
     # --- 샘플별 실행 ---
     all_results = []
@@ -731,7 +747,10 @@ async def run_benchmark(args):
             "num_hubs": args.num_hubs,
             "named_entity_hubs": args.named_entity_hubs,
             "llm_url": llm_url,
+            "llm_model": llm_model,
             "embed_url": embed_url,
+            "embed_model": embed_model,
+            "mock_embedding": args.mock_embedding,
         },
         "aggregate": aggregate,
         "per_sample": all_results,
@@ -821,7 +840,7 @@ def parse_args():
     )
     parser.add_argument(
         "--max_queries", type=int, default=None,
-        help="샘플당 최대 쿼리 수 (None=전체)"
+        help="샘플당 최대 쿼리 수 (None=전체, 0=LLM query 평가 스킵)"
     )
     parser.add_argument(
         "--chunk_size", type=int, default=4096,
@@ -852,8 +871,24 @@ def parse_args():
         help="LLM API base URL"
     )
     parser.add_argument(
+        "--llm_model", type=str, default=None,
+        help=f"LLM 모델명 (기본: {DEFAULT_LLM_MODEL})"
+    )
+    parser.add_argument(
         "--embed_url", type=str, default=None,
         help="Embedding API base URL"
+    )
+    parser.add_argument(
+        "--embed_model", type=str, default=None,
+        help=f"Embedding 모델명 (기본: {DEFAULT_EMBED_MODEL})"
+    )
+    parser.add_argument(
+        "--mock_embedding", action="store_true",
+        help="임베딩 endpoint 없이 smoke run만 수행한다. 논문 결과로 사용하면 안 됨."
+    )
+    parser.add_argument(
+        "--disable_graph_persist", action="store_true",
+        help="benchmark smoke run에서 background graph persistence를 비활성화한다."
     )
 
     return parser.parse_args()
