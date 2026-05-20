@@ -337,6 +337,33 @@ async def trigger_propagation(
     }
 
 
+async def collect_audit_trace(
+    adapter: MemoryModuleAdapter,
+    propagation: dict,
+    max_items: int,
+) -> dict:
+    """Manual dependency audit에 필요한 affected memory text 샘플을 수집한다."""
+    affected = []
+    for memory_id in propagation.get("affected_memory_ids", [])[:max_items]:
+        memory = await adapter._metadata_store.get_memory(memory_id)
+        if not memory:
+            continue
+        affected.append({
+            "memory_id": memory_id,
+            "content": memory.content,
+            "decay_weight": memory.decay_weight,
+            "is_valid": memory.is_valid,
+        })
+    return {
+        "trigger_memory_id": propagation.get("trigger_memory_id"),
+        "trigger_subject_key": propagation.get("trigger_subject_key"),
+        "trigger_content": propagation.get("trigger_content"),
+        "affected_sample": affected,
+        "affected_sample_count": len(affected),
+        "affected_total_count": propagation.get("affected_count", 0),
+    }
+
+
 # --- 쿼리 평가 ---
 
 async def evaluate_queries(
@@ -414,6 +441,8 @@ async def run_sample(
     num_hubs: int = 1,
     named_entity_hubs: bool = False,
     list_hubs_only: bool = False,
+    include_audit_trace: bool = False,
+    audit_trace_limit: int = 50,
 ) -> dict:
     """하나의 sample에 대해 3개 arm(Baseline, BFS, Attribute-aware) 실행
 
@@ -572,6 +601,11 @@ async def run_sample(
 
             pre_stats = await count_memory_stats(adapter)
             propagation = await trigger_propagation(adapter, h_entity, mode=arm_name)
+            audit_trace = None
+            if include_audit_trace:
+                audit_trace = await collect_audit_trace(
+                    adapter, propagation, audit_trace_limit
+                )
             post_stats = await count_memory_stats(adapter)
             collateral = pre_stats["retrievable"] - post_stats["retrievable"]
 
@@ -597,6 +631,7 @@ async def run_sample(
                     "affected_count": propagation.get("affected_count", 0),
                     "trigger_subject_key": propagation.get("trigger_subject_key"),
                     "trigger_content": propagation.get("trigger_content"),
+                    "audit_trace": audit_trace,
                 },
                 "collateral_damage": collateral,
             })
@@ -645,6 +680,7 @@ async def run_sample(
                             "f1": r["metrics"].get("f1", 0),
                             "collateral": r["collateral_damage"],
                             "affected": r["propagation"]["affected_count"],
+                            "audit_trace": r["propagation"].get("audit_trace"),
                         }
                         for r in per_hub_results
                     ],
@@ -726,6 +762,8 @@ async def run_benchmark(args):
             num_hubs=args.num_hubs,
             named_entity_hubs=args.named_entity_hubs,
             list_hubs_only=args.list_hubs_only,
+            include_audit_trace=args.include_audit_trace,
+            audit_trace_limit=args.audit_trace_limit,
         )
         all_results.append(sample_result)
 
@@ -768,6 +806,8 @@ async def run_benchmark(args):
             "num_hubs": args.num_hubs,
             "named_entity_hubs": args.named_entity_hubs,
             "list_hubs_only": args.list_hubs_only,
+            "include_audit_trace": args.include_audit_trace,
+            "audit_trace_limit": args.audit_trace_limit,
             "llm_url": llm_url,
             "llm_model": llm_model,
             "embed_url": embed_url,
@@ -915,6 +955,14 @@ def parse_args():
     parser.add_argument(
         "--list_hubs_only", action="store_true",
         help="hub selection만 확인하고 propagation/query arm은 실행하지 않는다."
+    )
+    parser.add_argument(
+        "--include_audit_trace", action="store_true",
+        help="manual dependency audit용 trigger/affected memory text sample을 결과에 포함한다."
+    )
+    parser.add_argument(
+        "--audit_trace_limit", type=int, default=50,
+        help="hub별 audit trace에 저장할 affected memory 최대 개수."
     )
 
     return parser.parse_args()
