@@ -1,0 +1,33 @@
+{
+  "experiment_name": "cross_task_named_hubs_smoke",
+  "dataset": {
+    "name": "ai-hyz/MemoryAgentBench",
+    "split": "Accurate_Retrieval",
+    "sub_dataset": "eventqa_65536",
+    "max_samples": 1,
+    "max_queries": 20
+  },
+  "hub_selection": {
+    "top_k": 2,
+    "named_entity_only": true,
+    "exclude_stopwords_pronouns": true
+  },
+  "policies": [
+    "no_propagation",
+    "bfs",
+    "weighted_bfs_0_3",
+    "attr_aware"
+  ],
+  "metrics": [
+    "em",
+    "f1",
+    "blast_radius",
+    "severe_decay",
+    "kill_rate"
+  ],
+  "models": {
+    "llm_model": "google/gemma-4-31B-it",
+    "embedding_model": "BAAI/bge-m3"
+  },
+  "output_dir": "experiments/results/preprint"
+}
