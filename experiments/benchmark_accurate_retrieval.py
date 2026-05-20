@@ -47,6 +47,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from benchmark_adapter import MemoryModuleAdapter, DooGPULLMClient
+from experiments.preprint_hubs import filter_named_entity_hubs
 from storage.vector_store import DooGPUEmbeddingProvider
 
 logger = logging.getLogger(__name__)
@@ -408,6 +409,7 @@ async def run_sample(
     propagation_depth: int,
     decay_per_hop: float,
     num_hubs: int = 1,
+    named_entity_hubs: bool = False,
 ) -> dict:
     """하나의 sample에 대해 3개 arm(Baseline, BFS, Attribute-aware) 실행
 
@@ -461,7 +463,18 @@ async def run_sample(
                 f"retrievable={baseline_stats['retrievable']}")
 
     # Hub entity 식별 (BFS/Attr-aware에서 사용)
-    all_hubs = find_high_degree_entities(baseline_adapter, top_k=num_hubs)
+    raw_hub_limit = num_hubs * 5 if named_entity_hubs else num_hubs
+    all_hubs = find_high_degree_entities(baseline_adapter, top_k=raw_hub_limit)
+    if named_entity_hubs:
+        hub_dicts = [
+            {"entity": entity, "degree": degree}
+            for entity, degree in all_hubs
+        ]
+        filtered_hubs = filter_named_entity_hubs(hub_dicts, top_k=num_hubs)
+        all_hubs = [
+            (str(hub["entity"]), int(hub["degree"]))
+            for hub in filtered_hubs
+        ]
     hub_entity = all_hubs[0][0] if all_hubs else None
     hub_degree = all_hubs[0][1] if all_hubs else 0
     logger.info(f"  Top hub: {hub_entity} (degree={hub_degree})")
@@ -675,6 +688,7 @@ async def run_benchmark(args):
             propagation_depth=args.propagation_depth,
             decay_per_hop=args.decay_per_hop,
             num_hubs=args.num_hubs,
+            named_entity_hubs=args.named_entity_hubs,
         )
         all_results.append(sample_result)
 
@@ -715,6 +729,7 @@ async def run_benchmark(args):
             "propagation_depth": args.propagation_depth,
             "decay_per_hop": args.decay_per_hop,
             "num_hubs": args.num_hubs,
+            "named_entity_hubs": args.named_entity_hubs,
             "llm_url": llm_url,
             "embed_url": embed_url,
         },
@@ -825,6 +840,10 @@ def parse_args():
     parser.add_argument(
         "--num_hubs", type=int, default=1,
         help="실험할 hub entity 수 (1=기존 단일 hub, >1=multi-hub 평균±std)"
+    )
+    parser.add_argument(
+        "--named_entity_hubs", action="store_true",
+        help="headline cross-task claims용: stopword/pronoun/function-word hub를 제외하고 named-entity-like hub만 사용"
     )
 
     # DooGPU 엔드포인트
