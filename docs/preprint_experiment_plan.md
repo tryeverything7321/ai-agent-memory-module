@@ -5,7 +5,8 @@ This tracker turns the SCALE reviews into executable experiment work. The goal i
 ## Required Before Preprint
 
 - [x] Initial expanded cross-task contamination over named-entity hubs: 5 samples, 5 hubs/sample, 100 queries/sample.
-- [ ] Larger cross-task contamination run with more samples or graph families.
+- [x] Larger-context named-hub replication: EventQA 131K, 5 samples, 5 hubs/sample, 100 queries/sample.
+- [ ] Cross-family contamination replication on `eventqa_full` or `longmemeval_s*`.
 - [ ] ATTR-AWARE false-negative audit.
 - [ ] Graph construction variants: raw, stopword/pronoun filtered, typed relation, and NER-normalized if available.
 - [ ] Practical-harm summary table separating blast radius from severe decay, kill-level decay, and retrieval F1 drop.
