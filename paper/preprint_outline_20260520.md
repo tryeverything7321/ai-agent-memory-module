@@ -27,7 +27,10 @@ noise or generic hubs decouple topology from dependency.
 Finding 2: EventQA named-entity hubs create large real-data structural blast
 radius under unfiltered propagation.
 
-Finding 3: Retrieval effects are unstable, not monotonically harmful.
+Finding 3: Raw LLM answer F1 is an unstable downstream signal, but
+decay-weighted support retrieval shows a cleaner harm channel: BFS can push
+answer-support memories out of top-k retrieval while ATTR-AWARE largely
+preserves them.
 
 Finding 4: Artificial generic phrases can create triggerable topology-poisoning
 surfaces; high repetition can enter raw top-hub diagnostics.
@@ -125,8 +128,23 @@ Latest structured propagation result:
   `answer_session_user_turns`;
 - BFS mean collateral across successful samples: 59.3 memories;
 - ATTR-AWARE mean collateral across successful samples: 1.25 memories;
-- this is structural-only evidence because queries were disabled and mock
-  embeddings were used.
+- this structural result used disabled queries and mock embeddings.
+
+Latest support-retrieval result:
+
+- metric: decay-weighted vector support hit@K, not LLM generation F1;
+- 5 LongMemEval samples, first 20 queries per sample, top-2 named/actionable
+  hubs per successful sample;
+- 4/5 samples produced actionable hubs, yielding 8 hub runs;
+- support hit@5: baseline 26.25%, BFS 16.25% (-10.0pp), ATTR-AWARE 26.25%
+  (+0.0pp);
+- support hit@20: baseline 32.50%, BFS 20.00% (-12.5pp), ATTR-AWARE 31.88%
+  (-0.62pp).
+
+This replaces the weaker LongMemEval raw LLM-F1 story.  The paper should say
+that answer-generation quality remains a separate evaluation problem, while
+propagation has a measurable retrieval-ranking effect once support evidence is
+used as the target.
 
 ## Topology Poisoning Extension
 
