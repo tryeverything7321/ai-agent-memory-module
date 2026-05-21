@@ -42,3 +42,16 @@ and retrieval metrics can either expose or hide those changes.
 2. Graph construction variant results.
 3. Balanced ATTR-AWARE audit with both blocked and accepted propagation examples.
 4. Full-context run scheduled as a long job, not an interactive foreground run.
+
+## Topology Poisoning Extension
+
+The paper should separate two structural risks:
+
+1. Natural content hubs: real entities become high-degree hubs and create large
+   propagation blast radius.
+2. Fabricated hubs: repeated generic/template phrases become artificial hubs
+   under naive extraction, creating a topology-poisoning surface.
+
+LongMemEval template hubs are diagnostic evidence for the second risk, not a
+standalone attack result. A controlled injection experiment is required before
+claiming attack success.
