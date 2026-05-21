@@ -6,6 +6,7 @@ from experiments.synthetic_memory_graph import (
     dependency_closure,
     evaluate_world,
     generate_world,
+    run_sweep,
     score_prediction,
 )
 
@@ -78,6 +79,34 @@ class SyntheticMemoryGraphTests(unittest.TestCase):
         self.assertEqual(score["false_negative"], 1)
         self.assertAlmostEqual(score["precision"], 2 / 3)
         self.assertAlmostEqual(score["recall"], 2 / 3)
+
+    def test_sweep_aggregates_grid(self):
+        result = run_sweep(
+            sizes=[30],
+            noise_multipliers=[0.0, 2.0],
+            hub_multipliers=[0.0],
+            seeds=[0, 1],
+        )
+
+        self.assertEqual(len(result["rows"]), 4)
+        self.assertEqual(len(result["summary"]), 2)
+
+    def test_sweep_noise_increases_bfs_fp_in_summary(self):
+        result = run_sweep(
+            sizes=[30],
+            noise_multipliers=[0.0, 2.0],
+            hub_multipliers=[0.0],
+            seeds=list(range(5)),
+        )
+        by_noise = {
+            row["noise_multiplier"]: row["algorithms"]["bfs_cooccurrence"]
+            for row in result["summary"]
+        }
+
+        self.assertGreater(
+            by_noise[2.0]["false_positive"],
+            by_noise[0.0]["false_positive"],
+        )
 
 
 if __name__ == "__main__":

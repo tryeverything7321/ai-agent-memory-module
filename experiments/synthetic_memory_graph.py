@@ -350,17 +350,114 @@ def run_smoke(seed: int = 0) -> dict:
     return {"seed": seed, "variants": results}
 
 
+def run_sweep(
+    *,
+    sizes: list[int],
+    noise_multipliers: list[float],
+    hub_multipliers: list[float],
+    seeds: list[int],
+    chain_length: int = 5,
+) -> dict:
+    rows = []
+    for n_entities in sizes:
+        n_chains = max(1, n_entities // 3)
+        base_facts = n_chains * chain_length
+        for noise_multiplier in noise_multipliers:
+            for hub_multiplier in hub_multipliers:
+                for seed in seeds:
+                    noise_edges = int(base_facts * noise_multiplier)
+                    hub_facts = int(n_chains * hub_multiplier)
+                    world = generate_world(
+                        n_entities=n_entities,
+                        n_chains=n_chains,
+                        chain_length=chain_length,
+                        noise_edges=noise_edges,
+                        hub_facts=hub_facts,
+                        seed=seed,
+                    )
+                    evaluation = evaluate_world(world, depth=2)
+                    rows.append({
+                        "n_entities": n_entities,
+                        "n_chains": n_chains,
+                        "chain_length": chain_length,
+                        "noise_multiplier": noise_multiplier,
+                        "hub_multiplier": hub_multiplier,
+                        "noise_edges": noise_edges,
+                        "hub_facts": hub_facts,
+                        "seed": seed,
+                        "n_facts": evaluation["n_facts"],
+                        "aggregate": evaluation["aggregate"],
+                    })
+    return {
+        "config": {
+            "sizes": sizes,
+            "noise_multipliers": noise_multipliers,
+            "hub_multipliers": hub_multipliers,
+            "seeds": seeds,
+            "chain_length": chain_length,
+        },
+        "rows": rows,
+        "summary": summarize_sweep(rows),
+    }
+
+
+def summarize_sweep(rows: list[dict]) -> list[dict]:
+    grouped: dict[tuple[int, float, float], list[dict]] = {}
+    for row in rows:
+        key = (
+            row["n_entities"],
+            row["noise_multiplier"],
+            row["hub_multiplier"],
+        )
+        grouped.setdefault(key, []).append(row)
+
+    summary = []
+    for (n_entities, noise_multiplier, hub_multiplier), group in sorted(grouped.items()):
+        entry = {
+            "n_entities": n_entities,
+            "noise_multiplier": noise_multiplier,
+            "hub_multiplier": hub_multiplier,
+            "n_runs": len(group),
+            "algorithms": {},
+        }
+        for algorithm in group[0]["aggregate"]:
+            entry["algorithms"][algorithm] = _average_metrics(
+                row["aggregate"][algorithm] for row in group
+            )
+        summary.append(entry)
+    return summary
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--seed", type=int, default=0)
+    parser.add_argument("--sweep", action="store_true")
+    parser.add_argument("--sizes", nargs="+", type=int, default=[30, 100, 300])
+    parser.add_argument(
+        "--noise_multipliers", nargs="+", type=float, default=[0.0, 1.0, 3.0]
+    )
+    parser.add_argument(
+        "--hub_multipliers", nargs="+", type=float, default=[0.0, 0.5, 2.0]
+    )
+    parser.add_argument("--seeds", type=int, default=20)
     parser.add_argument("--output", type=Path, default=None)
     args = parser.parse_args()
 
-    result = run_smoke(seed=args.seed)
+    if args.sweep:
+        result = run_sweep(
+            sizes=args.sizes,
+            noise_multipliers=args.noise_multipliers,
+            hub_multipliers=args.hub_multipliers,
+            seeds=list(range(args.seeds)),
+        )
+        compact = _compact_sweep_summary(result)
+    else:
+        result = run_smoke(seed=args.seed)
+        compact = _compact_summary(result)
     if args.output:
         args.output.parent.mkdir(parents=True, exist_ok=True)
         args.output.write_text(json.dumps(result, indent=2) + "\n")
-    print(json.dumps(_compact_summary(result), indent=2))
+    print(json.dumps(compact, indent=2))
 
 
 def _compact_summary(result: dict) -> dict:
@@ -377,6 +474,30 @@ def _compact_summary(result: dict) -> dict:
             for name, metrics in data["aggregate"].items()
         }
     return summary
+
+
+def _compact_sweep_summary(result: dict) -> list[dict]:
+    compact = []
+    for row in result["summary"]:
+        algorithms = row["algorithms"]
+        compact.append({
+            "n_entities": row["n_entities"],
+            "noise_multiplier": row["noise_multiplier"],
+            "hub_multiplier": row["hub_multiplier"],
+            "bfs_fp": round(
+                algorithms["bfs_cooccurrence"]["false_positive"], 2
+            ),
+            "bfs_blast": round(
+                algorithms["bfs_cooccurrence"]["blast_radius"], 2
+            ),
+            "attr_fp": round(algorithms["attr_like"]["false_positive"], 2),
+            "attr_recall": round(algorithms["attr_like"]["recall"], 3),
+            "degree_cap_fp": round(
+                algorithms["degree_capped_bfs"]["false_positive"], 2
+            ),
+            "weighted_recall": round(algorithms["weighted_bfs"]["recall"], 3),
+        })
+    return compact
 
 
 def world_to_jsonable(world: SyntheticWorld) -> dict:

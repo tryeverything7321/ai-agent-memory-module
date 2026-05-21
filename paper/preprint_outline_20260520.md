@@ -80,6 +80,17 @@ Evidence:
 - hub-heavy graph: false-positive blast radius increases further;
 - guardrails reduce false positives but expose missed-dependency costs.
 
+Latest sweep:
+
+- 540 synthetic worlds across 30/100/300 entities, three noise levels, three hub
+  strengths, and 20 seeds;
+- clean graphs: BFS FP = 0 and blast radius = 2 across sizes;
+- high-noise/no-hub graphs: BFS FP rises to 33.09, 49.65, and 54.29 for
+  30/100/300 entities;
+- high-noise/high-hub graphs: BFS FP rises further to 49.69, 70.66, and 76.64;
+- ATTR-like filtering keeps FP below 1 in all reported cells but recall stays
+  around 0.5-0.66, making the under-propagation tradeoff explicit.
+
 This answers reviewer concerns about artifacts and ATTR-AWARE false negatives
 without pretending synthetic results are deployment evidence.
 
