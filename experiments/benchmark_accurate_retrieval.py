@@ -49,6 +49,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from benchmark_adapter import MemoryModuleAdapter, DooGPULLMClient
 from config import settings
 from experiments.preprint_hubs import select_actionable_hubs
+from experiments.structured_graph_gate import build_structured_context
 from experiments.topology_poisoning import inject_phrase_into_context
 from storage.vector_store import DooGPUEmbeddingProvider, MockEmbeddingProvider
 
@@ -151,6 +152,7 @@ def load_accurate_retrieval_data(
     for item in filtered:
         samples.append({
             "context": item["context"],
+            "metadata": item.get("metadata", {}),
             "questions": (
                 item["questions"]
                 if isinstance(item["questions"], list)
@@ -741,6 +743,17 @@ async def run_benchmark(args):
         return
 
     logger.info(f"데이터 로드 완료: {len(samples)} 샘플")
+    if args.structured_context_mode:
+        logger.info(f"Structured context mode: {args.structured_context_mode}")
+        samples = [
+            {
+                **sample,
+                "context": build_structured_context(
+                    sample, args.structured_context_mode
+                ),
+            }
+            for sample in samples
+        ]
     if args.inject_phrase and args.inject_repetitions > 0:
         logger.info(
             "Topology injection enabled: "
@@ -849,6 +862,7 @@ async def run_benchmark(args):
             "num_hubs": args.num_hubs,
             "named_entity_hubs": args.named_entity_hubs,
             "hub_entity": args.hub_entity,
+            "structured_context_mode": args.structured_context_mode,
             "inject_phrase": args.inject_phrase,
             "inject_repetitions": args.inject_repetitions,
             "list_hubs_only": args.list_hubs_only,
@@ -975,6 +989,17 @@ def parse_args():
     parser.add_argument(
         "--named_entity_hubs", action="store_true",
         help="headline cross-task claims용: stopword/pronoun/function-word hub를 제외하고 named-entity-like hub만 사용"
+    )
+    parser.add_argument(
+        "--structured_context_mode", type=str, default=None,
+        choices=[
+            "raw_context",
+            "content_turns",
+            "user_turns",
+            "answer_turns",
+            "answer_session_user_turns",
+        ],
+        help="LongMemEval 등 structured metadata가 있는 데이터에서 raw context 대신 turn-level context를 사용한다."
     )
     parser.add_argument(
         "--inject_phrase", type=str, default=None,

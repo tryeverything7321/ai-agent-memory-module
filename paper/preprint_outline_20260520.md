@@ -33,7 +33,8 @@ Finding 4: Artificial generic phrases can create triggerable topology-poisoning
 surfaces; high repetition can enter raw top-hub diagnostics.
 
 Finding 5: LongMemEval fails the clean graph gate under the current extractor,
-showing that graph construction artifacts are part of the safety problem.
+but structured turn-level construction recovers content hubs and reproduces the
+structural collateral pattern.
 
 Finding 6: Guardrails reduce false positives but must be evaluated for
 under-propagation.
@@ -43,8 +44,9 @@ under-propagation.
 1. Controlled synthetic precision/recall table.
 2. EventQA practical-harm summary table.
 3. Artificial hub injection dose-response table.
-4. Clean graph gate / LongMemEval diagnostic table.
-5. ATTR-AWARE audit table.
+4. LongMemEval raw-vs-structured graph gate table.
+5. LongMemEval structured propagation table.
+6. ATTR-AWARE audit table.
 
 ## Narrative Change From Workshop Version
 
@@ -105,6 +107,15 @@ context construction. It should be presented as a graph construction diagnostic:
 
 Next paper decision: LongMemEval propagation experiments should use
 `answer_session_user_turns`, not raw context.
+
+Latest structured propagation result:
+
+- 4/5 LongMemEval samples produced actionable content hubs under
+  `answer_session_user_turns`;
+- BFS mean collateral across successful samples: 59.3 memories;
+- ATTR-AWARE mean collateral across successful samples: 1.25 memories;
+- this is structural-only evidence because queries were disabled and mock
+  embeddings were used.
 
 ## Topology Poisoning Extension
 
