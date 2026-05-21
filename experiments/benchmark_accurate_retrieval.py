@@ -49,6 +49,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from benchmark_adapter import MemoryModuleAdapter, DooGPULLMClient
 from config import settings
 from experiments.preprint_hubs import select_actionable_hubs
+from experiments.topology_poisoning import inject_phrase_into_context
 from storage.vector_store import DooGPUEmbeddingProvider, MockEmbeddingProvider
 
 logger = logging.getLogger(__name__)
@@ -229,6 +230,15 @@ def find_high_degree_entities(
 
     node_degrees.sort(key=lambda x: x[1], reverse=True)
     return node_degrees[:top_k]
+
+
+def find_entity_degree(adapter: MemoryModuleAdapter, entity_name: str) -> int:
+    """Return graph degree for an entity, matching case-insensitively."""
+    graph = adapter._graph_store.entity_graph
+    for node in graph.nodes:
+        if str(node).lower() == entity_name.lower():
+            return graph.in_degree(node) + graph.out_degree(node)
+    return 0
 
 
 def find_fact_for_entity(
@@ -448,6 +458,7 @@ async def run_sample(
     decay_per_hop: float,
     num_hubs: int = 1,
     named_entity_hubs: bool = False,
+    hub_entity_override: str | None = None,
     list_hubs_only: bool = False,
     include_audit_trace: bool = False,
     audit_trace_limit: int = 50,
@@ -504,9 +515,16 @@ async def run_sample(
                 f"retrievable={baseline_stats['retrievable']}")
 
     # Hub entity 식별 (BFS/Attr-aware에서 사용)
-    raw_hub_limit = num_hubs * 10 if named_entity_hubs else num_hubs
-    all_hubs = find_high_degree_entities(baseline_adapter, top_k=raw_hub_limit)
-    if named_entity_hubs:
+    if hub_entity_override:
+        all_hubs = [
+            (hub_entity_override, find_entity_degree(baseline_adapter, hub_entity_override))
+        ]
+        logger.info(f"  Forced hub: {hub_entity_override} "
+                    f"(degree={all_hubs[0][1]})")
+    else:
+        raw_hub_limit = num_hubs * 10 if named_entity_hubs else num_hubs
+        all_hubs = find_high_degree_entities(baseline_adapter, top_k=raw_hub_limit)
+    if named_entity_hubs and not hub_entity_override:
         hub_dicts = [
             {"entity": entity, "degree": degree}
             for entity, degree in all_hubs
@@ -723,6 +741,22 @@ async def run_benchmark(args):
         return
 
     logger.info(f"데이터 로드 완료: {len(samples)} 샘플")
+    if args.inject_phrase and args.inject_repetitions > 0:
+        logger.info(
+            "Topology injection enabled: "
+            f"phrase='{args.inject_phrase}', repetitions={args.inject_repetitions}"
+        )
+        samples = [
+            {
+                **sample,
+                "context": inject_phrase_into_context(
+                    sample["context"],
+                    args.inject_phrase,
+                    args.inject_repetitions,
+                ),
+            }
+            for sample in samples
+        ]
     for i, s in enumerate(samples):
         logger.info(f"  샘플 {i}: {len(s['context'])} chars, {len(s['questions'])} 질문")
 
@@ -769,6 +803,7 @@ async def run_benchmark(args):
             decay_per_hop=args.decay_per_hop,
             num_hubs=args.num_hubs,
             named_entity_hubs=args.named_entity_hubs,
+            hub_entity_override=args.hub_entity,
             list_hubs_only=args.list_hubs_only,
             include_audit_trace=args.include_audit_trace,
             audit_trace_limit=args.audit_trace_limit,
@@ -813,6 +848,9 @@ async def run_benchmark(args):
             "decay_per_hop": args.decay_per_hop,
             "num_hubs": args.num_hubs,
             "named_entity_hubs": args.named_entity_hubs,
+            "hub_entity": args.hub_entity,
+            "inject_phrase": args.inject_phrase,
+            "inject_repetitions": args.inject_repetitions,
             "list_hubs_only": args.list_hubs_only,
             "include_audit_trace": args.include_audit_trace,
             "audit_trace_limit": args.audit_trace_limit,
@@ -931,8 +969,20 @@ def parse_args():
         help="실험할 hub entity 수 (1=기존 단일 hub, >1=multi-hub 평균±std)"
     )
     parser.add_argument(
+        "--hub_entity", type=str, default=None,
+        help="특정 hub entity를 강제로 trigger한다. artificial hub injection 실험용."
+    )
+    parser.add_argument(
         "--named_entity_hubs", action="store_true",
         help="headline cross-task claims용: stopword/pronoun/function-word hub를 제외하고 named-entity-like hub만 사용"
+    )
+    parser.add_argument(
+        "--inject_phrase", type=str, default=None,
+        help="Artificial hub injection: 각 context 앞부분에 반복 삽입할 phrase."
+    )
+    parser.add_argument(
+        "--inject_repetitions", type=int, default=0,
+        help="Artificial hub injection phrase 반복 횟수."
     )
 
     # DooGPU 엔드포인트
