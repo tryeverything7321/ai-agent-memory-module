@@ -86,6 +86,10 @@ class PreprintHubTests(unittest.TestCase):
             {"entity": "Additional Tips", "degree": 2702},
             {"entity": "Many", "degree": 2862},
             {"entity": "Try", "degree": 2831},
+            {"entity": "Thanks", "degree": 44},
+            {"entity": "Speaking", "degree": 37},
+            {"entity": "Sure", "degree": 34},
+            {"entity": "Yes", "degree": 28},
             {"entity": "Ariadne", "degree": 71},
         ]
 

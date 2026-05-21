@@ -91,13 +91,20 @@ EventQA should be framed as real-data stress testing:
 
 ## Negative Transfer Section
 
-LongMemEval should not be used as successful replication under the current
-extractor. It should be presented as a clean graph gate failure:
+LongMemEval should not be used as successful replication under raw serialized
+context construction. It should be presented as a graph construction diagnostic:
 
 - raw template hubs dominate;
-- expanded stoplists remove many artifacts but often leave no actionable content
-  hub;
-- therefore graph construction is itself a safety-critical component.
+- expanded stoplists remove many artifacts but can leave too few actionable
+  content hubs under raw context;
+- structured metadata modes recover content hubs: user-turn and
+  answer-session-user graph construction pass a first clean hub gate on 5/5
+  samples;
+- therefore graph construction is itself a safety-critical component, not just a
+  preprocessing detail.
+
+Next paper decision: LongMemEval propagation experiments should use
+`answer_session_user_turns`, not raw context.
 
 ## Topology Poisoning Extension
 
