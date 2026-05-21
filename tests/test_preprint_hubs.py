@@ -61,6 +61,38 @@ class PreprintHubTests(unittest.TestCase):
             ["Debbie", "Marianne", "Nadia"],
         )
 
+    def test_filters_chat_template_artifacts(self):
+        raw_hubs = [
+            {"entity": "Chat Time", "degree": 7407},
+            {"entity": "Here", "degree": 7087},
+            {"entity": "Use", "degree": 5337},
+            {"entity": "Make", "degree": 4316},
+            {"entity": "Can", "degree": 6376},
+            {"entity": "Debbie", "degree": 715},
+            {"entity": "Paris", "degree": 296},
+        ]
+
+        filtered = filter_named_entity_hubs(raw_hubs, top_k=5)
+
+        self.assertEqual([hub["entity"] for hub in filtered], ["Debbie", "Paris"])
+
+    def test_filters_observed_longmemeval_instruction_artifacts(self):
+        raw_hubs = [
+            {"entity": "However", "degree": 4881},
+            {"entity": "Create", "degree": 4102},
+            {"entity": "Add", "degree": 3164},
+            {"entity": "Congratulations", "degree": 3125},
+            {"entity": "Enjoy", "degree": 2685},
+            {"entity": "Additional Tips", "degree": 2702},
+            {"entity": "Many", "degree": 2862},
+            {"entity": "Try", "degree": 2831},
+            {"entity": "Ariadne", "degree": 71},
+        ]
+
+        filtered = filter_named_entity_hubs(raw_hubs, top_k=5)
+
+        self.assertEqual([hub["entity"] for hub in filtered], ["Ariadne"])
+
 
 if __name__ == "__main__":
     unittest.main()
