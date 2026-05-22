@@ -15,7 +15,8 @@ variants.
 - [x] Larger-context named-hub replication: EventQA 131K, 5 samples, 5 hubs/sample, 100 queries/sample.
 - [ ] Cross-family contamination replication on a clean non-EventQA source.
 - [x] Cross-family dry check: LongMemEval currently dominated by chat-template hubs; EventQA full is clean but same-family.
-- [ ] ATTR-AWARE false-negative audit.
+- [~] ATTR-AWARE false-negative audit candidate set: balanced 50/50 candidate
+  file generated; manual labels still needed.
 - [ ] Graph construction variants: raw, stopword/pronoun filtered, typed relation, and NER-normalized if available.
 - [ ] Practical-harm summary table separating blast radius from severe decay, kill-level decay, and retrieval F1 drop.
 
@@ -111,7 +112,7 @@ The paper no longer relies on "any nonzero decay" as the practical-harm headline
 3. Add expanded cross-task runner.
 4. Run a 2-hub / 20-query smoke test.
 5. Run the full cross-task experiment.
-6. Add false-negative audit sampler.
+6. Add false-negative audit sampler. `[done: balanced sampler committed]`
 7. Label the audit set.
 8. Add graph construction variants.
 9. Rewrite the paper around the new evidence.

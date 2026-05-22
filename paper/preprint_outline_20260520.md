@@ -42,6 +42,15 @@ structural collateral pattern.
 Finding 6: Guardrails reduce false positives but must be evaluated for
 under-propagation.
 
+Latest audit-set status:
+
+- EventQA 64K trace-enabled run now yields a balanced dependency-labeling set;
+- 50 `bfs_reached_attr_blocked` candidates measure possible ATTR-AWARE false
+  negatives;
+- 50 `attr_reached` controls measure accepted-propagation precision;
+- the set is stratified across sample/hub groups, not filled from one hub;
+- no false-negative rate should be claimed until manual labels are completed.
+
 ## Main Tables
 
 1. Controlled synthetic precision/recall table.
@@ -62,7 +71,10 @@ and retrieval metrics can either expose or hide those changes.
 
 1. Larger controlled synthetic sweep across graph size, noise, and hub strength.
 2. Graph construction variant results.
-3. Balanced ATTR-AWARE audit with both blocked and accepted propagation examples.
+3. Manual labels for the balanced ATTR-AWARE audit set.  The sampler now
+   produces 50 blocked candidates and 50 accepted-propagation controls, but the
+   paper still needs `SHOULD_PROPAGATE` / `SHOULD_NOT_PROPAGATE` labels before
+   reporting a false-negative rate.
 4. Full-context EventQA run scheduled as a long job, not an interactive
    foreground run.
 5. A clean non-EventQA replication only after graph construction passes a clean
